@@ -119,14 +119,14 @@
   .clock-overlay.show { opacity: 1; }
 
   .clock-time {
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 200;
     letter-spacing: 4px;
     color: var(--text-primary);
     line-height: 1;
   }
   .clock-date {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 300;
     letter-spacing: 4px;
     color: var(--text-secondary);
@@ -159,35 +159,37 @@
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 300;
     letter-spacing: 1px;
   }
 
   .weather-label {
     color: var(--text-dim);
-    font-size: 14px;
+    font-size: 18px;
     letter-spacing: 3px;
-    min-width: 32px;
+    min-width: 50px;
     text-align: right;
   }
 
   .weather-icon {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1;
   }
 
   .weather-temp {
     color: var(--text-secondary);
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 200;
     letter-spacing: 1px;
     font-variant-numeric: tabular-nums;
+    min-width: 90px;
+    text-align: right;
   }
 
   .weather-precip {
-    color: var(--text-dim);
-    font-size: 13px;
+    color: var(--text-secondary);
+    font-size: 18px;
     letter-spacing: 1px;
     min-width: 44px;
     text-align: right;
@@ -403,20 +405,7 @@
   <div class="clock-time" id="clock-time"></div>
   <div class="clock-date" id="clock-date"></div>
   <div class="weather-location" id="weather-location"></div>
-  <div class="weather-section" id="weather">
-    <div class="weather-day">
-      <span class="weather-label">Today</span>
-      <span class="weather-icon" id="weather-icon-today"></span>
-      <span class="weather-temp" id="weather-temp-today"></span>
-      <span class="weather-precip" id="weather-precip-today"></span>
-    </div>
-    <div class="weather-day">
-      <span class="weather-label">Tomorrow</span>
-      <span class="weather-icon" id="weather-icon-tomorrow"></span>
-      <span class="weather-temp" id="weather-temp-tomorrow"></span>
-      <span class="weather-precip" id="weather-precip-tomorrow"></span>
-    </div>
-  </div>
+  <div class="weather-section" id="weather"></div>
 </div>
 
 <!-- Globe -->
@@ -1236,27 +1225,46 @@
         latitude,
         longitude,
         daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max',
-        forecast_days: '2',
+        forecast_days: '7',
         timezone: 'auto',
       });
       const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
       if (!res.ok) throw new Error(`Weather API: ${res.status}`);
       const data = await res.json();
-      renderWeather(data.daily, 0, 'today');
-      renderWeather(data.daily, 1, 'tomorrow');
+      const $weather = document.getElementById('weather');
+      const days = data.daily.time.length;
+      // 行が足りなければ生成
+      if ($weather.children.length < days) {
+        $weather.innerHTML = '';
+        for (let i = 0; i < days; i++) {
+          $weather.innerHTML += `<div class="weather-day">
+            <span class="weather-label" id="weather-date-${i}"></span>
+            <span class="weather-icon" id="weather-icon-${i}"></span>
+            <span class="weather-temp" id="weather-temp-${i}"></span>
+            <span class="weather-precip" id="weather-precip-${i}"></span>
+          </div>`;
+        }
+      }
+      for (let i = 0; i < days; i++) {
+        renderWeather(data.daily, i);
+      }
     } catch (e) {
       console.warn('Weather update failed:', e);
     }
   }
 
-  function renderWeather(daily, dayIndex, suffix) {
+  function renderWeather(daily, dayIndex) {
     const code = daily.weather_code[dayIndex];
     const tMax = Math.round(daily.temperature_2m_max[dayIndex]);
     const tMin = Math.round(daily.temperature_2m_min[dayIndex]);
     const precip = daily.precipitation_probability_max[dayIndex];
-    document.getElementById(`weather-icon-${suffix}`).textContent = WEATHER_EMOJI[code] || '🌡️';
-    document.getElementById(`weather-temp-${suffix}`).textContent = `${tMax}° / ${tMin}°`;
-    document.getElementById(`weather-precip-${suffix}`).textContent = precip > 0 ? `💧${precip}%` : '';
+    const d = new Date(daily.time[dayIndex]);
+    document.getElementById(`weather-date-${dayIndex}`).textContent =
+      `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+    document.getElementById(`weather-icon-${dayIndex}`).textContent = WEATHER_EMOJI[code] || '🌡️';
+    document.getElementById(`weather-temp-${dayIndex}`).textContent =
+      `${String(tMax).padStart(2, '0')}° / ${String(tMin).padStart(2, '0')}°`;
+    document.getElementById(`weather-precip-${dayIndex}`).textContent = `💧${String(precip).padStart(3, '0')}%`;
   }
 
   // ===== BURN-IN PREVENTION =====
