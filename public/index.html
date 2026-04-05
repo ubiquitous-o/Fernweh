@@ -1065,7 +1065,7 @@
     if (hasLocation) {
       const [lat, lon] = location;
       const targetPhi = -lon * (Math.PI / 180) - Math.PI / 2;
-      currentPhi = targetPhi + 3;
+      currentPhi = targetPhi - 3;
       var onRender = (state) => {
         currentPhi += (targetPhi - currentPhi) * 0.04;
         state.phi = currentPhi;
