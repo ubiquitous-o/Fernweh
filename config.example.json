@@ -1,0 +1,9 @@
+{
+  "youtube_api_key": "YOUR_YOUTUBE_DATA_API_V3_KEY_HERE",
+  "port": 3333,
+  "weather_location": {
+    "latitude": 35.68,
+    "longitude": 139.69,
+    "name": "Tokyo"
+  }
+}

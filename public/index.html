@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fernweh</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&family=Noto+Sans+JP:wght@200;300;400&display=swap');
+
+  :root {
+    --overlay-bg: rgba(0, 0, 0, 0.55);
+    --text-primary: rgba(255, 255, 255, 0.92);
+    --text-secondary: rgba(255, 255, 255, 0.55);
+    --text-dim: rgba(255, 255, 255, 0.25);
+    --accent: rgba(255, 90, 60, 0.9);
+    --transition-duration: 2.5s;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #000;
+    font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+    color: var(--text-primary);
+    cursor: none;
+    user-select: none;
+  }
+
+  /* --- Video Layers --- */
+  .video-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    transition: opacity var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+  }
+  .video-layer iframe {
+    width: 100%; height: 100%;
+    border: none;
+    pointer-events: none;
+  }
+  .video-layer.hidden { opacity: 0; z-index: 0; }
+  .video-layer.visible { opacity: 1; z-index: 1; }
+
+  /* --- Vignette overlay --- */
+  .vignette {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%),
+      linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 20%),
+      linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 10%);
+  }
+
+  /* --- Info Overlay --- */
+  .info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    padding: 40px 50px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .info-overlay.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .info-channel {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+
+  .info-title {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--text-primary);
+    max-width: 700px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .info-query {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* --- Top-right Clock --- */
+  .clock-overlay {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    z-index: 10;
+    text-align: right;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  .clock-overlay.show { opacity: 1; }
+
+  .clock-time {
+    font-size: 48px;
+    font-weight: 200;
+    letter-spacing: 4px;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+  .clock-date {
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 4px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* --- Weather (below clock) --- */
+  .weather-section {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .weather-day {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  .weather-label {
+    color: var(--text-dim);
+    font-size: 14px;
+    letter-spacing: 3px;
+    min-width: 32px;
+    text-align: right;
+  }
+
+  .weather-icon {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .weather-temp {
+    color: var(--text-secondary);
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .weather-precip {
+    color: var(--text-dim);
+    font-size: 13px;
+    letter-spacing: 1px;
+    min-width: 44px;
+    text-align: right;
+  }
+
+  /* --- Live indicator --- */
+  .live-badge {
+    position: absolute;
+    top: 38px;
+    left: 50px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  .live-badge.show { opacity: 1; }
+
+  .live-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .live-text {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  /* --- Progress bar (time until next switch) --- */
+  .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), rgba(255,180,100,0.8));
+    z-index: 15;
+    transition: width 1s linear;
+    opacity: 0.6;
+  }
+
+  /* --- Controls (appear on mouse move) --- */
+  .controls {
+    position: absolute;
+    bottom: 40px;
+    right: 50px;
+    z-index: 20;
+    display: flex;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  body.mouse-active .controls {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  body.mouse-active { cursor: default; }
+
+  .ctrl-btn {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: var(--overlay-bg);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    font-size: 16px;
+  }
+  .ctrl-btn:hover {
+    border-color: rgba(255,255,255,0.5);
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* --- Loading state --- */
+  .loading-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    transition: opacity 1s ease;
+  }
+  .loading-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .loading-text {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    animation: breathe 2s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* --- Error --- */
+  .error-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 25;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.85);
+  }
+  .error-overlay.show {
+    display: flex;
+  }
+  .error-msg {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .error-retry {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    cursor: pointer;
+    border: 1px solid var(--text-dim);
+    padding: 8px 24px;
+    transition: all 0.3s;
+  }
+  .error-retry:hover {
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+  }
+</style>
+</head>
+<body>
+
+<!-- Two video layers for crossfade -->
+<div class="video-layer visible" id="layer-a"></div>
+<div class="video-layer hidden" id="layer-b"></div>
+
+<!-- Vignette -->
+<div class="vignette"></div>
+
+<!-- Live badge -->
+<div class="live-badge" id="live-badge">
+  <div class="live-dot"></div>
+  <span class="live-text">Live</span>
+</div>
+
+<!-- Clock -->
+<div class="clock-overlay" id="clock">
+  <div class="clock-time" id="clock-time"></div>
+  <div class="clock-date" id="clock-date"></div>
+  <div class="weather-section" id="weather">
+    <div class="weather-day">
+      <span class="weather-label">Today</span>
+      <span class="weather-icon" id="weather-icon-today"></span>
+      <span class="weather-temp" id="weather-temp-today"></span>
+      <span class="weather-precip" id="weather-precip-today"></span>
+    </div>
+    <div class="weather-day">
+      <span class="weather-label">Tomorrow</span>
+      <span class="weather-icon" id="weather-icon-tomorrow"></span>
+      <span class="weather-temp" id="weather-temp-tomorrow"></span>
+      <span class="weather-precip" id="weather-precip-tomorrow"></span>
+    </div>
+  </div>
+</div>
+
+<!-- Info -->
+<div class="info-overlay" id="info">
+  <div class="info-channel" id="info-channel"></div>
+  <div class="info-title" id="info-title"></div>
+  <div class="info-query" id="info-query"></div>
+</div>
+
+<!-- Progress -->
+<div class="progress-bar" id="progress"></div>
+
+<!-- Controls -->
+<div class="controls">
+  <div class="ctrl-btn" id="btn-skip" title="Skip">⏭</div>
+  <div class="ctrl-btn" id="btn-fullscreen" title="Fullscreen">⛶</div>
+</div>
+
+<!-- Loading -->
+<div class="loading-overlay" id="loading">
+  <div class="loading-text">Exploring the world live camera...</div>
+</div>
+
+<!-- Error -->
+<div class="error-overlay" id="error">
+  <div class="error-msg" id="error-msg">Connection error</div>
+  <div class="error-retry" id="error-retry">Retry</div>
+</div>
+
+<script>
+  // ===== CONFIG =====
+  const SWITCH_INTERVAL_MS = 60 * 60 * 1000; // 1時間
+  const RETRY_DELAY = 15000;                  // エラー時のリトライ間隔
+
+  // ===== STATE =====
+  let activeLayer = 'a';
+  let switchTimer = null;
+  let progressTimer = null;
+  let switchStartTime = 0;
+  let mouseTimer = null;
+  let currentInfo = null;
+
+  // ===== ELEMENTS =====
+  const $layerA = document.getElementById('layer-a');
+  const $layerB = document.getElementById('layer-b');
+  const $info = document.getElementById('info');
+  const $infoTitle = document.getElementById('info-title');
+  const $infoChannel = document.getElementById('info-channel');
+  const $infoQuery = document.getElementById('info-query');
+  const $clock = document.getElementById('clock');
+  const $clockTime = document.getElementById('clock-time');
+  const $clockDate = document.getElementById('clock-date');
+  const $liveBadge = document.getElementById('live-badge');
+  const $progress = document.getElementById('progress');
+  const $loading = document.getElementById('loading');
+  const $error = document.getElementById('error');
+  const $errorMsg = document.getElementById('error-msg');
+
+  // ===== YouTube IFrame URL =====
+  function ytEmbedUrl(videoId) {
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&loop=1&playlist=${videoId}&enablejsapi=0`;
+  }
+
+  // ===== FETCH NEXT LIVE =====
+  async function fetchNext() {
+    const res = await fetch('/api/next-live');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    return data;
+  }
+
+  // ===== SWITCH VIDEO =====
+  async function switchVideo() {
+    try {
+      $error.classList.remove('show');
+      const data = await fetchNext();
+      currentInfo = data;
+
+      // 次のレイヤーにセット
+      const nextLayerId = activeLayer === 'a' ? 'b' : 'a';
+      const $nextLayer = nextLayerId === 'a' ? $layerA : $layerB;
+      const $currentLayer = activeLayer === 'a' ? $layerA : $layerB;
+
+      // iframeを作成してセット
+      $nextLayer.innerHTML = `<iframe src="${ytEmbedUrl(data.videoId)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+
+      // iframe読み込み待ち（少し待ってからフェード）
+      await new Promise(r => setTimeout(r, 2000));
+
+      // クロスフェード
+      $nextLayer.classList.remove('hidden');
+      $nextLayer.classList.add('visible');
+      $currentLayer.classList.remove('visible');
+      $currentLayer.classList.add('hidden');
+
+      // 古いレイヤーのiframeをフェード後に削除
+      setTimeout(() => {
+        $currentLayer.innerHTML = '';
+      }, 3000);
+
+      activeLayer = nextLayerId;
+
+      // ローディング消す
+      $loading.classList.add('fade-out');
+
+      // 情報を表示
+      showInfo(data);
+      showOverlays();
+
+      // タイマーリセット
+      resetSwitchTimer();
+
+    } catch (err) {
+      console.error('switchVideo error:', err);
+      showError(err.message);
+      setTimeout(switchVideo, RETRY_DELAY);
+    }
+  }
+
+  // ===== INFO DISPLAY =====
+  function showInfo(data) {
+    $infoChannel.textContent = data.channel || '';
+    $infoTitle.textContent = data.title || '';
+    $infoQuery.textContent = `🔍 ${data.query || ''}`;
+    $info.classList.add('show');
+  }
+
+  function showOverlays() {
+    $clock.classList.add('show');
+    $liveBadge.classList.add('show');
+  }
+
+  // ===== PROGRESS BAR =====
+  function resetSwitchTimer() {
+    clearTimeout(switchTimer);
+    clearInterval(progressTimer);
+
+    switchStartTime = Date.now();
+    $progress.style.width = '0%';
+
+    progressTimer = setInterval(() => {
+      const elapsed = Date.now() - switchStartTime;
+      const pct = Math.min((elapsed / SWITCH_INTERVAL_MS) * 100, 100);
+      $progress.style.width = `${pct}%`;
+    }, 1000);
+
+    switchTimer = setTimeout(switchVideo, SWITCH_INTERVAL_MS);
+  }
+
+  // ===== CLOCK =====
+  function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    $clockTime.textContent = `${h}:${m}`;
+
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const y = now.getFullYear();
+    const mo = now.getMonth() + 1;
+    const d = now.getDate();
+    const day = days[now.getDay()];
+    $clockDate.textContent = `${y}.${String(mo).padStart(2,'0')}.${String(d).padStart(2,'0')} ${day}`;
+  }
+
+  // ===== ERROR =====
+  function showError(msg) {
+    $errorMsg.textContent = msg || 'Connection error';
+    $error.classList.add('show');
+  }
+
+  // ===== MOUSE ACTIVITY =====
+  function onMouseMove() {
+    document.body.classList.add('mouse-active');
+    clearTimeout(mouseTimer);
+    mouseTimer = setTimeout(() => {
+      document.body.classList.remove('mouse-active');
+    }, 3000);
+  }
+
+  // ===== CONTROLS =====
+  document.getElementById('btn-skip').addEventListener('click', (e) => {
+    e.stopPropagation();
+    switchVideo();
+  });
+
+  document.getElementById('btn-fullscreen').addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  document.getElementById('error-retry').addEventListener('click', () => {
+    $error.classList.remove('show');
+    switchVideo();
+  });
+
+  // ===== KEYBOARD =====
+  document.addEventListener('keydown', (e) => {
+    if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'n') {
+      switchVideo();
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+  });
+
+  // ===== WEATHER =====
+  const WEATHER_EMOJI = {
+    0: '☀️', 1: '🌤️', 2: '⛅', 3: '☁️',
+    45: '🌫️', 48: '🌫️',
+    51: '🌦️', 53: '🌦️', 55: '🌧️',
+    56: '🌧️', 57: '🌧️',
+    61: '🌧️', 63: '🌧️', 65: '🌧️',
+    66: '🌧️', 67: '🌧️',
+    71: '🌨️', 73: '🌨️', 75: '❄️', 77: '🌨️',
+    80: '🌦️', 81: '🌧️', 82: '🌧️',
+    85: '🌨️', 86: '🌨️',
+    95: '⛈️', 96: '⛈️', 99: '⛈️',
+  };
+
+  let weatherLocation = null;
+
+  async function initWeather() {
+    try {
+      const res = await fetch('/api/weather-location');
+      if (res.ok) weatherLocation = await res.json();
+    } catch (e) {
+      console.warn('Weather location fetch failed:', e);
+    }
+    if (!weatherLocation) {
+      weatherLocation = { latitude: 35.6762, longitude: 139.6503 };
+    }
+    updateWeather();
+    setInterval(updateWeather, 30 * 60 * 1000);
+  }
+
+  async function updateWeather() {
+    if (!weatherLocation) return;
+    try {
+      const { latitude, longitude } = weatherLocation;
+      const params = new URLSearchParams({
+        latitude,
+        longitude,
+        daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max',
+        forecast_days: '2',
+        timezone: 'auto',
+      });
+      const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+      if (!res.ok) throw new Error(`Weather API: ${res.status}`);
+      const data = await res.json();
+      renderWeather(data.daily, 0, 'today');
+      renderWeather(data.daily, 1, 'tomorrow');
+    } catch (e) {
+      console.warn('Weather update failed:', e);
+    }
+  }
+
+  function renderWeather(daily, dayIndex, suffix) {
+    const code = daily.weather_code[dayIndex];
+    const tMax = Math.round(daily.temperature_2m_max[dayIndex]);
+    const tMin = Math.round(daily.temperature_2m_min[dayIndex]);
+    const precip = daily.precipitation_probability_max[dayIndex];
+    document.getElementById(`weather-icon-${suffix}`).textContent = WEATHER_EMOJI[code] || '🌡️';
+    document.getElementById(`weather-temp-${suffix}`).textContent = `${tMax}° / ${tMin}°`;
+    document.getElementById(`weather-precip-${suffix}`).textContent = precip > 0 ? `💧${precip}%` : '';
+  }
+
+  // ===== INIT =====
+  document.addEventListener('mousemove', onMouseMove);
+
+  updateClock();
+  setInterval(updateClock, 10000);
+  initWeather();
+
+  // 起動
+  switchVideo();
+</script>
+</body>
+</html>
