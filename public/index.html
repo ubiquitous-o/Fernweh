@@ -274,21 +274,24 @@
     opacity: 0.6;
   }
 
-  /* --- Controls (appear on mouse move, overlaid on globe) --- */
+  /* --- Controls (right edge, vertically centered) --- */
   .controls {
     position: absolute;
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%) translateY(4px);
-    z-index: 2;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%) translateX(4px);
+    z-index: 20;
     display: flex;
+    flex-direction: column;
     gap: 12px;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
   body.mouse-active .controls {
     opacity: 1;
-    transform: translate(-50%, 50%);
+    pointer-events: auto;
+    transform: translateY(-50%);
   }
   body.mouse-active { cursor: default; }
 
@@ -305,13 +308,13 @@
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
     font-size: 16px;
-    pointer-events: auto;
   }
   .ctrl-btn:hover {
     border-color: rgba(255,255,255,0.5);
     color: var(--text-primary);
     background: rgba(255,255,255,0.1);
   }
+  a.ctrl-btn { text-decoration: none; }
 
   /* --- Loading state --- */
   .loading-overlay {
@@ -420,11 +423,13 @@
 <div class="globe-container" id="globe-container">
   <canvas id="globe-canvas"></canvas>
   <div class="globe-label" id="globe-label"></div>
-  <!-- Controls (overlaid on globe) -->
-  <div class="controls">
-    <div class="ctrl-btn" id="btn-skip" title="Skip">⏭</div>
-    <div class="ctrl-btn" id="btn-fullscreen" title="Fullscreen">⛶</div>
-  </div>
+</div>
+
+<!-- Controls (right edge, vertically centered) -->
+<div class="controls">
+  <div class="ctrl-btn" id="btn-skip" title="Skip">⏭</div>
+  <div class="ctrl-btn" id="btn-fullscreen" title="Fullscreen">⛶</div>
+  <a class="ctrl-btn" id="btn-info" title="About" href="https://github.com/ubiquitous-o/Fernweh">ℹ</a>
 </div>
 
 <!-- Info -->
@@ -951,11 +956,10 @@
   });
 
   function toggleFullscreen() {
-    const el = document.documentElement;
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-      (el.requestFullscreen || el.webkitRequestFullscreen).call(el).catch(() => {});
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
     } else {
-      (document.exitFullscreen || document.webkitExitFullscreen).call(document).catch(() => {});
+      document.documentElement.requestFullscreen().catch(() => {});
     }
   }
 
