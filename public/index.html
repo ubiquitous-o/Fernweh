@@ -104,7 +104,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-decoration: none;
+    display: block;
   }
+  .info-title:hover { text-decoration: underline; }
 
   /* --- Top-right Clock --- */
   .clock-overlay {
@@ -424,7 +427,7 @@
 <!-- Info -->
 <div class="info-overlay" id="info">
   <div class="info-channel" id="info-channel"></div>
-  <div class="info-title" id="info-title"></div>
+  <a class="info-title" id="info-title" href="#"></a>
 </div>
 
 <!-- Progress -->
@@ -581,10 +584,51 @@
   const players = { a: null, b: null };
   const PLAYBACK_TIMEOUT = 15000; // Skip if not playing within 15s
 
+  const RESUME_KEY = 'fernweh_resume';
+
   window.onYouTubeIframeAPIReady = () => {
     ytApiReady = true;
+    // 前回の動画があれば復元
+    const saved = sessionStorage.getItem(RESUME_KEY);
+    if (saved) {
+      sessionStorage.removeItem(RESUME_KEY);
+      try {
+        const data = JSON.parse(saved);
+        resumeVideo(data);
+        return;
+      } catch {}
+    }
     switchVideo();
   };
+
+  async function resumeVideo(data) {
+    isSwitching = true;
+    startNoise();
+    try {
+      const layerId = activeLayer;
+      await createPlayer(layerId, data.videoId);
+      currentInfo = data;
+      const $layer = layerId === 'a' ? $layerA : $layerB;
+      $layer.classList.remove('hidden');
+      $layer.classList.add('visible');
+      stopNoise();
+      $loading.classList.add('fade-out');
+      showInfo(data);
+      showOverlays();
+      updateGlobe(data.location, data.locationName);
+      resetSwitchTimer();
+    } catch {
+      switchVideo();
+    } finally {
+      isSwitching = false;
+    }
+  }
+
+  window.addEventListener('pagehide', () => {
+    if (currentInfo) {
+      sessionStorage.setItem(RESUME_KEY, JSON.stringify(currentInfo));
+    }
+  });
 
   // Fallback if YouTube IFrame API fails to load
   setTimeout(() => {
@@ -876,6 +920,7 @@
   function showInfo(data) {
     $infoChannel.textContent = data.channel || '';
     $infoTitle.textContent = data.title || '';
+    $infoTitle.href = `https://www.youtube.com/watch?v=${data.videoId}`;
     $info.classList.add('show');
   }
 
@@ -938,7 +983,7 @@
     }, 3000);
   }
 
-  // ===== CONTROLS =====
+// ===== CONTROLS =====
   document.getElementById('btn-skip').addEventListener('click', (e) => {
     e.stopPropagation();
     switchVideo();
