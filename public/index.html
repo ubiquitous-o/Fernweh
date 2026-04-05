@@ -55,6 +55,7 @@
   .noise-overlay.active { opacity: 1; }
   .noise-overlay canvas {
     width: 100%; height: 100%;
+    image-rendering: pixelated;
   }
 
   /* --- Vignette overlay --- */
@@ -463,31 +464,40 @@
   const $noiseCanvas = document.getElementById('noise-canvas');
   const noiseCtx = $noiseCanvas.getContext('2d');
   let noiseAnimId = null;
+  let noiseLastTime = 0;
+  const NOISE_FPS = 15; // 15fpsで十分
+  const NOISE_INTERVAL = 1000 / NOISE_FPS;
+
+  let noiseImageData = null;
 
   function resizeNoiseCanvas() {
-    $noiseCanvas.width = window.innerWidth / 2;
-    $noiseCanvas.height = window.innerHeight / 2;
+    const scale = 8;
+    $noiseCanvas.width = Math.ceil(window.innerWidth / scale);
+    $noiseCanvas.height = Math.ceil(window.innerHeight / scale);
+    noiseImageData = noiseCtx.createImageData($noiseCanvas.width, $noiseCanvas.height);
   }
   resizeNoiseCanvas();
   window.addEventListener('resize', resizeNoiseCanvas);
 
-  function drawNoise() {
-    const w = $noiseCanvas.width;
-    const h = $noiseCanvas.height;
-    const img = noiseCtx.createImageData(w, h);
-    const d = img.data;
+  function drawNoise(timestamp) {
+    noiseAnimId = requestAnimationFrame(drawNoise);
+    if (timestamp - noiseLastTime < NOISE_INTERVAL) return;
+    noiseLastTime = timestamp;
+    const d = noiseImageData.data;
     for (let i = 0; i < d.length; i += 4) {
       const v = Math.random() * 255 | 0;
       d[i] = d[i + 1] = d[i + 2] = v;
       d[i + 3] = 255;
     }
-    noiseCtx.putImageData(img, 0, 0);
-    noiseAnimId = requestAnimationFrame(drawNoise);
+    noiseCtx.putImageData(noiseImageData, 0, 0);
   }
 
   function startNoise() {
     $noiseOverlay.classList.add('active');
-    if (!noiseAnimId) drawNoise();
+    if (!noiseAnimId) {
+      noiseLastTime = 0;
+      noiseAnimId = requestAnimationFrame(drawNoise);
+    }
   }
 
   function stopNoise() {
