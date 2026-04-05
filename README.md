@@ -12,15 +12,32 @@
 
 ---
 
-A fullscreen web app that automatically cycles through YouTube live cameras every hour. Designed for always-on displays — just open a browser and let the world come to you.
+A fullscreen web app that automatically cycles through YouTube live cameras every hour. Hosted on **GitHub Pages** with video data refreshed by **GitHub Actions**.
 
 ## Features
 
 - Crossfade transitions between live streams
 - Clock and weather overlay (today + tomorrow, via Open-Meteo)
-- Randomized search queries (topics x locations x sort orders) for maximum discovery
-- Auto-retry on failures
+- Geolocation-based weather (with IP and Tokyo fallback)
+- Randomized search queries for maximum discovery
+- Auto-retry on playback failures
 - Kiosk-friendly — minimal UI, cursor auto-hides
+
+## Architecture
+
+```
+[GitHub Actions cron (every 2 hours)]
+  → YouTube Data API v3 search (4 queries/run)
+  → public/videos.json → git push
+
+[GitHub Pages (static hosting)]
+  → public/index.html + public/videos.json
+
+[Browser]
+  → Loads video candidates from videos.json
+  → Geolocation API → Open-Meteo for weather
+  → YouTube IFrame Player API for playback
+```
 
 ## Setup
 
@@ -30,54 +47,39 @@ A fullscreen web app that automatically cycles through YouTube live cameras ever
 2. Create a project
 3. Enable **YouTube Data API v3** under APIs & Services > Library
 4. Create an API key under APIs & Services > Credentials
-5. Copy the key
 
-### 2. Install
+### 2. Configure GitHub
 
-```bash
-cd fernweh
-npm install
-```
+1. Go to your repo's **Settings > Secrets and variables > Actions**
+2. Add a secret: `YOUTUBE_API_KEY` = your API key
+3. Go to **Settings > Pages** and set source to the `main` branch, `/public` folder (or `/ (root)`)
+4. Go to **Actions** and manually trigger "Fetch Live Videos" to seed initial data
 
-### 3. Configure
+### 3. Done
 
-Edit `config.json`:
+The site will be live at `https://<username>.github.io/<repo>/`.
+Videos are refreshed every 2 hours automatically.
 
-```json
-{
-  "youtube_api_key": "YOUR_API_KEY_HERE",
-  "port": 3333,
-  "weather_location": {
-    "latitude": 35.68,
-    "longitude": 139.69,
-    "name": "Tokyo"
-  }
-}
-```
-
-- `youtube_api_key` — Your YouTube Data API v3 key
-- `port` — Server port (default: 3333)
-- `weather_location` — Set latitude/longitude for your location. Find yours at [latlong.net](https://www.latlong.net/). The `name` field is for your own reference only.
-
-### 4. Start
+## Local Development
 
 ```bash
-npm start
+# Fetch videos locally
+YOUTUBE_API_KEY=your_key node scripts/fetch-videos.js
+
+# Serve the static site
+npx serve public
 ```
 
-Open `http://localhost:3333` in a browser. Press `F` for fullscreen.
+## Local Server Mode (Optional)
 
-### 5. Auto-start on Ubuntu (Optional)
+For dedicated hardware (N100 kiosk, Raspberry Pi, etc.), the Express server is still available:
 
 ```bash
-chmod +x autostart.sh
-sudo cp livecam@.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable livecam@$USER
-sudo systemctl start livecam@$USER
+cp config.example.json config.json
+# Edit config.json with your API key
+npm install express
+npm run start:local
 ```
-
-This launches Chromium in kiosk mode on boot.
 
 ## Controls
 
@@ -87,45 +89,24 @@ This launches Chromium in kiosk mode on boot.
 | `F` / `F11` | Toggle fullscreen |
 | Mouse move | Show control buttons |
 
-## How It Works
-
-- **Search query generation**: Combines base queries (`live camera`, `live webcam`, ...) with random topics (`city`, `volcano`, `aurora`, ...) and locations (`Tokyo`, `Reykjavik`, `Cape Town`, ...) for thousands of unique combinations
-- **Sort order randomization**: Randomly picks between `viewCount`, `relevance`, and `date` to surface both popular and obscure streams
-- **Page token exploration**: 50% chance of fetching page 2+ of results to discover buried streams
-- **Duplicate avoidance**: Tracks the last 50 shown videos to avoid repeats
-- **Auto-retry**: If no embeddable live stream is found, retries with a new query after 15 seconds
-- **Weather**: Fetched directly from [Open-Meteo](https://open-meteo.com/) (free, no API key needed), updated every 30 minutes
-
 ## YouTube API Quota
 
-- Each search request costs 100 quota units
-- At 1 search per hour = 24/day = 2,400 quota
-- Free tier allows 10,000 quota/day — plenty of headroom
-
-## Customization
-
-### Switch interval
-
-Edit `SWITCH_INTERVAL_MS` in `public/index.html`:
-
-```js
-const SWITCH_INTERVAL_MS = 30 * 60 * 1000; // 30 minutes
-```
-
-### Search queries
-
-Edit `BASE_QUERIES`, `TOPICS`, and `LOCATIONS` arrays in `server.js` to adjust what kinds of live streams appear.
+- 4 searches/cron × 100 quota = 400 quota/run
+- Every 2 hours × 12 runs/day = **4,800 quota/day** (48% of free 10,000)
 
 ## Project Structure
 
 ```
 fernweh/
-├── server.js             # Express server (YouTube API proxy + weather location endpoint)
-├── config.json           # API key, port, weather location
-├── package.json
 ├── public/
-│   └── index.html        # Frontend (single-page, inline CSS/JS)
-├── autostart.sh          # Kiosk mode launch script
-├── livecam@.service      # systemd unit file
+│   ├── index.html        # Frontend (single-page, inline CSS/JS)
+│   └── videos.json       # Video candidates (generated by Actions)
+├── scripts/
+│   └── fetch-videos.js   # YouTube API search script
+├── .github/workflows/
+│   └── fetch-videos.yml  # Cron workflow (every 2 hours)
+├── server.js             # Express server (local/kiosk mode)
+├── config.example.json   # Config template (local mode)
+├── package.json
 └── README.md
 ```

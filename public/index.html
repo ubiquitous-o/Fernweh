@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fernweh</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&family=Noto+Sans+JP:wght@200;300;400&display=swap');
 
@@ -66,7 +67,7 @@
     padding: 40px 50px;
     opacity: 0;
     transform: translateY(8px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease, padding 60s ease;
   }
   .info-overlay.show {
     opacity: 1;
@@ -110,7 +111,7 @@
     z-index: 10;
     text-align: right;
     opacity: 0;
-    transition: opacity 0.8s ease;
+    transition: opacity 0.8s ease, top 60s ease, right 60s ease;
   }
   .clock-overlay.show { opacity: 1; }
 
@@ -129,11 +130,22 @@
     margin-top: 4px;
   }
 
-  /* --- Weather (below clock) --- */
-  .weather-section {
+  /* --- Weather location name --- */
+  .weather-location {
     margin-top: 14px;
     padding-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-dim);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  /* --- Weather (below clock) --- */
+  .weather-section {
+    margin-top: 6px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -188,7 +200,7 @@
     align-items: center;
     gap: 8px;
     opacity: 0;
-    transition: opacity 0.8s ease;
+    transition: opacity 0.8s ease, top 60s ease, left 60s ease;
   }
   .live-badge.show { opacity: 1; }
 
@@ -339,6 +351,7 @@
 <div class="clock-overlay" id="clock">
   <div class="clock-time" id="clock-time"></div>
   <div class="clock-date" id="clock-date"></div>
+  <div class="weather-location" id="weather-location"></div>
   <div class="weather-section" id="weather">
     <div class="weather-day">
       <span class="weather-label">Today</span>
@@ -419,6 +432,14 @@
     switchVideo();
   };
 
+  // Fallback if YouTube IFrame API fails to load
+  setTimeout(() => {
+    if (!ytApiReady) {
+      console.error('YouTube IFrame API failed to load. Reloading...');
+      location.reload();
+    }
+  }, 30000);
+
   function createPlayer(layerId, videoId) {
     return new Promise((resolve, reject) => {
       const elementId = `player-${layerId}`;
@@ -485,16 +506,64 @@
     });
   }
 
-  // ===== FETCH NEXT LIVE =====
-  async function fetchNext() {
-    const res = await fetch('/api/next-live');
-    const data = await res.json();
-    if (data.error) {
-      const err = new Error(data.error);
-      err.retryAfter = data.retryAfter || 0;
-      throw err;
+  // ===== VIDEO POOL (from videos.json) =====
+  let videoPool = [];
+  let videosLoaded = false;
+
+  // Track watched videos in localStorage to avoid repeats
+  const WATCHED_KEY = 'fernweh_watched';
+  const MAX_WATCHED = 150;
+
+  function getWatched() {
+    try {
+      return JSON.parse(localStorage.getItem(WATCHED_KEY) || '[]');
+    } catch { return []; }
+  }
+
+  function addWatched(videoId) {
+    const watched = getWatched();
+    if (!watched.includes(videoId)) {
+      watched.push(videoId);
+      // Keep only the most recent entries
+      while (watched.length > MAX_WATCHED) watched.shift();
+      localStorage.setItem(WATCHED_KEY, JSON.stringify(watched));
     }
-    return data;
+  }
+
+  async function loadVideoPool() {
+    const res = await fetch('videos.json');
+    if (!res.ok) throw new Error(`Failed to load videos.json: ${res.status}`);
+    const allVideos = await res.json();
+
+    // Filter out already-watched videos
+    const watched = new Set(getWatched());
+    videoPool = allVideos.filter(v => !watched.has(v.videoId));
+
+    // If all have been watched, reset and use the full list
+    if (videoPool.length === 0) {
+      localStorage.removeItem(WATCHED_KEY);
+      videoPool = [...allVideos];
+    }
+
+    // Shuffle for variety
+    for (let i = videoPool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [videoPool[i], videoPool[j]] = [videoPool[j], videoPool[i]];
+    }
+
+    videosLoaded = true;
+  }
+
+  async function fetchNext() {
+    if (!videosLoaded || videoPool.length === 0) {
+      await loadVideoPool();
+    }
+    if (videoPool.length === 0) {
+      throw new Error('No videos available in videos.json');
+    }
+    const video = videoPool.shift();
+    addWatched(video.videoId);
+    return video;
   }
 
   // ===== SWITCH VIDEO =====
@@ -614,13 +683,18 @@
     switchVideo();
   });
 
+  function toggleFullscreen() {
+    const el = document.documentElement;
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      (el.requestFullscreen || el.webkitRequestFullscreen).call(el).catch(() => {});
+    } else {
+      (document.exitFullscreen || document.webkitExitFullscreen).call(document).catch(() => {});
+    }
+  }
+
   document.getElementById('btn-fullscreen').addEventListener('click', (e) => {
     e.stopPropagation();
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
+    toggleFullscreen();
   });
 
   // ===== KEYBOARD =====
@@ -629,11 +703,7 @@
       switchVideo();
     } else if (e.key === 'f' || e.key === 'F11') {
       e.preventDefault();
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        document.exitFullscreen();
-      }
+      toggleFullscreen();
     }
   });
 
@@ -652,19 +722,98 @@
   };
 
   let weatherLocation = null;
+  const LOCATION_CACHE_KEY = 'fernweh_location';
+  const LOCATION_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+
+  function getCachedLocation() {
+    try {
+      const cached = JSON.parse(localStorage.getItem(LOCATION_CACHE_KEY));
+      if (cached && Date.now() - cached.ts < LOCATION_CACHE_TTL) {
+        return { latitude: cached.lat, longitude: cached.lon, city: cached.city || null };
+      }
+    } catch {}
+    return null;
+  }
+
+  function cacheLocation(lat, lon, city) {
+    localStorage.setItem(LOCATION_CACHE_KEY, JSON.stringify({ lat, lon, city: city || null, ts: Date.now() }));
+  }
+
+  async function getLocationByIP() {
+    const res = await fetch('https://ipapi.co/json/');
+    if (!res.ok) throw new Error(`IP geolocation failed: ${res.status}`);
+    const data = await res.json();
+    return { latitude: data.latitude, longitude: data.longitude, city: data.city || null };
+  }
+
+  async function reverseGeocode(lat, lon) {
+    try {
+      const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+      if (!res.ok) return null;
+      const data = await res.json();
+      return data.city || data.locality || null;
+    } catch { return null; }
+  }
+
+  function getLocationByGeolocation() {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) return reject(new Error('Geolocation not supported'));
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve({ latitude: pos.coords.latitude, longitude: pos.coords.longitude }),
+        err => reject(err),
+        { timeout: 10000, maximumAge: 600000 }
+      );
+    });
+  }
 
   async function initWeather() {
-    try {
-      const res = await fetch('/api/weather-location');
-      if (res.ok) weatherLocation = await res.json();
-    } catch (e) {
-      console.warn('Weather location fetch failed:', e);
+    // 1. Check cache
+    const cached = getCachedLocation();
+    if (cached) {
+      weatherLocation = cached;
+      displayLocationName(cached.city);
+      updateWeather();
+      setInterval(updateWeather, 30 * 60 * 1000);
+      // Refresh location in background
+      resolveLocation().catch(() => {});
+      return;
     }
-    if (!weatherLocation) {
-      weatherLocation = { latitude: 35.6762, longitude: 139.6503 };
-    }
+
+    // 2. Resolve location
+    await resolveLocation();
     updateWeather();
     setInterval(updateWeather, 30 * 60 * 1000);
+  }
+
+  function displayLocationName(city) {
+    const el = document.getElementById('weather-location');
+    if (el && city) el.textContent = city;
+  }
+
+  async function resolveLocation() {
+    // Step 1: Geolocation API
+    try {
+      weatherLocation = await getLocationByGeolocation();
+      const city = await reverseGeocode(weatherLocation.latitude, weatherLocation.longitude);
+      weatherLocation.city = city;
+      cacheLocation(weatherLocation.latitude, weatherLocation.longitude, city);
+      displayLocationName(city);
+      return;
+    } catch (e) {
+      console.warn('Geolocation denied/failed:', e.message);
+    }
+    // Step 2: IP Geolocation
+    try {
+      weatherLocation = await getLocationByIP();
+      cacheLocation(weatherLocation.latitude, weatherLocation.longitude, weatherLocation.city);
+      displayLocationName(weatherLocation.city);
+      return;
+    } catch (e) {
+      console.warn('IP geolocation failed:', e.message);
+    }
+    // Step 3: Fallback to Tokyo
+    weatherLocation = { latitude: 35.6762, longitude: 139.6503, city: 'Tokyo' };
+    displayLocationName('Tokyo');
   }
 
   async function updateWeather() {
@@ -698,12 +847,24 @@
     document.getElementById(`weather-precip-${suffix}`).textContent = precip > 0 ? `💧${precip}%` : '';
   }
 
+  // ===== BURN-IN PREVENTION =====
+  function shiftOverlays() {
+    const offsetX = Math.round(Math.random() * 20 - 10); // -10 to +10px
+    const offsetY = Math.round(Math.random() * 20 - 10);
+    $clock.style.top = `${30 + offsetY}px`;
+    $clock.style.right = `${50 + offsetX}px`;
+    $liveBadge.style.top = `${38 + offsetY}px`;
+    $liveBadge.style.left = `${50 + offsetX}px`;
+    $info.style.padding = `${40 + offsetY}px ${50 + offsetX}px`;
+  }
+
   // ===== INIT =====
   document.addEventListener('mousemove', onMouseMove);
 
   updateClock();
   setInterval(updateClock, 10000);
   initWeather();
+  setInterval(shiftOverlays, 10 * 60 * 1000); // Shift every 10 min
 
   // Startup: switchVideo() is called from onYouTubeIframeAPIReady
 </script>

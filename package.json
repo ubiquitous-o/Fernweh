@@ -1,15 +1,11 @@
 {
   "name": "fernweh",
-  "version": "1.0.0",
-  "description": "A fullscreen web app that cycles through YouTube live cameras",
+  "version": "2.0.0",
+  "description": "A fullscreen web app that cycles through YouTube live cameras — GitHub Pages edition",
   "type": "module",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "dotenv": "^16.3.1"
+    "fetch": "node scripts/fetch-videos.js",
+    "serve": "npx serve public",
+    "start:local": "node server.js"
   }
 }

@@ -160,9 +160,22 @@ async function fillCandidatePool() {
     pageTokenCache.set(cacheKey, nextPageToken);
   }
 
+  // Filter out non-camera streams (gaming, music, talk shows, etc.)
+  const EXCLUDE_PATTERNS = /\b(gaming|gameplay|fortnite|minecraft|gta|valorant|apex|cod|warzone|pubg|roblox|music|song|playlist|dj set|radio|podcast|talk show|news|reaction|asmr|cooking|tutorial|how to|unbox|review|trailer|anime|cartoon|movie|film|episode|series|drama|vlog|mukbang|karaoke|concert|remix)\b/i;
+  const INCLUDE_PATTERNS = /\b(cam|webcam|live cam|camera|view|skyline|beach|city|nature|street|traffic|weather|airport|harbor|port|landscape|panorama|scenic|earth|world|ocean|sea|mountain|river|lake|volcano|aurora|wildlife|animal|bird|nest|reef|ISS|space station|observatory)\b/i;
+
+  const cameraLike = items.filter(item => {
+    const title = item.snippet.title;
+    if (EXCLUDE_PATTERNS.test(title)) return false;
+    if (INCLUDE_PATTERNS.test(title)) return true;
+    // Allow if title doesn't match either pattern (might still be a camera)
+    return true;
+  });
+
   // Exclude recently shown videos
-  const fresh = items.filter(item => !recentVideoIds.has(item.id.videoId));
-  candidatePool = fresh.length > 0 ? fresh : items;
+  const pool = cameraLike.length > 0 ? cameraLike : items;
+  const fresh = pool.filter(item => !recentVideoIds.has(item.id.videoId));
+  candidatePool = fresh.length > 0 ? fresh : pool;
   lastQuery = query;
 
   // Shuffle for variety
@@ -224,16 +237,6 @@ app.get('/api/search-live', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});
-
-// --- Weather Location Endpoint ---
-app.get('/api/weather-location', (req, res) => {
-  const location = config.weather_location || {
-    latitude: 35.6762,
-    longitude: 139.6503,
-    name: 'Tokyo',
-  };
-  res.json(location);
 });
 
 // --- Start ---
