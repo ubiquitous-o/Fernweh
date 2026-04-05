@@ -448,7 +448,6 @@
 
 <script>
   // ===== CONFIG =====
-  const SWITCH_INTERVAL_MS = 60 * 60 * 1000; // 1 hour
 
   // ===== STATE =====
   let activeLayer = 'a';
@@ -892,20 +891,28 @@
   }
 
   // ===== PROGRESS BAR =====
+  function msUntilNextHour() {
+    const now = new Date();
+    const next = new Date(now);
+    next.setHours(next.getHours() + 1, 0, 0, 0);
+    return next - now;
+  }
+
   function resetSwitchTimer() {
     clearTimeout(switchTimer);
     clearInterval(progressTimer);
 
+    const delay = msUntilNextHour();
     switchStartTime = Date.now();
     $progress.style.width = '0%';
 
     progressTimer = setInterval(() => {
       const elapsed = Date.now() - switchStartTime;
-      const pct = Math.min((elapsed / SWITCH_INTERVAL_MS) * 100, 100);
+      const pct = Math.min((elapsed / delay) * 100, 100);
       $progress.style.width = `${pct}%`;
     }, 1000);
 
-    switchTimer = setTimeout(switchVideo, SWITCH_INTERVAL_MS);
+    switchTimer = setTimeout(switchVideo, delay);
   }
 
   // ===== CLOCK =====
