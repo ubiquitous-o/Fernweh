@@ -6,7 +6,7 @@
 <title>Fernweh</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
 
   :root {
     --overlay-bg: rgba(0, 0, 0, 0.55);
@@ -22,7 +22,7 @@
     width: 100%; height: 100%;
     overflow: hidden;
     background: #000;
-    font-family: 'Pixelify Sans', sans-serif;
+    font-family: 'Silkscreen', cursive;
     color: var(--text-primary);
     cursor: none;
     user-select: none;
@@ -1018,14 +1018,16 @@
       $globeLabel.style.top = '';
       $globeLabel.style.opacity = '';
       $globeLabel.style.transform = 'translate(-50%, -100%)';
+      $globeLabel.style.textAlign = '';
     } else if (!hasLocation) {
-      $globeLabel.textContent = 'Location unknown';
+      $globeLabel.innerHTML = 'Location<br>unknown';
       $globeLabel.classList.add('show');
       // 地球の中央に固定表示
       $globeLabel.style.left = '50%';
       $globeLabel.style.top = '50%';
       $globeLabel.style.opacity = '0.7';
       $globeLabel.style.transform = 'translate(-50%, -50%)';
+      $globeLabel.style.textAlign = 'center';
     } else {
       $globeLabel.textContent = '';
       $globeLabel.classList.remove('show');
