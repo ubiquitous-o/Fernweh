@@ -992,7 +992,7 @@
       $globeLabel.style.left = '';
       $globeLabel.style.top = '';
       $globeLabel.style.opacity = '';
-      $globeLabel.style.transform = 'translateX(-50%)';
+      $globeLabel.style.transform = 'translate(-50%, -100%)';
     } else if (!hasLocation) {
       $globeLabel.textContent = 'Location unknown';
       $globeLabel.classList.add('show');
@@ -1036,7 +1036,7 @@
       const sx = GLOBE_RADIUS + x1 * GLOBE_RADIUS;
       const sy = GLOBE_RADIUS - y2 * GLOBE_RADIUS;
       $globeLabel.style.left = sx + 'px';
-      $globeLabel.style.top = (sy - 28) + 'px';
+      $globeLabel.style.top = (sy - 16) + 'px';
       $globeLabel.style.opacity = String(Math.min(1, (z2 - 0.2) * 2));
     }
 
