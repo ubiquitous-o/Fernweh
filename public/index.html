@@ -310,29 +310,21 @@
     font-weight: 300;
     color: var(--text-secondary);
     letter-spacing: 2px;
-    margin-bottom: 20px;
-  }
-  .error-retry {
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    cursor: pointer;
-    border: 1px solid var(--text-dim);
-    padding: 8px 24px;
-    transition: all 0.3s;
-  }
-  .error-retry:hover {
-    color: var(--text-primary);
-    border-color: var(--text-secondary);
   }
 </style>
 </head>
 <body>
 
+<!-- YouTube IFrame API -->
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <!-- Two video layers for crossfade -->
-<div class="video-layer visible" id="layer-a"></div>
-<div class="video-layer hidden" id="layer-b"></div>
+<div class="video-layer visible" id="layer-a">
+  <div id="player-a"></div>
+</div>
+<div class="video-layer hidden" id="layer-b">
+  <div id="player-b"></div>
+</div>
 
 <!-- Vignette -->
 <div class="vignette"></div>
@@ -387,13 +379,11 @@
 <!-- Error -->
 <div class="error-overlay" id="error">
   <div class="error-msg" id="error-msg">Connection error</div>
-  <div class="error-retry" id="error-retry">Retry</div>
 </div>
 
 <script>
   // ===== CONFIG =====
-  const SWITCH_INTERVAL_MS = 60 * 60 * 1000; // 1時間
-  const RETRY_DELAY = 15000;                  // エラー時のリトライ間隔
+  const SWITCH_INTERVAL_MS = 60 * 60 * 1000; // 1 hour
 
   // ===== STATE =====
   let activeLayer = 'a';
@@ -419,65 +409,142 @@
   const $error = document.getElementById('error');
   const $errorMsg = document.getElementById('error-msg');
 
-  // ===== YouTube IFrame URL =====
-  function ytEmbedUrl(videoId) {
-    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&loop=1&playlist=${videoId}&enablejsapi=0`;
+  // ===== YouTube IFrame Player API =====
+  let ytApiReady = false;
+  const players = { a: null, b: null };
+  const PLAYBACK_TIMEOUT = 15000; // Skip if not playing within 15s
+
+  window.onYouTubeIframeAPIReady = () => {
+    ytApiReady = true;
+    switchVideo();
+  };
+
+  function createPlayer(layerId, videoId) {
+    return new Promise((resolve, reject) => {
+      const elementId = `player-${layerId}`;
+      let settled = false;
+      let timeoutId = null;
+
+      // Timeout: fail if playback doesn't start
+      timeoutId = setTimeout(() => {
+        if (!settled) {
+          settled = true;
+          console.warn(`⏰ Playback timeout: ${videoId}`);
+          reject(new Error('Playback timeout'));
+        }
+      }, PLAYBACK_TIMEOUT);
+
+      // Destroy old player
+      if (players[layerId]) {
+        try { players[layerId].destroy(); } catch (e) {}
+        players[layerId] = null;
+      }
+
+      // Recreate player div
+      const $layer = layerId === 'a' ? $layerA : $layerB;
+      $layer.innerHTML = `<div id="${elementId}"></div>`;
+
+      players[layerId] = new YT.Player(elementId, {
+        videoId,
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          showinfo: 0,
+          rel: 0,
+          modestbranding: 1,
+          iv_load_policy: 3,
+          loop: 1,
+          playlist: videoId,
+          enablejsapi: 1,
+          origin: location.origin,
+        },
+        events: {
+          onReady: (e) => {
+            e.target.mute();
+            e.target.playVideo();
+          },
+          onStateChange: (e) => {
+            // YT.PlayerState.PLAYING === 1
+            if (e.data === 1 && !settled) {
+              settled = true;
+              clearTimeout(timeoutId);
+              resolve();
+            }
+          },
+          onError: (e) => {
+            if (!settled) {
+              settled = true;
+              clearTimeout(timeoutId);
+              console.warn(`❌ Player error (code ${e.data}): ${videoId}`);
+              reject(new Error(`Player error: ${e.data}`));
+            }
+          },
+        },
+      });
+    });
   }
 
   // ===== FETCH NEXT LIVE =====
   async function fetchNext() {
     const res = await fetch('/api/next-live');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    if (data.error) throw new Error(data.error);
+    if (data.error) {
+      const err = new Error(data.error);
+      err.retryAfter = data.retryAfter || 0;
+      throw err;
+    }
     return data;
   }
 
   // ===== SWITCH VIDEO =====
   async function switchVideo() {
+    if (!ytApiReady) return;
     try {
       $error.classList.remove('show');
       const data = await fetchNext();
-      currentInfo = data;
 
-      // 次のレイヤーにセット
+      // Create player on next layer and wait for playback confirmation
       const nextLayerId = activeLayer === 'a' ? 'b' : 'a';
       const $nextLayer = nextLayerId === 'a' ? $layerA : $layerB;
       const $currentLayer = activeLayer === 'a' ? $layerA : $layerB;
 
-      // iframeを作成してセット
-      $nextLayer.innerHTML = `<iframe src="${ytEmbedUrl(data.videoId)}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      await createPlayer(nextLayerId, data.videoId);
 
-      // iframe読み込み待ち（少し待ってからフェード）
-      await new Promise(r => setTimeout(r, 2000));
+      // Playback confirmed -> crossfade
+      currentInfo = data;
 
-      // クロスフェード
       $nextLayer.classList.remove('hidden');
       $nextLayer.classList.add('visible');
       $currentLayer.classList.remove('visible');
       $currentLayer.classList.add('hidden');
 
-      // 古いレイヤーのiframeをフェード後に削除
+      // Destroy old player after fade
+      const oldLayerId = activeLayer;
       setTimeout(() => {
-        $currentLayer.innerHTML = '';
+        if (players[oldLayerId]) {
+          try { players[oldLayerId].destroy(); } catch (e) {}
+          players[oldLayerId] = null;
+        }
+        $currentLayer.innerHTML = `<div id="player-${oldLayerId}"></div>`;
       }, 3000);
 
       activeLayer = nextLayerId;
 
-      // ローディング消す
+      // Hide loading
       $loading.classList.add('fade-out');
 
-      // 情報を表示
+      // Show info
       showInfo(data);
       showOverlays();
 
-      // タイマーリセット
+      // Reset timer
       resetSwitchTimer();
 
     } catch (err) {
       console.error('switchVideo error:', err);
-      showError(err.message);
-      setTimeout(switchVideo, RETRY_DELAY);
+      const delay = err.retryAfter > 0 ? err.retryAfter * 1000 : 3000;
+      setTimeout(switchVideo, delay);
     }
   }
 
@@ -554,11 +621,6 @@
     } else {
       document.exitFullscreen();
     }
-  });
-
-  document.getElementById('error-retry').addEventListener('click', () => {
-    $error.classList.remove('show');
-    switchVideo();
   });
 
   // ===== KEYBOARD =====
@@ -643,8 +705,7 @@
   setInterval(updateClock, 10000);
   initWeather();
 
-  // 起動
-  switchVideo();
+  // Startup: switchVideo() is called from onYouTubeIframeAPIReady
 </script>
 </body>
 </html>

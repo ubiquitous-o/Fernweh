@@ -11,7 +11,7 @@ let config;
 try {
   config = JSON.parse(readFileSync(join(__dirname, 'config.json'), 'utf-8'));
 } catch {
-  console.error('⚠  config.json が見つからない。config.example.json をコピーして API キーを設定してね');
+  console.error('⚠  config.json not found. Copy config.example.json and set your API key');
   process.exit(1);
 }
 
@@ -19,7 +19,7 @@ const API_KEY = config.youtube_api_key;
 const PORT = config.port || 3333;
 
 if (!API_KEY || API_KEY === 'YOUR_YOUTUBE_DATA_API_V3_KEY_HERE') {
-  console.error('⚠  config.json に YouTube Data API v3 キーを設定してね');
+  console.error('⚠  Set your YouTube Data API v3 key in config.json');
   process.exit(1);
 }
 
@@ -27,7 +27,7 @@ const app = express();
 app.use(express.static(join(__dirname, 'public')));
 
 // --- Search Queries ---
-// ベースクエリ × ランダム地名で組み合わせ爆発させる
+// Combine base queries x topics x locations for variety
 const BASE_QUERIES = [
   'live camera', 'live webcam', 'live cam', 'live stream camera',
   'live view', '24/7 live cam', 'webcam live',
@@ -56,13 +56,13 @@ const LOCATIONS = [
   'Japan', 'Italy', 'Switzerland', 'Canada', 'Australia',
 ];
 
-// ランダムにクエリを合成する
+// Generate a random search query
 function generateQuery() {
   const base = BASE_QUERIES[Math.floor(Math.random() * BASE_QUERIES.length)];
-  // 70%の確率で地名を付ける、30%でトピックのみ
+  // 70% chance to include a location, 30% topic only
   if (Math.random() < 0.7) {
     const location = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
-    // 半分の確率でトピックも付ける
+    // 50% chance to also include a topic
     if (Math.random() < 0.5) {
       const topic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
       return `${base} ${topic} ${location}`;
@@ -73,14 +73,14 @@ function generateQuery() {
   return `${base} ${topic}`;
 }
 
-// ソート順もランダム化
+// Randomize sort order
 const SORT_ORDERS = ['viewCount', 'relevance', 'date'];
 
 function randomOrder() {
   return SORT_ORDERS[Math.floor(Math.random() * SORT_ORDERS.length)];
 }
 
-// 最近使った動画IDを記録（重複回避）
+// Track recent video IDs to avoid duplicates
 const recentVideoIds = new Set();
 const MAX_RECENT = 50;
 
@@ -92,8 +92,17 @@ function addRecent(id) {
   }
 }
 
+// --- Quota tracking ---
+let quotaExceeded = false;
+let quotaResumeTime = 0;
+
 // --- YouTube Data API v3 Search ---
 async function searchLiveVideos(query, order, pageToken) {
+  if (quotaExceeded && Date.now() < quotaResumeTime) {
+    const waitMin = Math.ceil((quotaResumeTime - Date.now()) / 60000);
+    throw new Error(`Quota exceeded. Retry in ${waitMin} min`);
+  }
+
   const params = new URLSearchParams({
     part: 'snippet',
     q: query,
@@ -110,50 +119,73 @@ async function searchLiveVideos(query, order, pageToken) {
   const res = await fetch(url);
 
   if (!res.ok) {
+    if (res.status === 403) {
+      quotaExceeded = true;
+      quotaResumeTime = Date.now() + 60 * 60 * 1000; // Wait 1 hour
+      console.error('⚠️  Quota exceeded. Pausing API calls for 1 hour.');
+      throw new Error('Quota exceeded. Pausing for 1 hour');
+    }
     const err = await res.text();
     throw new Error(`YouTube API error: ${res.status} - ${err}`);
   }
 
+  // Quota is fine, reset flag
+  quotaExceeded = false;
   const data = await res.json();
   return { items: data.items || [], nextPageToken: data.nextPageToken || null };
 }
 
-// --- ページトークンキャッシュ（2ページ目以降へアクセスするため）---
+// --- Page token cache (for accessing page 2+) ---
 const pageTokenCache = new Map();
+
+// --- Candidate pool (avoid new API calls on playback failures) ---
+let candidatePool = [];
+let lastQuery = '';
+
+async function fillCandidatePool() {
+  const query = generateQuery();
+  const order = randomOrder();
+
+  let pageToken = null;
+  const cacheKey = `${query}|${order}`;
+  if (Math.random() < 0.5 && pageTokenCache.has(cacheKey)) {
+    pageToken = pageTokenCache.get(cacheKey);
+  }
+
+  const { items, nextPageToken } = await searchLiveVideos(query, order, pageToken);
+
+  console.log(`🔍 Search: "${query}" (${order}${pageToken ? ', page2' : ''}) → ${items.length} results`);
+
+  if (nextPageToken) {
+    pageTokenCache.set(cacheKey, nextPageToken);
+  }
+
+  // Exclude recently shown videos
+  const fresh = items.filter(item => !recentVideoIds.has(item.id.videoId));
+  candidatePool = fresh.length > 0 ? fresh : items;
+  lastQuery = query;
+
+  // Shuffle for variety
+  for (let i = candidatePool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [candidatePool[i], candidatePool[j]] = [candidatePool[j], candidatePool[i]];
+  }
+}
 
 // --- API Endpoint ---
 app.get('/api/next-live', async (req, res) => {
   try {
-    const query = generateQuery();
-    const order = randomOrder();
-
-    // 50%の確率で2ページ目を試す（キャッシュがあれば）
-    let pageToken = null;
-    const cacheKey = `${query}|${order}`;
-    if (Math.random() < 0.5 && pageTokenCache.has(cacheKey)) {
-      pageToken = pageTokenCache.get(cacheKey);
+    // Only call API when pool is empty
+    if (candidatePool.length === 0) {
+      await fillCandidatePool();
     }
 
-    console.log(`🔍 検索: "${query}" (${order}${pageToken ? ', page2' : ''})`);
-
-    const { items, nextPageToken } = await searchLiveVideos(query, order, pageToken);
-
-    // 次ページトークンをキャッシュ
-    if (nextPageToken) {
-      pageTokenCache.set(cacheKey, nextPageToken);
+    if (candidatePool.length === 0) {
+      return res.json({ error: 'No live streams found', query: lastQuery });
     }
 
-    // 最近表示した動画を除外
-    const fresh = items.filter(item => !recentVideoIds.has(item.id.videoId));
-    const candidates = fresh.length > 0 ? fresh : items;
-
-    if (candidates.length === 0) {
-      return res.json({ error: 'No live streams found', query });
-    }
-
-    // 全候補からランダムに選択（上位5件制限なし）
-    const idx = Math.floor(Math.random() * candidates.length);
-    const chosen = candidates[idx];
+    // Pop one candidate from the pool (no new API call needed)
+    const chosen = candidatePool.shift();
 
     addRecent(chosen.id.videoId);
 
@@ -162,18 +194,20 @@ app.get('/api/next-live', async (req, res) => {
       title: chosen.snippet.title,
       channel: chosen.snippet.channelTitle,
       thumbnail: chosen.snippet.thumbnails?.high?.url || '',
-      query,
+      query: lastQuery,
     };
 
-    console.log(`📺 選択: "${result.title}" (${result.channel})`);
+    console.log(`📺 Selected: "${result.title}" (${result.channel}) [${candidatePool.length} remaining]`);
     res.json(result);
   } catch (err) {
-    console.error('❌ エラー:', err.message);
-    res.status(500).json({ error: err.message });
+    const isQuota = quotaExceeded;
+    if (!isQuota) console.error('❌ Error:', err.message);
+    const retryAfter = isQuota ? Math.ceil((quotaResumeTime - Date.now()) / 1000) : 0;
+    res.status(isQuota ? 429 : 500).json({ error: err.message, retryAfter });
   }
 });
 
-// --- 複数候補を返すエンドポイント ---
+// --- Search endpoint (returns multiple candidates) ---
 app.get('/api/search-live', async (req, res) => {
   try {
     const query = req.query.q || 'live camera';
@@ -197,7 +231,7 @@ app.get('/api/weather-location', (req, res) => {
   const location = config.weather_location || {
     latitude: 35.6762,
     longitude: 139.6503,
-    name: '東京',
+    name: 'Tokyo',
   };
   res.json(location);
 });
@@ -208,7 +242,7 @@ app.listen(PORT, () => {
   console.log('┌─────────────────────────────────────────┐');
   console.log('│  🌍  Fernweh                             │');
   console.log(`│  http://localhost:${PORT}                  │`);
-  console.log('│  Ctrl+C で終了                           │');
+  console.log('│  Ctrl+C to quit                          │');
   console.log('└─────────────────────────────────────────┘');
   console.log('');
 });
