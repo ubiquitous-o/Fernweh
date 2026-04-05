@@ -14,18 +14,20 @@
 
 **🌍️🌍️🌍️Live Demo🌍️🌍️🌍️** https://ubiquitous-o.github.io/Fernweh/
 
-A fullscreen web app that automatically cycles through YouTube live cameras every hour. Hosted on **GitHub Pages** with video data refreshed by **GitHub Actions**.
+A fullscreen web app that automatically cycles through YouTube live cameras at the top of every hour. Hosted on **GitHub Pages** with video data refreshed by **GitHub Actions**.
 
 ## Features
 
 - TV static noise transition between live streams (WebGL shader)
 - Interactive 3D globe showing camera location ([COBE](https://github.com/shuding/cobe))
 - Location detection from video title/channel name (dictionary + [compromise.js](https://github.com/spencermountain/compromise) NLP) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
-- Clock and weather overlay (today + tomorrow, via [Open-Meteo](https://open-meteo.com/))
+- Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/))
 - Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback)
 - Randomized search queries for maximum discovery
+- Clickable video title — links to original YouTube video, resumes on browser back
+- Auto-switch at the top of each hour with progress bar
 - Auto-retry on playback failures
-- Kiosk-friendly — minimal UI, cursor auto-hides, burn-in prevention
+- Kiosk-friendly — Silkscreen bitmap font, cursor auto-hides, burn-in prevention
 
 ## Architecture
 
