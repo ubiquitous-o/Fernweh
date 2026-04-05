@@ -1050,7 +1050,15 @@
       const sx = GLOBE_RADIUS + x1 * GLOBE_RADIUS;
       const sy = GLOBE_RADIUS - y2 * GLOBE_RADIUS;
       $globeLabel.style.left = sx + 'px';
-      $globeLabel.style.top = (sy - 16) + 'px';
+      if (lat >= 0) {
+        // 北半球: ピンの上にラベル（下端基準）
+        $globeLabel.style.top = (sy - 16) + 'px';
+        $globeLabel.style.transform = 'translate(-50%, -100%)';
+      } else {
+        // 南半球: ピンの下にラベル（上端基準）
+        $globeLabel.style.top = (sy + 16) + 'px';
+        $globeLabel.style.transform = 'translate(-50%, 0%)';
+      }
       $globeLabel.style.opacity = String(Math.min(1, (z2 - 0.2) * 2));
     }
 
