@@ -8,7 +8,7 @@
 >
 > While *Wanderlust* describes a joyful desire to travel, *Fernweh* conveys something deeper — a pain, a pull toward the unknown. It is the feeling of being homesick for a place you have never visited.
 >
-> — [BBC Travel: The travel ache you can't translate](https://www.bbc.com/travel/article/20200323-the-travel-ache-you-cant-translate)
+> — [BBC: The travel 'ache' you can’t translate](https://www.bbc.com/travel/article/20200323-the-travel-ache-you-cant-translate)
 
 ---
 
