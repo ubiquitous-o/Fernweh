@@ -14,7 +14,6 @@
     --text-secondary: rgba(255, 255, 255, 0.55);
     --text-dim: rgba(255, 255, 255, 0.25);
     --accent: rgba(255, 90, 60, 0.9);
-    --transition-duration: 2.5s;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,7 +33,6 @@
     position: absolute;
     inset: 0;
     width: 100%; height: 100%;
-    transition: opacity var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
   }
   .video-layer iframe {
@@ -42,8 +40,22 @@
     border: none;
     pointer-events: none;
   }
-  .video-layer.hidden { opacity: 0; z-index: 0; }
-  .video-layer.visible { opacity: 1; z-index: 1; }
+  .video-layer.hidden { display: none; }
+  .video-layer.visible { display: block; }
+
+  /* --- TV Noise overlay --- */
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+  .noise-overlay.active { opacity: 1; }
+  .noise-overlay canvas {
+    width: 100%; height: 100%;
+  }
 
   /* --- Vignette overlay --- */
   .vignette {
@@ -310,8 +322,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #000;
-    transition: opacity 1s ease;
+    background: transparent;
+    transition: opacity 0.3s ease;
   }
   .loading-overlay.fade-out {
     opacity: 0;
@@ -320,10 +332,13 @@
 
   .loading-text {
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 6px;
     text-transform: uppercase;
-    color: var(--text-secondary);
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 24px;
+    border-radius: 4px;
     animation: breathe 2s ease-in-out infinite;
   }
   @keyframes breathe {
@@ -364,6 +379,11 @@
 </div>
 <div class="video-layer hidden" id="layer-b">
   <div id="player-b"></div>
+</div>
+
+<!-- TV Noise -->
+<div class="noise-overlay" id="noise-overlay">
+  <canvas id="noise-canvas"></canvas>
 </div>
 
 <!-- Vignette -->
@@ -437,6 +457,46 @@
   let switchStartTime = 0;
   let mouseTimer = null;
   let currentInfo = null;
+
+  // ===== TV NOISE =====
+  const $noiseOverlay = document.getElementById('noise-overlay');
+  const $noiseCanvas = document.getElementById('noise-canvas');
+  const noiseCtx = $noiseCanvas.getContext('2d');
+  let noiseAnimId = null;
+
+  function resizeNoiseCanvas() {
+    $noiseCanvas.width = window.innerWidth / 2;
+    $noiseCanvas.height = window.innerHeight / 2;
+  }
+  resizeNoiseCanvas();
+  window.addEventListener('resize', resizeNoiseCanvas);
+
+  function drawNoise() {
+    const w = $noiseCanvas.width;
+    const h = $noiseCanvas.height;
+    const img = noiseCtx.createImageData(w, h);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const v = Math.random() * 255 | 0;
+      d[i] = d[i + 1] = d[i + 2] = v;
+      d[i + 3] = 255;
+    }
+    noiseCtx.putImageData(img, 0, 0);
+    noiseAnimId = requestAnimationFrame(drawNoise);
+  }
+
+  function startNoise() {
+    $noiseOverlay.classList.add('active');
+    if (!noiseAnimId) drawNoise();
+  }
+
+  function stopNoise() {
+    $noiseOverlay.classList.remove('active');
+    if (noiseAnimId) {
+      cancelAnimationFrame(noiseAnimId);
+      noiseAnimId = null;
+    }
+  }
 
   // ===== ELEMENTS =====
   const $layerA = document.getElementById('layer-a');
@@ -689,20 +749,26 @@
   }
 
   // ===== SWITCH VIDEO =====
+  let isSwitching = false;
+
   async function switchVideo() {
-    if (!ytApiReady) return;
+    if (!ytApiReady || isSwitching) return;
+    isSwitching = true;
+
+    // 即座に砂嵐表示
+    startNoise();
+
     try {
       $error.classList.remove('show');
       const data = await fetchNext();
 
-      // Create player on next layer and wait for playback confirmation
       const nextLayerId = activeLayer === 'a' ? 'b' : 'a';
       const $nextLayer = nextLayerId === 'a' ? $layerA : $layerB;
       const $currentLayer = activeLayer === 'a' ? $layerA : $layerB;
 
       await createPlayer(nextLayerId, data.videoId);
 
-      // Playback confirmed -> crossfade
+      // 再生開始 → 即座に切替
       currentInfo = data;
 
       $nextLayer.classList.remove('hidden');
@@ -710,17 +776,18 @@
       $currentLayer.classList.remove('visible');
       $currentLayer.classList.add('hidden');
 
-      // Destroy old player after fade
+      // 旧プレーヤーを即破棄
       const oldLayerId = activeLayer;
-      setTimeout(() => {
-        if (players[oldLayerId]) {
-          try { players[oldLayerId].destroy(); } catch (e) {}
-          players[oldLayerId] = null;
-        }
-        $currentLayer.innerHTML = `<div id="player-${oldLayerId}"></div>`;
-      }, 3000);
+      if (players[oldLayerId]) {
+        try { players[oldLayerId].destroy(); } catch (e) {}
+        players[oldLayerId] = null;
+      }
+      $currentLayer.innerHTML = `<div id="player-${oldLayerId}"></div>`;
 
       activeLayer = nextLayerId;
+
+      // 砂嵐停止
+      stopNoise();
 
       // Hide loading
       $loading.classList.add('fade-out');
@@ -737,8 +804,11 @@
 
     } catch (err) {
       console.error('switchVideo error:', err);
+      stopNoise();
       const delay = err.retryAfter > 0 ? err.retryAfter * 1000 : 3000;
       setTimeout(switchVideo, delay);
+    } finally {
+      isSwitching = false;
     }
   }
 
@@ -1114,6 +1184,9 @@
   setInterval(updateClock, 10000);
   initWeather();
   setInterval(shiftOverlays, 10 * 60 * 1000); // Shift every 10 min
+
+  // 初回ロード時に砂嵐表示
+  startNoise();
 
   // Startup: switchVideo() is called from onYouTubeIframeAPIReady
 </script>
