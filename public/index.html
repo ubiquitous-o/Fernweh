@@ -477,23 +477,24 @@
       uniform float u_time;
       uniform vec2 u_resolution;
 
-      // Hash-based pseudo-random (GPU fast)
-      float rand(vec2 co) {
-        return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+      // Dave Hoskins hash — 全GPU安定、パターンなし
+      float hash(vec3 p3) {
+        p3 = fract(p3 * 0.1031);
+        p3 += dot(p3, p3.zyx + 31.32);
+        return fract((p3.x + p3.y) * p3.z);
       }
 
       void main() {
-        vec2 uv = gl_FragCoord.xy / u_resolution;
-        // ピクセルサイズを粗くしてアナログTV感を出す
-        vec2 blockSize = vec2(3.0, 2.0);
-        vec2 block = floor(gl_FragCoord.xy / blockSize);
-        float n = rand(block + u_time);
-        // スキャンライン（偶数行をわずかに暗く）
+        // ピクセルサイズを粗くしてアナログTV感
+        vec2 block = floor(gl_FragCoord.xy / vec2(3.0, 2.0));
+        // 時間を独立した第3次元に — 対角パターン防止
+        float t = floor(u_time * 24.0);
+        float n = hash(vec3(block, t));
+        // スキャンライン
         float scanline = 1.0 - 0.15 * step(0.5, fract(gl_FragCoord.y / 4.0));
-        // フリッカー（全体の明滅）
-        float flicker = 0.92 + 0.08 * rand(vec2(u_time, 0.0));
-        float v = n * scanline * flicker;
-        gl_FragColor = vec4(vec3(v), 1.0);
+        // フリッカー
+        float flicker = 0.92 + 0.08 * hash(vec3(t, 0.0, 0.0));
+        gl_FragColor = vec4(vec3(n * scanline * flicker), 1.0);
       }
     `;
 
