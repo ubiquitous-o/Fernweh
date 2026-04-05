@@ -50,12 +50,11 @@
     z-index: 3;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.1s ease;
   }
   .noise-overlay.active { opacity: 1; }
   .noise-overlay canvas {
     width: 100%; height: 100%;
-    image-rendering: pixelated;
   }
 
   /* --- Vignette overlay --- */
@@ -459,53 +458,101 @@
   let mouseTimer = null;
   let currentInfo = null;
 
-  // ===== TV NOISE =====
+  // ===== TV NOISE (WebGL shader — GPU描画、CPU負荷ゼロ) =====
   const $noiseOverlay = document.getElementById('noise-overlay');
   const $noiseCanvas = document.getElementById('noise-canvas');
-  const noiseCtx = $noiseCanvas.getContext('2d');
-  let noiseAnimId = null;
-  let noiseLastTime = 0;
-  const NOISE_FPS = 15; // 15fpsで十分
-  const NOISE_INTERVAL = 1000 / NOISE_FPS;
 
-  let noiseImageData = null;
+  const noiseGL = (() => {
+    const canvas = $noiseCanvas;
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return null;
 
-  function resizeNoiseCanvas() {
-    const scale = 8;
-    $noiseCanvas.width = Math.ceil(window.innerWidth / scale);
-    $noiseCanvas.height = Math.ceil(window.innerHeight / scale);
-    noiseImageData = noiseCtx.createImageData($noiseCanvas.width, $noiseCanvas.height);
-  }
-  resizeNoiseCanvas();
-  window.addEventListener('resize', resizeNoiseCanvas);
+    // --- Shaders ---
+    const vsSource = `
+      attribute vec2 a_pos;
+      void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }
+    `;
+    const fsSource = `
+      precision mediump float;
+      uniform float u_time;
+      uniform vec2 u_resolution;
 
-  function drawNoise(timestamp) {
-    noiseAnimId = requestAnimationFrame(drawNoise);
-    if (timestamp - noiseLastTime < NOISE_INTERVAL) return;
-    noiseLastTime = timestamp;
-    const d = noiseImageData.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const v = Math.random() * 255 | 0;
-      d[i] = d[i + 1] = d[i + 2] = v;
-      d[i + 3] = 255;
+      // Hash-based pseudo-random (GPU fast)
+      float rand(vec2 co) {
+        return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+      }
+
+      void main() {
+        vec2 uv = gl_FragCoord.xy / u_resolution;
+        // ピクセルサイズを粗くしてアナログTV感を出す
+        vec2 blockSize = vec2(3.0, 2.0);
+        vec2 block = floor(gl_FragCoord.xy / blockSize);
+        float n = rand(block + u_time);
+        // スキャンライン（偶数行をわずかに暗く）
+        float scanline = 1.0 - 0.15 * step(0.5, fract(gl_FragCoord.y / 4.0));
+        // フリッカー（全体の明滅）
+        float flicker = 0.92 + 0.08 * rand(vec2(u_time, 0.0));
+        float v = n * scanline * flicker;
+        gl_FragColor = vec4(vec3(v), 1.0);
+      }
+    `;
+
+    function compileShader(type, source) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, source);
+      gl.compileShader(s);
+      return s;
     }
-    noiseCtx.putImageData(noiseImageData, 0, 0);
-  }
+
+    const vs = compileShader(gl.VERTEX_SHADER, vsSource);
+    const fs = compileShader(gl.FRAGMENT_SHADER, fsSource);
+    const prog = gl.createProgram();
+    gl.attachShader(prog, vs);
+    gl.attachShader(prog, fs);
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    // Full-screen quad
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const aPos = gl.getAttribLocation(prog, 'a_pos');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+    const uTime = gl.getUniformLocation(prog, 'u_time');
+    const uRes = gl.getUniformLocation(prog, 'u_resolution');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+    }
+    resize();
+    window.addEventListener('resize', () => { if (animId) resize(); });
+
+    let animId = null;
+    function render() {
+      gl.uniform1f(uTime, performance.now() * 0.001);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      animId = requestAnimationFrame(render);
+    }
+
+    return {
+      start() { if (!animId) { resize(); render(); } },
+      stop() { if (animId) { cancelAnimationFrame(animId); animId = null; } },
+    };
+  })();
 
   function startNoise() {
+    if (noiseGL) noiseGL.start();
     $noiseOverlay.classList.add('active');
-    if (!noiseAnimId) {
-      noiseLastTime = 0;
-      noiseAnimId = requestAnimationFrame(drawNoise);
-    }
   }
 
   function stopNoise() {
     $noiseOverlay.classList.remove('active');
-    if (noiseAnimId) {
-      cancelAnimationFrame(noiseAnimId);
-      noiseAnimId = null;
-    }
+    if (noiseGL) noiseGL.stop();
   }
 
   // ===== ELEMENTS =====
