@@ -16,7 +16,7 @@
 
 ---
 
-**🌍️🌍️🌍️Live Demo:** https://ubiquitous-o.github.io/Fernweh/🌍️🌍️🌍️
+**🌍️🌍️🌍️Live Demo:** https://ubiquitous-o.github.io/Fernweh/ 🌍️🌍️🌍️
 
 A fullscreen web app that automatically cycles through YouTube live cameras at the top of every hour. Hosted on **GitHub Pages** with video data refreshed by **GitHub Actions**.
 
