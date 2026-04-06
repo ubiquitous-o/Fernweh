@@ -426,13 +426,13 @@
 <div class="controls">
   <div class="ctrl-btn" id="btn-skip" title="Skip">⏭</div>
   <div class="ctrl-btn" id="btn-fullscreen" title="Fullscreen">⛶</div>
-  <a class="ctrl-btn" id="btn-info" title="About" href="https://github.com/ubiquitous-o/Fernweh">ℹ</a>
+  <a class="ctrl-btn" id="btn-info" title="About" href="https://github.com/ubiquitous-o/Fernweh" target="_blank" rel="noopener">ℹ</a>
 </div>
 
 <!-- Info -->
 <div class="info-overlay" id="info">
   <div class="info-channel" id="info-channel"></div>
-  <a class="info-title" id="info-title" href="#"></a>
+  <a class="info-title" id="info-title" href="#" target="_blank" rel="noopener"></a>
 </div>
 
 <!-- Progress -->
@@ -1034,6 +1034,16 @@
     e.stopPropagation();
     toggleFullscreen();
   });
+
+  const $btnInfo = document.getElementById('btn-info');
+  document.addEventListener('fullscreenchange', updateFullscreenUI);
+  document.addEventListener('webkitfullscreenchange', updateFullscreenUI);
+  function updateFullscreenUI() {
+    const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    $btnInfo.style.display = isFS ? 'none' : '';
+    $infoTitle.style.pointerEvents = isFS ? 'none' : '';
+    $infoTitle.style.textDecoration = isFS ? 'none' : '';
+  }
 
   // ===== KEYBOARD =====
   document.addEventListener('keydown', (e) => {
