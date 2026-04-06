@@ -9,12 +9,11 @@
 import { writeFileSync, readFileSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import nlp from 'compromise';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const OUTPUT_PATH = join(__dirname, '..', 'public', 'videos.json');
 const GEOCACHE_PATH = join(__dirname, 'geocache.json');
+const CONFIG_PATH = join(__dirname, '..', 'config.json');
 
 const API_KEY = process.env.YOUTUBE_API_KEY;
 if (!API_KEY) {
@@ -145,18 +144,70 @@ function extractLocationFromDict(text) {
   return null;
 }
 
-// --- compromise.js: 地名抽出 ---
-// ライブカメラタイトルで地名と誤認されやすい語を除外
-const NLP_IGNORE = new Set([
-  'live', 'hd', 'cam', 'camera', 'webcam', 'stream', 'view', 'channel',
-  '4k', '24/7', 'earth', 'world', 'nature', 'city', 'beach', 'sunset',
-  'sunrise', 'weather', 'sky', 'panorama', 'scenic', 'beautiful',
-]);
+// --- Gemini API: バッチ地名抽出 ---
+function loadGeminiApiKey() {
+  // 環境変数優先（GitHub Actions用）
+  if (process.env.GEMINI_API_KEY) return process.env.GEMINI_API_KEY;
+  // config.json フォールバック（ローカル用）
+  try {
+    const config = JSON.parse(readFileSync(CONFIG_PATH, 'utf-8'));
+    if (config.gemini_api_key) return config.gemini_api_key;
+  } catch { /* ignore */ }
+  return null;
+}
 
-function extractPlacesNLP(text) {
-  const doc = nlp(text);
-  const places = doc.places().out('array');
-  return places.filter(p => !NLP_IGNORE.has(p.toLowerCase()));
+const GEMINI_API_KEY = loadGeminiApiKey();
+
+/**
+ * Gemini APIにバッチでタイトル+チャンネル名を送り、地名を抽出する。
+ * @param {Array<{title: string, channel: string}>} items
+ * @returns {Promise<Array<string|null>>} 各アイテムに対応する地名 or null
+ */
+async function extractLocationsWithGemini(items) {
+  if (!GEMINI_API_KEY || items.length === 0) return items.map(() => null);
+
+  const prompt = `You are a geographic location extractor for live camera video titles.
+Extract the most specific place name (city, landmark, region, or country) from each video title and channel name.
+Return ONLY a JSON array of strings (or null for unknown). No markdown, no explanation.
+Example: ["Tokyo", "Niagara Falls", null, "Bali"]
+
+Input:
+${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel })))}`;
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0, maxOutputTokens: 1024 },
+      }),
+    });
+
+    if (!res.ok) {
+      console.warn(`Gemini API error: ${res.status} ${await res.text()}`);
+      return items.map(() => null);
+    }
+
+    const data = await res.json();
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    // JSONブロックを抽出（```json ... ``` でラップされる場合に対応）
+    const jsonMatch = text.match(/\[[\s\S]*\]/);
+    if (!jsonMatch) {
+      console.warn('Gemini: JSON配列が見つからない:', text.slice(0, 200));
+      return items.map(() => null);
+    }
+    const locations = JSON.parse(jsonMatch[0]);
+    // 長さが一致しない場合はnullで埋める
+    while (locations.length < items.length) locations.push(null);
+    console.log(`Gemini抽出結果: ${JSON.stringify(locations)}`);
+    return locations;
+  } catch (err) {
+    console.warn(`Gemini API request failed: ${err.message}`);
+    return items.map(() => null);
+  }
 }
 
 // --- Geocoding: geocache.json + Nominatim ---
@@ -214,34 +265,28 @@ async function geocode(placeName) {
   }
 }
 
-// --- 統合: 辞書 → compromise.js + Geocoding フォールバック ---
-// 優先順位: タイトル → チャンネル名（検索クエリは使わない）
+// --- 統合: Gemini → 辞書座標 or Nominatim → 辞書マッチ（フォールバック） ---
 // Returns { coords: [lat, lon], name: string } or null
-async function extractLocation(title, query, channel) {
-  // ① タイトルから辞書マッチ（最優先）
+async function resolveLocation(geminiName, title, channel) {
+  // ① Geminiが地名を返した場合
+  if (geminiName) {
+    // 辞書に一致すればその座標
+    if (LOCATION_COORDS[geminiName]) {
+      return { coords: LOCATION_COORDS[geminiName], name: geminiName };
+    }
+    // 辞書にない → Nominatimでジオコーディング
+    const coords = await geocode(geminiName);
+    if (coords) return { coords, name: geminiName };
+  }
+
+  // ② フォールバック: タイトルから辞書マッチ
   const titleDict = extractLocationFromDict(title);
   if (titleDict) return titleDict;
 
-  // ② タイトルからNLP抽出 + ジオコーディング
-  const titlePlaces = extractPlacesNLP(title);
-  for (const place of titlePlaces) {
-    if (LOCATION_COORDS[place]) return { coords: LOCATION_COORDS[place], name: place };
-    const coords = await geocode(place);
-    if (coords) return { coords, name: place };
-  }
-
-  // ③ チャンネル名から辞書マッチ
+  // ③ フォールバック: チャンネル名から辞書マッチ
   if (channel) {
     const chDict = extractLocationFromDict(channel);
     if (chDict) return chDict;
-
-    // ④ チャンネル名からNLP抽出 + ジオコーディング
-    const chPlaces = extractPlacesNLP(channel);
-    for (const place of chPlaces) {
-      if (LOCATION_COORDS[place]) return { coords: LOCATION_COORDS[place], name: place };
-      const coords = await geocode(place);
-      if (coords) return { coords, name: place };
-    }
   }
 
   return null;
@@ -307,6 +352,8 @@ function filterCameraStreams(items) {
 
 // --- Main ---
 async function main() {
+  console.log(`Gemini API: ${GEMINI_API_KEY ? '有効' : '無効（辞書マッチのみ）'}`);
+
   // Load existing videos to merge
   let existing = [];
   try {
@@ -328,19 +375,36 @@ async function main() {
       console.log(`[${i + 1}/${SEARCH_COUNT}] "${query}" (${order}) -> ${items.length} results`);
 
       const filtered = filterCameraStreams(items);
+
+      // 新規動画だけを抽出
+      const candidates = [];
       for (const item of filtered) {
         const videoId = item.id.videoId;
         if (!videoId || existingIds.has(videoId)) continue;
         existingIds.add(videoId);
-        const title = item.snippet.title;
-        const channel = item.snippet.channelTitle;
-        const result = await extractLocation(title, query, channel);
-        newVideos.push({
+        candidates.push({
           videoId,
-          title,
-          channel,
+          title: item.snippet.title,
+          channel: item.snippet.channelTitle,
           thumbnail: item.snippet.thumbnails?.high?.url || '',
           query,
+        });
+      }
+
+      // Gemini APIでバッチ地名抽出
+      const geminiResults = await extractLocationsWithGemini(candidates);
+
+      // 各動画に地名を紐付け
+      for (let j = 0; j < candidates.length; j++) {
+        const c = candidates[j];
+        const geminiName = geminiResults[j] || null;
+        const result = await resolveLocation(geminiName, c.title, c.channel);
+        newVideos.push({
+          videoId: c.videoId,
+          title: c.title,
+          channel: c.channel,
+          thumbnail: c.thumbnail,
+          query: c.query,
           location: result?.coords || null,
           locationName: result?.name || null,
           fetchedAt: new Date().toISOString(),
@@ -348,6 +412,29 @@ async function main() {
       }
     } catch (err) {
       console.error(`Search ${i + 1} failed:`, err.message);
+    }
+  }
+
+  // 既存動画のうち location が未設定のものを Gemini で再処理
+  if (GEMINI_API_KEY) {
+    const unresolved = existing.filter(v => !v.location);
+    if (unresolved.length > 0) {
+      console.log(`\n既存動画の再処理: ${unresolved.length}件 (location未設定)`);
+      // 25件ずつバッチ処理（Geminiのレート制限を考慮）
+      for (let k = 0; k < unresolved.length; k += 25) {
+        const batch = unresolved.slice(k, k + 25);
+        const geminiResults = await extractLocationsWithGemini(batch);
+        for (let j = 0; j < batch.length; j++) {
+          const v = batch[j];
+          const geminiName = geminiResults[j] || null;
+          const result = await resolveLocation(geminiName, v.title, v.channel || '');
+          if (result) {
+            v.location = result.coords;
+            v.locationName = result.name;
+          }
+        }
+      }
+      console.log(`再処理完了`);
     }
   }
 

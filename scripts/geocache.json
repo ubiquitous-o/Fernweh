@@ -39,324 +39,441 @@
     42.6248342,
     -82.5143645
   ],
-  "Weymouth Beach (UK)": [
-    52.5384671,
-    -0.2456685
+  "Nagano": [
+    36.1143945,
+    138.0319015
   ],
-  "Detroit River Live": null,
-  "Museum,": [
-    50.0794841,
-    14.4316586
+  "Bergamo": [
+    45.7566557,
+    9.7542192
   ],
-  "OHIO": [
-    40.2253569,
-    -82.6881395
+  "Lake Como": [
+    45.9917589,
+    9.264881
   ],
-  "Lake Livestream": null,
-  "Live-Stream": [
-    34.1398259,
-    -117.7435807
+  "Abetone": [
+    44.1444997,
+    10.6644636
   ],
-  "Severn Valley Railway": [
-    52.6147785,
-    -2.4425948
+  "Varazze": [
+    44.3592996,
+    8.5753273
   ],
-  "San Marcos Fort": [
-    32.7307203,
-    -97.4704736
+  "Orvieto": [
+    42.7186152,
+    12.1087907
   ],
-  "Castelul Bran - Dracula&#39;s Castle - Casa": null,
-  "Ocean City": [
-    39.2788685,
-    -74.5762507
+  "Perugia": [
+    43.1070321,
+    12.4029962
   ],
-  "Pennsylvania, USA": [
-    40.9699889,
-    -77.7278831
+  "La Spezia": [
+    44.238366,
+    9.6912326
   ],
-  "Peregrine Falcon Nest - Castle Rock -": null,
-  "Maddalena": [
-    44.6222404,
-    7.0285759
+  "Assisi": [
+    43.0711952,
+    12.6146669
   ],
-  "Castle Live": [
-    51.4823617,
-    -3.1779029
+  "Gorreto": [
+    44.6048462,
+    9.2912637
   ],
-  "Hurst Castle": [
-    50.7068783,
-    -1.5500234
+  "Trieste": [
+    45.6496485,
+    13.7772781
   ],
-  "Peregrine Falcon Lookout  - Castle Rock": null,
-  "Matsumoto Castle": [
-    36.2386353,
-    137.9688709
+  "New York City": [
+    40.7127281,
+    -74.0060152
   ],
-  "Schloss Colditz - Wettercam Castle Colditz": null,
-  "River Sounds": [
-    40.5935143,
-    -122.3808746
+  "Santiago": [
+    9.8694792,
+    -83.7980749
   ],
-  "Mississippi River": [
-    39.5523599,
-    -91.1578924
+  "Heathrow Airport": [
+    51.467739,
+    -0.4587801
   ],
-  "City,": [
-    -37.8141705,
-    144.9655616
+  "Minneapolis / St. Paul": [
+    44.8780191,
+    -93.2209281
   ],
-  "Ohio River,": [
-    38.8197972,
-    -84.2289889
+  "Creve Coeur Airport": [
+    38.7256219,
+    -90.5075138
   ],
-  "Missouri River": [
-    44.786375,
-    -100.7217317
+  "Montreal": [
+    45.5031824,
+    -73.5698065
   ],
-  "In The Forest -": [
-    35.3169702,
-    139.5491298
+  "Lanzarote": [
+    29.0397081,
+    -13.6362916
   ],
-  "Mississippi River Flyway": null,
-  "Dam - Michigan -": [
-    40.5533073,
-    -106.008603
+  "Madeira Island": [
+    32.7517501,
+    -16.9817487
   ],
-  "RIO": [
-    -22.9110137,
-    -43.2093727
+  "Fort Lauderdale": [
+    26.1223084,
+    -80.1433786
   ],
-  "ATL": [
-    33.6374009,
-    -84.4298161
+  "Gran Canaria": [
+    27.9580004,
+    -15.6062305
   ],
-  "Space Coast Live:": null,
-  "Live Stream of Earth": null,
-  "Reef Camera": null,
-  "Kensington": [
-    51.4989948,
-    -0.1991229
+  "Waupaca": [
+    44.4927889,
+    -88.9650419
+  ],
+  "Frankfurt Airport": [
+    50.0244126,
+    8.5552003
+  ],
+  "Munich Airport": [
+    48.3539625,
+    11.7785925
+  ],
+  "Mallorca": [
+    39.613432,
+    2.8829185
   ],
   "Saint Martin": [
     18.0814066,
     -63.0467131
   ],
-  "Live Stream of Harbour": null,
-  "Clearwater Beach Cam": [
-    33.6998397,
-    -118.0145282
+  "Warren Idaho": [
+    45.2640724,
+    -115.6765116
   ],
-  "Margaritaville Beach Resort Fort Myers Beach": null,
-  "Margaritaville Beach": [
-    25.0807022,
-    -77.3210597
+  "Keokuk": [
+    41.3154792,
+    -92.1867128
   ],
-  "Cruz Bay Beach": [
-    18.3305591,
-    -64.7963377
+  "Etosha National Park": [
+    -18.9913306,
+    15.7460551
+  ],
+  "Rio": [
+    -22.9110137,
+    -43.2093727
+  ],
+  "Tongass National Forest": [
+    59.5583247,
+    -138.9619712
+  ],
+  "Detroit": [
+    42.3315509,
+    -83.0466403
+  ],
+  "Ocho Rios": [
+    18.4081045,
+    -77.1011092
+  ],
+  "Devon": [
+    50.7241405,
+    -3.6607788
+  ],
+  "Mad River Valley": [
+    41.5388583,
+    -73.0168902
+  ],
+  "Martha's Vineyard": [
+    41.3920455,
+    -70.6208138
+  ],
+  "Marine City": [
+    42.7190045,
+    -82.4941921
+  ],
+  "Port Colborne": [
+    42.8862392,
+    -79.2513905
+  ],
+  "Leavenworth": [
+    39.3113257,
+    -94.922759
+  ],
+  "earthTV": null,
+  "Koh Samui": [
+    9.5013945,
+    99.9956193
   ],
   "Curaçao": [
     12.1176488,
     -68.9309263
   ],
-  "🌊🅻🅸🆅🅴🌊Cape Kiwanda Beach Cam 🌅Live Pacific City 🌊Oregon Coast": null,
-  "Beach Live": [
-    25.7907264,
-    -80.1359831
+  "Rotterdam": [
+    51.9244424,
+    4.47775
   ],
-  "Maine -": [
+  "CANARY ISLANDS": [
+    28.2935785,
+    -16.6214471
+  ],
+  "Rovaniemi": [
+    66.5025537,
+    25.7303912
+  ],
+  "Palm": [
+    40.4281539,
+    -75.5329608
+  ],
+  "SAPPORO-city": [
+    40.6289914,
+    -74.0289734
+  ],
+  "Earth": [
+    34.2331373,
+    -102.4107493
+  ],
+  "Fairbanks": [
+    64.837845,
+    -147.716675
+  ],
+  "Cresswell": [
+    55.2352886,
+    -1.5398744
+  ],
+  "Nelson/Tasman": [
+    -41.0343027,
+    173.3480665
+  ],
+  "Utsjoki": [
+    69.907601,
+    27.0252458
+  ],
+  "Maine": [
     45.709097,
     -68.8590201
   ],
-  "Downtown Harbor Springs,": null,
-  "Friday Harbor Marina Live Stream": null,
-  "Dorset": [
-    50.7968369,
-    -2.3447323
+  "Lapland": [
+    67.6922371,
+    26.728139
   ],
-  "Weymouth": [
-    50.6096257,
-    -2.4543424
+  "Pyhä-Luosto": [
+    67.1618234,
+    26.9154118
   ],
-  "Beach Life": [
-    -26.6655644,
-    153.105071
+  "Koh Phangan": [
+    9.7349503,
+    100.0305711
   ],
-  "UK": [
-    19.7031822,
-    -79.9174627
+  "Big Bear": [
+    29.6675171,
+    -98.4556864
   ],
-  "Minnesota": [
-    45.9896587,
-    -94.6113288
+  "Duluth": [
+    46.7838287,
+    -92.1052679
   ],
-  "Jackson Hole Town Square Live Webcam Stream – See": null,
-  "Pomerelle Mountain Ski": null,
-  "Myrtle Beach Boardwalk": [
-    33.6897648,
-    -78.8811109
+  "Lower Keys": [
+    24.6736205,
+    -81.4981792
   ],
-  "Town of Collingwood Live Stream": null,
-  "Town of Collingwood": [
-    42.8675669,
-    -76.0829793
+  "Kisatchie National Forest": [
+    32.6722848,
+    -93.2880666
   ],
-  "Kentucky, USA": [
-    37.5726028,
-    -85.1551411
+  "Avon Lake": [
+    41.510033,
+    -82.0185895
   ],
-  "Fort Madison, Iowa, USA": [
-    40.6311415,
-    -91.3084007
+  "Davao City": [
+    7.0648306,
+    125.6080623
   ],
-  "Ontario": [
-    50.000678,
-    -86.000977
+  "Aruba": [
+    12.5013629,
+    -69.9618475
   ],
-  "Santa Claus Village": [
-    66.5432629,
-    25.8458339
+  "Mojave": [
+    35.0109603,
+    -118.1902833
   ],
-  "NYC Skyline Live Stream Camera": null,
-  "Tel Aviv": [
-    32.0852997,
-    34.7818064
+  "Kalahari Desert": [
+    -23,
+    22
   ],
-  "Auckland": [
-    -36.852095,
-    174.7631803
+  "Kalahari": [
+    -23,
+    22
   ],
-  "Lx Live Stream": null,
-  "Cat Tien National Park": [
-    11.4547262,
-    107.3197806
+  "Judean Desert": [
+    30.9313844,
+    35.2039375
+  ],
+  "Arizona": [
+    34.395342,
+    -111.763275
+  ],
+  "Mendenhall Glacier": [
+    58.5047401,
+    -134.5539266
+  ],
+  "Ilulissat": [
+    69.2197127,
+    -51.0986385
+  ],
+  "Victor Glacier": [
+    73.25,
+    -28.875
+  ],
+  "Grand Teton National Park": [
+    43.8105668,
+    -110.6487948
+  ],
+  "Swiss Alps": [
+    46.3802707,
+    8.871155
+  ],
+  "Kulusuk": [
+    65.5518396,
+    -37.116877
+  ],
+  "Skigebiete": [
+    51.7604184,
+    10.5119472
+  ],
+  "Grasslands National Park": [
+    49.1126209,
+    -107.3701047
+  ],
+  "Winter Park": [
+    28.5977707,
+    -81.3510264
+  ],
+  "Österreich": [
+    47.59397,
+    14.12456
+  ],
+  "Arvidsjaur": [
+    65.666667,
+    19.25
+  ],
+  "Essaouira": [
+    31.5118281,
+    -9.7620903
+  ],
+  "Groningen": [
+    53.2190652,
+    6.5680077
+  ],
+  "Andalo": [
+    46.1661363,
+    11.003402
+  ],
+  "Sicily": [
+    37.587794,
+    14.155048
+  ],
+  "Guatemala": [
+    15.5855545,
+    -90.345759
+  ],
+  "Times Square": [
+    40.7570095,
+    -73.9859724
+  ],
+  "ITALY": [
+    42.6384261,
+    12.674297
   ],
   "Southampton": [
     50.9025349,
     -1.404189
   ],
-  "Stream - Erasmusbrug,": null,
-  "Rotterdam": [
-    51.9244424,
-    4.47775
+  "LANZAROTE": [
+    29.0397081,
+    -13.6362916
   ],
-  "Aurora Camp": [
-    20.3714184,
-    -90.051876
+  "Playa de Altea": [
+    38.6011386,
+    -0.0458072
   ],
-  "Slovakia": [
-    48.7411522,
-    19.4528646
+  "Fuengirola": [
+    36.5388398,
+    -4.6233974
   ],
-  "Bay Port,": [
-    43.8492297,
-    -83.3731789
+  "Palma de Mallorca": [
+    39.5695818,
+    2.6500745
   ],
-  "Mt": [
-    35.9311442,
-    14.3951627
+  "Platja d'Aro": [
+    41.8184693,
+    3.0687997
   ],
-  "Cruise Cam - Southampton Cruise Ship Live Stream": null,
-  "UK)": [
-    19.7031822,
-    -79.9174627
+  "Barcellona Pozzo di Gotto": [
+    38.1483059,
+    15.2175523
   ],
-  "STREAM – Footage": null,
-  "Africa": [
-    11.5024338,
-    17.7578122
+  "Žacléř": [
+    50.6586423,
+    15.9078109
   ],
-  "Manatee Cam At Homosassa Springs": null,
-  "Fotherdale,": [
-    54.0296424,
-    -0.7257903
+  "North Carolina": [
+    35.6729639,
+    -79.0392919
   ],
-  "York": [
-    53.9656579,
-    -1.0743052
+  "Cat Tien National Park": [
+    11.4547262,
+    107.3197806
   ],
-  "Polzeath beach community Webcam": null,
-  "Polzeath House": [
-    50.5612666,
-    -4.9238405
+  "Ontario": [
+    50.000678,
+    -86.000977
   ],
-  "LAX Airport Action": null,
-  "Utopia Village Top-": null,
-  "Wall Underwater Reef Cam": null,
-  "Lake Lugano": [
-    28.5011798,
-    -81.7328766
+  "Gaylord": [
+    45.027513,
+    -84.674752
   ],
-  "Waterfall Flowing": null,
-  "Mountain Forest": [
-    33.53816,
-    -86.6588758
+  "Missouri Ozarks": [
+    38.1443725,
+    -92.6594744
   ],
-  "Mt.": [
-    35.9311442,
-    14.3951627
+  "Oakland": [
+    37.8044557,
+    -122.271356
   ],
-  "Clayton&#39;s Landing": [
-    34.0912759,
-    -84.526654
+  "Pittsburgh": [
+    40.4406968,
+    -80.0025666
   ],
-  "NYC": [
-    40.7127281,
-    -74.0060152
+  "Sabi Sand": [
+    -24.821303,
+    31.4411616
   ],
-  "Calgary": [
-    51.0456064,
-    -114.057541
+  "Roccaraso": [
+    41.8502606,
+    14.0782574
   ],
-  "MELBOURNE": [
-    -37.8142454,
-    144.9631732
+  "Colorado": [
+    38.7251776,
+    -105.607716
   ],
-  "St Ives": [
-    50.2149064,
-    -5.4795083
+  "Carson City": [
+    39.1663259,
+    -119.7670374
   ],
-  "(Baltimore, Maryland)": [
-    39.2908816,
-    -76.610759
+  "Santo Stefano d’Aveto": [
+    44.5472974,
+    9.4502082
   ],
-  "Dollar Bar": [
-    40.7084122,
-    -73.9381164
+  "Pikes Peak": [
+    38.8404012,
+    -105.0439523
   ],
-  "Den": [
-    39.8606676,
-    -104.6853673
+  "Porto Moniz": [
+    32.8669649,
+    -17.1666328
   ],
-  "Virginia, USA": [
-    37.1232245,
-    -78.4927721
+  "Kintamani": [
+    -8.2401567,
+    115.3263567
   ],
-  "Fuego Volcano Eruption": null,
-  "(Guatemala)": [
-    15.5855545,
-    -90.345759
-  ],
-  "Nutty Kingdom": null,
-  "Chengdu": [
-    30.659867,
-    104.063315
-  ],
-  "Wernwood - Live Stream Birdcast": null,
-  "Wales": [
-    52.2928116,
-    -3.73893
-  ],
-  "Hills Ontario": [
-    -33.7859084,
-    150.9291786
-  ],
-  "Alabama": [
-    33.2588817,
-    -86.8295337
-  ],
-  "Indiana": [
-    40.3270127,
-    -86.1746933
+  "Rutland": [
+    52.6423036,
+    -0.6632643
   ]
 }

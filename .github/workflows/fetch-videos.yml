@@ -25,6 +25,7 @@ jobs:
       - name: Fetch videos from YouTube API
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/fetch-videos.js
 
       - name: Commit and push if changed
