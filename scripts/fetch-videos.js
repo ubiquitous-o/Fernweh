@@ -307,7 +307,7 @@ ${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel })))}`;
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0, maxOutputTokens: 4096 },
+        generationConfig: { temperature: 0, maxOutputTokens: 8192 },
       }),
     });
 
@@ -319,12 +319,22 @@ ${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel })))}`;
     const data = await res.json();
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
     // JSONブロックを抽出（```json ... ``` でラップされる場合に対応）
+    let jsonStr = '';
     const jsonMatch = text.match(/\[[\s\S]*\]/);
-    if (!jsonMatch) {
-      console.warn('Gemini: JSON配列が見つからない:', text.slice(0, 200));
-      return items.map(() => null);
+    if (jsonMatch) {
+      jsonStr = jsonMatch[0];
+    } else {
+      // レスポンスが途中で切れた場合: [ で始まるが ] がない → 補完を試みる
+      const bracketStart = text.indexOf('[');
+      if (bracketStart >= 0) {
+        jsonStr = text.slice(bracketStart).replace(/,\s*$/, '') + ']';
+        console.warn('Gemini: 途中切れJSON → 補完を試行');
+      } else {
+        console.warn('Gemini: JSON配列が見つからない:', text.slice(0, 200));
+        return items.map(() => null);
+      }
     }
-    const locations = JSON.parse(jsonMatch[0]).map(v =>
+    const locations = JSON.parse(jsonStr).map(v =>
       (v === null || v === 'null' || v === '') ? null : v
     );
     // 長さが一致しない場合はnullで埋める
