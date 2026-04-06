@@ -167,12 +167,92 @@ const LOCATION_COORDS = {
   'Reykjavík': [64.15, -21.94], 'Hollywood Beach': [26.01, -80.12],
 };
 
+// 表示ラベル: キー（マッチ用）→ "地名, 国名/州名" フォーマット
+// ここに無いキーはそのまま表示される（Tokyo, Paris等の有名都市）
+const LOCATION_LABELS = {
+  // 米国の都市・州
+  'New York': 'New York, USA', 'Los Angeles': 'Los Angeles, USA',
+  'San Francisco': 'San Francisco, USA', 'San Diego': 'San Diego, USA',
+  'Chicago': 'Chicago, USA', 'Miami': 'Miami, USA', 'Seattle': 'Seattle, USA',
+  'Las Vegas': 'Las Vegas, USA', 'Washington': 'Washington, USA',
+  'Anchorage': 'Anchorage, Alaska', 'Honolulu': 'Honolulu, Hawaii',
+  'Galveston': 'Galveston, Texas', 'Gatlinburg': 'Gatlinburg, Tennessee',
+  'Monterey': 'Monterey, California', 'Venice Beach': 'Venice Beach, California',
+  'Yellowstone': 'Yellowstone, USA', 'Yosemite': 'Yosemite, USA',
+  'Niagara': 'Niagara Falls, USA', 'Grand Canyon': 'Grand Canyon, USA',
+  'Deerfield Beach': 'Deerfield Beach, Florida', 'Homosassa Springs': 'Homosassa Springs, Florida',
+  'Big Bear': 'Big Bear, California', 'La Grange': 'La Grange, Kentucky',
+  'St. Augustine': 'St. Augustine, Florida', 'Burlington': 'Burlington, Vermont',
+  'Winter Garden': 'Winter Garden, Florida', 'Ashland': 'Ashland, Virginia',
+  'Mt Katahdin': 'Mt Katahdin, Maine', 'Jackson Hole': 'Jackson Hole, Wyoming',
+  'Baltimore': 'Baltimore, Maryland', 'Lorain': 'Lorain, Ohio',
+  'Turpentine Creek': 'Turpentine Creek, Arkansas',
+  'Frying Pan Tower': 'Frying Pan Tower, NC',
+  'Pipeline': 'Banzai Pipeline, Hawaii', 'Banzai Pipeline': 'Banzai Pipeline, Hawaii',
+  'Hollywood Beach': 'Hollywood Beach, Florida',
+  'Alabama': 'Alabama, USA', 'Indiana': 'Indiana, USA',
+  'Florida': 'Florida, USA', 'Texas': 'Texas, USA', 'California': 'California, USA',
+  'Ozarks': 'Ozarks, Missouri',
+  // カナダ
+  'Vancouver': 'Vancouver, Canada', 'Toronto': 'Toronto, Canada',
+  'Ottawa': 'Ottawa, Canada', 'Revelstoke': 'Revelstoke, BC',
+  'Churchill': 'Churchill, Manitoba', 'Saint-Félicien': 'Saint-Félicien, Quebec',
+  // ヨーロッパ
+  'Venice': 'Venice, Italy', 'Milan': 'Milan, Italy', 'Naples': 'Naples, Italy',
+  'Monterosso': 'Monterosso, Italy', 'Mt. Etna': 'Mt. Etna, Sicily',
+  'Dublin': 'Dublin, Ireland', 'Edinburgh': 'Edinburgh, Scotland',
+  'Stockholm': 'Stockholm, Sweden', 'Copenhagen': 'Copenhagen, Denmark',
+  'Warsaw': 'Warsaw, Poland', 'Budapest': 'Budapest, Hungary',
+  'Moscow': 'Moscow, Russia', 'St. Petersburg': 'St. Petersburg, Russia',
+  'Brasov': 'Brașov, Romania', 'Transylvania': 'Transylvania, Romania',
+  'Grindavík': 'Grindavík, Iceland', 'Þorbjörn': 'Þorbjörn, Iceland',
+  'Reykjavík': 'Reykjavík, Iceland', 'Reykjavik': 'Reykjavik, Iceland',
+  'Levi': 'Levi, Finland', 'Rovaniemi': 'Rovaniemi, Finland',
+  'Posio': 'Posio, Finland', 'Iisalmi': 'Iisalmi, Finland',
+  'Narvik': 'Narvik, Norway', 'Hafjell': 'Hafjell, Norway',
+  'Myrkdalen': 'Myrkdalen, Norway', 'Beitostølen': 'Beitostølen, Norway',
+  'Voss': 'Voss, Norway', 'Drammen': 'Drammen, Norway',
+  'Måløy': 'Måløy, Norway', 'Skarsvåg': 'Skarsvåg, Norway',
+  'Runde': 'Runde, Norway', 'Helgoland': 'Helgoland, Germany',
+  'Munich': 'Munich, Germany', 'Hamburg': 'Hamburg, Germany', 'Berlin': 'Berlin, Germany',
+  'Madrid': 'Madrid, Spain', 'Santorini': 'Santorini, Greece',
+  'Sint-Niklaas': 'Sint-Niklaas, Belgium',
+  // アジア・オセアニア
+  'Osaka': 'Osaka, Japan', 'Kyoto': 'Kyoto, Japan', 'Sapporo': 'Sapporo, Japan',
+  'Nagoya': 'Nagoya, Japan', 'Yokohama': 'Yokohama, Japan', 'Kobe': 'Kobe, Japan',
+  'Okinawa': 'Okinawa, Japan', 'Hokkaido': 'Hokkaido, Japan',
+  'Mt. Fuji': 'Mt. Fuji, Japan', 'Fuji': 'Fuji, Japan', 'Fujisan': 'Fujisan, Japan',
+  'Niseko': 'Niseko, Japan', 'Hakone': 'Hakone, Japan',
+  'Busan': 'Busan, South Korea', 'Taipei': 'Taipei, Taiwan',
+  'Phuket': 'Phuket, Thailand', 'Chengdu': 'Chengdu, China',
+  'Beijing': 'Beijing, China', 'Shanghai': 'Shanghai, China',
+  'Kuala Lumpur': 'Kuala Lumpur, Malaysia', 'Manila': 'Manila, Philippines',
+  'Davao City': 'Davao City, Philippines', 'Hanoi': 'Hanoi, Vietnam',
+  'Auckland': 'Auckland, New Zealand', 'Ōamaru': 'Ōamaru, New Zealand',
+  'Borneo': 'Borneo, Indonesia',
+  // 中南米・カリブ
+  'Ocho Rios': 'Ocho Rios, Jamaica', 'May Pen': 'May Pen, Jamaica',
+  'Kingston': 'Kingston, Jamaica', 'Utila': 'Utila, Honduras',
+  'Sarapiquí': 'Sarapiquí, Costa Rica', 'Volcán de Fuego': 'Volcán de Fuego, Guatemala',
+  'Grand Cayman': 'Grand Cayman, Cayman Islands',
+  // アフリカ
+  'Nairobi': 'Nairobi, Kenya', 'Johannesburg': 'Johannesburg, South Africa',
+  'Kruger': 'Kruger, South Africa', 'Hoedspruit': 'Hoedspruit, South Africa',
+  'Serengeti': 'Serengeti, Tanzania', 'Etosha': 'Etosha, Namibia',
+  'Kilimanjaro': 'Kilimanjaro, Tanzania', 'Mana Pools': 'Mana Pools, Zimbabwe',
+  // ランドマーク
+  'Loch Arkaig': 'Loch Arkaig, Scotland', 'Kilauea': 'Kīlauea, Hawaii',
+  'Everest': 'Everest, Nepal', 'Cat Tien': 'Cat Tien, Vietnam',
+  'Funchal': 'Funchal, Madeira', 'Madeira': 'Madeira, Portugal',
+  'Ilulissat': 'Ilulissat, Greenland',
+};
+
 function extractLocationFromDict(text) {
   // Check longer names first to avoid partial matches
   const sorted = Object.keys(LOCATION_COORDS).sort((a, b) => b.length - a.length);
-  for (const name of sorted) {
-    if (new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(text)) {
-      return { coords: LOCATION_COORDS[name], name };
+  for (const key of sorted) {
+    if (new RegExp(`\\b${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(text)) {
+      return { coords: LOCATION_COORDS[key], name: LOCATION_LABELS[key] || key };
     }
   }
   return null;

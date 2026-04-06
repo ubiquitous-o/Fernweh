@@ -825,18 +825,41 @@
     'Dominican Republic':[18.49,-69.93],'Puerto Rico':[18.47,-66.11],
     'Bermuda':[32.32,-64.76],'Tahiti':[-17.53,-149.57],
   };
+  const KNOWN_LABELS = {
+    'New York':'New York, USA','Los Angeles':'Los Angeles, USA',
+    'San Francisco':'San Francisco, USA','San Diego':'San Diego, USA',
+    'Chicago':'Chicago, USA','Miami':'Miami, USA','Seattle':'Seattle, USA',
+    'Las Vegas':'Las Vegas, USA','Anchorage':'Anchorage, Alaska',
+    'Honolulu':'Honolulu, Hawaii','Galveston':'Galveston, Texas',
+    'Gatlinburg':'Gatlinburg, Tennessee','Monterey':'Monterey, California',
+    'Venice Beach':'Venice Beach, California','Yellowstone':'Yellowstone, USA',
+    'Jacksonville':'Jacksonville, Florida','Huntington Beach':'Huntington Beach, California',
+    'Hollywood Beach':'Hollywood Beach, Florida','Islamorada':'Islamorada, Florida',
+    'Venice':'Venice, Italy','Santorini':'Santorini, Greece',
+    'Berlin':'Berlin, Germany','Stockholm':'Stockholm, Sweden',
+    'Copenhagen':'Copenhagen, Denmark','Budapest':'Budapest, Hungary',
+    'Moscow':'Moscow, Russia','Beijing':'Beijing, China','Shanghai':'Shanghai, China',
+    'Taipei':'Taipei, Taiwan','Osaka':'Osaka, Japan','Kyoto':'Kyoto, Japan',
+    'Sapporo':'Sapporo, Japan','Hokkaido':'Hokkaido, Japan',
+    'Fuji':'Fuji, Japan','Mt. Fuji':'Mt. Fuji, Japan',
+    'Niseko':'Niseko, Japan','Hakone':'Hakone, Japan',
+    'Kruger':'Kruger, South Africa','Reykjavik':'Reykjavik, Iceland',
+    'Maui':'Maui, Hawaii','Oahu':'Oahu, Hawaii',
+    'Vancouver':'Vancouver, Canada','Florida':'Florida, USA',
+    'California':'California, USA','Texas':'Texas, USA',
+  };
   const KNOWN_NAMES_SORTED = Object.keys(KNOWN_LOCATIONS).sort((a, b) => b.length - a.length);
 
   function guessLocation(title, channel) {
     // タイトル優先 → チャンネル名の順で検索（queryは使わない）
-    for (const name of KNOWN_NAMES_SORTED) {
-      const re = new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
-      if (re.test(title)) return { coords: KNOWN_LOCATIONS[name], name };
+    for (const key of KNOWN_NAMES_SORTED) {
+      const re = new RegExp(`\\b${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
+      if (re.test(title)) return { coords: KNOWN_LOCATIONS[key], name: KNOWN_LABELS[key] || key };
     }
     if (channel) {
-      for (const name of KNOWN_NAMES_SORTED) {
-        const re = new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
-        if (re.test(channel)) return { coords: KNOWN_LOCATIONS[name], name };
+      for (const key of KNOWN_NAMES_SORTED) {
+        const re = new RegExp(`\\b${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'i');
+        if (re.test(channel)) return { coords: KNOWN_LOCATIONS[key], name: KNOWN_LABELS[key] || key };
       }
     }
     return null;
