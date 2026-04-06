@@ -131,6 +131,40 @@ const LOCATION_COORDS = {
   'Madagascar': [-18.88, 47.51], 'Greenland': [64.18, -51.69],
   'Dominican Republic': [18.49, -69.93], 'Puerto Rico': [18.47, -66.11],
   'Bermuda': [32.32, -64.76], 'Tahiti': [-17.53, -149.57],
+  // Discovered from live cam data
+  'Loch Arkaig': [56.94, -5.14], 'Deerfield Beach': [26.32, -80.10],
+  'Sarapiquí': [10.45, -84.01], 'Homosassa Springs': [28.80, -82.58],
+  'Turpentine Creek': [36.28, -93.73], 'Utila': [16.10, -86.90],
+  'Big Bear': [34.24, -116.91], 'Toronto': [43.65, -79.38],
+  'La Grange': [38.41, -85.38], 'St. Augustine': [29.89, -81.31],
+  'Burlington': [44.48, -73.21], 'Winter Garden': [28.57, -81.59],
+  'Revelstoke': [50.98, -118.20], 'Ashland': [37.76, -77.48],
+  'Mt Katahdin': [45.90, -68.91], 'Drammen': [59.74, 10.20],
+  'Runde': [62.40, 5.63], 'Posio': [65.99, 28.17], 'Iisalmi': [63.56, 27.19],
+  'St. Petersburg': [59.95, 30.34], 'Auckland': [-36.85, 174.76],
+  'Rovaniemi': [66.54, 25.85], 'Hoedspruit': [-24.35, 30.97],
+  'Borneo': [-1.35, 116.85], 'Grand Cayman': [19.30, -81.38],
+  'Ilulissat': [69.22, -51.10], 'Mt. Etna': [37.75, 14.99],
+  'Grindavík': [63.84, -22.43], 'Þorbjörn': [63.86, -22.44],
+  'Pipeline': [21.66, -158.05], 'Banzai Pipeline': [21.66, -158.05],
+  'Frying Pan Tower': [33.49, -77.59], 'Narvik': [68.43, 17.43],
+  'Hafjell': [61.24, 10.53], 'Myrkdalen': [60.88, 6.46],
+  'Beitostølen': [61.25, 8.92], 'Voss': [60.63, 6.42],
+  'Måløy': [61.93, 5.11], 'Skarsvåg': [71.11, 25.84],
+  'Helgoland': [54.18, 7.89], 'Sint-Niklaas': [51.16, 4.14],
+  'Chengdu': [30.66, 104.06], 'Davao City': [7.07, 125.61],
+  'Ocho Rios': [18.41, -77.10], 'May Pen': [17.97, -77.25],
+  'Kingston': [18.01, -76.80], 'Jackson Hole': [43.48, -110.76],
+  'Baltimore': [39.29, -76.61], 'Funchal': [32.65, -16.91],
+  'Madeira': [32.65, -16.91], 'Ottawa': [45.42, -75.70],
+  'Monterosso': [44.15, 9.65], 'Lorain': [41.47, -82.18],
+  'Ōamaru': [-45.10, 170.97], 'Churchill': [58.77, -94.17],
+  'Saint-Félicien': [48.65, -72.44], 'Volcán de Fuego': [14.47, -90.88],
+  'Alabama': [33.26, -86.83], 'Indiana': [40.33, -86.17],
+  'Ozarks': [36.50, -93.00], 'Wales': [52.29, -3.74],
+  'Zimbabwe': [-17.83, 31.05], 'Mana Pools': [-15.76, 29.39],
+  'Cat Tien': [11.45, 107.32], 'Kilauea': [19.42, -155.29],
+  'Reykjavík': [64.15, -21.94], 'Hollywood Beach': [26.01, -80.12],
 };
 
 function extractLocationFromDict(text) {
@@ -167,9 +201,11 @@ async function extractLocationsWithGemini(items) {
   if (!GEMINI_API_KEY || items.length === 0) return items.map(() => null);
 
   const prompt = `You are a geographic location extractor for live camera video titles.
-Extract the most specific place name (city, landmark, region, or country) from each video title and channel name.
+Extract the most specific place name from each video title and channel name.
+Format: "City/Landmark, Country/State" (e.g. "Narvik, Norway", "Galveston, Texas", "Mt. Etna, Sicily").
+For well-known cities (Tokyo, Paris, London etc.), the city name alone is fine.
 Return ONLY a JSON array of strings (or null for unknown). No markdown, no explanation.
-Example: ["Tokyo", "Niagara Falls", null, "Bali"]
+Example: ["Tokyo", "Niagara Falls, USA", null, "Ubud, Bali"]
 
 Input:
 ${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel })))}`;
@@ -182,7 +218,7 @@ ${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel })))}`;
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0, maxOutputTokens: 1024 },
+        generationConfig: { temperature: 0, maxOutputTokens: 4096 },
       }),
     });
 
@@ -368,6 +404,8 @@ async function main() {
   const newVideos = [];
   const SEARCH_COUNT = 4; // 4 searches per cron run
 
+  // --- Phase 1: YouTube検索で全候補を収集 ---
+  const allCandidates = [];
   for (let i = 0; i < SEARCH_COUNT; i++) {
     const query = generateQuery();
     const order = pick(SORT_ORDERS);
@@ -378,13 +416,11 @@ async function main() {
 
       const filtered = filterCameraStreams(items);
 
-      // 新規動画だけを抽出
-      const candidates = [];
       for (const item of filtered) {
         const videoId = item.id.videoId;
         if (!videoId || existingIds.has(videoId)) continue;
         existingIds.add(videoId);
-        candidates.push({
+        allCandidates.push({
           videoId,
           title: item.snippet.title,
           channel: item.snippet.channelTitle,
@@ -392,51 +428,51 @@ async function main() {
           query,
         });
       }
-
-      // Gemini APIでバッチ地名抽出
-      const geminiResults = await extractLocationsWithGemini(candidates);
-
-      // 各動画に地名を紐付け
-      for (let j = 0; j < candidates.length; j++) {
-        const c = candidates[j];
-        const geminiName = geminiResults[j] || null;
-        const result = await resolveLocation(geminiName, c.title, c.channel);
-        newVideos.push({
-          videoId: c.videoId,
-          title: c.title,
-          channel: c.channel,
-          thumbnail: c.thumbnail,
-          query: c.query,
-          location: result?.coords || null,
-          locationName: result?.name || null,
-          fetchedAt: new Date().toISOString(),
-        });
-      }
     } catch (err) {
       console.error(`Search ${i + 1} failed:`, err.message);
     }
   }
 
-  // 既存動画のうち location が未設定のものを Gemini で再処理
-  if (GEMINI_API_KEY) {
-    const unresolved = existing.filter(v => !v.location);
-    if (unresolved.length > 0) {
-      console.log(`\n既存動画の再処理: ${unresolved.length}件 (location未設定)`);
-      // 25件ずつバッチ処理（Geminiのレート制限を考慮）
-      for (let k = 0; k < unresolved.length; k += 25) {
-        const batch = unresolved.slice(k, k + 25);
-        const geminiResults = await extractLocationsWithGemini(batch);
-        for (let j = 0; j < batch.length; j++) {
-          const v = batch[j];
-          const geminiName = geminiResults[j] || null;
-          const result = await resolveLocation(geminiName, v.title, v.channel || '');
-          if (result) {
-            v.location = result.coords;
-            v.locationName = result.name;
-          }
-        }
-      }
-      console.log(`再処理完了`);
+  // --- Phase 2: 既存動画のうち location 未設定のものも収集 ---
+  const unresolved = existing.filter(v => !v.location);
+  if (unresolved.length > 0) {
+    console.log(`既存動画の再処理対象: ${unresolved.length}件 (location未設定)`);
+  }
+
+  // --- Phase 3: 新規 + 再処理を1回のGemini APIコールで処理（RPD節約） ---
+  const geminiItems = [
+    ...allCandidates.map(c => ({ title: c.title, channel: c.channel })),
+    ...unresolved.map(v => ({ title: v.title, channel: v.channel || '' })),
+  ];
+  const geminiResults = await extractLocationsWithGemini(geminiItems);
+  const newGeminiResults = geminiResults.slice(0, allCandidates.length);
+  const unresolvedGeminiResults = geminiResults.slice(allCandidates.length);
+
+  // --- Phase 4: 新規動画のロケーション解決 ---
+  for (let j = 0; j < allCandidates.length; j++) {
+    const c = allCandidates[j];
+    const geminiName = newGeminiResults[j] || null;
+    const result = await resolveLocation(geminiName, c.title, c.channel);
+    newVideos.push({
+      videoId: c.videoId,
+      title: c.title,
+      channel: c.channel,
+      thumbnail: c.thumbnail,
+      query: c.query,
+      location: result?.coords || null,
+      locationName: result?.name || null,
+      fetchedAt: new Date().toISOString(),
+    });
+  }
+
+  // --- Phase 5: 既存動画の再処理結果を反映 ---
+  for (let j = 0; j < unresolved.length; j++) {
+    const v = unresolved[j];
+    const geminiName = unresolvedGeminiResults[j] || null;
+    const result = await resolveLocation(geminiName, v.title, v.channel || '');
+    if (result) {
+      v.location = result.coords;
+      v.locationName = result.name;
     }
   }
 

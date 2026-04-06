@@ -120,7 +120,7 @@ npm run start:local
 - Every 2 hours × 12 runs/day = **4,800 quota/day** (48% of free 10,000)
 
 **Gemini API (gemini-2.5-flash-lite)**
-- 4 batch requests/run × 12 runs/day = **48 requests/day** (free tier: 1,000/day)
+- 1 batch request/run × 12 runs/day = **12 requests/day** (free tier: 20 RPD)
 
 ## Project Structure
 

@@ -5,8 +5,8 @@
     "channel": "The Woodland Trust",
     "thumbnail": "https://i.ytimg.com/vi/iabToGLaMuY/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [56.94, -5.14],
+    "locationName": "Loch Arkaig, Scotland",
     "fetchedAt": "2026-04-06T16:35:01.506Z"
   },
   {
@@ -41,8 +41,8 @@
     "channel": "Deerfield Beach Live",
     "thumbnail": "https://i.ytimg.com/vi/ngMbVpBhpe4/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [26.32, -80.10],
+    "locationName": "Deerfield Beach, Florida",
     "fetchedAt": "2026-04-06T16:35:01.510Z"
   },
   {
@@ -51,8 +51,8 @@
     "channel": "Explore Birds Bats Bees",
     "thumbnail": "https://i.ytimg.com/vi/2FdvAk95PSk/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [10.45, -84.01],
+    "locationName": "Sarapiquí, Costa Rica",
     "fetchedAt": "2026-04-06T16:35:01.510Z"
   },
   {
@@ -61,8 +61,8 @@
     "channel": "Explore Live Nature Cams",
     "thumbnail": "https://i.ytimg.com/vi/Fz6sl9YJZE0/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [28.80, -82.58],
+    "locationName": "Homosassa Springs, Florida",
     "fetchedAt": "2026-04-06T16:35:01.511Z"
   },
   {
@@ -71,8 +71,8 @@
     "channel": "Explore Bears & Bison",
     "thumbnail": "https://i.ytimg.com/vi/2360fnKZcIQ/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [56.18, -131.57],
+    "locationName": "Anan Creek, Alaska",
     "fetchedAt": "2026-04-06T16:35:01.512Z"
   },
   {
@@ -150,8 +150,8 @@
     "channel": "Explore Cats Lions Tigers",
     "thumbnail": "https://i.ytimg.com/vi/PcAOecvAh1U/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [36.28, -93.73],
+    "locationName": "Eureka Springs, Arkansas",
     "fetchedAt": "2026-04-06T16:35:01.518Z"
   },
   {
@@ -160,8 +160,8 @@
     "channel": "Explore Oceans",
     "thumbnail": "https://i.ytimg.com/vi/jzx_n25g3kA/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [16.10, -86.90],
+    "locationName": "Utila, Honduras",
     "fetchedAt": "2026-04-06T16:35:01.519Z"
   },
   {
@@ -170,8 +170,8 @@
     "channel": "Explore Africa",
     "thumbnail": "https://i.ytimg.com/vi/yfSyjwY6zSQ/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [-1.40, 29.20],
+    "locationName": "Kasugho, DR Congo",
     "fetchedAt": "2026-04-06T16:35:01.519Z"
   },
   {
@@ -180,8 +180,8 @@
     "channel": "Explore Live Nature Cams",
     "thumbnail": "https://i.ytimg.com/vi/DHUnz4dyb54/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [19.30, -81.38],
+    "locationName": "Grand Cayman",
     "fetchedAt": "2026-04-06T16:35:01.520Z"
   },
   {
@@ -203,8 +203,8 @@
     "channel": "FOBBV CAM",
     "thumbnail": "https://i.ytimg.com/vi/B4-L2nfGcuE/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [34.24, -116.91],
+    "locationName": "Big Bear, California",
     "fetchedAt": "2026-04-06T16:35:01.521Z"
   },
   {
@@ -213,8 +213,8 @@
     "channel": "GRACEgorillas",
     "thumbnail": "https://i.ytimg.com/vi/672cUSe69J0/hqdefault_live.jpg",
     "query": "live cam rainforest",
-    "location": null,
-    "locationName": null,
+    "location": [-1.40, 29.20],
+    "locationName": "Kasugho, DR Congo",
     "fetchedAt": "2026-04-06T16:35:01.521Z"
   },
   {
@@ -249,8 +249,8 @@
     "channel": "Ambient Renders",
     "thumbnail": "https://i.ytimg.com/vi/oXvPA6l4pts/hqdefault_live.jpg",
     "query": "live stream camera waterfall London",
-    "location": null,
-    "locationName": null,
+    "location": [43.65, -79.38],
+    "locationName": "Toronto",
     "fetchedAt": "2026-04-06T16:35:01.871Z"
   },
   {
@@ -259,8 +259,8 @@
     "channel": "WebcamSydney",
     "thumbnail": "https://i.ytimg.com/vi/5uZa3-RMFos/hqdefault_live.jpg",
     "query": "live stream camera aurora Bali",
-    "location": null,
-    "locationName": null,
+    "location": [-33.87, 151.21],
+    "locationName": "Sydney",
     "fetchedAt": "2026-04-06T16:35:02.191Z"
   },
   {
@@ -273,7 +273,7 @@
       69.0165527,
       20.8732059
     ],
-    "locationName": "Kilpisjärvi",
+    "locationName": "Kilpisjärvi, Finland",
     "fetchedAt": "2026-04-06T16:33:36.413Z"
   },
   {
@@ -286,7 +286,7 @@
       55.2352886,
       -1.5398744
     ],
-    "locationName": "Cresswell",
+    "locationName": "Cresswell, UK",
     "fetchedAt": "2026-04-06T16:33:36.413Z"
   },
   {
@@ -299,7 +299,7 @@
       54.6500566,
       -3.3153207
     ],
-    "locationName": "Embleton",
+    "locationName": "Embleton, UK",
     "fetchedAt": "2026-04-06T16:33:37.678Z"
   },
   {
@@ -312,7 +312,7 @@
       69.907601,
       27.0252458
     ],
-    "locationName": "Utsjoki",
+    "locationName": "Utsjoki, Finland",
     "fetchedAt": "2026-04-06T16:33:37.678Z"
   },
   {
@@ -325,7 +325,7 @@
       51.175076,
       -115.5720773
     ],
-    "locationName": "Banff",
+    "locationName": "Banff, Canada",
     "fetchedAt": "2026-04-06T16:33:39.188Z"
   },
   {
@@ -364,7 +364,7 @@
       67.0086767,
       -50.6913356
     ],
-    "locationName": "Kangerlussuaq",
+    "locationName": "Kangerlussuaq, Greenland",
     "fetchedAt": "2026-04-06T16:33:40.460Z"
   },
   {
@@ -377,7 +377,7 @@
       -41.2710849,
       173.2836756
     ],
-    "locationName": "Nelson",
+    "locationName": "Nelson, New Zealand",
     "fetchedAt": "2026-04-06T16:33:40.460Z"
   },
   {
@@ -400,7 +400,7 @@
       65.5518396,
       -37.116877
     ],
-    "locationName": "Kulusuk",
+    "locationName": "Kulusuk, Greenland",
     "fetchedAt": "2026-04-06T16:33:40.466Z"
   },
   {
@@ -413,7 +413,7 @@
       69.907601,
       27.0252458
     ],
-    "locationName": "Utsjoki",
+    "locationName": "Utsjoki, Finland",
     "fetchedAt": "2026-04-06T16:33:40.466Z"
   },
   {
@@ -426,7 +426,7 @@
       43.8492297,
       -83.3731789
     ],
-    "locationName": "Bay Port",
+    "locationName": "Bay Port, Michigan",
     "fetchedAt": "2026-04-06T16:33:41.915Z"
   },
   {
@@ -439,7 +439,7 @@
       67.1618234,
       26.9154118
     ],
-    "locationName": "Pyhä-Luosto",
+    "locationName": "Pyhä-Luosto, Finland",
     "fetchedAt": "2026-04-06T16:33:41.915Z"
   },
   {
@@ -452,7 +452,7 @@
       69.7297121,
       20.0817661
     ],
-    "locationName": "Lyngen",
+    "locationName": "Lyngen, Norway",
     "fetchedAt": "2026-04-06T16:33:43.206Z"
   },
   {
@@ -465,7 +465,7 @@
       61.22,
       -149.9
     ],
-    "locationName": "Anchorage",
+    "locationName": "Anchorage, Alaska",
     "fetchedAt": "2026-04-06T16:33:43.206Z"
   },
   {
@@ -478,7 +478,7 @@
       67.4189716,
       26.5902179
     ],
-    "locationName": "Sodankylä",
+    "locationName": "Sodankylä, Finland",
     "fetchedAt": "2026-04-06T16:33:44.656Z"
   },
   {
@@ -504,7 +504,7 @@
       46.1802947,
       7.573834
     ],
-    "locationName": "Grimentz",
+    "locationName": "Grimentz, Switzerland",
     "fetchedAt": "2026-04-06T16:29:03.724Z"
   },
   {
@@ -543,7 +543,7 @@
       40.5193586,
       -78.3968299
     ],
-    "locationName": "Altoona",
+    "locationName": "Altoona, Pennsylvania",
     "fetchedAt": "2026-04-06T16:29:06.190Z"
   },
   {
@@ -569,7 +569,7 @@
       29.9561422,
       -90.0733934
     ],
-    "locationName": "New Orleans",
+    "locationName": "New Orleans, Louisiana",
     "fetchedAt": "2026-04-06T16:29:07.514Z"
   },
   {
@@ -578,11 +578,8 @@
     "channel": "Virtual Railfan",
     "thumbnail": "https://i.ytimg.com/vi/9SLt3AT0rXk/hqdefault_live.jpg",
     "query": "live cam street London",
-    "location": [
-      47.2820623,
-      6.6655859
-    ],
-    "locationName": "La Grange",
+    "location": [38.41, -85.38],
+    "locationName": "La Grange, Kentucky",
     "fetchedAt": "2026-04-06T16:29:09.469Z"
   },
   {
@@ -595,7 +592,7 @@
       9.5013945,
       99.9956193
     ],
-    "locationName": "Koh Samui",
+    "locationName": "Koh Samui, Thailand",
     "fetchedAt": "2026-04-06T16:29:09.469Z"
   },
   {
@@ -621,7 +618,7 @@
       43.0993,
       -77.443014
     ],
-    "locationName": "Fairport",
+    "locationName": "Fairport, New York",
     "fetchedAt": "2026-04-06T16:29:12.866Z"
   },
   {
@@ -647,7 +644,7 @@
       38.6254063,
       -90.190009
     ],
-    "locationName": "St Louis",
+    "locationName": "St. Louis, Missouri",
     "fetchedAt": "2026-04-06T16:29:14.468Z"
   },
   {
@@ -660,7 +657,7 @@
       41.3556187,
       -72.0997804
     ],
-    "locationName": "New London",
+    "locationName": "New London, Connecticut",
     "fetchedAt": "2026-04-06T16:29:16.101Z"
   },
   {
@@ -686,7 +683,7 @@
       -41.2710849,
       173.2836756
     ],
-    "locationName": "Nelson",
+    "locationName": "Nelson, New Zealand",
     "fetchedAt": "2026-04-06T16:29:18.823Z"
   },
   {
@@ -725,7 +722,7 @@
       61.22,
       -149.9
     ],
-    "locationName": "Anchorage",
+    "locationName": "Anchorage, Alaska",
     "fetchedAt": "2026-04-06T16:29:21.746Z"
   },
   {
@@ -738,7 +735,7 @@
       33.1958696,
       -117.379483
     ],
-    "locationName": "Oceanside",
+    "locationName": "Oceanside, California",
     "fetchedAt": "2026-04-06T16:29:23.196Z"
   },
   {
@@ -751,7 +748,7 @@
       9.7349503,
       100.0305711
     ],
-    "locationName": "Koh Phangan",
+    "locationName": "Koh Phangan, Thailand",
     "fetchedAt": "2026-04-06T16:29:23.196Z"
   },
   {
@@ -770,11 +767,8 @@
     "channel": "St. Augustine Live",
     "thumbnail": "https://i.ytimg.com/vi/ZksWoEAhmTU/hqdefault_live.jpg",
     "query": "live camera Australia",
-    "location": [
-      40.7183728,
-      -90.4109616
-    ],
-    "locationName": "St. Augustine",
+    "location": [29.89, -81.31],
+    "locationName": "St. Augustine, Florida",
     "fetchedAt": "2026-04-06T16:29:24.696Z"
   },
   {
@@ -787,7 +781,7 @@
       28.2360511,
       -177.3685632
     ],
-    "locationName": "Midway Atoll",
+    "locationName": "Midway Atoll, Hawaii",
     "fetchedAt": "2026-04-06T16:29:26.125Z"
   },
   {
@@ -819,11 +813,8 @@
     "channel": "Little Miami Conservancy",
     "thumbnail": "https://i.ytimg.com/vi/kHOdKaPsFk8/hqdefault_live.jpg",
     "query": "live camera Australia",
-    "location": [
-      25.76,
-      -80.19
-    ],
-    "locationName": "Miami",
+    "location": [39.43, -84.22],
+    "locationName": "Little Miami River, Ohio",
     "fetchedAt": "2026-04-06T16:29:26.125Z"
   },
   {
@@ -862,7 +853,7 @@
       -18.9913306,
       15.7460551
     ],
-    "locationName": "Etosha National Park",
+    "locationName": "Etosha, Namibia",
     "fetchedAt": "2026-04-06T16:29:26.125Z"
   },
   {
@@ -871,11 +862,8 @@
     "channel": "Aurora Reykjavík The Northern Lights Center",
     "thumbnail": "https://i.ytimg.com/vi/6xOnr8Ukeb0/hqdefault_live.jpg",
     "query": "live stream camera nature Reykjavik",
-    "location": [
-      64.15,
-      -21.94
-    ],
-    "locationName": "Iceland",
+    "location": [64.15, -21.94],
+    "locationName": "Reykjavík",
     "fetchedAt": "2026-04-06T16:28:01.445Z"
   },
   {
@@ -884,11 +872,8 @@
     "channel": "Mobotix Webcams Russia Live",
     "thumbnail": "https://i.ytimg.com/vi/jc3NRsILvr4/hqdefault_live.jpg",
     "query": "live webcam aurora",
-    "location": [
-      55.76,
-      37.62
-    ],
-    "locationName": "Russia",
+    "location": [59.95, 30.34],
+    "locationName": "St. Petersburg, Russia",
     "fetchedAt": "2026-04-06T16:28:01.980Z"
   },
   {
@@ -901,7 +886,7 @@
       40.6311415,
       -91.3084007
     ],
-    "locationName": "Fort Madison",
+    "locationName": "Fort Madison, Iowa",
     "fetchedAt": "2026-04-06T16:28:01.983Z"
   },
   {
@@ -924,7 +909,7 @@
       45.9038468,
       -68.9145397
     ],
-    "locationName": "Mt Katahdin",
+    "locationName": "Mt Katahdin, Maine",
     "fetchedAt": "2026-04-06T16:28:01.984Z"
   },
   {
@@ -937,7 +922,7 @@
       60.6524159,
       21.8610745
     ],
-    "locationName": "Pyhä",
+    "locationName": "Pyhä, Finland",
     "fetchedAt": "2026-04-06T16:28:01.985Z"
   },
   {
@@ -946,11 +931,8 @@
     "channel": "Hotel Lapin Satu",
     "thumbnail": "https://i.ytimg.com/vi/iOmco6eIa-0/hqdefault_live.jpg",
     "query": "live webcam aurora",
-    "location": [
-      61.92,
-      25.75
-    ],
-    "locationName": "Finland",
+    "location": [65.99, 28.17],
+    "locationName": "Posio, Finland",
     "fetchedAt": "2026-04-06T16:28:01.985Z"
   },
   {
@@ -959,11 +941,8 @@
     "channel": "Starlapland / Samuli Korvanen",
     "thumbnail": "https://i.ytimg.com/vi/rKfecmmzzw0/hqdefault_live.jpg",
     "query": "live webcam aurora",
-    "location": [
-      61.92,
-      25.75
-    ],
-    "locationName": "Finland",
+    "location": [67.80, 24.81],
+    "locationName": "Levi, Finland",
     "fetchedAt": "2026-04-06T16:28:01.985Z"
   },
   {
@@ -976,7 +955,7 @@
       46.485132,
       13.7843957
     ],
-    "locationName": "Kranjska Gora",
+    "locationName": "Kranjska Gora, Slovenia",
     "fetchedAt": "2026-04-06T16:28:01.985Z"
   },
   {
@@ -989,7 +968,7 @@
       66.1655532,
       29.1514909
     ],
-    "locationName": "Ruka",
+    "locationName": "Ruka, Finland",
     "fetchedAt": "2026-04-06T16:28:01.985Z"
   },
   {
@@ -1002,7 +981,7 @@
       45.3653424,
       11.7624377
     ],
-    "locationName": "Monterosso",
+    "locationName": "Monterosso, Italy",
     "fetchedAt": "2026-04-06T16:28:01.986Z"
   },
   {
@@ -1015,7 +994,7 @@
       41.4736214,
       -82.1781278
     ],
-    "locationName": "PORT LORAIN",
+    "locationName": "Lorain, Ohio",
     "fetchedAt": "2026-04-06T16:28:01.987Z"
   },
   {
@@ -1041,7 +1020,7 @@
       63.844239,
       -22.4317498
     ],
-    "locationName": "Grindavik",
+    "locationName": "Grindavík, Iceland",
     "fetchedAt": "2026-04-06T16:28:02.287Z"
   },
   {
@@ -1067,7 +1046,7 @@
       63.8642833,
       -22.4409501
     ],
-    "locationName": "Þorbjörn",
+    "locationName": "Þorbjörn, Iceland",
     "fetchedAt": "2026-04-06T16:28:02.288Z"
   },
   {
@@ -1080,7 +1059,7 @@
       28.2935785,
       -16.6214471
     ],
-    "locationName": "Tenerife",
+    "locationName": "Tenerife, Spain",
     "fetchedAt": "2026-04-06T16:28:02.289Z"
   },
   {
@@ -1089,11 +1068,8 @@
     "channel": "afarTV",
     "thumbnail": "https://i.ytimg.com/vi/EGk3Mr0OshE/hqdefault_live.jpg",
     "query": "live webcam volcano Iceland",
-    "location": [
-      41.9,
-      12.5
-    ],
-    "locationName": "Italy",
+    "location": [37.75, 14.99],
+    "locationName": "Mount Etna, Sicily",
     "fetchedAt": "2026-04-06T16:28:02.289Z"
   },
   {
@@ -1132,7 +1108,7 @@
       40.8274575,
       14.1402297
     ],
-    "locationName": "Campi Flegrei",
+    "locationName": "Campi Flegrei, Italy",
     "fetchedAt": "2026-04-06T16:28:02.290Z"
   },
   {
@@ -1141,11 +1117,8 @@
     "channel": "afarTV",
     "thumbnail": "https://i.ytimg.com/vi/UsQ0C8xG3wk/hqdefault_live.jpg",
     "query": "live webcam volcano Iceland",
-    "location": [
-      41.9,
-      12.5
-    ],
-    "locationName": "Italy",
+    "location": [37.75, 14.99],
+    "locationName": "Mount Etna, Sicily",
     "fetchedAt": "2026-04-06T16:28:02.290Z"
   },
   {
@@ -1158,7 +1131,7 @@
       40.8213963,
       14.4261967
     ],
-    "locationName": "Vulcano Vesuvio",
+    "locationName": "Vesuvius, Italy",
     "fetchedAt": "2026-04-06T16:28:02.290Z"
   },
   {
@@ -1167,11 +1140,8 @@
     "channel": "Virtual Railfan",
     "thumbnail": "https://i.ytimg.com/vi/fIMbMz2P7Bs/hqdefault_live.jpg",
     "query": "live cam market",
-    "location": [
-      50.98,
-      -118.2
-    ],
-    "locationName": "Revelstoke",
+    "location": [50.98, -118.20],
+    "locationName": "Revelstoke, BC",
     "fetchedAt": "2026-04-06T14:39:34.497Z"
   },
   {
@@ -1219,11 +1189,8 @@
     "channel": "Winter Garden Heritage Foundation",
     "thumbnail": "https://i.ytimg.com/vi/67zqaidhq-U/hqdefault_live.jpg",
     "query": "live cam market",
-    "location": [
-      27.99,
-      -81.76
-    ],
-    "locationName": "Florida",
+    "location": [28.57, -81.59],
+    "locationName": "Winter Garden, Florida",
     "fetchedAt": "2026-04-06T14:39:34.499Z"
   },
   {
@@ -1232,11 +1199,8 @@
     "channel": "See Jamaica ",
     "thumbnail": "https://i.ytimg.com/vi/4X9dtsZmSw8/hqdefault_live.jpg",
     "query": "live cam market",
-    "location": [
-      18.41,
-      -77.1
-    ],
-    "locationName": "Ocho Rios",
+    "location": [18.41, -77.10],
+    "locationName": "Ocho Rios, Jamaica",
     "fetchedAt": "2026-04-06T14:39:34.500Z"
   },
   {
@@ -1258,11 +1222,8 @@
     "channel": "See Jamaica ",
     "thumbnail": "https://i.ytimg.com/vi/hKcBA8XS5ZA/hqdefault_live.jpg",
     "query": "live cam market",
-    "location": [
-      17.97,
-      -77.25
-    ],
-    "locationName": "May Pen",
+    "location": [17.97, -77.25],
+    "locationName": "May Pen, Jamaica",
     "fetchedAt": "2026-04-06T14:39:34.500Z"
   },
   {
@@ -1271,11 +1232,8 @@
     "channel": "Bouwwebcam - live stream & timelapse video",
     "thumbnail": "https://i.ytimg.com/vi/ZjfFGJlkjmE/hqdefault_live.jpg",
     "query": "live cam market",
-    "location": [
-      53.22,
-      6.57
-    ],
-    "locationName": "Groningen",
+    "location": [53.22, 6.57],
+    "locationName": "Groningen, Netherlands",
     "fetchedAt": "2026-04-06T14:39:34.500Z"
   },
   {
@@ -1336,11 +1294,8 @@
     "channel": "See Jamaica ",
     "thumbnail": "https://i.ytimg.com/vi/fNmFje4SG4o/hqdefault_live.jpg",
     "query": "live cam market",
-    "location": [
-      18.01,
-      -76.8
-    ],
-    "locationName": "Kingston",
+    "location": [18.01, -76.80],
+    "locationName": "Kingston, Jamaica",
     "fetchedAt": "2026-04-06T14:39:34.543Z"
   },
   {
@@ -1375,11 +1330,8 @@
     "channel": "Webcam stadhuis Sint-Niklaas",
     "thumbnail": "https://i.ytimg.com/vi/7gOLLJGudNo/hqdefault_live.jpg",
     "query": "live cam market",
-    "location": [
-      51.16,
-      4.14
-    ],
-    "locationName": "Sint-Niklaas",
+    "location": [51.16, 4.14],
+    "locationName": "Sint-Niklaas, Belgium",
     "fetchedAt": "2026-04-06T14:39:34.546Z"
   },
   {
@@ -1392,7 +1344,7 @@
       9.51,
       100.06
     ],
-    "locationName": "Koh Samui",
+    "locationName": "Koh Samui, Thailand",
     "fetchedAt": "2026-04-06T14:39:34.546Z"
   },
   {
@@ -1415,7 +1367,7 @@
       25.09,
       -80.45
     ],
-    "locationName": "Key Largo",
+    "locationName": "Key Largo, Florida",
     "fetchedAt": "2026-04-06T14:39:35.428Z"
   },
   {
@@ -1525,8 +1477,8 @@
     "channel": "Nature Live Camera",
     "thumbnail": "https://i.ytimg.com/vi/uPTbEyoM0TQ/hqdefault_live.jpg",
     "query": "24/7 live cam animals wildlife",
-    "location": null,
-    "locationName": null,
+    "location": [55.68, 12.57],
+    "locationName": "Denmark",
     "fetchedAt": "2026-04-06T14:39:41.594Z"
   },
   {
@@ -1587,11 +1539,8 @@
     "channel": "Live African Wildlife",
     "thumbnail": "https://i.ytimg.com/vi/wtylzrJvCKU/hqdefault_live.jpg",
     "query": "24/7 live cam animals wildlife",
-    "location": [
-      -30.56,
-      22.94
-    ],
-    "locationName": "South Africa",
+    "location": [-24.35, 30.97],
+    "locationName": "Hoedspruit, South Africa",
     "fetchedAt": "2026-04-06T14:39:43.256Z"
   },
   {
@@ -1610,8 +1559,8 @@
     "channel": "Nature Live Camera",
     "thumbnail": "https://i.ytimg.com/vi/U-rvoF1tLoU/hqdefault_live.jpg",
     "query": "24/7 live cam animals wildlife",
-    "location": null,
-    "locationName": null,
+    "location": [55.68, 12.57],
+    "locationName": "Denmark",
     "fetchedAt": "2026-04-06T14:39:43.263Z"
   },
   {
@@ -1682,8 +1631,8 @@
     "channel": "Love Nature",
     "thumbnail": "https://i.ytimg.com/vi/QhahoVG0BfI/hqdefault_live.jpg",
     "query": "24/7 live cam animals wildlife",
-    "location": null,
-    "locationName": null,
+    "location": [-1.35, 116.85],
+    "locationName": "Borneo, Indonesia",
     "fetchedAt": "2026-04-06T14:39:46.414Z"
   },
   {
@@ -1715,11 +1664,8 @@
     "channel": "DestC",
     "thumbnail": "https://i.ytimg.com/vi/lLYosWv_AwQ/hqdefault_live.jpg",
     "query": "24/7 live cam aurora Seoul",
-    "location": [
-      45.42,
-      -75.7
-    ],
-    "locationName": "Canada",
+    "location": [45.42, -75.70],
+    "locationName": "Ottawa, Canada",
     "fetchedAt": "2026-04-06T12:42:31.528Z"
   },
   {
@@ -1754,11 +1700,8 @@
     "channel": "Runde Miljøsenter AS",
     "thumbnail": "https://i.ytimg.com/vi/JqrOjNBDcVw/hqdefault_live.jpg",
     "query": "live webcam Norway",
-    "location": [
-      59.91,
-      10.75
-    ],
-    "locationName": "Norway",
+    "location": [62.40, 5.63],
+    "locationName": "Runde, Norway",
     "fetchedAt": "2026-04-06T12:42:31.866Z"
   },
   {
@@ -1923,11 +1866,8 @@
     "channel": "Norway Live",
     "thumbnail": "https://i.ytimg.com/vi/6LiukKeHyBc/hqdefault_live.jpg",
     "query": "live webcam Norway",
-    "location": [
-      59.91,
-      10.75
-    ],
-    "locationName": "Norway",
+    "location": [59.74, 10.20],
+    "locationName": "Drammen, Norway",
     "fetchedAt": "2026-04-06T12:42:31.877Z"
   },
   {
@@ -1988,11 +1928,8 @@
     "channel": "Virtual Railfan",
     "thumbnail": "https://i.ytimg.com/vi/wgkdREYOfw0/hqdefault_live.jpg",
     "query": "live webcam Norway",
-    "location": [
-      37.1232245,
-      -78.4927721
-    ],
-    "locationName": "Virginia, USA",
+    "location": [37.76, -77.48],
+    "locationName": "Ashland, Virginia",
     "fetchedAt": "2026-04-06T12:42:33.525Z"
   },
   {
@@ -2001,11 +1938,8 @@
     "channel": "Iisalmen kaupunki - City of Iisalmi #byiisalmi",
     "thumbnail": "https://i.ytimg.com/vi/1k4DEIa2cuI/hqdefault_live.jpg",
     "query": "live webcam Norway",
-    "location": [
-      61.92,
-      25.75
-    ],
-    "locationName": "Finland",
+    "location": [63.56, 27.19],
+    "locationName": "Iisalmi, Finland",
     "fetchedAt": "2026-04-06T12:42:33.525Z"
   },
   {
@@ -2119,7 +2053,7 @@
       29.3,
       -94.8
     ],
-    "locationName": "Galveston",
+    "locationName": "Galveston, Texas",
     "fetchedAt": "2026-04-06T12:42:36.943Z"
   },
   {
@@ -2281,11 +2215,8 @@
     "channel": "City of Rovaniemi",
     "thumbnail": "https://i.ytimg.com/vi/Cp4RRAEgpeU/hqdefault_live.jpg",
     "query": "live view mountain Istanbul",
-    "location": [
-      66.5432629,
-      25.8458339
-    ],
-    "locationName": "Santa Claus Village",
+    "location": [66.54, 25.85],
+    "locationName": "Rovaniemi, Finland",
     "fetchedAt": "2026-04-06T10:45:09.014Z"
   },
   {
@@ -2320,8 +2251,8 @@
     "channel": "American Eagle Foundation",
     "thumbnail": "https://i.ytimg.com/vi/fsPgJhq84mk/hqdefault_live.jpg",
     "query": "live webcam Australia",
-    "location": null,
-    "locationName": null,
+    "location": [30.33, -81.66],
+    "locationName": "Northeast Florida",
     "fetchedAt": "2026-04-06T10:45:09.287Z"
   },
   {
@@ -2392,8 +2323,8 @@
     "channel": "Explore Oceans",
     "thumbnail": "https://i.ytimg.com/vi/og8bbxl0iW8/hqdefault_live.jpg",
     "query": "live webcam Australia",
-    "location": null,
-    "locationName": null,
+    "location": [33.49, -77.59],
+    "locationName": "Frying Pan Tower, NC",
     "fetchedAt": "2026-04-06T10:45:12.943Z"
   },
   {
@@ -2415,11 +2346,8 @@
     "channel": "afarTV",
     "thumbnail": "https://i.ytimg.com/vi/qJ3D5vhIK6k/hqdefault_live.jpg",
     "query": "live view animals wildlife Iceland",
-    "location": [
-      64.18,
-      -51.69
-    ],
-    "locationName": "Greenland",
+    "location": [69.22, -51.10],
+    "locationName": "Ilulissat, Greenland",
     "fetchedAt": "2026-04-06T10:45:13.517Z"
   },
   {
@@ -2428,8 +2356,8 @@
     "channel": "Explore Oceans",
     "thumbnail": "https://i.ytimg.com/vi/VI8Wj5EwoRM/hqdefault_live.jpg",
     "query": "live view animals wildlife Iceland",
-    "location": null,
-    "locationName": null,
+    "location": [21.66, -158.05],
+    "locationName": "Banzai Pipeline, Oahu",
     "fetchedAt": "2026-04-06T10:45:13.520Z"
   },
   {
@@ -2490,11 +2418,8 @@
     "channel": "SurveillanceMap Foundation",
     "thumbnail": "https://i.ytimg.com/vi/Ql7graq0I9M/hqdefault_live.jpg",
     "query": "live camera skyline New Zealand",
-    "location": [
-      -41.29,
-      174.78
-    ],
-    "locationName": "New Zealand",
+    "location": [-36.85, 174.76],
+    "locationName": "Auckland",
     "fetchedAt": "2026-04-06T08:59:27.291Z"
   }
 ]
