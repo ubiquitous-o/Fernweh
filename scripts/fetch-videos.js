@@ -440,6 +440,17 @@ try {
   geocache = {};
 }
 
+// geocache のエントリを辞書マッチにも活用（Gemini 呼び出し削減）
+for (const [name, coords] of Object.entries(geocache)) {
+  if (!coords) continue;
+  const commaIdx = name.indexOf(',');
+  const dictKey = commaIdx > 0 ? name.substring(0, commaIdx).trim() : name.trim();
+  if (dictKey.length < 3) continue;
+  if (LOCATION_COORDS[dictKey]) continue;
+  LOCATION_COORDS[dictKey] = coords;
+  LOCATION_LABELS[dictKey] = name;
+}
+
 function saveGeocache() {
   writeFileSync(GEOCACHE_PATH, JSON.stringify(geocache, null, 2) + '\n');
 }

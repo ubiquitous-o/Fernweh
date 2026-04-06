@@ -26,6 +26,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 - Interactive 3D globe showing camera location ([COBE](https://github.com/shuding/cobe))
 - Location detection from video title/channel/description ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
 - Dictionary-first optimization: skips Gemini API for known locations, saving RPD quota
+- Auto-learning from geocache: previously resolved locations are merged into the dictionary at startup, reducing Gemini calls over time
 - Full video description fetching via YouTube videos.list API for improved location accuracy
 - Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/))
 - Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback)
@@ -56,12 +57,13 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
   → Geolocation API / IP API → Open-Meteo for weather
 
 [Location Detection (build-time)]
-  → Dictionary match first (LOCATION_COORDS + LOCATION_LABELS)
+  → Load geocache.json → merge into dictionary (auto-learning)
+  → Dictionary match first (hardcoded + learned locations)
   → Fetch full descriptions via YouTube videos.list API
   → Unmatched items → Gemini API batch (gemini-2.5-flash-lite, 20/batch)
   → Gemini result → dictionary coords or Nominatim geocoding
   → Fallback → dictionary match on title/channel
-  → Nominatim cache → scripts/geocache.json
+  → Nominatim cache → scripts/geocache.json (feeds next run's dictionary)
 
 [Location Detection (runtime fallback)]
   → Title/channel → KNOWN_LOCATIONS dictionary match
