@@ -199,7 +199,9 @@ ${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel })))}`;
       console.warn('Gemini: JSON配列が見つからない:', text.slice(0, 200));
       return items.map(() => null);
     }
-    const locations = JSON.parse(jsonMatch[0]);
+    const locations = JSON.parse(jsonMatch[0]).map(v =>
+      (v === null || v === 'null' || v === '') ? null : v
+    );
     // 長さが一致しない場合はnullで埋める
     while (locations.length < items.length) locations.push(null);
     console.log(`Gemini抽出結果: ${JSON.stringify(locations)}`);
