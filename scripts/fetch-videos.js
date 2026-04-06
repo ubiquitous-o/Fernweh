@@ -281,11 +281,19 @@ async function extractLocationsWithGemini(items) {
   if (!GEMINI_API_KEY || items.length === 0) return items.map(() => null);
 
   const prompt = `You are a geographic location extractor for live camera video titles.
-Extract the most specific place name from each video title and channel name.
-Format: "City/Landmark, Country/State" (e.g. "Narvik, Norway", "Galveston, Texas", "Mt. Etna, Sicily").
-For well-known cities (Tokyo, Paris, London etc.), the city name alone is fine.
+Extract the REAL geographic place name from each video title and channel name.
+Preferred format: "City/Landmark, Country" (e.g. "Narvik, Norway", "Galveston, Texas", "Mt. Etna, Sicily").
+If only a country or region is identifiable, that alone is fine (e.g. "Austria", "Switzerland").
+If only a city is identifiable, that alone is fine (e.g. "Tokyo", "Paris").
+
+IMPORTANT: Return null ONLY when NO real geographic name exists at all. Do NOT guess or infer.
+These are NOT place names — return null for these:
+- Camera/stream descriptions: "Ski Panorama", "City View", "Beach Cam", "Nature Live"
+- Channel names that aren't places: "earthTV", "PixCams", "Birder King"
+- Non-geographic content: "ISS", "Aurora Alert", "Volcano Monitoring"
+
 Return ONLY a JSON array of strings (or null for unknown). No markdown, no explanation.
-Example: ["Tokyo", "Niagara Falls, USA", null, "Ubud, Bali"]
+Example: ["Tokyo", "Niagara Falls, USA", null, "Austria"]
 
 Input:
 ${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel })))}`;
