@@ -16,7 +16,7 @@
 
 ---
 
-**🌍️🌍️🌍️Live Demo🌍️🌍️🌍️** https://ubiquitous-o.github.io/Fernweh/
+**🌍️🌍️🌍️Live Demo:** https://ubiquitous-o.github.io/Fernweh/🌍️🌍️🌍️
 
 A fullscreen web app that automatically cycles through YouTube live cameras at the top of every hour. Hosted on **GitHub Pages** with video data refreshed by **GitHub Actions**.
 
@@ -24,13 +24,15 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 
 - TV static noise transition between live streams (WebGL shader)
 - Interactive 3D globe showing camera location ([COBE](https://github.com/shuding/cobe))
-- Location detection from video title/channel name ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
+- Location detection from video title/channel/description ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
 - Dictionary-first optimization: skips Gemini API for known locations, saving RPD quota
+- Full video description fetching via YouTube videos.list API for improved location accuracy
 - Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/))
 - Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback)
 - Randomized search queries for maximum discovery
 - Clickable video title — links to original YouTube video, resumes on browser back
 - "City, Country" location labels on globe (auto line-break at comma)
+  - **Note:** Globe labels are best-effort — location detection relies on video titles, channel names, and AI extraction, so labels may be inaccurate or missing for some streams
 - Client-side video pool refresh every 2 hours (follows server-side updates)
 - Auto-switch at the top of each hour with progress bar
 - Auto-retry on playback failures
@@ -55,7 +57,8 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 
 [Location Detection (build-time)]
   → Dictionary match first (LOCATION_COORDS + LOCATION_LABELS)
-  → Unmatched items → Gemini API batch (gemini-2.5-flash-lite)
+  → Fetch full descriptions via YouTube videos.list API
+  → Unmatched items → Gemini API batch (gemini-2.5-flash-lite, 20/batch)
   → Gemini result → dictionary coords or Nominatim geocoding
   → Fallback → dictionary match on title/channel
   → Nominatim cache → scripts/geocache.json
@@ -125,7 +128,8 @@ npm run start:local
 
 **YouTube Data API v3**
 - 4 searches/cron × 100 quota = 400 quota/run
-- Every 2 hours × 12 runs/day = **4,800 quota/day** (48% of free 10,000)
+- 1 videos.list/cron × 1 quota/video ≈ 50–100 quota/run
+- Every 2 hours × 12 runs/day ≈ **6,000 quota/day** (60% of free 10,000)
 
 **Gemini API (gemini-2.5-flash-lite)**
 - 0–1 batch request/run (skipped when all items are dictionary-matched)
@@ -142,7 +146,8 @@ fernweh/
 │   ├── fetch-videos.js   # YouTube API search + Gemini location extraction
 │   └── geocache.json     # Nominatim geocoding cache
 ├── .github/workflows/
-│   └── fetch-videos.yml  # Cron workflow (every 2 hours)
+│   ├── fetch-videos.yml  # Cron workflow (every 2 hours)
+│   └── deploy-pages.yml  # GitHub Pages deployment
 ├── server.js             # Express server (local/kiosk mode)
 ├── config.example.json   # Config template (local mode)
 ├── package.json
