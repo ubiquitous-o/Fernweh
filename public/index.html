@@ -714,6 +714,8 @@
   // ===== VIDEO POOL (from videos.json) =====
   let videoPool = [];
   let videosLoaded = false;
+  let lastPoolFetch = 0;
+  const POOL_REFRESH_INTERVAL = 2 * 60 * 60 * 1000; // 2時間（cron更新間隔に合わせる）
 
   // Track watched videos in localStorage to avoid repeats
   const WATCHED_KEY = 'fernweh_watched';
@@ -757,6 +759,7 @@
     }
 
     videosLoaded = true;
+    lastPoolFetch = Date.now();
   }
 
   // Fallback location extraction for videos without location data
@@ -840,7 +843,8 @@
   }
 
   async function fetchNext() {
-    if (!videosLoaded || videoPool.length === 0) {
+    const poolStale = Date.now() - lastPoolFetch > POOL_REFRESH_INTERVAL;
+    if (!videosLoaded || videoPool.length === 0 || poolStale) {
       await loadVideoPool();
     }
     if (videoPool.length === 0) {
