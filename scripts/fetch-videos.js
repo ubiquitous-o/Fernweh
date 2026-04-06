@@ -160,7 +160,23 @@ const LOCATION_COORDS = {
   'Monterosso': [44.15, 9.65], 'Lorain': [41.47, -82.18],
   'Ōamaru': [-45.10, 170.97], 'Churchill': [58.77, -94.17],
   'Saint-Félicien': [48.65, -72.44], 'Volcán de Fuego': [14.47, -90.88],
-  'Alabama': [33.26, -86.83], 'Indiana': [40.33, -86.17],
+  // 米国の州名
+  'Alabama': [33.26, -86.83], 'Alaska': [64.20, -152.49], 'Arizona': [34.05, -111.09],
+  'Arkansas': [35.20, -91.83], 'Colorado': [39.55, -105.78], 'Connecticut': [41.60, -72.76],
+  'Delaware': [38.91, -75.53], 'Georgia US': [33.75, -84.39], 'Hawaii': [21.31, -157.86],
+  'Idaho': [44.07, -114.74], 'Illinois': [40.63, -89.40], 'Indiana': [40.33, -86.17],
+  'Iowa': [42.01, -93.21], 'Kansas': [39.01, -98.48], 'Kentucky': [37.84, -84.27],
+  'Louisiana': [30.98, -91.96], 'Maine': [45.25, -69.45], 'Maryland': [39.05, -76.64],
+  'Massachusetts': [42.41, -71.38], 'Michigan': [44.31, -85.60], 'Minnesota': [46.73, -94.69],
+  'Mississippi': [32.35, -89.40], 'Missouri': [38.57, -92.60], 'Montana': [46.88, -110.36],
+  'Nebraska': [41.49, -99.90], 'Nevada': [38.80, -116.42], 'New Hampshire': [43.19, -71.57],
+  'New Jersey': [40.06, -74.41], 'New Mexico': [35.68, -105.94], 'North Carolina': [35.76, -79.02],
+  'North Dakota': [47.55, -101.00], 'Ohio': [40.42, -82.91], 'Oklahoma': [35.47, -97.52],
+  'Oregon': [43.80, -120.55], 'Pennsylvania': [41.20, -77.19], 'Rhode Island': [41.58, -71.48],
+  'South Carolina': [34.00, -81.03], 'South Dakota': [43.97, -99.90], 'Tennessee': [35.52, -86.58],
+  'Utah': [39.32, -111.09], 'Vermont': [44.56, -72.58], 'Virginia': [37.43, -78.66],
+  'Washington State': [47.75, -120.74], 'West Virginia': [38.60, -80.45],
+  'Wisconsin': [43.78, -88.79], 'Wyoming': [43.08, -107.29],
   'Ozarks': [36.50, -93.00], 'Wales': [52.29, -3.74],
   'Zimbabwe': [-17.83, 31.05], 'Mana Pools': [-15.76, 29.39],
   'Cat Tien': [11.45, 107.32], 'Kilauea': [19.42, -155.29],
@@ -190,14 +206,35 @@ const LOCATION_LABELS = {
   'Frying Pan Tower': 'Frying Pan Tower, NC',
   'Pipeline': 'Banzai Pipeline, Hawaii', 'Banzai Pipeline': 'Banzai Pipeline, Hawaii',
   'Hollywood Beach': 'Hollywood Beach, Florida',
-  'Alabama': 'Alabama, USA', 'Indiana': 'Indiana, USA',
-  'Florida': 'Florida, USA', 'Texas': 'Texas, USA', 'California': 'California, USA',
+  'Alabama': 'Alabama, USA', 'Alaska': 'Alaska, USA', 'Arizona': 'Arizona, USA',
+  'Arkansas': 'Arkansas, USA', 'California': 'California, USA', 'Colorado': 'Colorado, USA',
+  'Connecticut': 'Connecticut, USA', 'Delaware': 'Delaware, USA',
+  'Florida': 'Florida, USA', 'Georgia US': 'Georgia, USA', 'Hawaii': 'Hawaii, USA',
+  'Idaho': 'Idaho, USA', 'Illinois': 'Illinois, USA', 'Indiana': 'Indiana, USA',
+  'Iowa': 'Iowa, USA', 'Kansas': 'Kansas, USA', 'Kentucky': 'Kentucky, USA',
+  'Louisiana': 'Louisiana, USA', 'Maine': 'Maine, USA', 'Maryland': 'Maryland, USA',
+  'Massachusetts': 'Massachusetts, USA', 'Michigan': 'Michigan, USA', 'Minnesota': 'Minnesota, USA',
+  'Mississippi': 'Mississippi, USA', 'Missouri': 'Missouri, USA', 'Montana': 'Montana, USA',
+  'Nebraska': 'Nebraska, USA', 'Nevada': 'Nevada, USA', 'New Hampshire': 'New Hampshire, USA',
+  'New Jersey': 'New Jersey, USA', 'New Mexico': 'New Mexico, USA', 'North Carolina': 'North Carolina, USA',
+  'North Dakota': 'North Dakota, USA', 'Ohio': 'Ohio, USA', 'Oklahoma': 'Oklahoma, USA',
+  'Oregon': 'Oregon, USA', 'Pennsylvania': 'Pennsylvania, USA', 'Rhode Island': 'Rhode Island, USA',
+  'South Carolina': 'South Carolina, USA', 'South Dakota': 'South Dakota, USA', 'Tennessee': 'Tennessee, USA',
+  'Texas': 'Texas, USA', 'Utah': 'Utah, USA', 'Vermont': 'Vermont, USA', 'Virginia': 'Virginia, USA',
+  'Washington State': 'Washington State, USA', 'West Virginia': 'West Virginia, USA',
+  'Wisconsin': 'Wisconsin, USA', 'Wyoming': 'Wyoming, USA',
   'Ozarks': 'Ozarks, Missouri',
   // カナダ
   'Vancouver': 'Vancouver, Canada', 'Toronto': 'Toronto, Canada',
   'Ottawa': 'Ottawa, Canada', 'Revelstoke': 'Revelstoke, BC',
   'Churchill': 'Churchill, Manitoba', 'Saint-Félicien': 'Saint-Félicien, Quebec',
   // ヨーロッパ
+  'Paris': 'Paris, France', 'London': 'London, England',
+  'Istanbul': 'Istanbul, Turkey', 'Rome': 'Rome, Italy', 'Barcelona': 'Barcelona, Spain',
+  'Amsterdam': 'Amsterdam, Netherlands', 'Prague': 'Prague, Czech Republic',
+  'Vienna': 'Vienna, Austria', 'Zurich': 'Zurich, Switzerland',
+  'Lisbon': 'Lisbon, Portugal', 'Athens': 'Athens, Greece',
+  'Oslo': 'Oslo, Norway', 'Helsinki': 'Helsinki, Finland',
   'Venice': 'Venice, Italy', 'Milan': 'Milan, Italy', 'Naples': 'Naples, Italy',
   'Monterosso': 'Monterosso, Italy', 'Mt. Etna': 'Mt. Etna, Sicily',
   'Dublin': 'Dublin, Ireland', 'Edinburgh': 'Edinburgh, Scotland',
@@ -218,24 +255,31 @@ const LOCATION_LABELS = {
   'Madrid': 'Madrid, Spain', 'Santorini': 'Santorini, Greece',
   'Sint-Niklaas': 'Sint-Niklaas, Belgium',
   // アジア・オセアニア
-  'Osaka': 'Osaka, Japan', 'Kyoto': 'Kyoto, Japan', 'Sapporo': 'Sapporo, Japan',
+  'Tokyo': 'Tokyo, Japan', 'Osaka': 'Osaka, Japan', 'Kyoto': 'Kyoto, Japan', 'Sapporo': 'Sapporo, Japan',
   'Nagoya': 'Nagoya, Japan', 'Yokohama': 'Yokohama, Japan', 'Kobe': 'Kobe, Japan',
   'Okinawa': 'Okinawa, Japan', 'Hokkaido': 'Hokkaido, Japan',
   'Mt. Fuji': 'Mt. Fuji, Japan', 'Fuji': 'Fuji, Japan', 'Fujisan': 'Fujisan, Japan',
   'Niseko': 'Niseko, Japan', 'Hakone': 'Hakone, Japan',
-  'Busan': 'Busan, South Korea', 'Taipei': 'Taipei, Taiwan',
-  'Phuket': 'Phuket, Thailand', 'Chengdu': 'Chengdu, China',
+  'Seoul': 'Seoul, South Korea', 'Busan': 'Busan, South Korea', 'Taipei': 'Taipei, Taiwan',
+  'Bangkok': 'Bangkok, Thailand', 'Phuket': 'Phuket, Thailand', 'Chengdu': 'Chengdu, China',
   'Beijing': 'Beijing, China', 'Shanghai': 'Shanghai, China',
+  'Singapore': 'Singapore', 'Hong Kong': 'Hong Kong, China',
+  'Mumbai': 'Mumbai, India', 'Dubai': 'Dubai, UAE',
   'Kuala Lumpur': 'Kuala Lumpur, Malaysia', 'Manila': 'Manila, Philippines',
   'Davao City': 'Davao City, Philippines', 'Hanoi': 'Hanoi, Vietnam',
+  'Jakarta': 'Jakarta, Indonesia', 'Bali': 'Bali, Indonesia',
+  'Sydney': 'Sydney, Australia',
   'Auckland': 'Auckland, New Zealand', 'Ōamaru': 'Ōamaru, New Zealand',
   'Borneo': 'Borneo, Indonesia',
   // 中南米・カリブ
+  'Rio de Janeiro': 'Rio de Janeiro, Brazil', 'Buenos Aires': 'Buenos Aires, Argentina',
+  'Mexico City': 'Mexico City, Mexico', 'Havana': 'Havana, Cuba',
   'Ocho Rios': 'Ocho Rios, Jamaica', 'May Pen': 'May Pen, Jamaica',
   'Kingston': 'Kingston, Jamaica', 'Utila': 'Utila, Honduras',
   'Sarapiquí': 'Sarapiquí, Costa Rica', 'Volcán de Fuego': 'Volcán de Fuego, Guatemala',
   'Grand Cayman': 'Grand Cayman, Cayman Islands',
   // アフリカ
+  'Cairo': 'Cairo, Egypt', 'Cape Town': 'Cape Town, South Africa',
   'Nairobi': 'Nairobi, Kenya', 'Johannesburg': 'Johannesburg, South Africa',
   'Kruger': 'Kruger, South Africa', 'Hoedspruit': 'Hoedspruit, South Africa',
   'Serengeti': 'Serengeti, Tanzania', 'Etosha': 'Etosha, Namibia',
@@ -273,19 +317,35 @@ function loadGeminiApiKey() {
 const GEMINI_API_KEY = loadGeminiApiKey();
 
 /**
- * Gemini APIにバッチでタイトル+チャンネル名を送り、地名を抽出する。
- * @param {Array<{title: string, channel: string}>} items
+ * Gemini APIにバッチでタイトル+チャンネル名+説明文を送り、地名を抽出する。
+ * @param {Array<{title: string, channel: string, description: string}>} items
  * @returns {Promise<Array<string|null>>} 各アイテムに対応する地名 or null
  */
 async function extractLocationsWithGemini(items) {
   if (!GEMINI_API_KEY || items.length === 0) return items.map(() => null);
 
+  // 20件ずつバッチ分割して送信（途中切れJSON防止）
+  const BATCH_SIZE = 20;
+  const allResults = [];
+  for (let i = 0; i < items.length; i += BATCH_SIZE) {
+    const batch = items.slice(i, i + BATCH_SIZE);
+    console.log(`  Geminiバッチ ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(items.length / BATCH_SIZE)} (${batch.length}件)`);
+    const batchResults = await _extractLocationsWithGeminiBatch(batch);
+    allResults.push(...batchResults);
+  }
+  console.log(`Gemini抽出結果: ${JSON.stringify(allResults)}`);
+  return allResults;
+}
+
+async function _extractLocationsWithGeminiBatch(items) {
   const prompt = `You are a geographic location extractor for live camera video titles.
-Extract the REAL geographic place name from each video title and channel name.
+Extract the REAL geographic place name from each video title, channel name, and description.
 
 ALWAYS include the country or state: "City, Country" or "City, State" format.
 Examples: "Narvik, Norway", "Galveston, Texas", "Mt. Etna, Italy", "Seoul, South Korea", "Rome, Italy", "London, England".
 If only a country is identifiable, return the country alone (e.g. "Austria", "Peru").
+
+Use the description field to find location hints such as "Located in...", "撮影地:...", GPS coordinates, or any geographic references.
 
 IMPORTANT: Return null ONLY when NO real geographic name exists at all. Do NOT guess or infer.
 These are NOT place names — return null for these:
@@ -297,7 +357,7 @@ Return ONLY a JSON array of strings (or null for unknown). No markdown, no expla
 Example: ["Rome, Italy", "Niagara Falls, USA", null, "Austria"]
 
 Input:
-${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel })))}`;
+${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel, description: (i.description || '').slice(0, 1000) })))}`;
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
 
@@ -339,12 +399,35 @@ ${JSON.stringify(items.map(i => ({ title: i.title, channel: i.channel })))}`;
     );
     // 長さが一致しない場合はnullで埋める
     while (locations.length < items.length) locations.push(null);
-    console.log(`Gemini抽出結果: ${JSON.stringify(locations)}`);
     return locations;
   } catch (err) {
     console.warn(`Gemini API request failed: ${err.message}`);
     return items.map(() => null);
   }
+}
+
+// --- YouTube videos.list: フル説明文を一括取得 ---
+async function fetchVideoDescriptions(videoIds) {
+  const descriptions = {};
+  // 50件ずつバッチ（videos.list の上限）
+  for (let i = 0; i < videoIds.length; i += 50) {
+    const batch = videoIds.slice(i, i + 50);
+    const params = new URLSearchParams({
+      part: 'snippet',
+      id: batch.join(','),
+      key: API_KEY,
+    });
+    const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?${params}`);
+    if (!res.ok) {
+      console.warn(`videos.list error: ${res.status}`);
+      continue;
+    }
+    const data = await res.json();
+    for (const item of (data.items || [])) {
+      descriptions[item.id] = item.snippet.description || '';
+    }
+  }
+  return descriptions;
 }
 
 // --- Geocoding: geocache.json + Nominatim ---
@@ -429,7 +512,7 @@ async function resolveLocation(geminiName, title, channel) {
   return null;
 }
 
-const EXCLUDE_PATTERNS = /\b(gaming|gameplay|fortnite|minecraft|gta|valorant|apex|cod|warzone|pubg|roblox|music|song|playlist|dj set|radio|podcast|talk show|news|reaction|asmr|cooking|tutorial|how to|unbox|review|trailer|anime|cartoon|movie|film|episode|series|drama|vlog|mukbang|karaoke|concert|remix)\b/i;
+const EXCLUDE_PATTERNS = /\b(gaming|gameplay|fortnite|minecraft|gta|valorant|apex|cod|warzone|pubg|roblox|music|song|playlist|dj set|radio|podcast|talk show|news|reaction|asmr|cooking|tutorial|how to|unbox|review|trailer|anime|cartoon|movie|film|episode|series|drama|vlog|mukbang|karaoke|concert|remix|GDP|population|アニメ|disney|ディズニー)\b/i;
 const INCLUDE_PATTERNS = /\b(cam|webcam|live cam|camera|view|skyline|beach|city|nature|street|traffic|weather|airport|harbor|port|landscape|panorama|scenic|earth|world|ocean|sea|mountain|river|lake|volcano|aurora|wildlife|animal|bird|nest|reef|ISS|space station|observatory)\b/i;
 
 // --- Helpers ---
@@ -532,14 +615,28 @@ async function main() {
     }
   }
 
-  // --- Phase 2: 既存動画のうち location 未設定のものも収集 ---
+  // --- Phase 1.5: フル説明文を一括取得（新規 + 既存未解決） ---
   const unresolved = existing.filter(v => !v.location);
+  const allVideoIds = [
+    ...allCandidates.map(c => c.videoId),
+    ...unresolved.map(v => v.videoId),
+  ];
+  const descriptions = await fetchVideoDescriptions(allVideoIds);
+  for (const c of allCandidates) {
+    c.description = descriptions[c.videoId] || '';
+  }
+  for (const v of unresolved) {
+    v.description = descriptions[v.videoId] || '';
+  }
+  console.log(`説明文取得: ${Object.keys(descriptions).length}/${allVideoIds.length}件`);
+
+  // --- Phase 2: 既存動画のうち location 未設定のものも収集 ---
   if (unresolved.length > 0) {
     console.log(`既存動画の再処理対象: ${unresolved.length}件 (location未設定)`);
   }
 
   // --- Phase 3: 辞書マッチを先に試し、未解決分だけGeminiに送る（RPD節約） ---
-  // 新規候補: 辞書マッチを先に試す
+  // 新規候補: 辞書マッチを先に試す（title → channel のみ、descriptionはGeminiに委ねる）
   const newDictResults = allCandidates.map(c =>
     extractLocationFromDict(c.title) || extractLocationFromDict(c.channel) || null
   );
@@ -550,14 +647,14 @@ async function main() {
 
   // 辞書で解決できなかったものだけGeminiに送る
   const geminiNeededNew = allCandidates
-    .map((c, i) => newDictResults[i] ? null : { idx: i, title: c.title, channel: c.channel })
+    .map((c, i) => newDictResults[i] ? null : { idx: i, title: c.title, channel: c.channel, description: c.description })
     .filter(Boolean);
   const geminiNeededUnresolved = unresolved
-    .map((v, i) => unresolvedDictResults[i] ? null : { idx: i, title: v.title, channel: v.channel || '' })
+    .map((v, i) => unresolvedDictResults[i] ? null : { idx: i, title: v.title, channel: v.channel || '', description: v.description || '' })
     .filter(Boolean);
   const geminiItems = [
-    ...geminiNeededNew.map(g => ({ title: g.title, channel: g.channel })),
-    ...geminiNeededUnresolved.map(g => ({ title: g.title, channel: g.channel })),
+    ...geminiNeededNew.map(g => ({ title: g.title, channel: g.channel, description: g.description })),
+    ...geminiNeededUnresolved.map(g => ({ title: g.title, channel: g.channel, description: g.description })),
   ];
 
   // Gemini不要ならスキップ（RPD節約）
