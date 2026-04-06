@@ -625,8 +625,9 @@ async function main() {
   for (const c of allCandidates) {
     c.description = descriptions[c.videoId] || '';
   }
+  const unresolvedDescs = {};
   for (const v of unresolved) {
-    v.description = descriptions[v.videoId] || '';
+    unresolvedDescs[v.videoId] = descriptions[v.videoId] || '';
   }
   console.log(`説明文取得: ${Object.keys(descriptions).length}/${allVideoIds.length}件`);
 
@@ -650,11 +651,11 @@ async function main() {
     .map((c, i) => newDictResults[i] ? null : { idx: i, title: c.title, channel: c.channel, description: c.description })
     .filter(Boolean);
   const geminiNeededUnresolved = unresolved
-    .map((v, i) => unresolvedDictResults[i] ? null : { idx: i, title: v.title, channel: v.channel || '', description: v.description || '' })
+    .map((v, i) => unresolvedDictResults[i] ? null : { idx: i, title: v.title, channel: v.channel || '', description: unresolvedDescs[v.videoId] || '' })
     .filter(Boolean);
   const geminiItems = [
-    ...geminiNeededNew.map(g => ({ title: g.title, channel: g.channel, description: g.description })),
-    ...geminiNeededUnresolved.map(g => ({ title: g.title, channel: g.channel, description: g.description })),
+    ...geminiNeededNew.map(g => ({ title: g.title, channel: g.channel, description: g.description || '' })),
+    ...geminiNeededUnresolved.map(g => ({ title: g.title, channel: g.channel, description: g.description || '' })),
   ];
 
   // Gemini不要ならスキップ（RPD節約）
