@@ -1,5 +1,9 @@
 # Fernweh
 
+<p align="center">
+  <img src="public/og-image.png" alt="Fernweh" width="600">
+</p>
+
 > **Fernweh** /ˈfɛʁnˌveː/ — German, *noun*
 >
 > From *fern* ("far, distant") + *Weh* ("pain, ache"). Literally "far-sickness" — an ache for distant places, a longing for somewhere you have never been. The opposite of homesickness.
