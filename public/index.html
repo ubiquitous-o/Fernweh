@@ -1079,7 +1079,8 @@
     // Label: show location name or "Location unknown"
     if (hasLocation && locationName) {
       $globeLabel.textContent = locationName.replace(/,\s*/g, '\n');
-      $globeLabel.style.fontSize = '20px';
+      const maxLineLen = locationName.split(/,\s*/).reduce((m, s) => Math.max(m, s.length), 0);
+      $globeLabel.style.fontSize = maxLineLen > 22 ? '14px' : maxLineLen > 18 ? '17px' : '20px';
       $globeLabel.classList.add('show');
       $globeLabel.style.left = '';
       $globeLabel.style.top = '';
