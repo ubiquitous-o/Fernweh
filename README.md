@@ -20,11 +20,14 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 
 - TV static noise transition between live streams (WebGL shader)
 - Interactive 3D globe showing camera location ([COBE](https://github.com/shuding/cobe))
-- Location detection from video title/channel name ([Gemini API](https://ai.google.dev/) batch extraction + dictionary fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
+- Location detection from video title/channel name ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
+- Dictionary-first optimization: skips Gemini API for known locations, saving RPD quota
 - Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/))
 - Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback)
 - Randomized search queries for maximum discovery
 - Clickable video title — links to original YouTube video, resumes on browser back
+- "City, Country" location labels on globe (auto line-break at comma)
+- Client-side video pool refresh every 2 hours (follows server-side updates)
 - Auto-switch at the top of each hour with progress bar
 - Auto-retry on playback failures
 - Kiosk-friendly — Silkscreen bitmap font, cursor auto-hides, burn-in prevention
@@ -47,7 +50,8 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
   → Geolocation API / IP API → Open-Meteo for weather
 
 [Location Detection (build-time)]
-  → Batch titles+channels → Gemini API (gemini-2.5-flash-lite)
+  → Dictionary match first (LOCATION_COORDS + LOCATION_LABELS)
+  → Unmatched items → Gemini API batch (gemini-2.5-flash-lite)
   → Gemini result → dictionary coords or Nominatim geocoding
   → Fallback → dictionary match on title/channel
   → Nominatim cache → scripts/geocache.json
@@ -120,7 +124,8 @@ npm run start:local
 - Every 2 hours × 12 runs/day = **4,800 quota/day** (48% of free 10,000)
 
 **Gemini API (gemini-2.5-flash-lite)**
-- 1 batch request/run × 12 runs/day = **12 requests/day** (free tier: 20 RPD)
+- 0–1 batch request/run (skipped when all items are dictionary-matched)
+- Max 12 runs/day = **≤12 requests/day** (free tier: 20 RPD)
 
 ## Project Structure
 

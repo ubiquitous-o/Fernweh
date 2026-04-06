@@ -217,8 +217,7 @@
   .globe-container.show { opacity: 0.95; }
   .globe-label {
     position: absolute;
-    width: auto;
-    max-width: 180px;
+    width: max-content;
     text-align: center;
     transform: translate(-50%, -50%);
     font-size: 20px;
@@ -228,8 +227,7 @@
     padding: 1px 6px;
     border-radius: 3px;
     letter-spacing: 0;
-    white-space: normal;
-    overflow-wrap: normal;
+    white-space: pre-line;
     line-height: 1.2;
     opacity: 0;
     transition: opacity 0.2s ease;
@@ -1080,7 +1078,8 @@
 
     // Label: show location name or "Location unknown"
     if (hasLocation && locationName) {
-      $globeLabel.textContent = locationName;
+      $globeLabel.textContent = locationName.replace(/,\s*/g, '\n');
+      $globeLabel.style.fontSize = '20px';
       $globeLabel.classList.add('show');
       $globeLabel.style.left = '';
       $globeLabel.style.top = '';
