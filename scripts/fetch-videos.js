@@ -519,20 +519,50 @@ async function main() {
     console.log(`既存動画の再処理対象: ${unresolved.length}件 (location未設定)`);
   }
 
-  // --- Phase 3: 新規 + 再処理を1回のGemini APIコールで処理（RPD節約） ---
+  // --- Phase 3: 辞書マッチを先に試し、未解決分だけGeminiに送る（RPD節約） ---
+  // 新規候補: 辞書マッチを先に試す
+  const newDictResults = allCandidates.map(c =>
+    extractLocationFromDict(c.title) || extractLocationFromDict(c.channel) || null
+  );
+  // 既存未解決: 辞書マッチを先に試す
+  const unresolvedDictResults = unresolved.map(v =>
+    extractLocationFromDict(v.title) || extractLocationFromDict(v.channel || '') || null
+  );
+
+  // 辞書で解決できなかったものだけGeminiに送る
+  const geminiNeededNew = allCandidates
+    .map((c, i) => newDictResults[i] ? null : { idx: i, title: c.title, channel: c.channel })
+    .filter(Boolean);
+  const geminiNeededUnresolved = unresolved
+    .map((v, i) => unresolvedDictResults[i] ? null : { idx: i, title: v.title, channel: v.channel || '' })
+    .filter(Boolean);
   const geminiItems = [
-    ...allCandidates.map(c => ({ title: c.title, channel: c.channel })),
-    ...unresolved.map(v => ({ title: v.title, channel: v.channel || '' })),
+    ...geminiNeededNew.map(g => ({ title: g.title, channel: g.channel })),
+    ...geminiNeededUnresolved.map(g => ({ title: g.title, channel: g.channel })),
   ];
-  const geminiResults = await extractLocationsWithGemini(geminiItems);
-  const newGeminiResults = geminiResults.slice(0, allCandidates.length);
-  const unresolvedGeminiResults = geminiResults.slice(allCandidates.length);
+
+  // Gemini不要ならスキップ（RPD節約）
+  let geminiResults = geminiItems.map(() => null);
+  if (geminiItems.length > 0) {
+    console.log(`Gemini送信: ${geminiItems.length}件（辞書で解決済み: 新規${allCandidates.length - geminiNeededNew.length}件, 再処理${unresolved.length - geminiNeededUnresolved.length}件）`);
+    geminiResults = await extractLocationsWithGemini(geminiItems);
+  } else {
+    console.log('Geminiスキップ: 全件辞書マッチ済み or 対象なし');
+  }
+
+  // Gemini結果を元のインデックスに戻す
+  const newGeminiMap = new Map();
+  const unresolvedGeminiMap = new Map();
+  let gi = 0;
+  for (const g of geminiNeededNew) newGeminiMap.set(g.idx, geminiResults[gi++] || null);
+  for (const g of geminiNeededUnresolved) unresolvedGeminiMap.set(g.idx, geminiResults[gi++] || null);
 
   // --- Phase 4: 新規動画のロケーション解決 ---
   for (let j = 0; j < allCandidates.length; j++) {
     const c = allCandidates[j];
-    const geminiName = newGeminiResults[j] || null;
-    const result = await resolveLocation(geminiName, c.title, c.channel);
+    // 辞書マッチ済みならそのまま使う、なければGemini結果で解決
+    const dictResult = newDictResults[j];
+    const result = dictResult || await resolveLocation(newGeminiMap.get(j) || null, c.title, c.channel);
     newVideos.push({
       videoId: c.videoId,
       title: c.title,
@@ -548,7 +578,13 @@ async function main() {
   // --- Phase 5: 既存動画の再処理結果を反映 ---
   for (let j = 0; j < unresolved.length; j++) {
     const v = unresolved[j];
-    const geminiName = unresolvedGeminiResults[j] || null;
+    const dictResult = unresolvedDictResults[j];
+    if (dictResult) {
+      v.location = dictResult.coords;
+      v.locationName = dictResult.name;
+      continue;
+    }
+    const geminiName = unresolvedGeminiMap.get(j) || null;
     const result = await resolveLocation(geminiName, v.title, v.channel || '');
     if (result) {
       v.location = result.coords;
