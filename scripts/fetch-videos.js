@@ -9,6 +9,7 @@
 import { writeFileSync, readFileSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { find as findTimezone } from 'geo-tz';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const OUTPUT_PATH = join(__dirname, '..', 'public', 'videos.json');
@@ -300,6 +301,14 @@ function extractLocationFromDict(text) {
     }
   }
   return null;
+}
+
+function resolveTimezone(coords) {
+  if (!coords || !Array.isArray(coords) || coords.length < 2) return null;
+  try {
+    const zones = findTimezone(coords[0], coords[1]);
+    return zones.length > 0 ? zones[0] : null;
+  } catch { return null; }
 }
 
 // --- Gemini API: バッチ地名抽出 ---
@@ -691,14 +700,16 @@ async function main() {
     // 辞書マッチ済みならそのまま使う、なければGemini結果で解決
     const dictResult = newDictResults[j];
     const result = dictResult || await resolveLocation(newGeminiMap.get(j) || null, c.title, c.channel);
+    const coords = result?.coords || null;
     newVideos.push({
       videoId: c.videoId,
       title: c.title,
       channel: c.channel,
       thumbnail: c.thumbnail,
       query: c.query,
-      location: result?.coords || null,
+      location: coords,
       locationName: result?.name || null,
+      timezone: resolveTimezone(coords),
       fetchedAt: new Date().toISOString(),
     });
   }
@@ -710,6 +721,7 @@ async function main() {
     if (dictResult) {
       v.location = dictResult.coords;
       v.locationName = dictResult.name;
+      v.timezone = resolveTimezone(dictResult.coords);
       continue;
     }
     const geminiName = unresolvedGeminiMap.get(j) || null;
@@ -717,6 +729,14 @@ async function main() {
     if (result) {
       v.location = result.coords;
       v.locationName = result.name;
+      v.timezone = resolveTimezone(result.coords);
+    }
+  }
+
+  // 既存データの後付け: location はあるが timezone がないものを補完
+  for (const v of existing) {
+    if (v.location && !v.timezone) {
+      v.timezone = resolveTimezone(v.location);
     }
   }
 

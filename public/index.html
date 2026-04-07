@@ -249,6 +249,26 @@
     filter: invert(1);
   }
 
+  .camera-time {
+    position: absolute;
+    bottom: 275px;
+    right: 50px;
+    z-index: 12;
+    text-align: right;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+  }
+  .camera-time.show { opacity: 1; }
+  .camera-time-clock {
+    font-size: 28px; font-weight: 200;
+    letter-spacing: 2px; color: var(--text-primary); line-height: 1;
+  }
+  .camera-time-diff {
+    font-size: 13px; font-weight: 300;
+    letter-spacing: 2px; color: var(--text-secondary); margin-top: 2px;
+  }
+
   /* --- Live indicator --- */
   .live-badge {
     position: absolute;
@@ -426,6 +446,11 @@
   <div class="weather-section" id="weather"></div>
 </div>
 
+<div class="camera-time" id="camera-time">
+  <div class="camera-time-clock" id="camera-time-clock"></div>
+  <div class="camera-time-diff" id="camera-time-diff"></div>
+</div>
+
 <!-- Globe -->
 <div class="globe-container" id="globe-container">
   <canvas id="globe-canvas"></canvas>
@@ -593,6 +618,9 @@
   const $globe = document.getElementById('globe-container');
   let $globeCanvas = document.getElementById('globe-canvas');
   const $globeLabel = document.getElementById('globe-label');
+  const $cameraTime = document.getElementById('camera-time');
+  const $cameraTimeClock = document.getElementById('camera-time-clock');
+  const $cameraTimeDiff = document.getElementById('camera-time-diff');
 
   // ===== YouTube IFrame Player API =====
   let ytApiReady = false;
@@ -631,6 +659,7 @@
       showInfo(data);
       showOverlays();
       updateGlobe(data.location, data.locationName);
+      updateCameraTime();
       resetSwitchTimer();
     } catch {
       switchVideo();
@@ -944,6 +973,7 @@
 
       // Update globe
       updateGlobe(data.location, data.locationName);
+      updateCameraTime();
 
       // Reset timer
       resetSwitchTimer();
@@ -969,6 +999,7 @@
   function showOverlays() {
     $clock.classList.add('show');
     $liveBadge.classList.add('show');
+    if (currentInfo?.timezone) $cameraTime.classList.add('show');
   }
 
   // ===== PROGRESS BAR =====
@@ -1008,6 +1039,42 @@
     const d = now.getDate();
     const day = days[now.getDay()];
     $clockDate.textContent = `${y}.${String(mo).padStart(2,'0')}.${String(d).padStart(2,'0')} ${day}`;
+    updateCameraTime();
+  }
+
+  function getTimezoneDiffMinutes(now, tz) {
+    // リモートTZの「見かけの時刻」をIntlで取得
+    const fmt = (timeZone) => {
+      const parts = new Intl.DateTimeFormat('en-GB', {
+        timeZone, hour: 'numeric', minute: 'numeric', hour12: false,
+        year: 'numeric', month: 'numeric', day: 'numeric'
+      }).formatToParts(now);
+      const get = (type) => parseInt(parts.find(p => p.type === type).value, 10);
+      return new Date(get('year'), get('month') - 1, get('day'), get('hour'), get('minute'));
+    };
+    const localApparent = fmt(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    const remoteApparent = fmt(tz);
+    return Math.round((remoteApparent - localApparent) / 60000);
+  }
+
+  function formatTimeDiff(diffMin) {
+    if (diffMin === 0) return 'Same time';
+    const sign = diffMin > 0 ? '+' : '-';
+    const abs = Math.abs(diffMin);
+    const h = Math.floor(abs / 60);
+    const m = abs % 60;
+    return m === 0 ? `${sign}${h}h` : `${sign}${h}:${String(m).padStart(2, '0')}`;
+  }
+
+  function updateCameraTime() {
+    if (!currentInfo?.timezone) { $cameraTime.classList.remove('show'); return; }
+    const tz = currentInfo.timezone;
+    const now = new Date();
+    $cameraTimeClock.textContent = new Intl.DateTimeFormat('en-GB', {
+      timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false
+    }).format(now);
+    $cameraTimeDiff.textContent = formatTimeDiff(getTimezoneDiffMinutes(now, tz));
+    $cameraTime.classList.add('show');
   }
 
   // ===== ERROR =====
@@ -1375,6 +1442,8 @@
     $liveBadge.style.top = `${38 + offsetY}px`;
     $liveBadge.style.left = `${50 + offsetX}px`;
     $info.style.padding = `${40 + offsetY}px ${50 + offsetX}px`;
+    $cameraTime.style.bottom = `${275 + offsetY}px`;
+    $cameraTime.style.right = `${50 + offsetX}px`;
   }
 
   // ===== INIT =====
