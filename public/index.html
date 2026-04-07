@@ -251,12 +251,12 @@
 
   .camera-time {
     position: absolute;
-    bottom: 275px;
+    bottom: 250px;
     right: 50px;
     z-index: 12;
     text-align: right;
     opacity: 0;
-    transition: opacity 1.2s ease;
+    transition: opacity 1.2s ease, bottom 0.4s ease;
     pointer-events: none;
   }
   .camera-time.show { opacity: 1; }
@@ -1074,7 +1074,21 @@
       timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false
     }).format(now);
     $cameraTimeDiff.textContent = formatTimeDiff(getTimezoneDiffMinutes(now, tz));
+    repositionCameraTime();
     $cameraTime.classList.add('show');
+  }
+
+  function repositionCameraTime() {
+    const viewH = window.innerHeight;
+    const baseBottom = 250;
+    const labelVisible = $globeLabel.classList.contains('show') && parseFloat($globeLabel.style.opacity || '0') > 0;
+    if (labelVisible) {
+      const labelRect = $globeLabel.getBoundingClientRect();
+      const needed = viewH - labelRect.top + 4;
+      $cameraTime.style.bottom = Math.max(baseBottom, needed) + 'px';
+    } else {
+      $cameraTime.style.bottom = baseBottom + 'px';
+    }
   }
 
   // ===== ERROR =====
@@ -1227,7 +1241,8 @@
         $globeLabel.style.top = (sy + 16) + 'px';
         $globeLabel.style.transform = 'translate(-50%, 0%)';
       }
-      $globeLabel.style.opacity = String(Math.min(1, (z2 - 0.2) * 2));
+      $globeLabel.style.opacity = String(Math.min(1, (z2 - 0.2) * 3));
+      repositionCameraTime();
     }
 
     if (hasLocation) {
@@ -1442,7 +1457,6 @@
     $liveBadge.style.top = `${38 + offsetY}px`;
     $liveBadge.style.left = `${50 + offsetX}px`;
     $info.style.padding = `${40 + offsetY}px ${50 + offsetX}px`;
-    $cameraTime.style.bottom = `${275 + offsetY}px`;
     $cameraTime.style.right = `${50 + offsetX}px`;
   }
 
