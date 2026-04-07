@@ -28,6 +28,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 - Dictionary-first optimization: skips Gemini API for known locations, saving RPD quota
 - Auto-learning from geocache: previously resolved locations are merged into the dictionary at startup, reducing Gemini calls over time
 - Full video description fetching via YouTube videos.list API for improved location accuracy
+- Camera local time & time difference from your timezone (via [geo-tz](https://github.com/evansiroky/timezone-boundary-builder) at build-time)
 - Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/))
 - Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback)
 - Randomized search queries for maximum discovery
@@ -53,6 +54,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
   → Loads video candidates from videos.json
   → YouTube IFrame Player API for playback
   → COBE globe with pin-tracking label
+  → Camera local time + time difference (from timezone in videos.json)
   → WebGL shader TV noise during loading
   → Geolocation API / IP API → Open-Meteo for weather
 
@@ -64,6 +66,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
   → Gemini result → dictionary coords or Nominatim geocoding
   → Fallback → dictionary match on title/channel
   → Nominatim cache → scripts/geocache.json (feeds next run's dictionary)
+  → geo-tz: coords → IANA timezone → videos.json
 
 [Location Detection (runtime fallback)]
   → Title/channel → KNOWN_LOCATIONS dictionary match
@@ -152,6 +155,9 @@ fernweh/
 │   └── deploy-pages.yml  # GitHub Pages deployment
 ├── server.js             # Express server (local/kiosk mode)
 ├── config.example.json   # Config template (local mode)
+├── setup.sh              # Kiosk auto-start setup script
+├── autostart.sh          # Kiosk launch script (chromium)
+├── fernweh@.service      # systemd service unit (kiosk mode)
 ├── package.json
 └── README.md
 ```
