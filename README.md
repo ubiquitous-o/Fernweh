@@ -125,6 +125,7 @@ npm run start:local
 
 | Key | Action |
 |-----|--------|
+| Click (screen) | Skip to next camera |
 | `Space` / `→` / `N` | Skip to next camera |
 | `F` / `F11` | Toggle fullscreen |
 | Mouse move | Show control buttons |

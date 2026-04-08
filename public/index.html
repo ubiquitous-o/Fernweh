@@ -1195,6 +1195,12 @@
     $infoTitle.style.textDecoration = isFS ? 'none' : '';
   }
 
+  // ===== CLICK TO SKIP =====
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.controls, .info-title')) return;
+    switchVideo();
+  });
+
   // ===== KEYBOARD =====
   document.addEventListener('keydown', (e) => {
     if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'n') {
