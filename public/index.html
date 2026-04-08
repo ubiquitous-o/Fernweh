@@ -451,21 +451,25 @@
     letter-spacing: 2px;
   }
 
-  /* --- Responsive --- */
-  @media (max-width: 768px) {
+  /* --- Responsive (width) --- */
+  @media (min-width: 501px) and (max-width: 768px) {
     .weather-section .weather-day:nth-child(n+3) { display: none; }
   }
   @media (max-width: 500px) {
-    .weather-section { display: none; }
-    .weather-location { display: none; }
-    .clock-time { font-size: clamp(20px, 4vw, 28px); }
-    .clock-date { font-size: clamp(10px, 1.5vw, 14px); }
+    .weather-section .weather-day:nth-child(n+4) { display: none; }
   }
+  @media (max-width: 500px) and (max-height: 500px) {
+    .weather-location { display: none; }
+  }
+  /* --- Responsive (height) --- */
   @media (max-height: 700px) {
     .weather-section .weather-day:nth-child(n+3) { display: none; }
   }
   @media (max-height: 500px) {
     .weather-section { display: none; }
+    .weather-location { display: none; }
+    .clock-time { font-size: clamp(16px, 3.5vw, 24px); }
+    .clock-date { font-size: clamp(9px, 1.3vw, 12px); }
   }
 </style>
 </head>
