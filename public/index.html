@@ -456,8 +456,10 @@
     .weather-section .weather-day:nth-child(n+3) { display: none; }
   }
   @media (max-width: 500px) {
-    .globe-container, .camera-time { display: none !important; }
     .weather-section { display: none; }
+    .weather-location { display: none; }
+    .clock-time { font-size: clamp(20px, 4vw, 28px); }
+    .clock-date { font-size: clamp(10px, 1.5vw, 14px); }
   }
   @media (max-height: 700px) {
     .weather-section .weather-day:nth-child(n+3) { display: none; }
