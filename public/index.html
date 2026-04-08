@@ -24,6 +24,47 @@
     --text-secondary: rgba(255, 255, 255, 0.55);
     --text-dim: rgba(255, 255, 255, 0.25);
     --accent: rgba(255, 90, 60, 0.9);
+
+    /* レイアウト */
+    --edge-x: clamp(20px, 3.5vw, 50px);
+    --edge-y: clamp(16px, 2.5vh, 40px);
+    --globe-size: clamp(120px, 18vw, 225px);
+    --shift-x: 0px;
+    --shift-y: 0px;
+
+    /* Clock */
+    --clock-top: clamp(16px, 2.5vh, 30px);
+    --clock-font-time: clamp(28px, 4.5vw, 56px);
+    --clock-font-date: clamp(13px, 1.8vw, 22px);
+    --clock-padding-x: clamp(10px, 1.5vw, 20px);
+    --clock-padding-y: clamp(8px, 1.2vw, 16px);
+
+    /* Weather */
+    --weather-font: clamp(11px, 1.5vw, 18px);
+    --weather-location-font: clamp(9px, 1.1vw, 13px);
+
+    /* Info */
+    --info-font-title: clamp(14px, 1.8vw, 22px);
+    --info-font-channel: clamp(10px, 1.1vw, 13px);
+
+    /* Live badge */
+    --badge-top: clamp(20px, 3vh, 38px);
+    --badge-font: clamp(11px, 1.3vw, 16px);
+
+    /* Camera time */
+    --ct-font-clock: clamp(16px, 2.2vw, 28px);
+    --ct-font-diff: clamp(9px, 1.1vw, 13px);
+
+    /* Globe label */
+    --globe-label-font: clamp(11px, 1.6vw, 20px);
+
+    /* Controls */
+    --ctrl-btn-size: clamp(32px, 3.5vw, 42px);
+    --ctrl-btn-font: clamp(12px, 1.3vw, 16px);
+    --ctrl-right: clamp(16px, 2.5vw, 30px);
+
+    /* Progress */
+    --progress-height: clamp(2px, 0.35vh, 4px);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -86,10 +127,10 @@
     left: 0;
     right: 0;
     z-index: 10;
-    padding: 40px 50px;
+    padding: calc(var(--edge-y) + var(--shift-y)) calc(var(--edge-x) + var(--shift-x));
     opacity: 0;
     transform: translateY(8px);
-    transition: opacity 0.8s ease, transform 0.8s ease, padding 60s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
   .info-overlay.show {
     opacity: 1;
@@ -97,7 +138,7 @@
   }
 
   .info-channel {
-    font-size: 13px;
+    font-size: var(--info-font-channel);
     font-weight: 300;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -106,11 +147,11 @@
   }
 
   .info-title {
-    font-size: 22px;
+    font-size: var(--info-font-title);
     font-weight: 300;
     line-height: 1.4;
     color: var(--text-primary);
-    max-width: 700px;
+    max-width: clamp(300px, 50vw, 700px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -122,30 +163,30 @@
   /* --- Top-right Clock --- */
   .clock-overlay {
     position: absolute;
-    top: 30px;
-    right: 50px;
+    top: calc(var(--clock-top) + var(--shift-y));
+    right: calc(var(--edge-x) + var(--shift-x));
     z-index: 10;
     text-align: right;
     opacity: 0;
-    transition: opacity 0.8s ease, top 60s ease, right 60s ease;
+    transition: opacity 0.8s ease;
     background: var(--overlay-bg);
-    padding: 16px 20px;
+    padding: var(--clock-padding-y) var(--clock-padding-x);
     border-radius: 8px;
     backdrop-filter: blur(6px);
   }
   .clock-overlay.show { opacity: 1; }
 
   .clock-time {
-    font-size: 56px;
+    font-size: var(--clock-font-time);
     font-weight: 200;
-    letter-spacing: 4px;
+    letter-spacing: clamp(2px, 0.3vw, 4px);
     color: var(--text-primary);
     line-height: 1;
   }
   .clock-date {
-    font-size: 22px;
+    font-size: var(--clock-font-date);
     font-weight: 300;
-    letter-spacing: 4px;
+    letter-spacing: clamp(2px, 0.3vw, 4px);
     color: var(--text-secondary);
     margin-top: 4px;
   }
@@ -156,7 +197,7 @@
     padding-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--text-dim);
-    font-size: 13px;
+    font-size: var(--weather-location-font);
     font-weight: 300;
     letter-spacing: 3px;
     text-align: right;
@@ -175,51 +216,51 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
-    font-size: 18px;
+    gap: clamp(4px, 0.8vw, 10px);
+    font-size: var(--weather-font);
     font-weight: 300;
     letter-spacing: 1px;
   }
 
   .weather-label {
     color: var(--text-dim);
-    font-size: 18px;
+    font-size: var(--weather-font);
     letter-spacing: 3px;
-    min-width: 50px;
+    min-width: clamp(30px, 4vw, 50px);
     text-align: right;
   }
 
   .weather-icon {
-    font-size: 18px;
+    font-size: var(--weather-font);
     line-height: 1;
   }
 
   .weather-temp {
     color: var(--text-secondary);
-    font-size: 18px;
+    font-size: var(--weather-font);
     font-weight: 200;
     letter-spacing: 1px;
     font-variant-numeric: tabular-nums;
-    min-width: 90px;
+    min-width: clamp(55px, 7vw, 90px);
     text-align: right;
   }
 
   .weather-precip {
     color: var(--text-secondary);
-    font-size: 18px;
+    font-size: var(--weather-font);
     letter-spacing: 1px;
-    min-width: 44px;
+    min-width: clamp(30px, 3.5vw, 44px);
     text-align: right;
   }
 
   /* --- Globe --- */
   .globe-container {
     position: absolute;
-    bottom: 40px;
-    right: 50px;
+    bottom: calc(var(--edge-y) + var(--shift-y));
+    right: calc(var(--edge-x) + var(--shift-x));
     z-index: 12;
-    width: 225px;
-    height: 225px;
+    width: var(--globe-size);
+    height: var(--globe-size);
     opacity: 0;
     transition: opacity 1.2s ease;
     pointer-events: none;
@@ -230,7 +271,7 @@
     width: max-content;
     text-align: center;
     transform: translate(-50%, -50%);
-    font-size: 20px;
+    font-size: var(--globe-label-font);
     font-weight: 600;
     color: #fff;
     background: rgba(51, 102, 255, 0.9);
@@ -251,8 +292,8 @@
 
   .camera-time {
     position: absolute;
-    bottom: 250px;
-    right: 50px;
+    bottom: calc(var(--globe-size) + var(--edge-y) + 10px);
+    right: calc(var(--edge-x) + var(--shift-x));
     z-index: 12;
     text-align: right;
     opacity: 0;
@@ -261,30 +302,30 @@
   }
   .camera-time.show { opacity: 1; }
   .camera-time-clock {
-    font-size: 28px; font-weight: 200;
+    font-size: var(--ct-font-clock); font-weight: 200;
     letter-spacing: 2px; color: var(--text-primary); line-height: 1;
   }
   .camera-time-diff {
-    font-size: 13px; font-weight: 300;
+    font-size: var(--ct-font-diff); font-weight: 300;
     letter-spacing: 2px; color: var(--text-secondary); margin-top: 2px;
   }
 
   /* --- Live indicator --- */
   .live-badge {
     position: absolute;
-    top: 38px;
-    left: 50px;
+    top: calc(var(--badge-top) + var(--shift-y));
+    left: calc(var(--edge-x) + var(--shift-x));
     z-index: 10;
     display: flex;
     align-items: center;
     gap: 8px;
     opacity: 0;
-    transition: opacity 0.8s ease, top 60s ease, left 60s ease;
+    transition: opacity 0.8s ease;
   }
   .live-badge.show { opacity: 1; }
 
   .live-dot {
-    width: 10px; height: 10px;
+    width: clamp(6px, 0.8vw, 10px); height: clamp(6px, 0.8vw, 10px);
     border-radius: 50%;
     background: var(--accent);
     animation: pulse 2s ease-in-out infinite;
@@ -295,9 +336,9 @@
   }
 
   .live-text {
-    font-size: 16px;
+    font-size: var(--badge-font);
     font-weight: 400;
-    letter-spacing: 5px;
+    letter-spacing: clamp(3px, 0.4vw, 5px);
     text-transform: uppercase;
     color: var(--text-secondary);
   }
@@ -307,7 +348,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 4px;
+    height: var(--progress-height);
     background: var(--accent);
     z-index: 15;
     transition: width 1s linear;
@@ -318,12 +359,12 @@
   .controls {
     position: absolute;
     top: 50%;
-    right: 30px;
+    right: var(--ctrl-right);
     transform: translateY(-50%) translateX(4px);
     z-index: 20;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: clamp(8px, 1vw, 12px);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease, transform 0.4s ease;
@@ -336,7 +377,7 @@
   body.mouse-active { cursor: default; }
 
   .ctrl-btn {
-    width: 42px; height: 42px;
+    width: var(--ctrl-btn-size); height: var(--ctrl-btn-size);
     border-radius: 50%;
     border: 1px solid rgba(255,255,255,0.2);
     background: var(--overlay-bg);
@@ -347,7 +388,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
-    font-size: 16px;
+    font-size: var(--ctrl-btn-font);
   }
   .ctrl-btn:hover {
     border-color: rgba(255,255,255,0.5);
@@ -408,6 +449,21 @@
     font-weight: 300;
     color: var(--text-secondary);
     letter-spacing: 2px;
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 768px) {
+    .weather-section .weather-day:nth-child(n+3) { display: none; }
+  }
+  @media (max-width: 500px) {
+    .globe-container, .camera-time { display: none !important; }
+    .weather-section { display: none; }
+  }
+  @media (max-height: 700px) {
+    .weather-section .weather-day:nth-child(n+3) { display: none; }
+  }
+  @media (max-height: 500px) {
+    .weather-section { display: none; }
   }
 </style>
 </head>
@@ -1080,7 +1136,8 @@
 
   function repositionCameraTime() {
     const viewH = window.innerHeight;
-    const baseBottom = 250;
+    const globeRect = $globe.getBoundingClientRect();
+    const baseBottom = viewH - globeRect.top + 10;
     const labelVisible = $globeLabel.classList.contains('show') && parseFloat($globeLabel.style.opacity || '0') > 0;
     if (labelVisible) {
       const labelRect = $globeLabel.getBoundingClientRect();
@@ -1149,6 +1206,9 @@
   // ===== GLOBE =====
   let globeInstance = null;
   let createGlobeFn = null;
+  let resizeTimer = null;
+
+  function getComputedGlobeSize() { return $globe.offsetWidth; }
 
   // Preload COBE library
   import('https://esm.sh/cobe@0.6.3')
@@ -1177,11 +1237,17 @@
       ? [{ location, size: 0.08 }]
       : [];
 
+    const GLOBE_THETA = 0.15; // fixed slight tilt — keeps north pole at top
+    const globeDisplaySize = getComputedGlobeSize();
+    const GLOBE_RADIUS = globeDisplaySize / 2;
+
     // Label: show location name or "Location unknown"
     if (hasLocation && locationName) {
       $globeLabel.textContent = locationName.replace(/,\s*/g, '\n');
       const maxLineLen = locationName.split(/,\s*/).reduce((m, s) => Math.max(m, s.length), 0);
-      $globeLabel.style.fontSize = maxLineLen > 22 ? '14px' : maxLineLen > 18 ? '17px' : '20px';
+      const scale = globeDisplaySize / 225;
+      const base = maxLineLen > 22 ? 14 : maxLineLen > 18 ? 17 : 20;
+      $globeLabel.style.fontSize = (base * scale) + 'px';
       $globeLabel.classList.add('show');
       $globeLabel.style.left = '';
       $globeLabel.style.top = '';
@@ -1204,12 +1270,10 @@
       $globeLabel.style.top = '';
       $globeLabel.style.opacity = '';
     }
-
-    const GLOBE_THETA = 0.15; // fixed slight tilt — keeps north pole at top
-    const GLOBE_RADIUS = 112.5; // display radius in px (225/2)
     let currentPhi;
 
     // ピンの2Dスクリーン座標を計算してラベルを配置
+    const labelOffset = globeDisplaySize * (16 / 225);
     function updateLabelPosition(phi, theta) {
       if (!hasLocation || !locationName) return;
       const [lat, lon] = location;
@@ -1234,11 +1298,11 @@
       $globeLabel.style.left = sx + 'px';
       if (lat >= 0) {
         // 北半球: ピンの上にラベル（下端基準）
-        $globeLabel.style.top = (sy - 16) + 'px';
+        $globeLabel.style.top = (sy - labelOffset) + 'px';
         $globeLabel.style.transform = 'translate(-50%, -100%)';
       } else {
         // 南半球: ピンの下にラベル（上端基準）
-        $globeLabel.style.top = (sy + 16) + 'px';
+        $globeLabel.style.top = (sy + labelOffset) + 'px';
         $globeLabel.style.transform = 'translate(-50%, 0%)';
       }
       $globeLabel.style.opacity = String(Math.min(1, (z2 - 0.2) * 3));
@@ -1264,7 +1328,7 @@
       };
     }
 
-    const size = 225 * 2;
+    const size = globeDisplaySize * 2;
     freshCanvas.width = size;
     freshCanvas.height = size;
 
@@ -1452,13 +1516,20 @@
   function shiftOverlays() {
     const offsetX = Math.round(Math.random() * 20 - 10); // -10 to +10px
     const offsetY = Math.round(Math.random() * 20 - 10);
-    $clock.style.top = `${30 + offsetY}px`;
-    $clock.style.right = `${50 + offsetX}px`;
-    $liveBadge.style.top = `${38 + offsetY}px`;
-    $liveBadge.style.left = `${50 + offsetX}px`;
-    $info.style.padding = `${40 + offsetY}px ${50 + offsetX}px`;
-    $cameraTime.style.right = `${50 + offsetX}px`;
+    document.documentElement.style.setProperty('--shift-x', offsetX + 'px');
+    document.documentElement.style.setProperty('--shift-y', offsetY + 'px');
   }
+
+  // ===== RESIZE =====
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (currentInfo) {
+        updateGlobe(currentInfo.location, currentInfo.locationName);
+        repositionCameraTime();
+      }
+    }, 500);
+  });
 
   // ===== INIT =====
   document.addEventListener('mousemove', onMouseMove);
