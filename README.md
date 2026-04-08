@@ -20,6 +20,15 @@
 
 A fullscreen web app that automatically cycles through YouTube live cameras at the top of every hour. Hosted on **GitHub Pages** with video data refreshed by **GitHub Actions**.
 
+## Controls
+
+| Key | Action |
+|-----|--------|
+| Click (screen) | Skip to next camera |
+| `Space` / `→` / `N` | Skip to next camera |
+| `F` / `F11` | Toggle fullscreen |
+| Mouse move | Show control buttons |
+
 ## Features
 
 - TV static noise transition between live streams (WebGL shader)
@@ -120,15 +129,6 @@ cp config.example.json config.json
 npm install express
 npm run start:local
 ```
-
-## Controls
-
-| Key | Action |
-|-----|--------|
-| Click (screen) | Skip to next camera |
-| `Space` / `→` / `N` | Skip to next camera |
-| `F` / `F11` | Toggle fullscreen |
-| Mouse move | Show control buttons |
 
 ## API Quotas
 
