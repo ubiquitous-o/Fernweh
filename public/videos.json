@@ -1,5 +1,103 @@
 [
   {
+    "videoId": "_5zWp0bMgcI",
+    "title": "EarthCam Live:  Aquarium Cam (Baltimore, Maryland)",
+    "channel": "EarthCam",
+    "thumbnail": "https://i.ytimg.com/vi/_5zWp0bMgcI/hqdefault_live.jpg",
+    "query": "webcam live coral reef Tokyo",
+    "location": [
+      39.29,
+      -76.61
+    ],
+    "locationName": "Baltimore, Maryland",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-04-11T02:20:10.992Z"
+  },
+  {
+    "videoId": "iSeH45R-8R0",
+    "title": "Maho Beach Live Cam Saint Martin ✈️  Princess Juliana Airport Beach 24/7",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/iSeH45R-8R0/hqdefault_live.jpg",
+    "query": "live cam bridge Lisbon",
+    "location": [
+      18.0814066,
+      -63.0467131
+    ],
+    "locationName": "Saint Martin",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-04-11T02:20:10.994Z"
+  },
+  {
+    "videoId": "Cp4RRAEgpeU",
+    "title": "Live @ Santa Claus Village",
+    "channel": "City of Rovaniemi",
+    "thumbnail": "https://i.ytimg.com/vi/Cp4RRAEgpeU/hqdefault_live.jpg",
+    "query": "live webcam Reykjavik",
+    "location": [
+      66.54,
+      25.85
+    ],
+    "locationName": "Rovaniemi, Finland",
+    "timezone": "Europe/Helsinki",
+    "fetchedAt": "2026-04-11T02:20:10.994Z"
+  },
+  {
+    "videoId": "NtbquzembC8",
+    "title": "ACE Lanzarote Airport LIVE 24/7 - Canary Islands SPAIN",
+    "channel": "Flightradar24",
+    "thumbnail": "https://i.ytimg.com/vi/NtbquzembC8/hqdefault_live.jpg",
+    "query": "live webcam Reykjavik",
+    "location": [
+      28.9456805,
+      -13.6075882
+    ],
+    "locationName": "Lanzarote Airport, Canary Islands",
+    "timezone": "Atlantic/Canary",
+    "fetchedAt": "2026-04-11T02:20:10.994Z"
+  },
+  {
+    "videoId": "tYgGEC-ESTw",
+    "title": "Reykjavik, Iceland LIVE",
+    "channel": "Our World Live",
+    "thumbnail": "https://i.ytimg.com/vi/tYgGEC-ESTw/hqdefault_live.jpg",
+    "query": "live webcam Reykjavik",
+    "location": [
+      64.15,
+      -21.94
+    ],
+    "locationName": "Reykjavik, Iceland",
+    "timezone": "Africa/Abidjan",
+    "fetchedAt": "2026-04-11T02:20:10.994Z"
+  },
+  {
+    "videoId": "iMqrD-HBDGo",
+    "title": "Skarsvåg Live",
+    "channel": "Skarsvåg bygdelag live cam",
+    "thumbnail": "https://i.ytimg.com/vi/iMqrD-HBDGo/hqdefault_live.jpg",
+    "query": "live webcam Reykjavik",
+    "location": [
+      71.11,
+      25.84
+    ],
+    "locationName": "Skarsvåg, Norway",
+    "timezone": "Europe/Berlin",
+    "fetchedAt": "2026-04-11T02:20:10.994Z"
+  },
+  {
+    "videoId": "iOmco6eIa-0",
+    "title": "LIVE 24/7 Northern Lights &amp; Sky Cam | Lapland Finland Webcam | Aurora Borealis from Posio",
+    "channel": "Hotel Lapin Satu",
+    "thumbnail": "https://i.ytimg.com/vi/iOmco6eIa-0/hqdefault_live.jpg",
+    "query": "live webcam Reykjavik",
+    "location": [
+      57.7281481,
+      -117.8123499
+    ],
+    "locationName": "Northern Lights",
+    "timezone": "America/Edmonton",
+    "fetchedAt": "2026-04-11T02:20:10.994Z"
+  },
+  {
     "videoId": "04sQWSPBrUY",
     "title": "🔴 [LIVE] PATROL CAM007: Forest-Grassland edge | 24/7 cam in Vietnam #live",
     "channel": "Katien Ranger Patrol",
@@ -2639,9 +2737,12 @@
     "channel": "Utonish",
     "thumbnail": "https://i.ytimg.com/vi/OxzHQ546YQY/hqdefault_live.jpg",
     "query": "live stream camera nature Peru",
-    "location": null,
-    "locationName": null,
-    "timezone": null,
+    "location": [
+      38.9,
+      -77.04
+    ],
+    "locationName": "United States",
+    "timezone": "America/New_York",
     "fetchedAt": "2026-04-10T14:41:40.627Z"
   },
   {
@@ -2683,104 +2784,6 @@
       -75.9107565
     ],
     "locationName": "Watertown, New York",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-10T12:41:05.259Z"
-  },
-  {
-    "videoId": "H67j7H-7QD0",
-    "title": "EarthCam Live:  Coney Island (New York City)",
-    "channel": "EarthCam",
-    "thumbnail": "https://i.ytimg.com/vi/H67j7H-7QD0/hqdefault_live.jpg",
-    "query": "live stream camera New York",
-    "location": [
-      40.7127281,
-      -74.0060152
-    ],
-    "locationName": "New York City",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-10T12:41:05.259Z"
-  },
-  {
-    "videoId": "x90WegFbefI",
-    "title": "LIVE New York City Walk - Experience Manhattan!",
-    "channel": "Epic World Walking",
-    "thumbnail": "https://i.ytimg.com/vi/x90WegFbefI/hqdefault_live.jpg",
-    "query": "live stream camera New York",
-    "location": [
-      40.7127281,
-      -74.0060152
-    ],
-    "locationName": "New York City",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-10T12:41:05.259Z"
-  },
-  {
-    "videoId": "4qyZLflp-sI",
-    "title": "Times Square: 1560 Broadway View Live",
-    "channel": "AE Signage",
-    "thumbnail": "https://i.ytimg.com/vi/4qyZLflp-sI/hqdefault_live.jpg",
-    "query": "live stream camera New York",
-    "location": [
-      40.7570095,
-      -73.9859724
-    ],
-    "locationName": "Times Square",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-10T12:41:05.259Z"
-  },
-  {
-    "videoId": "sxZxz0OPoh0",
-    "title": "Hamptons.com - LIVE! 4K Main Street, Sag Harbor Village, New York",
-    "channel": "Hamptons. com",
-    "thumbnail": "https://i.ytimg.com/vi/sxZxz0OPoh0/hqdefault_live.jpg",
-    "query": "live stream camera New York",
-    "location": [
-      40.71,
-      -74.01
-    ],
-    "locationName": "New York, USA",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-10T12:41:05.259Z"
-  },
-  {
-    "videoId": "cWR8KGKftUw",
-    "title": "EarthCam Live:  Statue of Liberty",
-    "channel": "EarthCam",
-    "thumbnail": "https://i.ytimg.com/vi/cWR8KGKftUw/hqdefault_live.jpg",
-    "query": "live stream camera New York",
-    "location": [
-      40.7127281,
-      -74.0060152
-    ],
-    "locationName": "New York, USA",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-10T12:41:05.259Z"
-  },
-  {
-    "videoId": "XWxyuL9dctA",
-    "title": "Fairport, New York, USA | LIVE Train Camera (Fixed View – West)",
-    "channel": "Virtual Railfan",
-    "thumbnail": "https://i.ytimg.com/vi/XWxyuL9dctA/hqdefault_live.jpg",
-    "query": "live stream camera New York",
-    "location": [
-      40.71,
-      -74.01
-    ],
-    "locationName": "New York, USA",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-10T12:41:05.259Z"
-  },
-  {
-    "videoId": "lkzIualhhRM",
-    "title": "Bryant Park Webcam",
-    "channel": "Bryant Park NYC",
-    "thumbnail": "https://i.ytimg.com/vi/lkzIualhhRM/hqdefault_live.jpg",
-    "query": "live stream camera New York",
-    "location": [
-      40.7127281,
-      -74.0060152
-    ],
-    "locationName": "New York, USA",
     "timezone": "America/New_York",
     "fetchedAt": "2026-04-10T12:41:05.259Z"
   }
