@@ -1,5 +1,341 @@
 [
   {
+    "videoId": "CvOB-Is_yYU",
+    "title": "Port of Helsinki - South Harbour Live (Live Camera Axis Q6155-E)",
+    "channel": "Port of Helsinki",
+    "thumbnail": "https://i.ytimg.com/vi/CvOB-Is_yYU/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      60.17,
+      24.94
+    ],
+    "locationName": "Helsinki, Finland",
+    "timezone": "Europe/Helsinki",
+    "fetchedAt": "2026-04-12T07:01:39.841Z"
+  },
+  {
+    "videoId": "6hPWq2IG08M",
+    "title": "Port of Helsinki - West harbour - south cam",
+    "channel": "Port of Helsinki",
+    "thumbnail": "https://i.ytimg.com/vi/6hPWq2IG08M/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      60.17,
+      24.94
+    ],
+    "locationName": "Helsinki, Finland",
+    "timezone": "Europe/Helsinki",
+    "fetchedAt": "2026-04-12T07:01:39.841Z"
+  },
+  {
+    "videoId": "awW1kvv5HB0",
+    "title": "Cam 1 Skid Row Los Angeles CA. Cam 1",
+    "channel": "OMG Live TV ",
+    "thumbnail": "https://i.ytimg.com/vi/awW1kvv5HB0/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      34.05,
+      -118.24
+    ],
+    "locationName": "Los Angeles, USA",
+    "timezone": "America/Los_Angeles",
+    "fetchedAt": "2026-04-12T07:01:39.842Z"
+  },
+  {
+    "videoId": "ccTVAhJU5lg",
+    "title": "Northern Light Live Kilpisjärvi, Finland. North view",
+    "channel": "Starlapland / Samuli Korvanen",
+    "thumbnail": "https://i.ytimg.com/vi/ccTVAhJU5lg/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      69.0165527,
+      20.8732059
+    ],
+    "locationName": "Kilpisjärvi",
+    "timezone": "Europe/Helsinki",
+    "fetchedAt": "2026-04-12T07:01:39.843Z"
+  },
+  {
+    "videoId": "LwihxyJ4V20",
+    "title": "Zero Point Levi | Levi Ski Resort | Finland",
+    "channel": "Levi Ski Resort",
+    "thumbnail": "https://i.ytimg.com/vi/LwihxyJ4V20/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      61.92,
+      25.75
+    ],
+    "locationName": "Finland",
+    "timezone": "Europe/Helsinki",
+    "fetchedAt": "2026-04-12T07:01:39.843Z"
+  },
+  {
+    "videoId": "Cp4RRAEgpeU",
+    "title": "Live @ Santa Claus Village",
+    "channel": "City of Rovaniemi",
+    "thumbnail": "https://i.ytimg.com/vi/Cp4RRAEgpeU/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      66.54,
+      25.85
+    ],
+    "locationName": "Rovaniemi, Finland",
+    "timezone": "Europe/Helsinki",
+    "fetchedAt": "2026-04-12T07:01:39.843Z"
+  },
+  {
+    "videoId": "yqJBRmpOpnM",
+    "title": "Tornion kaupungin webkamera - Tornio City Webcam",
+    "channel": "Tornion kaupunki",
+    "thumbnail": "https://i.ytimg.com/vi/yqJBRmpOpnM/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      65.8457589,
+      24.1464
+    ],
+    "locationName": "Tornio, Finland",
+    "timezone": "Europe/Helsinki",
+    "fetchedAt": "2026-04-12T07:01:39.843Z"
+  },
+  {
+    "videoId": "oxx7MqjhOpw",
+    "title": "Dublin Bay Live: Watch Ships Enter and Exit Dublin Port",
+    "channel": "Dublin Port",
+    "thumbnail": "https://i.ytimg.com/vi/oxx7MqjhOpw/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Dublin, Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-04-12T07:01:39.843Z"
+  },
+  {
+    "videoId": "VR-x3HdhKLQ",
+    "title": "🔴 Live Camera Stream | Bondi Aussie Bar &amp; Grill | Chaweng | Koh Samui | Thailand | 2160p 4K",
+    "channel": "The Real Samui Webcam",
+    "thumbnail": "https://i.ytimg.com/vi/VR-x3HdhKLQ/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      9.5013945,
+      99.9956193
+    ],
+    "locationName": "Koh Samui",
+    "timezone": "Asia/Jakarta",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "M09NaBVPjAI",
+    "title": "Live stream | Amazonehaven west",
+    "channel": "Port of Rotterdam",
+    "thumbnail": "https://i.ytimg.com/vi/M09NaBVPjAI/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      51.9244424,
+      4.47775
+    ],
+    "locationName": "Rotterdam",
+    "timezone": "Europe/Brussels",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "Dnw_l8f9rUc",
+    "title": "Live Camera Arvidsjaur",
+    "channel": "Live Arvidsjaur",
+    "thumbnail": "https://i.ytimg.com/vi/Dnw_l8f9rUc/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      65.666667,
+      19.25
+    ],
+    "locationName": "Arvidsjaur",
+    "timezone": "Europe/Berlin",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "F0GOOP82094",
+    "title": "Wildlife In The Forest - 24/7 LIVE 🔴 by Morten Hilmer",
+    "channel": "Nature Live Camera",
+    "thumbnail": "https://i.ytimg.com/vi/F0GOOP82094/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      55.68,
+      12.57
+    ],
+    "locationName": "Denmark",
+    "timezone": "Europe/Berlin",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "EmoTKMm5sDI",
+    "title": "Live Camera - Elves Village - Levi  Resort - Lapland - Finland",
+    "channel": "Hullu Poro & Elves Village",
+    "thumbnail": "https://i.ytimg.com/vi/EmoTKMm5sDI/hqdefault_live.jpg",
+    "query": "live stream camera Helsinki",
+    "location": [
+      61.92,
+      25.75
+    ],
+    "locationName": "Finland",
+    "timezone": "Europe/Helsinki",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "TcJvbahPke8",
+    "title": "Livestream RailCam Netherlands",
+    "channel": "RailCam Netherlands",
+    "thumbnail": "https://i.ytimg.com/vi/TcJvbahPke8/hqdefault_live.jpg",
+    "query": "live webcam Zurich",
+    "location": [
+      52.37,
+      4.9
+    ],
+    "locationName": "Netherlands",
+    "timezone": "Europe/Brussels",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "fIMbMz2P7Bs",
+    "title": "Revelstoke, British Columbia, Canada | LIVE Train Camera (PTZ)",
+    "channel": "Virtual Railfan",
+    "thumbnail": "https://i.ytimg.com/vi/fIMbMz2P7Bs/hqdefault_live.jpg",
+    "query": "live webcam Zurich",
+    "location": [
+      50.98,
+      -118.2
+    ],
+    "locationName": "Revelstoke, BC",
+    "timezone": "America/Vancouver",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "vByZX49lCic",
+    "title": "York ROC Camera No.1, Yorkshire UK - in Partnership with Network Rail | Railcam LIVE",
+    "channel": "Railcam",
+    "thumbnail": "https://i.ytimg.com/vi/vByZX49lCic/hqdefault_live.jpg",
+    "query": "live webcam Zurich",
+    "location": [
+      53.9656579,
+      -1.0743052
+    ],
+    "locationName": "York, United Kingdom",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "FHJH2yMe6Hw",
+    "title": "Station Amsterdam Centraal - De Vijf Bruggen, camera 2 | Livestream ProRail",
+    "channel": "ProRail",
+    "thumbnail": "https://i.ytimg.com/vi/FHJH2yMe6Hw/hqdefault_live.jpg",
+    "query": "live webcam Zurich",
+    "location": [
+      52.37,
+      4.9
+    ],
+    "locationName": "Amsterdam, Netherlands",
+    "timezone": "Europe/Brussels",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "TmtVbezZaqg",
+    "title": "Leavenworth Washington Live Webcam from Kris Kringl!",
+    "channel": "Visit Leavenworth",
+    "thumbnail": "https://i.ytimg.com/vi/TmtVbezZaqg/hqdefault_live.jpg",
+    "query": "live webcam Zurich",
+    "location": [
+      39.3113257,
+      -94.922759
+    ],
+    "locationName": "Leavenworth",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "OmyDLXvaus4",
+    "title": "🔴 LIVE: Hamburg Michel – Webcam mit Panoramablick auf Hafen",
+    "channel": "livespotting",
+    "thumbnail": "https://i.ytimg.com/vi/OmyDLXvaus4/hqdefault_live.jpg",
+    "query": "live webcam Zurich",
+    "location": [
+      53.55,
+      9.99
+    ],
+    "locationName": "Hamburg, Germany",
+    "timezone": "Europe/Berlin",
+    "fetchedAt": "2026-04-12T07:01:39.844Z"
+  },
+  {
+    "videoId": "UCgLr29bxO8",
+    "title": "Rhine Falls live | Rheinfall live - Webcam",
+    "channel": "Schaffhauserland Tourismus",
+    "thumbnail": "https://i.ytimg.com/vi/UCgLr29bxO8/hqdefault_live.jpg",
+    "query": "live webcam Zurich",
+    "location": [
+      47.677719,
+      8.6150718
+    ],
+    "locationName": "Rhine Falls, Switzerland",
+    "timezone": "Europe/Zurich",
+    "fetchedAt": "2026-04-12T07:01:39.848Z"
+  },
+  {
+    "videoId": "ALZU0HGq-1c",
+    "title": "Live WebCam from Hotel Suvretta House - St. Moritz, Switzerland",
+    "channel": "Suvretta House",
+    "thumbnail": "https://i.ytimg.com/vi/ALZU0HGq-1c/hqdefault_live.jpg",
+    "query": "live webcam Zurich",
+    "location": [
+      46.95,
+      7.45
+    ],
+    "locationName": "Switzerland",
+    "timezone": "Europe/Zurich",
+    "fetchedAt": "2026-04-12T07:01:39.848Z"
+  },
+  {
+    "videoId": "jpU5isWgnYU",
+    "title": "LIVE from Wellington: Beautiful Views of Wellington, New Zealand | live cam",
+    "channel": "Extreme Relax",
+    "thumbnail": "https://i.ytimg.com/vi/jpU5isWgnYU/hqdefault_live.jpg",
+    "query": "live stream camera waterfall New Zealand",
+    "location": [
+      -41.29,
+      174.78
+    ],
+    "locationName": "New Zealand",
+    "timezone": "Pacific/Auckland",
+    "fetchedAt": "2026-04-12T07:01:39.848Z"
+  },
+  {
+    "videoId": "AeMUdOPFcXI",
+    "title": "Namibia: Live stream at the Okaukuejo waterhole in Etosha National Park, Namibia",
+    "channel": "NamibiaCam",
+    "thumbnail": "https://i.ytimg.com/vi/AeMUdOPFcXI/hqdefault_live.jpg",
+    "query": "live stream camera waterfall New Zealand",
+    "location": [
+      -18.9913306,
+      15.7460551
+    ],
+    "locationName": "Etosha National Park",
+    "timezone": "Africa/Windhoek",
+    "fetchedAt": "2026-04-12T07:01:39.848Z"
+  },
+  {
+    "videoId": "VI8Wj5EwoRM",
+    "title": "Pipeline Cam powered by EXPLORE.org",
+    "channel": "Explore Oceans",
+    "thumbnail": "https://i.ytimg.com/vi/VI8Wj5EwoRM/hqdefault_live.jpg",
+    "query": "live stream camera waterfall New Zealand",
+    "location": [
+      21.66,
+      -158.05
+    ],
+    "locationName": "Banzai Pipeline, Hawaii",
+    "timezone": "Pacific/Honolulu",
+    "fetchedAt": "2026-04-12T07:01:39.848Z"
+  },
+  {
     "videoId": "AfD16cDYBbE",
     "title": "LIVE 🔴 WEBCAM from PUERTO del CARMEN BEACH - (Lanzarote, Canary Islands, Spain)",
     "channel": "LanzaroteWebcam",
@@ -2456,341 +2792,5 @@
     "locationName": "Japan",
     "timezone": "Asia/Tokyo",
     "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "gFRtAAmiFbE",
-    "title": "【 LIVE 】 東京 新宿 歌舞伎町 ライブ ２ / 『 Kabukicho Live Channel II 』",
-    "channel": "歌舞伎町 ライブ ちゃんねる 2『 Kabukicho Live Channel II 』",
-    "thumbnail": "https://i.ytimg.com/vi/gFRtAAmiFbE/hqdefault_live.jpg",
-    "query": "live webcam Japan",
-    "location": [
-      35.6768601,
-      139.7638947
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "sgrAfWdVa0E",
-    "title": "🔴LIVE Shinkansen TOHOKU🗾JAPAN NONSTOP CAMERA 東北新幹線 郡山 ライブカメラ 鉄道 MAX320km/h bullet train ",
-    "channel": "東北新幹線ライブ Alfa Live",
-    "thumbnail": "https://i.ytimg.com/vi/sgrAfWdVa0E/hqdefault_live.jpg",
-    "query": "live webcam Japan",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "W0V8-6WrgBY",
-    "title": "[Live] 東京・浜松町駅 ライブカメラ  Live Stream of Hamamatsu-cho  railway tracks Tokyo",
-    "channel": "共同通信LiveCamera",
-    "thumbnail": "https://i.ytimg.com/vi/W0V8-6WrgBY/hqdefault_live.jpg",
-    "query": "live webcam Japan",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "Iv2VUE_UhRQ",
-    "title": "[4K] 上高地河童橋ライブカメラ KAMIKOCHI KAPPA-BASHI LIVE CAMERA",
-    "channel": "五千尺ホテル上高地",
-    "thumbnail": "https://i.ytimg.com/vi/Iv2VUE_UhRQ/hqdefault_live.jpg",
-    "query": "live webcam Japan",
-    "location": [
-      36.2462449,
-      137.6355354
-    ],
-    "locationName": "Kamikochi, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "pSbSFobr_7o",
-    "title": "【LIVE】Tokyo Station　-Terminal for Shinkansen",
-    "channel": "Nippon Television News Japan",
-    "thumbnail": "https://i.ytimg.com/vi/pSbSFobr_7o/hqdefault_live.jpg",
-    "query": "live webcam Japan",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "7XzfKy8CzdY",
-    "title": "【LIVE】東京ドームシティ公式ライブカメラ  Tokyo Dome City, Japan - Live Camera 24/7",
-    "channel": "東京ドームシティ",
-    "thumbnail": "https://i.ytimg.com/vi/7XzfKy8CzdY/hqdefault_live.jpg",
-    "query": "live webcam Japan",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "6fdFZUqi0oU",
-    "title": "Universal Studios Live Worldwide Virtual Webcam Stream - Hollywood, Orlando, Singapore, and Japan",
-    "channel": "WorldscapeScenery",
-    "thumbnail": "https://i.ytimg.com/vi/6fdFZUqi0oU/hqdefault_live.jpg",
-    "query": "live webcam Japan",
-    "location": [
-      1.35,
-      103.82
-    ],
-    "locationName": "Singapore",
-    "timezone": "Asia/Singapore",
-    "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "YiESp5BmmEU",
-    "title": "Tokyo Live 4K 🌃 Lo-Fi Beats to Study / Relax | Real-Time Japan City Ambience",
-    "channel": "Tokyo Views ",
-    "thumbnail": "https://i.ytimg.com/vi/YiESp5BmmEU/hqdefault_live.jpg",
-    "query": "live webcam Japan",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "bzn2QWfOLFY",
-    "title": "【LIVE】大阪・道頓堀ライブカメラ　グリコ看板前の様子は？ Osaka Dotonbori #道頓堀 #ライブカメラ",
-    "channel": "MBS NEWS",
-    "thumbnail": "https://i.ytimg.com/vi/bzn2QWfOLFY/hqdefault_live.jpg",
-    "query": "live webcam Japan",
-    "location": [
-      34.69,
-      135.5
-    ],
-    "locationName": "Osaka, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-11T18:26:17.351Z"
-  },
-  {
-    "videoId": "B4-L2nfGcuE",
-    "title": "Big Bear Bald Eagle Live Nest - Cam 1",
-    "channel": "FOBBV CAM",
-    "thumbnail": "https://i.ytimg.com/vi/B4-L2nfGcuE/hqdefault_live.jpg",
-    "query": "live view volcano Alaska",
-    "location": [
-      34.24,
-      -116.91
-    ],
-    "locationName": "Big Bear, California",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-04-11T16:22:30.083Z"
-  },
-  {
-    "videoId": "YcQT1a6K1Mo",
-    "title": "West Base Live Webcam",
-    "channel": "Mountain High",
-    "thumbnail": "https://i.ytimg.com/vi/YcQT1a6K1Mo/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      37.359106,
-      -122.067156
-    ],
-    "locationName": "Mountain High, California",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-04-11T16:22:30.085Z"
-  },
-  {
-    "videoId": "dyjqN3NezH0",
-    "title": "Upper Chisolm Live Webcam",
-    "channel": "Mountain High",
-    "thumbnail": "https://i.ytimg.com/vi/dyjqN3NezH0/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      37.359106,
-      -122.067156
-    ],
-    "locationName": "Mountain High, California",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-04-11T16:22:30.086Z"
-  },
-  {
-    "videoId": "teGLziUvDkI",
-    "title": "Gatlinburg SkyPark Live Webcam",
-    "channel": "Gatlinburg SkyPark",
-    "thumbnail": "https://i.ytimg.com/vi/teGLziUvDkI/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      35.71,
-      -83.51
-    ],
-    "locationName": "Gatlinburg, Tennessee",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-11T16:22:30.086Z"
-  },
-  {
-    "videoId": "jJI5w_RVGtQ",
-    "title": "Mendenhall Glacier and Mountain Goat Cam  powered by EXPLORE.org",
-    "channel": "Explore Zen Den",
-    "thumbnail": "https://i.ytimg.com/vi/jJI5w_RVGtQ/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      58.5047401,
-      -134.5539266
-    ],
-    "locationName": "Mendenhall Glacier",
-    "timezone": "America/Juneau",
-    "fetchedAt": "2026-04-11T16:22:30.086Z"
-  },
-  {
-    "videoId": "nkMzeg5QbgY",
-    "title": "Copy: Beech Mountain Resort Entrance Camera",
-    "channel": "Town of Beech Mountain",
-    "thumbnail": "https://i.ytimg.com/vi/nkMzeg5QbgY/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      36.2090865,
-      -81.8817964
-    ],
-    "locationName": "Beech Mountain, North Carolina",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-11T16:22:31.759Z"
-  },
-  {
-    "videoId": "j8VVBhJdyqY",
-    "title": "Sugarloaf Webcam - The Beach",
-    "channel": "Sugarloaf",
-    "thumbnail": "https://i.ytimg.com/vi/j8VVBhJdyqY/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      -22.9494891,
-      -43.1561568
-    ],
-    "locationName": "Sugarloaf, Brazil",
-    "timezone": "America/Sao_Paulo",
-    "fetchedAt": "2026-04-11T16:22:31.782Z"
-  },
-  {
-    "videoId": "1EiC9bvVGnk",
-    "title": "Jackson Hole Town Square Live Webcam Stream – See the Action Now",
-    "channel": "See Jackson Hole",
-    "thumbnail": "https://i.ytimg.com/vi/1EiC9bvVGnk/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      43.48,
-      -110.76
-    ],
-    "locationName": "Jackson Hole, Wyoming",
-    "timezone": "America/Denver",
-    "fetchedAt": "2026-04-11T16:22:31.783Z"
-  },
-  {
-    "videoId": "52ar9bJWTIA",
-    "title": "Village Base @ Blue Mountain Resort",
-    "channel": "Blue Mountain Resort",
-    "thumbnail": "https://i.ytimg.com/vi/52ar9bJWTIA/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      44.5025586,
-      -80.3127754
-    ],
-    "locationName": "Blue Mountain Resort, Canada",
-    "timezone": "America/Toronto",
-    "fetchedAt": "2026-04-11T16:22:31.784Z"
-  },
-  {
-    "videoId": "KDYnfJzQrQA",
-    "title": "Borderline Live Webcam",
-    "channel": "Mountain High",
-    "thumbnail": "https://i.ytimg.com/vi/KDYnfJzQrQA/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      37.359106,
-      -122.067156
-    ],
-    "locationName": "Mountain High, California",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-04-11T16:22:31.786Z"
-  },
-  {
-    "videoId": "NdW8Mh0lmOo",
-    "title": "Leavenworth Washington Live Webcam from Mountain Modern",
-    "channel": "Visit Leavenworth",
-    "thumbnail": "https://i.ytimg.com/vi/NdW8Mh0lmOo/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      39.3113257,
-      -94.922759
-    ],
-    "locationName": "Leavenworth",
-    "timezone": "America/Chicago",
-    "fetchedAt": "2026-04-11T16:22:31.786Z"
-  },
-  {
-    "videoId": "mHTTPNYltZo",
-    "title": "Breckenridge Ski Area and Mountain Cam by Breckenridge Associates",
-    "channel": "Breckenridge Associates Real Estate",
-    "thumbnail": "https://i.ytimg.com/vi/mHTTPNYltZo/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      39.4829124,
-      -106.0465486
-    ],
-    "locationName": "Breckenridge, Colorado",
-    "timezone": "America/Denver",
-    "fetchedAt": "2026-04-11T16:22:31.786Z"
-  },
-  {
-    "videoId": "71jD_DaYVm4",
-    "title": "Playground Live Webcam",
-    "channel": "Mountain High",
-    "thumbnail": "https://i.ytimg.com/vi/71jD_DaYVm4/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      37.359106,
-      -122.067156
-    ],
-    "locationName": "Mountain High, California",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-04-11T16:22:31.787Z"
-  },
-  {
-    "videoId": "9--ZgYEZBhk",
-    "title": "Canyon Lodge",
-    "channel": "Mammoth Mountain",
-    "thumbnail": "https://i.ytimg.com/vi/9--ZgYEZBhk/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      37.6432525,
-      -118.9668509
-    ],
-    "locationName": "Mammoth Lakes, California",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-04-11T16:22:33.264Z"
-  },
-  {
-    "videoId": "4kzVkq8YLko",
-    "title": "Hemlock: Boyne Mountain Resort",
-    "channel": "Boyne Mountain Resort",
-    "thumbnail": "https://i.ytimg.com/vi/4kzVkq8YLko/hqdefault_live.jpg",
-    "query": "live webcam mountain",
-    "location": [
-      45.1586201,
-      -84.9389365
-    ],
-    "locationName": "Boyne Mountain, Michigan",
-    "timezone": "America/Detroit",
-    "fetchedAt": "2026-04-11T16:22:33.266Z"
   }
 ]
