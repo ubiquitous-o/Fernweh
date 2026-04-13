@@ -61,12 +61,9 @@
     "channel": "Farmer Derek",
     "thumbnail": "https://i.ytimg.com/vi/GNue2tsz3Ok/hqdefault_live.jpg",
     "query": "live stream camera bird nest Oregon",
-    "location": [
-      42.2937839,
-      -95.0503045
-    ],
-    "locationName": "Bald Eagle Nest",
-    "timezone": "America/Chicago",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
     "fetchedAt": "2026-04-13T03:08:32.184Z"
   },
   {

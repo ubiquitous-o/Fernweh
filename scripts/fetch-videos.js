@@ -293,10 +293,11 @@ const LOCATION_LABELS = {
   'Ilulissat': 'Ilulissat, Greenland',
 };
 
-// 一般的すぎる語が地名マッチしないようにブロック
+// 一般的すぎる語・動物名等が地名マッチしないようにブロック
 const LOCATION_BLOCKLIST = new Set([
   'The World', 'Earth', 'World', 'Live', 'Nature', 'City',
   'The City', 'The Island', 'The Beach', 'The Lake',
+  'Bald Eagle Nest', 'Eagle Nest', 'Bird Nest',
 ]);
 
 function extractLocationFromDict(text) {
