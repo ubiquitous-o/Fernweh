@@ -40,7 +40,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 - Camera local time & time difference from your timezone (via [geo-tz](https://github.com/evansiroky/timezone-boundary-builder) at build-time)
 - Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/))
 - Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback)
-- Randomized search queries for maximum discovery
+- Randomized search queries with multiple patterns for maximum discovery (300+ locations, 50+ topics)
 - Clickable video title — links to original YouTube video, resumes on browser back
 - "City, Country" location labels on globe (auto line-break at comma)
   - **Note:** Globe labels are best-effort — location detection relies on video titles, channel names, and AI extraction, so labels may be inaccurate or missing for some streams
@@ -53,7 +53,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 
 ```
 [GitHub Actions cron (every 2 hours)]
-  → YouTube Data API v3 search (4 queries/run)
+  → YouTube Data API v3 search (8 queries/run)
   → public/videos.json → git push
 
 [GitHub Pages (static hosting)]
@@ -133,9 +133,9 @@ npm run start:local
 ## API Quotas
 
 **YouTube Data API v3**
-- 4 searches/cron × 100 quota = 400 quota/run
+- 8 searches/cron × 100 quota = 800 quota/run
 - 1 videos.list/cron × 1 quota/video ≈ 50–100 quota/run
-- Every 2 hours × 12 runs/day ≈ **6,000 quota/day** (60% of free 10,000)
+- Every 2 hours × 12 runs/day ≈ **~10,000 quota/day** (near free tier limit)
 
 **Gemini API (gemini-2.5-flash-lite)**
 - 0–1 batch request/run (skipped when all items are dictionary-matched)

@@ -542,17 +542,30 @@ function pick(arr) {
 }
 
 function generateQuery() {
-  const base = pick(BASE_QUERIES);
-  if (Math.random() < 0.7) {
+  const r = Math.random();
+  if (r < 0.5) {
+    // 50%: base + location (± topic)
+    const base = pick(BASE_QUERIES);
     const location = pick(LOCATIONS);
     if (Math.random() < 0.5) {
-      const topic = pick(TOPICS);
-      return `${base} ${topic} ${location}`;
+      return `${base} ${pick(TOPICS)} ${location}`;
     }
     return `${base} ${location}`;
+  } else if (r < 0.75) {
+    // 25%: base + topic (no location)
+    return `${pick(BASE_QUERIES)} ${pick(TOPICS)}`;
+  } else {
+    // 25%: baseなし — topic + location or location + webcam 等
+    const location = pick(LOCATIONS);
+    const topic = pick(TOPICS);
+    const patterns = [
+      `${topic} ${location} webcam`,
+      `${location} ${topic} live`,
+      `${location} live camera`,
+      `${topic} webcam ${location}`,
+    ];
+    return pick(patterns);
   }
-  const topic = pick(TOPICS);
-  return `${base} ${topic}`;
 }
 
 // --- YouTube API ---
@@ -605,7 +618,7 @@ async function main() {
 
   const existingIds = new Set(existing.map(v => v.videoId));
   const newVideos = [];
-  const SEARCH_COUNT = 4; // 4 searches per cron run
+  const SEARCH_COUNT = 8; // 8 searches per cron run
 
   // --- Phase 1: YouTube検索で全候補を収集 ---
   const allCandidates = [];
