@@ -36,20 +36,19 @@ const TOPICS = [
   'harbor port', 'sunset', 'countryside', 'temple shrine',
   'bridge', 'lake', 'rainforest', 'desert', 'glacier',
   'waterfall', 'castle', 'market', 'canal',
+  // 地理
+  'island', 'fjord', 'cliff', 'cave', 'plateau',
+  // 動物
+  'bird nest', 'aquarium', 'zoo', 'dolphin', 'whale',
+  // 都市
+  'intersection', 'plaza', 'rooftop', 'construction',
+  // 交通
+  'highway', 'railway station', 'ferry',
+  // 自然現象
+  'geyser', 'tide pool', 'storm',
 ];
 
-const LOCATIONS = [
-  'Tokyo', 'New York', 'Paris', 'London', 'Bangkok', 'Dubai',
-  'Sydney', 'Rio de Janeiro', 'Istanbul', 'Rome', 'Barcelona',
-  'Amsterdam', 'Seoul', 'Singapore', 'Hong Kong', 'Mumbai',
-  'Cairo', 'Cape Town', 'Buenos Aires', 'Mexico City',
-  'Vancouver', 'Reykjavik', 'Oslo', 'Helsinki', 'Prague',
-  'Vienna', 'Zurich', 'Havana', 'Lisbon', 'Athens',
-  'Santorini', 'Bali', 'Maldives', 'Hawaii', 'Alaska',
-  'Norway', 'Iceland', 'Tanzania', 'Peru', 'Nepal',
-  'New Zealand', 'Scotland', 'Croatia', 'Morocco', 'Vietnam',
-  'Japan', 'Italy', 'Switzerland', 'Canada', 'Australia',
-];
+// LOCATIONS is auto-generated from LOCATION_COORDS keys (see below)
 
 const SORT_ORDERS = ['viewCount', 'relevance', 'date'];
 
@@ -183,6 +182,8 @@ const LOCATION_COORDS = {
   'Cat Tien': [11.45, 107.32], 'Kilauea': [19.42, -155.29],
   'Reykjavík': [64.15, -21.94], 'Hollywood Beach': [26.01, -80.12],
 };
+
+const LOCATIONS = Object.keys(LOCATION_COORDS);
 
 // 表示ラベル: キー（マッチ用）→ "地名, 国名/州名" フォーマット
 // ここに無いキーはそのまま表示される（Tokyo, Paris等の有名都市）
