@@ -293,10 +293,17 @@ const LOCATION_LABELS = {
   'Ilulissat': 'Ilulissat, Greenland',
 };
 
+// 一般的すぎる語が地名マッチしないようにブロック
+const LOCATION_BLOCKLIST = new Set([
+  'The World', 'Earth', 'World', 'Live', 'Nature', 'City',
+  'The City', 'The Island', 'The Beach', 'The Lake',
+]);
+
 function extractLocationFromDict(text) {
   // Check longer names first to avoid partial matches
   const sorted = Object.keys(LOCATION_COORDS).sort((a, b) => b.length - a.length);
   for (const key of sorted) {
+    if (LOCATION_BLOCKLIST.has(key)) continue;
     if (new RegExp(`\\b${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(text)) {
       return { coords: LOCATION_COORDS[key], name: LOCATION_LABELS[key] || key };
     }
@@ -456,6 +463,7 @@ for (const [name, coords] of Object.entries(geocache)) {
   const commaIdx = name.indexOf(',');
   const dictKey = commaIdx > 0 ? name.substring(0, commaIdx).trim() : name.trim();
   if (dictKey.length < 3) continue;
+  if (LOCATION_BLOCKLIST.has(dictKey)) continue;
   if (LOCATION_COORDS[dictKey]) continue;
   LOCATION_COORDS[dictKey] = coords;
   LOCATION_LABELS[dictKey] = name;
