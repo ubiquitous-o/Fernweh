@@ -29,10 +29,10 @@ const BASE_QUERIES = [
 ];
 
 const TOPICS = [
-  'city', 'nature', 'street', 'ocean beach', 'mountain',
-  'skyline', 'animals wildlife', 'aurora', 'train railway',
+  'city', 'nature', 'street', 'ocean', 'beach', 'mountain',
+  'skyline', 'animal', 'wildlife', 'aurora', 'train railway',
   'airport', 'underwater', 'volcano', 'space ISS',
-  'safari', 'Northern Lights', 'coral reef', 'river',
+  'safari', 'aurora borealis', 'coral reef', 'river',
   'harbor port', 'sunset', 'countryside', 'temple shrine',
   'bridge', 'lake', 'rainforest', 'desert', 'glacier',
   'waterfall', 'castle', 'market', 'canal',
