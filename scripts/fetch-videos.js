@@ -300,12 +300,23 @@ const LOCATION_BLOCKLIST = new Set([
   'Bald Eagle Nest', 'Eagle Nest', 'Bird Nest',
 ]);
 
+// ソート済み辞書キャッシュ（geocache auto-learning 後に構築）
+let _dictCache = null;
+
+function buildDictCache() {
+  _dictCache = Object.keys(LOCATION_COORDS)
+    .filter(k => !LOCATION_BLOCKLIST.has(k))
+    .sort((a, b) => b.length - a.length)
+    .map(key => ({
+      key,
+      re: new RegExp(`\\b${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i'),
+    }));
+}
+
 function extractLocationFromDict(text) {
-  // Check longer names first to avoid partial matches
-  const sorted = Object.keys(LOCATION_COORDS).sort((a, b) => b.length - a.length);
-  for (const key of sorted) {
-    if (LOCATION_BLOCKLIST.has(key)) continue;
-    if (new RegExp(`\\b${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(text)) {
+  if (!_dictCache) buildDictCache();
+  for (const { key, re } of _dictCache) {
+    if (re.test(text)) {
       return { coords: LOCATION_COORDS[key], name: LOCATION_LABELS[key] || key };
     }
   }
@@ -469,6 +480,7 @@ for (const [name, coords] of Object.entries(geocache)) {
   LOCATION_COORDS[dictKey] = coords;
   LOCATION_LABELS[dictKey] = name;
 }
+buildDictCache(); // geocache統合後にキャッシュ構築
 
 function saveGeocache() {
   writeFileSync(GEOCACHE_PATH, JSON.stringify(geocache, null, 2) + '\n');
