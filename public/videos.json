@@ -1,5 +1,841 @@
 [
   {
+    "videoId": "xCLTpcx9aO8",
+    "title": "The Best 4K Aquarium - Dive Into The Mesmerizing Underwater Realm, Sea Jellyfish, Coral Reefs",
+    "channel": "4K Ocean World",
+    "thumbnail": "https://i.ytimg.com/vi/xCLTpcx9aO8/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": [
+      5.3783537,
+      132.9102573
+    ],
+    "locationName": "Palau",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-04-30T22:39:21.480Z"
+  },
+  {
+    "videoId": "tEtg5Kg3voQ",
+    "title": "Live Shark Cam - Monterey Bay Aquarium",
+    "channel": "Monterey Bay Aquarium",
+    "thumbnail": "https://i.ytimg.com/vi/tEtg5Kg3voQ/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": [
+      36.6,
+      -121.89
+    ],
+    "locationName": "Monterey, California",
+    "timezone": "America/Los_Angeles",
+    "fetchedAt": "2026-04-30T22:39:21.481Z"
+  },
+  {
+    "videoId": "_5zWp0bMgcI",
+    "title": "EarthCam Live:  Aquarium Cam (Baltimore, Maryland)",
+    "channel": "EarthCam",
+    "thumbnail": "https://i.ytimg.com/vi/_5zWp0bMgcI/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": [
+      39.29,
+      -76.61
+    ],
+    "locationName": "Baltimore, Maryland",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-04-30T22:39:21.481Z"
+  },
+  {
+    "videoId": "THnF0IQ8JJM",
+    "title": "THE DEEP OCEAN | 4K TV ULTRA HD / Full Documentary - Beautiful Coral Reef Fish Video - Stress Relief",
+    "channel": "4K Ocean World",
+    "thumbnail": "https://i.ytimg.com/vi/THnF0IQ8JJM/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": [
+      19.5938015,
+      -155.4283701
+    ],
+    "locationName": "Hawaii, USA",
+    "timezone": "Pacific/Honolulu",
+    "fetchedAt": "2026-04-30T22:39:21.481Z"
+  },
+  {
+    "videoId": "DHUnz4dyb54",
+    "title": "Tropical Reef Camera powered by EXPLORE.org",
+    "channel": "Explore Live Nature Cams",
+    "thumbnail": "https://i.ytimg.com/vi/DHUnz4dyb54/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "fetchedAt": "2026-04-30T22:39:21.482Z"
+  },
+  {
+    "videoId": "UFA_SYoLqtk",
+    "title": "MEGA Cam Live",
+    "channel": "MEGA Lab",
+    "thumbnail": "https://i.ytimg.com/vi/UFA_SYoLqtk/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "fetchedAt": "2026-04-30T22:39:21.482Z"
+  },
+  {
+    "videoId": "Lv9t0hZTvz4",
+    "title": "Utopia Village Back-of-Dock Underwater Reef Cams powered by EXPLORE.org",
+    "channel": "Explore Oceans",
+    "thumbnail": "https://i.ytimg.com/vi/Lv9t0hZTvz4/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": [
+      51.5399964,
+      -0.1527828
+    ],
+    "locationName": "Utopia Village",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-04-30T22:39:21.482Z"
+  },
+  {
+    "videoId": "a_n_RCR3NZU",
+    "title": "Harbour Village Bonaire Coral Reef",
+    "channel": "Harbour Village Bonaire",
+    "thumbnail": "https://i.ytimg.com/vi/a_n_RCR3NZU/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": [
+      12.167,
+      -68.2876439
+    ],
+    "locationName": "Bonaire",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-04-30T22:39:21.482Z"
+  },
+  {
+    "videoId": "Sq-X4Ga1oyc",
+    "title": "Utopia Village Edge-of-Wall Underwater Reef Cam powered by EXPLORE.org",
+    "channel": "Explore Oceans",
+    "thumbnail": "https://i.ytimg.com/vi/Sq-X4Ga1oyc/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": [
+      51.5399964,
+      -0.1527828
+    ],
+    "locationName": "Utopia Village",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-04-30T22:39:21.482Z"
+  },
+  {
+    "videoId": "99aULx3GORo",
+    "title": "Live Coral Reef Cam | California Academy of Sciences",
+    "channel": "California Academy of Sciences",
+    "thumbnail": "https://i.ytimg.com/vi/99aULx3GORo/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": [
+      36.78,
+      -119.42
+    ],
+    "locationName": "California, USA",
+    "timezone": "America/Los_Angeles",
+    "fetchedAt": "2026-04-30T22:39:21.482Z"
+  },
+  {
+    "videoId": "jH3YSToXQmg",
+    "title": "Tropical Reef Aquarium Live Cam Georgia Aquarium Coral Fish 24/7",
+    "channel": "Ozolio Plus",
+    "thumbnail": "https://i.ytimg.com/vi/jH3YSToXQmg/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": [
+      41.72,
+      44.83
+    ],
+    "locationName": "Georgia",
+    "timezone": "Asia/Tbilisi",
+    "fetchedAt": "2026-04-30T22:39:21.482Z"
+  },
+  {
+    "videoId": "A7gifjaEIco",
+    "title": "ReefBum Coral Reef Aquarium Live Webcam",
+    "channel": "ReefBum",
+    "thumbnail": "https://i.ytimg.com/vi/A7gifjaEIco/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "fetchedAt": "2026-04-30T22:39:21.483Z"
+  },
+  {
+    "videoId": "OqkxNmcLItY",
+    "title": "ReefBum: Peninsula Tank Live Webcam",
+    "channel": "ReefBum",
+    "thumbnail": "https://i.ytimg.com/vi/OqkxNmcLItY/hqdefault_live.jpg",
+    "query": "live webcam coral reef",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "fetchedAt": "2026-04-30T22:39:21.483Z"
+  },
+  {
+    "videoId": "agY6ZaM1G_o",
+    "title": "MEDview: DN-Skrapan, Stockholm",
+    "channel": "MED - Mediateknik",
+    "thumbnail": "https://i.ytimg.com/vi/agY6ZaM1G_o/hqdefault_live.jpg",
+    "query": "live camera Stockholm",
+    "location": [
+      59.33,
+      18.07
+    ],
+    "locationName": "Stockholm, Sweden",
+    "timezone": "Europe/Berlin",
+    "fetchedAt": "2026-04-30T22:39:21.483Z"
+  },
+  {
+    "videoId": "VR-x3HdhKLQ",
+    "title": "🔴 Live Camera Stream | Bondi Aussie Bar &amp; Grill | Chaweng | Koh Samui | Thailand | 2160p 4K",
+    "channel": "The Real Samui Webcam",
+    "thumbnail": "https://i.ytimg.com/vi/VR-x3HdhKLQ/hqdefault_live.jpg",
+    "query": "live camera Stockholm",
+    "location": [
+      9.5013945,
+      99.9956193
+    ],
+    "locationName": "Koh Samui",
+    "timezone": "Asia/Jakarta",
+    "fetchedAt": "2026-04-30T22:39:21.483Z"
+  },
+  {
+    "videoId": "ETMY5FWp-XE",
+    "title": "Sweden Now",
+    "channel": "Earth Now",
+    "thumbnail": "https://i.ytimg.com/vi/ETMY5FWp-XE/hqdefault_live.jpg",
+    "query": "live camera Stockholm",
+    "location": [
+      59.33,
+      18.07
+    ],
+    "locationName": "Sweden",
+    "timezone": "Europe/Berlin",
+    "fetchedAt": "2026-04-30T22:39:21.483Z"
+  },
+  {
+    "videoId": "85OM8_W_mag",
+    "title": "Live Camera",
+    "channel": "Trelleborgs Kommun",
+    "thumbnail": "https://i.ytimg.com/vi/85OM8_W_mag/hqdefault_live.jpg",
+    "query": "live camera Stockholm",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "fetchedAt": "2026-04-30T22:39:21.483Z"
+  },
+  {
+    "videoId": "cvP_F-c2Upw",
+    "title": "The Rooftop Bar | Oceanside, CA | San Diego Web Cam",
+    "channel": "San Diego Web Cam",
+    "thumbnail": "https://i.ytimg.com/vi/cvP_F-c2Upw/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      32.72,
+      -117.16
+    ],
+    "locationName": "San Diego, USA",
+    "timezone": "America/Los_Angeles",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "OYqo4dqYjh0",
+    "title": "The Rooftop Bar (Fixed Wide West) | Oceanside, CA | San Diego Web Cam",
+    "channel": "San Diego Web Cam",
+    "thumbnail": "https://i.ytimg.com/vi/OYqo4dqYjh0/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      32.72,
+      -117.16
+    ],
+    "locationName": "San Diego, USA",
+    "timezone": "America/Los_Angeles",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "28U-t3fA9ks",
+    "title": "LIVE Cam Swinging Bridge - Curacao World Heritage 🛳️✨",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/28U-t3fA9ks/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      12.17,
+      -68.98
+    ],
+    "locationName": "Curacao",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "feOo3Q0qA0w",
+    "title": "Live | Chicago Axis Experience Center Rooftop - Q6355-LE",
+    "channel": "Axis Midwest Tech Channel",
+    "thumbnail": "https://i.ytimg.com/vi/feOo3Q0qA0w/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      41.88,
+      -87.63
+    ],
+    "locationName": "Chicago, USA",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "rFhE3WLVVTc",
+    "title": "Mövenpick Hotel Amsterdam Livestream | Panoramic Rooftop View – IJ-Haven Javakade",
+    "channel": "Mövenpick Hotel Amsterdam City Centre",
+    "thumbnail": "https://i.ytimg.com/vi/rFhE3WLVVTc/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      52.37,
+      4.9
+    ],
+    "locationName": "Amsterdam, Netherlands",
+    "timezone": "Europe/Brussels",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "V7sUbjD_e3I",
+    "title": "The Edge Hotel Clearwater Beach",
+    "channel": "Clearwater Beach Live Cams",
+    "thumbnail": "https://i.ytimg.com/vi/V7sUbjD_e3I/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      27.9774736,
+      -82.8279313
+    ],
+    "locationName": "Clearwater Beach, Florida",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "9Pm6Ji6tm7s",
+    "title": "Movenpick Hotel Amsterdam Livestream | Panoramic Rooftop View - Amsterdam Central Station",
+    "channel": "Mövenpick Hotel Amsterdam City Centre",
+    "thumbnail": "https://i.ytimg.com/vi/9Pm6Ji6tm7s/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      52.37,
+      4.9
+    ],
+    "locationName": "Amsterdam, Netherlands",
+    "timezone": "Europe/Brussels",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "gT5x9GU_tbA",
+    "title": "EarthCam Live:  Seaside Heights, NJ - North View",
+    "channel": "EarthCam",
+    "thumbnail": "https://i.ytimg.com/vi/gT5x9GU_tbA/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      45.993246,
+      -123.920213
+    ],
+    "locationName": "Seaside, Oregon",
+    "timezone": "America/Los_Angeles",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "S605ycm0Vlk",
+    "title": "Hogs Breath Mini Bar Cam",
+    "channel": "Hogs Breath Saloon Key West",
+    "thumbnail": "https://i.ytimg.com/vi/S605ycm0Vlk/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      24.5548262,
+      -81.8020722
+    ],
+    "locationName": "Key West, Florida",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "1j1lgppb0PY",
+    "title": "Fort Lauderdale Beach Live Cam ☀️ Sunrise, Weather &amp; Wind Conditions | Elbo Room",
+    "channel": "Elbo Room (Home of ElboTV)",
+    "thumbnail": "https://i.ytimg.com/vi/1j1lgppb0PY/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      26.1223084,
+      -80.1433786
+    ],
+    "locationName": "Fort Lauderdale",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "hYnWDuvXXvc",
+    "title": "Live Roof Camera - Merrimac Mill Office Building - Newburyport, MA",
+    "channel": "ctc1111",
+    "thumbnail": "https://i.ytimg.com/vi/hYnWDuvXXvc/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      42.8116592,
+      -70.8719271
+    ],
+    "locationName": "Newburyport, Massachusetts",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-04-30T22:39:21.484Z"
+  },
+  {
+    "videoId": "7pcL-0Wo77U",
+    "title": "Sydney Harbour Bridge and Opera House Live Camera 24/7 PTZ camera live stream",
+    "channel": "Sydney Live Camera",
+    "thumbnail": "https://i.ytimg.com/vi/7pcL-0Wo77U/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      -33.87,
+      151.21
+    ],
+    "locationName": "Sydney, Australia",
+    "timezone": "Australia/Sydney",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "c1kfkIoF0k0",
+    "title": "Pier B Cam",
+    "channel": "Duluth Harbor Cam",
+    "thumbnail": "https://i.ytimg.com/vi/c1kfkIoF0k0/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      46.7838287,
+      -92.1052679
+    ],
+    "locationName": "Duluth",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "hJbGHE1ZBjU",
+    "title": "EarthCam Live:  Geese &amp; Goslings",
+    "channel": "EarthCam",
+    "thumbnail": "https://i.ytimg.com/vi/hJbGHE1ZBjU/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "mpMdJJjw59E",
+    "title": "Western Harbor Cam",
+    "channel": "Duluth Harbor Cam",
+    "thumbnail": "https://i.ytimg.com/vi/mpMdJJjw59E/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      46.7838287,
+      -92.1052679
+    ],
+    "locationName": "Duluth",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "ZXlXNf_w5Lw",
+    "title": "South Pier Lighthouse Cam",
+    "channel": "Duluth Harbor Cam",
+    "thumbnail": "https://i.ytimg.com/vi/ZXlXNf_w5Lw/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      46.7838287,
+      -92.1052679
+    ],
+    "locationName": "Duluth",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "EbVlhVeD3jA",
+    "title": "Bayfront Cam",
+    "channel": "Duluth Harbor Cam",
+    "thumbnail": "https://i.ytimg.com/vi/EbVlhVeD3jA/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      46.7838287,
+      -92.1052679
+    ],
+    "locationName": "Duluth",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "INtLnpLxPKQ",
+    "title": "LIVE: CR7 Museum PTZ Webcam Funchal, Madeira Island  @WebcamTaxi",
+    "channel": "Webcamtaxi",
+    "thumbnail": "https://i.ytimg.com/vi/INtLnpLxPKQ/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      32.7517501,
+      -16.9817487
+    ],
+    "locationName": "Madeira Island",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "9EnmgL3fXW8",
+    "title": "Split Rock Lighthouse",
+    "channel": "Duluth Harbor Cam",
+    "thumbnail": "https://i.ytimg.com/vi/9EnmgL3fXW8/hqdefault_live.jpg",
+    "query": "live stream camera rooftop",
+    "location": [
+      46.7838287,
+      -92.1052679
+    ],
+    "locationName": "Duluth",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "4cDBr4IZznY",
+    "title": "Hamptons.com - LIVE! Coopers Beach, Southampton Village, New York - Rated #2 Beach In the Country !",
+    "channel": "Hamptons. com",
+    "thumbnail": "https://i.ytimg.com/vi/4cDBr4IZznY/hqdefault_live.jpg",
+    "query": "webcam live countryside New York",
+    "location": [
+      50.9025349,
+      -1.404189
+    ],
+    "locationName": "Southampton",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "-p1Xnt9n0yg",
+    "title": "LIVE: Funchal Marina Webcam 1 Madeira Island | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/-p1Xnt9n0yg/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.7517501,
+      -16.9817487
+    ],
+    "locationName": "Madeira Island",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "0iDQDwx21Oo",
+    "title": "LIVE Planespotting Madeira Airport by Cassiano&#39;s Snack Bar | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/0iDQDwx21Oo/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "afyrMxe0qjg",
+    "title": "Ritz Madeira Live Webcam, Avenida Arriaga, Funchal, Madeira Island",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/afyrMxe0qjg/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.7517501,
+      -16.9817487
+    ],
+    "locationName": "Madeira Island",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "f6D3Zq6J5A8",
+    "title": "LIVE: Funchal Marina Webcam 2 Madeira Island | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/f6D3Zq6J5A8/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.7517501,
+      -16.9817487
+    ],
+    "locationName": "Madeira Island",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "UfuspS8uXQg",
+    "title": "MadeiraWeb Live Events Cam, Avenida Arriaga, Funchal",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/UfuspS8uXQg/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Funchal, Madeira",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "QZeuP3PjPDw",
+    "title": "Webcam Live @ Funchal Pontinha - Madeira / Portal Netmadeira",
+    "channel": "Portal Netmadeira",
+    "thumbnail": "https://i.ytimg.com/vi/QZeuP3PjPDw/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Funchal, Madeira",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "zKBfq980gTc",
+    "title": "Webcam Live @ Palheiro  Golf - Funchal - Madeira / Portal Netmadeira",
+    "channel": "Portal Netmadeira",
+    "thumbnail": "https://i.ytimg.com/vi/zKBfq980gTc/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Funchal, Madeira",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "ZDxb_uIcq5c",
+    "title": "LIVE Cam: Doca do Cavacas Pools by Frente MarFunchal | Madeira-Web",
+    "channel": "Madeira-Web Beaches",
+    "thumbnail": "https://i.ytimg.com/vi/ZDxb_uIcq5c/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "GoCh3Rw2fH4",
+    "title": "Madeira Island Live Rolling Multi-cam  Streaming 24/7  –  13 cams and local weather",
+    "channel": "Webcamtaxi",
+    "thumbnail": "https://i.ytimg.com/vi/GoCh3Rw2fH4/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.7517501,
+      -16.9817487
+    ],
+    "locationName": "Madeira Island",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "sTAWMDWmRf0",
+    "title": "LIVE: Fortim/Jardim do Lido PTZ Cam by Frente MarFunchal | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/sTAWMDWmRf0/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "mUgnMZQxJFg",
+    "title": "LIVE Cam: Madeira Island Airport by Só Espeto | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/mUgnMZQxJFg/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.7517501,
+      -16.9817487
+    ],
+    "locationName": "Madeira Island",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.485Z"
+  },
+  {
+    "videoId": "hUavUKN7O4s",
+    "title": "LIVE: Penha de França Mar Webcam | Madeira-Web.com",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/hUavUKN7O4s/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "t4x0u0ARLwo",
+    "title": "LIVE: Calheta Beach Webcam @ Mudas Museum | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/t4x0u0ARLwo/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "4bgsscC-fJc",
+    "title": "LIVE Cam: Praia dos Reis Magos Beach, Caniço | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/4bgsscC-fJc/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "kLsk1pZ5YeY",
+    "title": "LIVE: Funchal City Webcam from São Roque, Madeira Island | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/kLsk1pZ5YeY/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.7517501,
+      -16.9817487
+    ],
+    "locationName": "Madeira Island",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "KUnIxGXKox0",
+    "title": "LIVE: Forum Machico Webcam, Madeira, Portugal | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/KUnIxGXKox0/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      38.72,
+      -9.14
+    ],
+    "locationName": "Portugal",
+    "timezone": "Europe/Lisbon",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "dlyn0fJBBWk",
+    "title": "Webcam Live @ Câmara de Lobos  - Madeira / Portal Netmadeira",
+    "channel": "Portal Netmadeira",
+    "thumbnail": "https://i.ytimg.com/vi/dlyn0fJBBWk/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "eTzl0qcPTF8",
+    "title": "Webcam Live @ Caniçal - Madeira / Portal Netmadeira",
+    "channel": "Portal Netmadeira",
+    "thumbnail": "https://i.ytimg.com/vi/eTzl0qcPTF8/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "Hl2pcHw_97M",
+    "title": "LIVE Cam: Lido Pool Complex - Piscinas do Lido by Frente MarFunchal | Madeira-Web",
+    "channel": "Madeira-Web Beaches",
+    "thumbnail": "https://i.ytimg.com/vi/Hl2pcHw_97M/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "WwOuI_G5WUI",
+    "title": "Webcam Live @ Seixal - Madeira / Portal Netmadeira",
+    "channel": "Portal Netmadeira",
+    "thumbnail": "https://i.ytimg.com/vi/WwOuI_G5WUI/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "BuL1tgahkXM",
+    "title": "Webcam Live @ Ponta do Sol - Madeira / Portal Netmadeira",
+    "channel": "Portal Netmadeira",
+    "thumbnail": "https://i.ytimg.com/vi/BuL1tgahkXM/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "Q3-4IwXgHU0",
+    "title": "LIVE: Port of Machico HD Webcam, Madeira Island  | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/Q3-4IwXgHU0/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.7517501,
+      -16.9817487
+    ],
+    "locationName": "Madeira Island",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "n5z4uxlus8k",
+    "title": "LIVE: Paul do Mar WebCam 24/7 | O Precipício, Fajã da Ovelha | Madeira-Web",
+    "channel": "Madeira-Web",
+    "thumbnail": "https://i.ytimg.com/vi/n5z4uxlus8k/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      32.65,
+      -16.91
+    ],
+    "locationName": "Madeira, Portugal",
+    "timezone": "Atlantic/Madeira",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
+    "videoId": "_hUPj6CtsV4",
+    "title": "LIVE: Barreirinha Beach Cam, Funchal Centre Madeira, Portugal  | Madeira-Web",
+    "channel": "Madeira-Web Beaches",
+    "thumbnail": "https://i.ytimg.com/vi/_hUPj6CtsV4/hqdefault_live.jpg",
+    "query": "live cam Madeira",
+    "location": [
+      38.72,
+      -9.14
+    ],
+    "locationName": "Portugal",
+    "timezone": "Europe/Lisbon",
+    "fetchedAt": "2026-04-30T22:39:21.486Z"
+  },
+  {
     "videoId": "oI8R4_UG3Fs",
     "title": "Live Deer, Bird &amp; Wildlife Cam",
     "channel": "Woodlands Critter Quest",
@@ -1929,859 +2765,5 @@
     "locationName": "Pyhä-Luosto",
     "timezone": "Europe/Helsinki",
     "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "6xOnr8Ukeb0",
-    "title": "Live Aurora from Reykjavík Iceland",
-    "channel": "Aurora Reykjavík The Northern Lights Center",
-    "thumbnail": "https://i.ytimg.com/vi/6xOnr8Ukeb0/hqdefault_live.jpg",
-    "query": "live stream camera aurora",
-    "location": [
-      64.15,
-      -21.94
-    ],
-    "locationName": "Reykjavík, Iceland",
-    "timezone": "Africa/Abidjan",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "HVIUqiv7EmA",
-    "title": "Kangerlussuaq Airport West",
-    "channel": "Greenland Airports",
-    "thumbnail": "https://i.ytimg.com/vi/HVIUqiv7EmA/hqdefault_live.jpg",
-    "query": "live stream camera aurora",
-    "location": [
-      67.0086767,
-      -50.6913356
-    ],
-    "locationName": "Kangerlussuaq",
-    "timezone": "America/Nuuk",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "fO9e9jnhYK8",
-    "title": "Live 4K video of Earth and space: 24/7 Livestream of Earth by Sen’s 4K video cameras on the ISS",
-    "channel": "Sen",
-    "thumbnail": "https://i.ytimg.com/vi/fO9e9jnhYK8/hqdefault_live.jpg",
-    "query": "live stream camera aurora",
-    "location": [
-      51.2861908,
-      7.5207184
-    ],
-    "locationName": "ISS",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "jc3NRsILvr4",
-    "title": "LIVE CAMERA Russian Cruiser Aurora St.Petersburg Russia Россия онлайн Санкт-Петербург крейсер Аврора",
-    "channel": "Mobotix Webcams Russia Live",
-    "thumbnail": "https://i.ytimg.com/vi/jc3NRsILvr4/hqdefault_live.jpg",
-    "query": "live stream camera aurora",
-    "location": [
-      55.76,
-      37.62
-    ],
-    "locationName": "Russia",
-    "timezone": "Europe/Moscow",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "zcG3oejHHNs",
-    "title": "LIVE Iceland NOW 🇮🇸 | 4K Aurora Borealis Real-Time Sky Camera – Iceland",
-    "channel": "Geimfarinn",
-    "thumbnail": "https://i.ytimg.com/vi/zcG3oejHHNs/hqdefault_live.jpg",
-    "query": "live stream camera aurora",
-    "location": [
-      64.15,
-      -21.94
-    ],
-    "locationName": "Iceland",
-    "timezone": "Africa/Abidjan",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "zlnqZxsAXOU",
-    "title": "Kulusuk Airport West",
-    "channel": "Greenland Airports",
-    "thumbnail": "https://i.ytimg.com/vi/zlnqZxsAXOU/hqdefault_live.jpg",
-    "query": "live stream camera aurora",
-    "location": [
-      65.5518396,
-      -37.116877
-    ],
-    "locationName": "Kulusuk",
-    "timezone": "America/Nuuk",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "8xp9hxRCvxQ",
-    "title": "🔴 LIVE: Sylt Leuchtturm Hörnum – Webcam mit Blick auf Hafen, Strand &amp; Nordsee",
-    "channel": "livespotting",
-    "thumbnail": "https://i.ytimg.com/vi/8xp9hxRCvxQ/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      54.9026616,
-      8.3311491
-    ],
-    "locationName": "Sylt, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "Li3Dvqlo5uE",
-    "title": "🔴 Destination Deutschland – 24/7 LIVE Stream Webcams Germany",
-    "channel": "feratel – your window to the world",
-    "thumbnail": "https://i.ytimg.com/vi/Li3Dvqlo5uE/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      52.52,
-      13.41
-    ],
-    "locationName": "Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "SZp1Q6LX7Wk",
-    "title": "🔴 Cuxhaven WetterCam Kamp Hotels Cuxhaven-Duhnen",
-    "channel": "OrniTech LiveCam",
-    "thumbnail": "https://i.ytimg.com/vi/SZp1Q6LX7Wk/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.86878,
-      8.698286
-    ],
-    "locationName": "Cuxhaven, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "OmyDLXvaus4",
-    "title": "🔴 LIVE: Hamburg Michel – Webcam mit Panoramablick auf Hafen",
-    "channel": "livespotting",
-    "thumbnail": "https://i.ytimg.com/vi/OmyDLXvaus4/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.55,
-      9.99
-    ],
-    "locationName": "Hamburg, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:43.100Z"
-  },
-  {
-    "videoId": "ixXN9VOxsiw",
-    "title": "🔴 Live: JadeWeserPort Wilhelmshaven – Deutschlands einziger Tiefwasserhafen in HD",
-    "channel": "Wilhelmshaven Touristik & Freizeit GmbH",
-    "thumbnail": "https://i.ytimg.com/vi/ixXN9VOxsiw/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.5278793,
-      8.106301
-    ],
-    "locationName": "Wilhelmshaven, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:44.520Z"
-  },
-  {
-    "videoId": "u70QibRZZSs",
-    "title": "🔴 Insel Neuwerk LIVE: Wattwagen, Schiffe &amp; Nordsee-Panorama | 24/7 Wetter Webcam auf Haus Bernstein",
-    "channel": "Elbcam Shipspotting",
-    "thumbnail": "https://i.ytimg.com/vi/u70QibRZZSs/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.922455,
-      8.5033536
-    ],
-    "locationName": "Neuwerk, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:44.520Z"
-  },
-  {
-    "videoId": "Hq2Qbcuph4w",
-    "title": "Live Webcam Texel: Paal 17 De Koog | Strand &amp; Zeezicht (Livecam Strand &amp; Nordsee)",
-    "channel": "TexelInformatie",
-    "thumbnail": "https://i.ytimg.com/vi/Hq2Qbcuph4w/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.0893718,
-      4.8213473
-    ],
-    "locationName": "Texel, Netherlands",
-    "timezone": "Europe/Brussels",
-    "fetchedAt": "2026-04-30T17:07:44.521Z"
-  },
-  {
-    "videoId": "Q0HnrUeceac",
-    "title": "🔴 LIVE: Brunsbüttel – Nord-Ostsee-Kanal / Kiel Canal | Live Ship Traffic",
-    "channel": "livespotting",
-    "thumbnail": "https://i.ytimg.com/vi/Q0HnrUeceac/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.8972549,
-      9.1395423
-    ],
-    "locationName": "Brunsbüttel, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:44.521Z"
-  },
-  {
-    "videoId": "nmic4tt88-Y",
-    "title": "🔴 Grauerort LIVE Shipspotting - Giganten der Meere – Schiffsbegrüßung bei KM 660",
-    "channel": "Elbcam Shipspotting",
-    "thumbnail": "https://i.ytimg.com/vi/nmic4tt88-Y/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.6756625,
-      9.4927447
-    ],
-    "locationName": "Grauerort, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:45.772Z"
-  },
-  {
-    "videoId": "4HFvQIxR7dk",
-    "title": "Föhr Webcam Sandwall",
-    "channel": "Insel Föhr - Friesische Karibik",
-    "thumbnail": "https://i.ytimg.com/vi/4HFvQIxR7dk/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      54.7173519,
-      8.4957628
-    ],
-    "locationName": "Föhr, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:47.219Z"
-  },
-  {
-    "videoId": "BnLcCs_NYUM",
-    "title": "🔴 Spotlight Baltic Sea – 24/7 Live Webcams: Beaches, Coast &amp; Nature in HD",
-    "channel": "livespotting",
-    "thumbnail": "https://i.ytimg.com/vi/BnLcCs_NYUM/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.5491126,
-      9.8507666
-    ],
-    "locationName": "Baltic Sea, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:47.219Z"
-  },
-  {
-    "videoId": "U8m7Fr6xMqM",
-    "title": "Live Webcam Den Helder: TESO Boot Texel | Haven &amp; Veerboot (Livecam Texel Fähre)",
-    "channel": "TexelInformatie",
-    "thumbnail": "https://i.ytimg.com/vi/U8m7Fr6xMqM/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      52.9529894,
-      4.8267592
-    ],
-    "locationName": "Den Helder, Netherlands",
-    "timezone": "Europe/Brussels",
-    "fetchedAt": "2026-04-30T17:07:47.219Z"
-  },
-  {
-    "videoId": "Cp4RRAEgpeU",
-    "title": "Live @ Santa Claus Village",
-    "channel": "City of Rovaniemi",
-    "thumbnail": "https://i.ytimg.com/vi/Cp4RRAEgpeU/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      66.54,
-      25.85
-    ],
-    "locationName": "Rovaniemi, Finland",
-    "timezone": "Europe/Helsinki",
-    "fetchedAt": "2026-04-30T17:07:47.219Z"
-  },
-  {
-    "videoId": "QfOEaDVbLaU",
-    "title": "Live-Webcam Hafen in Dornumersiel",
-    "channel": "1top IT Dienstleistungen GbR",
-    "thumbnail": "https://i.ytimg.com/vi/QfOEaDVbLaU/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.6744623,
-      7.4729556
-    ],
-    "locationName": "Dornumersiel, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:47.219Z"
-  },
-  {
-    "videoId": "mfpdquRilCk",
-    "title": "🔴 LIVE: Hamburg Landungsbrücken – Schiffe, Fähren &amp; Hafenbetrieb",
-    "channel": "livespotting",
-    "thumbnail": "https://i.ytimg.com/vi/mfpdquRilCk/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.55,
-      9.99
-    ],
-    "locationName": "Hamburg, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:47.219Z"
-  },
-  {
-    "videoId": "voexm7WL60o",
-    "title": "🔴LIVE vom Alten Baljer Leuchtturm 120 Jahre maritimes Wahrzeichen Shipspotting an der Elbmündung",
-    "channel": "Elbcam Shipspotting",
-    "thumbnail": "https://i.ytimg.com/vi/voexm7WL60o/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.8333,
-      9.13333
-    ],
-    "locationName": "Balje, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:48.622Z"
-  },
-  {
-    "videoId": "SoufqhTDYmc",
-    "title": "🔴 LIVE: Borkum – Nordsee, Dünen &amp; Wattenmeer | Webcam 24/7",
-    "channel": "livespotting",
-    "thumbnail": "https://i.ytimg.com/vi/SoufqhTDYmc/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.5862669,
-      6.6917449
-    ],
-    "locationName": "Borkum, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:48.622Z"
-  },
-  {
-    "videoId": "A8ikkAROz6k",
-    "title": "🔴 LIVE: Greetsiel – Webcam mit Blick auf Hafen, Krabbenkutter &amp; Leybucht",
-    "channel": "livespotting",
-    "thumbnail": "https://i.ytimg.com/vi/A8ikkAROz6k/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      53.4999753,
-      7.0906967
-    ],
-    "locationName": "Greetsiel, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:50.062Z"
-  },
-  {
-    "videoId": "kiOefBj8Ju4",
-    "title": "Surfcam Sylt: Westerland live erleben – Strand, Meer &amp; Promenade",
-    "channel": "Surfcam Sylt",
-    "thumbnail": "https://i.ytimg.com/vi/kiOefBj8Ju4/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      54.9026616,
-      8.3311491
-    ],
-    "locationName": "Sylt, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:50.062Z"
-  },
-  {
-    "videoId": "z_WfgJ8lnZA",
-    "title": "Strandpaviljoen Breezand - Vrouwenpolder - 24/7 Webcam",
-    "channel": "Strandhotel Duinoord",
-    "thumbnail": "https://i.ytimg.com/vi/z_WfgJ8lnZA/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      51.576602,
-      3.6165776
-    ],
-    "locationName": "Vrouwenpolder, Netherlands",
-    "timezone": "Europe/Brussels",
-    "fetchedAt": "2026-04-30T17:07:50.062Z"
-  },
-  {
-    "videoId": "Nn2zaO5Wddk",
-    "title": "LIVE-Webcam Insel Rügen: Kiting-/Surfspot in Wiek auf der nördl. Halbinsel Wittow",
-    "channel": "Meerblick in Wiek auf Rügen",
-    "thumbnail": "https://i.ytimg.com/vi/Nn2zaO5Wddk/hqdefault_live.jpg",
-    "query": "live cam Helgoland",
-    "location": [
-      54.621387,
-      13.2899509
-    ],
-    "locationName": "Wiek, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-04-30T17:07:51.359Z"
-  },
-  {
-    "videoId": "QSsnv0zkWvQ",
-    "title": "🔴 LIVE Hong Kong Night Walk 🇭🇰 City Street Walk &amp; Tram Ride",
-    "channel": "Watchers Club",
-    "thumbnail": "https://i.ytimg.com/vi/QSsnv0zkWvQ/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      22.32,
-      114.17
-    ],
-    "locationName": "Hong Kong, China",
-    "timezone": "Asia/Hong_Kong",
-    "fetchedAt": "2026-04-30T17:07:51.359Z"
-  },
-  {
-    "videoId": "ygC5wni2DMQ",
-    "title": "🔴【LIVE】Hong Kong Int&#39;l Airport (VHHH/HKG)  ATC Tracking｜香港國際機場｜即時航班動態＆塔台通訊",
-    "channel": "TWSkyWave 空中電波",
-    "thumbnail": "https://i.ytimg.com/vi/ygC5wni2DMQ/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      22.32,
-      114.17
-    ],
-    "locationName": "Hong Kong, China",
-    "timezone": "Asia/Hong_Kong",
-    "fetchedAt": "2026-04-30T17:07:51.359Z"
-  },
-  {
-    "videoId": "5uZa3-RMFos",
-    "title": "WebcamSydney 1 Live Stream of Harbour 24/7 (~4K)",
-    "channel": "WebcamSydney",
-    "thumbnail": "https://i.ytimg.com/vi/5uZa3-RMFos/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      -33.8698439,
-      151.2082848
-    ],
-    "locationName": "Sydney, Australia",
-    "timezone": "Australia/Sydney",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "ZgK5wv4K8Uo",
-    "title": "🕒 LIVE: Hong Kong Time (HKT) Clock | Hong Kong, Beijing, Shanghai | 24/7 China Time",
-    "channel": "Hidden True Stories",
-    "thumbnail": "https://i.ytimg.com/vi/ZgK5wv4K8Uo/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      22.32,
-      114.17
-    ],
-    "locationName": "Hong Kong, China",
-    "timezone": "Asia/Hong_Kong",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "6dp-bvQ7RWo",
-    "title": "【LIVE】2024 Tokyo Shinjuku 新宿 大ガード交差点 Live Ch",
-    "channel": "【LIVE】新宿 大ガード交差点 Tokyo Shinjuku Live Ch",
-    "thumbnail": "https://i.ytimg.com/vi/6dp-bvQ7RWo/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      35.6937632,
-      139.7036319
-    ],
-    "locationName": "Shinjuku, Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "n1Q2njXWwP4",
-    "title": "Live Korea 2026 🔴 Korean Shopping Mall Coex | Fantastic Seoul walk | Korean Food Street walking tour",
-    "channel": "Watchers Club",
-    "thumbnail": "https://i.ytimg.com/vi/n1Q2njXWwP4/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      37.57,
-      126.98
-    ],
-    "locationName": "Seoul, South Korea",
-    "timezone": "Asia/Seoul",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "Q71sLS8h9a4",
-    "title": "🔴 El Gaucho | Soi 19 | Sukhumvit Road | Bangkok | Thailand | Live Street Webcam | 2160p 4K",
-    "channel": "The Real Samui Webcam",
-    "thumbnail": "https://i.ytimg.com/vi/Q71sLS8h9a4/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      15.87,
-      100.99
-    ],
-    "locationName": "Thailand",
-    "timezone": "Asia/Jakarta",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "UemFRPrl1hk",
-    "title": "🔴 El Gaucho | Soi 11 | Sukhumvit Road | Bangkok | Thailand | Live Street Webcam | 2160p 4K",
-    "channel": "The Real Samui Webcam",
-    "thumbnail": "https://i.ytimg.com/vi/UemFRPrl1hk/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      15.87,
-      100.99
-    ],
-    "locationName": "Thailand",
-    "timezone": "Asia/Jakarta",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "6MMXJrzT5c0",
-    "title": "🔴 Live Camera Stream | Henry Africa&#39;s Bar &amp; Café | Soi Green Mango | Koh Samui | Thailand | 2160p 4K",
-    "channel": "The Real Samui Webcam",
-    "thumbnail": "https://i.ytimg.com/vi/6MMXJrzT5c0/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      9.5013945,
-      99.9956193
-    ],
-    "locationName": "Koh Samui",
-    "timezone": "Asia/Jakarta",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "M3EYAY2MftI",
-    "title": "EarthCam Live:  Abbey Road Crossing (London, England)",
-    "channel": "EarthCam",
-    "thumbnail": "https://i.ytimg.com/vi/M3EYAY2MftI/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      51.51,
-      -0.13
-    ],
-    "locationName": "England",
-    "timezone": "Europe/London",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "DjdUEyjx8GM",
-    "title": "【 LIVE 】東京都 新宿 歌舞伎町 24時間 ライブ / Tokyo Shinjuku Kabukicho Live",
-    "channel": "歌舞伎町 ライブ ちゃんねる『 Kabukicho Live Channel 』",
-    "thumbnail": "https://i.ytimg.com/vi/DjdUEyjx8GM/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      35.6937632,
-      139.7036319
-    ],
-    "locationName": "Shinjuku, Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "_k-5U7IeK8g",
-    "title": "Tokyo Live Camera 東京ライブカメラ 勉強・作業・集中・リラックス with Lofi and soft jazz BGM",
-    "channel": "Tokyo Views ",
-    "thumbnail": "https://i.ytimg.com/vi/_k-5U7IeK8g/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "UQaSS4_VAV4",
-    "title": "🔴LIVE 24/7 LAX Airport Action Runways 25L &amp; 25R | LIVE Plane Spotting with ATC!",
-    "channel": "AirlineVideosLive+",
-    "thumbnail": "https://i.ytimg.com/vi/UQaSS4_VAV4/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      33.9421675,
-      -118.4213591
-    ],
-    "locationName": "LAX Airport",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "z_fY1pj1VBw",
-    "title": "【Taipei Live Cam】象山看台北 - 4K即時影像 | Overlooking Taipei at the top of Xiangshan | 象山から望む台北 | Taipei 101",
-    "channel": "Taipei Travel Live Cam  台北觀光即時影像 ",
-    "thumbnail": "https://i.ytimg.com/vi/z_fY1pj1VBw/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      25.03,
-      121.57
-    ],
-    "locationName": "Taipei, Taiwan",
-    "timezone": "Asia/Taipei",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "3w4zEyFamuA",
-    "title": "【Live】Tokyo International Airport ,Haneda Plane Spotting (NipponTV News24)  IATA: HND, ICAO: RJTT",
-    "channel": "Nippon Television News Japan",
-    "thumbnail": "https://i.ytimg.com/vi/3w4zEyFamuA/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "wS21Bb97AWY",
-    "title": "LIVE 24/7 | Japan &amp; Hong Kong Scenic Window – Relaxing Armchair Travel &amp; Study Ambience [4K]",
-    "channel": "Midair Times",
-    "thumbnail": "https://i.ytimg.com/vi/wS21Bb97AWY/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      22.32,
-      114.17
-    ],
-    "locationName": "Hong Kong, China",
-    "timezone": "Asia/Hong_Kong",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "y3_x8el5ZJY",
-    "title": "🔴 TPE 4K桃園國際機場 南跑道觀景台即時影像｜Taoyuan International Airport South Runway Live plane spotting",
-    "channel": "Taoyuan Airport",
-    "thumbnail": "https://i.ytimg.com/vi/y3_x8el5ZJY/hqdefault_live.jpg",
-    "query": "Hong Kong live camera",
-    "location": [
-      24.9929995,
-      121.3010003
-    ],
-    "locationName": "Taoyuan, Taiwan",
-    "timezone": "Asia/Taipei",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "Cj4bM-OoW9g",
-    "title": "Puffin Colony Cam - Skomer Island Livestream",
-    "channel": "The Wildlife Trust of South and West Wales",
-    "thumbnail": "https://i.ytimg.com/vi/Cj4bM-OoW9g/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      52.29,
-      -3.74
-    ],
-    "locationName": "Wales",
-    "timezone": "Europe/London",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "Thtj8Ht7Z_c",
-    "title": "Seychelles Ocean 4K (LIVE 24/7). Wild Beach &amp; Ocean Waves Sounds. Relaxing Ocean",
-    "channel": "Luxury Island",
-    "thumbnail": "https://i.ytimg.com/vi/Thtj8Ht7Z_c/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      -4.68,
-      55.49
-    ],
-    "locationName": "Seychelles",
-    "timezone": "Asia/Dubai",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "1pFTuCQGVZ0",
-    "title": "Puffin Bank Cam - Skomer Island Live Stream",
-    "channel": "The Wildlife Trust of South and West Wales",
-    "thumbnail": "https://i.ytimg.com/vi/1pFTuCQGVZ0/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      52.29,
-      -3.74
-    ],
-    "locationName": "Wales",
-    "timezone": "Europe/London",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "V_I168MM-ik",
-    "title": "Soggy Dollar Bar LIVE Webcam on White Bay, Jost Van Dyke, BVI",
-    "channel": "Soggy Dollar",
-    "thumbnail": "https://i.ytimg.com/vi/V_I168MM-ik/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      18.4468459,
-      -64.7490427
-    ],
-    "locationName": "Jost Van Dyke, British Virgin Islands",
-    "timezone": "America/Puerto_Rico",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "_VqvVJfmyfs",
-    "title": "Treasure Island, California Live Cam | 24/7 Stream",
-    "channel": "ABC7 News Bay Area",
-    "thumbnail": "https://i.ytimg.com/vi/_VqvVJfmyfs/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      36.78,
-      -119.42
-    ],
-    "locationName": "California, USA",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "4B-xBkUX4jM",
-    "title": "🔴 Live Now: 24/7 Iceland Volcano Watch (Multi-cams)",
-    "channel": "afarTV",
-    "thumbnail": "https://i.ytimg.com/vi/4B-xBkUX4jM/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      64.15,
-      -21.94
-    ],
-    "locationName": "Iceland",
-    "timezone": "Africa/Abidjan",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "p4C2WL9Nq9o",
-    "title": "Blind Donkey - LIVE Webcam in downtown Cruz Bay, St. John, USVI",
-    "channel": "St. John USVI",
-    "thumbnail": "https://i.ytimg.com/vi/p4C2WL9Nq9o/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      18.3356013,
-      -64.7550406
-    ],
-    "locationName": "St. John",
-    "timezone": "America/Puerto_Rico",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "iWCeBAxRCBo",
-    "title": "🔴 Live Now: 24/7 Hawaii Humpback Whale Marine Sanctuary in Maui, Hawaii in 4K Ultra HD",
-    "channel": "afarTV",
-    "thumbnail": "https://i.ytimg.com/vi/iWCeBAxRCBo/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      21.31,
-      -157.86
-    ],
-    "locationName": "Hawaii, USA",
-    "timezone": "Pacific/Honolulu",
-    "fetchedAt": "2026-04-30T17:07:51.360Z"
-  },
-  {
-    "videoId": "IAkRcsPDO8w",
-    "title": "LIVE Cam Royal Sea Aquarium Resort | Curacao 🌴☀️ LIVE CAM 4K",
-    "channel": "SHOWME Caribbean",
-    "thumbnail": "https://i.ytimg.com/vi/IAkRcsPDO8w/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      12.17,
-      -68.98
-    ],
-    "locationName": "Curacao",
-    "timezone": "America/Puerto_Rico",
-    "fetchedAt": "2026-04-30T17:07:51.361Z"
-  },
-  {
-    "videoId": "LRIJL1GS_Uc",
-    "title": "🔴LIVE - Kings Island Webcams 24/7 🎢",
-    "channel": "CedarPointCams",
-    "thumbnail": "https://i.ytimg.com/vi/LRIJL1GS_Uc/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      39.3438277,
-      -84.2658113
-    ],
-    "locationName": "Kings Island, USA",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-30T17:07:51.361Z"
-  },
-  {
-    "videoId": "iaBfYxbmwXA",
-    "title": "San Diego Harbor Island Live Web Cam 4K",
-    "channel": "San Diego Web Cam",
-    "thumbnail": "https://i.ytimg.com/vi/iaBfYxbmwXA/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      32.72,
-      -117.16
-    ],
-    "locationName": "San Diego, USA",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-04-30T17:07:51.361Z"
-  },
-  {
-    "videoId": "5s6X2045OTs",
-    "title": "Packery Surf Cam LIVE | Corpus Christi Surf Cam | North Padre Island | Texas Beach &amp; Fishing Cam",
-    "channel": "packerysurfcam",
-    "thumbnail": "https://i.ytimg.com/vi/5s6X2045OTs/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      31.97,
-      -99.9
-    ],
-    "locationName": "Texas, USA",
-    "timezone": "America/Chicago",
-    "fetchedAt": "2026-04-30T17:07:51.361Z"
-  },
-  {
-    "videoId": "H67j7H-7QD0",
-    "title": "EarthCam Live:  Coney Island (New York City)",
-    "channel": "EarthCam",
-    "thumbnail": "https://i.ytimg.com/vi/H67j7H-7QD0/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      40.7127281,
-      -74.0060152
-    ],
-    "locationName": "New York City",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-04-30T17:07:51.361Z"
-  },
-  {
-    "videoId": "dzylsC0KcOE",
-    "title": "Live HD Stream - Courtyard by Marriott South Padre Island Live Beach Webcam",
-    "channel": "South Padre Island",
-    "thumbnail": "https://i.ytimg.com/vi/dzylsC0KcOE/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      26.1036887,
-      -97.1646938
-    ],
-    "locationName": "South Padre Island, Texas",
-    "timezone": "America/Chicago",
-    "fetchedAt": "2026-04-30T17:07:51.361Z"
-  },
-  {
-    "videoId": "Fw9hgttWzIg",
-    "title": "🔴 Crystal Bay Beach Resort | Lamai | Koh Samui | Thailand | Live Beach Webcam | 2160p 4K",
-    "channel": "The Real Samui Webcam",
-    "thumbnail": "https://i.ytimg.com/vi/Fw9hgttWzIg/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      9.5013945,
-      99.9956193
-    ],
-    "locationName": "Koh Samui",
-    "timezone": "Asia/Jakarta",
-    "fetchedAt": "2026-04-30T17:07:51.361Z"
-  },
-  {
-    "videoId": "AAlo3eCPVbk",
-    "title": "LIVE 🔴 WEBCAM from LANZAROTE AIRPORT - (Canary Islands, Spain)",
-    "channel": "LanzaroteWebcam",
-    "thumbnail": "https://i.ytimg.com/vi/AAlo3eCPVbk/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      28.9456805,
-      -13.6075882
-    ],
-    "locationName": "Lanzarote Airport, Canary Islands",
-    "timezone": "Atlantic/Canary",
-    "fetchedAt": "2026-04-30T17:07:51.361Z"
-  },
-  {
-    "videoId": "gXKuUyKt8mc",
-    "title": "[V3cam] Kīlauea volcano, Hawaii (south Halemaʻumaʻu crater)",
-    "channel": "USGS",
-    "thumbnail": "https://i.ytimg.com/vi/gXKuUyKt8mc/hqdefault_live.jpg",
-    "query": "live camera island",
-    "location": [
-      19.4138647,
-      -155.275811
-    ],
-    "locationName": "Kīlauea, Hawaii",
-    "timezone": "Pacific/Honolulu",
-    "fetchedAt": "2026-04-30T17:07:51.361Z"
   }
 ]
