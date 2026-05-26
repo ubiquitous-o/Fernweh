@@ -34,7 +34,7 @@ export async function switchVideo() {
   clearError();
 
   // 動画ロード失敗時は砂嵐を維持したまま次の動画を試す（古い動画には戻さない）
-  const MAX_ATTEMPTS = 5;
+  const MAX_ATTEMPTS = 3; // 諦めを早く（累積砂嵐時間短縮）
   const RETRY_DELAY_MS = 500;
   let nextLayerId = state.activeLayer === 'a' ? 'b' : 'a';
   let $nextLayer = getLayer(nextLayerId);

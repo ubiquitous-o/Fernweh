@@ -3,7 +3,7 @@
 // 単一player + loadVideoById方式はbot検知に引っかかりやすいため避ける。
 import { getLayer } from './dom.js';
 
-const PLAYBACK_TIMEOUT = 15000;
+const PLAYBACK_TIMEOUT = 10000; // 失敗判定を早く（モバイルでの累積遅延対策）
 
 // レイヤーIDごとのYT.Playerインスタンス
 export const players = { a: null, b: null };
