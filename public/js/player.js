@@ -1,31 +1,38 @@
-// YouTube IFrame Player API のラッパー。
-// 単一のYT.Playerインスタンスを使い回し、loadVideoByIdで動画を切り替える。
-import { state } from './state.js';
-import { $videoLayer } from './dom.js';
+// YouTube IFrame Player API のラッパー（2レイヤーcrossfade版）。
+// 切替時に inactive layer に新規 YT.Player を作成し、PLAYING になったら swap する。
+// 単一player + loadVideoById方式はbot検知に引っかかりやすいため避ける。
+import { getLayer } from './dom.js';
 
 const PLAYBACK_TIMEOUT = 15000;
 
-export const playerRef = {
-  instance: null,
-};
+// レイヤーIDごとのYT.Playerインスタンス
+export const players = { a: null, b: null };
 
-// loadVideoById後、PLAYING遷移を待つpromiseのresolver
-let loadResolver = null;
-
-// 初回のみ呼ぶ：YT.Playerインスタンスを1つ作る
-export function createPlayer(videoId) {
+// 指定レイヤーに新規 YT.Player を作る。PLAYING に遷移したら resolve。
+export function createPlayer(layerId, videoId) {
   return new Promise((resolve, reject) => {
+    const elementId = `player-${layerId}`;
     let settled = false;
+
     const timeoutId = setTimeout(() => {
       if (!settled) {
         settled = true;
-        reject(new Error('Initial playback timeout'));
+        console.warn(`Playback timeout: ${videoId}`);
+        reject(new Error('Playback timeout'));
       }
     }, PLAYBACK_TIMEOUT);
 
-    $videoLayer.innerHTML = `<div id="player"></div>`;
+    // 既存playerがあれば破棄
+    if (players[layerId]) {
+      try { players[layerId].destroy(); } catch {}
+      players[layerId] = null;
+    }
 
-    playerRef.instance = new YT.Player('player', {
+    // プレーヤー用div再生成
+    const $layer = getLayer(layerId);
+    $layer.innerHTML = `<div id="${elementId}"></div>`;
+
+    players[layerId] = new YT.Player(elementId, {
       videoId,
       host: 'https://www.youtube-nocookie.com',
       playerVars: {
@@ -52,34 +59,22 @@ export function createPlayer(videoId) {
         },
         onStateChange: (e) => {
           // UNSTARTED=-1, ENDED=0, PLAYING=1, PAUSED=2, BUFFERING=3, CUED=5
-          if (e.data === 1) {
-            if (!settled) {
-              settled = true;
-              clearTimeout(timeoutId);
-              resolve();
-            }
-            if (loadResolver) {
-              const r = loadResolver;
-              loadResolver = null;
-              r();
-            }
+          if (e.data === 1 && !settled) {
+            settled = true;
+            clearTimeout(timeoutId);
+            resolve();
           }
-          // 自動pauseを検出したら即座に再開
+          // 隠しiframeでの謎の自動pauseを検出したら即座に再開
           if (e.data === 2) {
             try { e.target.playVideo(); } catch {}
           }
         },
         onError: (e) => {
-          console.warn(`Player error (code ${e.data})`);
           if (!settled) {
             settled = true;
             clearTimeout(timeoutId);
+            console.warn(`Player error (code ${e.data}): ${videoId}`);
             reject(new Error(`Player error: ${e.data}`));
-          }
-          if (loadResolver) {
-            const r = loadResolver;
-            loadResolver = null;
-            r(new Error(`Player error: ${e.data}`));
           }
         },
       },
@@ -87,27 +82,12 @@ export function createPlayer(videoId) {
   });
 }
 
-// 切替時に呼ぶ：既存playerに新しい動画をロード、PLAYING到達まで待つ
-export function loadVideo(videoId) {
-  return new Promise((resolve, reject) => {
-    const timeoutId = setTimeout(() => {
-      if (loadResolver) {
-        loadResolver = null;
-        reject(new Error('Load timeout'));
-      }
-    }, PLAYBACK_TIMEOUT);
-
-    loadResolver = (err) => {
-      clearTimeout(timeoutId);
-      if (err) reject(err); else resolve();
-    };
-
-    try {
-      playerRef.instance.loadVideoById(videoId);
-    } catch (err) {
-      clearTimeout(timeoutId);
-      loadResolver = null;
-      reject(err);
-    }
-  });
+// 指定レイヤーのplayerを破棄してdivを差し戻す。
+export function destroyPlayer(layerId) {
+  if (players[layerId]) {
+    try { players[layerId].destroy(); } catch {}
+    players[layerId] = null;
+  }
+  const $layer = getLayer(layerId);
+  $layer.innerHTML = `<div id="player-${layerId}"></div>`;
 }

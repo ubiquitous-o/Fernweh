@@ -9,12 +9,12 @@ const $offsetR = document.querySelector('#video-glitch-filter feOffset[result="r
 const $offsetB = document.querySelector('#video-glitch-filter feOffset[result="b2"]');
 const $leftCopy = document.querySelector('#video-glitch-filter feOffset[result="leftCopy"]');
 const $rightCopy = document.querySelector('#video-glitch-filter feOffset[result="rightCopy"]');
-const $videoLayer = document.getElementById('video-layer');
+const $videoFrame = document.getElementById('video-frame');
 
-// 変位が画面外に出たとき、左右コピーから絵を引いてくるためにvideo-layer幅ぶんの dx を設定。
-// video-layerは16:9でビューポート内に centered → window幅ではなく実際のレイヤー幅を使う。
+// 変位が枠外に出たとき、左右コピーから絵を引いてくるためにframe幅ぶんの dx を設定。
+// .video-frame は16:9 centered → ビューポート幅ではなくframeの実幅を使う。
 function updateExtendDx() {
-  const w = $videoLayer.clientWidth || window.innerWidth;
+  const w = $videoFrame.clientWidth || window.innerWidth;
   $leftCopy.setAttribute('dx', -w);
   $rightCopy.setAttribute('dx', w);
 }

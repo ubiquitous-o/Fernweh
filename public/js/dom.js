@@ -1,5 +1,8 @@
 // DOM参照を1か所にキャッシュ。可変要素（globeCanvas）はオブジェクト経由で更新可能に。
-export const $videoLayer = document.getElementById('video-layer');
+export const $videoFrame = document.getElementById('video-frame');
+export const $layerA = document.getElementById('layer-a');
+export const $layerB = document.getElementById('layer-b');
+export function getLayer(id) { return id === 'a' ? $layerA : $layerB; }
 export const $noiseOverlay = document.getElementById('noise-overlay');
 export const $noiseCanvas = document.getElementById('noise-canvas');
 

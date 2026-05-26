@@ -22,9 +22,12 @@
 
 <!-- 16:9のフレーム枠（overflow:hiddenでSVGフィルタの染み出しをクリップ） -->
 <div class="video-frame" id="video-frame">
-  <!-- Video layer (single player, loadVideoById for switching) -->
-  <div class="video-layer" id="video-layer">
-    <div id="player"></div>
+  <!-- 2レイヤーcrossfade: 切替時はinactive layerに新規YT.Player作成 → swap -->
+  <div class="video-layer visible" id="layer-a">
+    <div id="player-a"></div>
+  </div>
+  <div class="video-layer hidden" id="layer-b">
+    <div id="player-b"></div>
   </div>
 </div>
 

@@ -4,4 +4,5 @@ export const state = {
   currentInfo: null,
   isSwitching: false,
   ytApiReady: false,
+  activeLayer: 'a', // 'a' | 'b' — 表示中のレイヤーID
 };

@@ -1,11 +1,15 @@
-// 動画切替の中心ロジック：前奏グリッチ → 砂嵐 → loadVideo → ホールド → 後奏グリッチ。
+// 動画切替の中心ロジック（2レイヤーcrossfade）：
+// 前奏グリッチ → 砂嵐 → inactive layerに新player → 4秒ホールド（intro UIマスク）→ swap → 後奏グリッチ
 import { state } from './state.js';
-import { $videoLayer } from './dom.js';
+import { getLayer } from './dom.js';
 import { startNoise, stopNoise } from './noise.js';
 import { playGlitch, clearGlitch } from './glitch.js';
-import { createPlayer, loadVideo, playerRef } from './player.js';
+import { createPlayer, destroyPlayer } from './player.js';
 import { fetchNext } from './videoPool.js';
-import { showInfo, showOverlays, hideLoading, clearError } from './ui.js';
+import {
+  showInfo, showOverlays, hideLoading, clearError,
+  hideOverlaysInstant, showOverlaysInstant,
+} from './ui.js';
 import { updateGlobe } from './globe.js';
 import { updateCameraTime } from './clock.js';
 import { resetSwitchTimer } from './progress.js';
@@ -18,30 +22,46 @@ export async function switchVideo() {
   if (!state.ytApiReady || state.isSwitching) return;
   state.isSwitching = true;
 
-  // 前奏グリッチ（既に動画再生中の場合のみ）
-  if (state.currentInfo && playerRef.instance) {
-    await playGlitch($videoLayer, 'up');
+  const $currentLayer = getLayer(state.activeLayer);
+
+  // 動画グリッチ → 砂嵐と同時にオーバーレイを瞬時に非表示
+  if (state.currentInfo) {
+    await playGlitch($currentLayer, 'up');
   }
 
+  hideOverlaysInstant();
   startNoise();
 
   try {
     clearError();
     const data = await fetchNext();
 
-    if (!playerRef.instance) {
-      await createPlayer(data.videoId);
-    } else {
-      await loadVideo(data.videoId);
-    }
+    const nextLayerId = state.activeLayer === 'a' ? 'b' : 'a';
+    const $nextLayer = getLayer(nextLayerId);
 
+    // inactive layer に新規 YT.Player を作る（visibility:hiddenでiframeは生きてる）
+    await createPlayer(nextLayerId, data.videoId);
+
+    // intro UIを砂嵐で覆い隠す
     await new Promise(r => setTimeout(r, POST_LOAD_HOLD_MS));
 
+    // swap visibility
     state.currentInfo = data;
-    clearGlitch($videoLayer);
+    $nextLayer.classList.remove('hidden');
+    $nextLayer.classList.add('visible');
+    $currentLayer.classList.remove('visible');
+    $currentLayer.classList.add('hidden');
+
+    // 旧playerを破棄してdivを戻す
+    const oldLayerId = state.activeLayer;
+    destroyPlayer(oldLayerId);
+    clearGlitch($currentLayer);
+
+    state.activeLayer = nextLayerId;
 
     stopNoise();
-    playGlitch($videoLayer, 'down');
+    showOverlaysInstant();
+    playGlitch($nextLayer, 'down');
 
     hideLoading();
     showInfo(data);
@@ -52,8 +72,9 @@ export async function switchVideo() {
 
   } catch (err) {
     console.error('switchVideo error:', err);
-    // 前奏グリッチが残ったままにならないよう必ずクリーンアップ
-    clearGlitch($videoLayer);
+    clearGlitch($currentLayer);
+    // 消えっぱなし防止
+    showOverlaysInstant();
     stopNoise();
     const delay = err.retryAfter > 0 ? err.retryAfter * 1000 : 3000;
     setTimeout(switchVideo, delay);
@@ -65,12 +86,17 @@ export async function switchVideo() {
 export async function resumeVideo(data) {
   state.isSwitching = true;
   startNoise();
+  const layerId = state.activeLayer;
+  const $layer = getLayer(layerId);
   try {
-    await createPlayer(data.videoId);
+    await createPlayer(layerId, data.videoId);
     await new Promise(r => setTimeout(r, POST_LOAD_HOLD_MS));
     state.currentInfo = data;
+    $layer.classList.remove('hidden');
+    $layer.classList.add('visible');
     stopNoise();
-    playGlitch($videoLayer, 'down');
+    showOverlaysInstant();
+    playGlitch($layer, 'down');
     hideLoading();
     showInfo(data);
     showOverlays();
@@ -78,7 +104,8 @@ export async function resumeVideo(data) {
     updateCameraTime();
     resetSwitchTimer(switchVideo);
   } catch {
-    clearGlitch($videoLayer);
+    clearGlitch($layer);
+    showOverlaysInstant();
     switchVideo();
   } finally {
     state.isSwitching = false;

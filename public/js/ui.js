@@ -2,8 +2,22 @@
 import { state } from './state.js';
 import {
   $info, $infoTitle, $infoChannel, $clock, $liveBadge, $cameraTime,
-  $loading, $error, $errorMsg, $btnInfo,
+  $loading, $error, $errorMsg, $btnInfo, $globe,
 } from './dom.js';
+
+// 砂嵐期間中にぱっと隠す対象オーバーレイ
+// （時計＋天気の clock-overlay は常時表示のままにする）
+const $hideableOverlays = [$liveBadge, $info, $globe, $cameraTime];
+
+// 砂嵐開始タイミングで瞬時に非表示
+export function hideOverlaysInstant() {
+  $hideableOverlays.forEach((el) => el?.classList.add('noise-hidden'));
+}
+
+// 砂嵐停止タイミングで瞬時に再表示
+export function showOverlaysInstant() {
+  $hideableOverlays.forEach((el) => el?.classList.remove('noise-hidden'));
+}
 
 export function showInfo(data) {
   $infoChannel.textContent = data.channel || '';

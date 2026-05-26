@@ -79,6 +79,10 @@ html, body {
   inset: 0;
   width: 100%; height: 100%;
 }
+/* visibility:hidden を使う：iframeをレンダリング状態に保ったまま不可視化
+   → display:noneによるYouTube playerの隠れ抑制を回避 */
+.video-layer.hidden { visibility: hidden; }
+.video-layer.visible { visibility: visible; }
 .video-layer iframe {
   width: 100%; height: 100%;
   border: none;
@@ -435,6 +439,16 @@ a.ctrl-btn { text-decoration: none; }
 @keyframes breathe {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
+}
+
+/* --- Noise期間中のオーバーレイ非表示 ---
+   オーバーレイ自身のopacity/transform transitionを使ってフェードout/in。
+   初回表示と同じ挙動: info-overlayだけ translateY(8px) で下にスライド。 */
+.noise-hidden {
+  opacity: 0 !important;
+}
+.info-overlay.noise-hidden {
+  transform: translateY(8px) !important;
 }
 
 /* --- Error --- */
