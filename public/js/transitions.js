@@ -31,56 +31,71 @@ export async function switchVideo() {
 
   hideOverlaysInstant();
   startNoise();
+  clearError();
 
-  try {
-    clearError();
-    const data = await fetchNext();
+  // 動画ロード失敗時は砂嵐を維持したまま次の動画を試す（古い動画には戻さない）
+  const MAX_ATTEMPTS = 5;
+  const RETRY_DELAY_MS = 500;
+  let nextLayerId = state.activeLayer === 'a' ? 'b' : 'a';
+  let $nextLayer = getLayer(nextLayerId);
+  let data = null;
+  let success = false;
 
-    const nextLayerId = state.activeLayer === 'a' ? 'b' : 'a';
-    const $nextLayer = getLayer(nextLayerId);
-
-    // inactive layer に新規 YT.Player を作る（visibility:hiddenでiframeは生きてる）
-    await createPlayer(nextLayerId, data.videoId);
-
-    // intro UIを砂嵐で覆い隠す
-    await new Promise(r => setTimeout(r, POST_LOAD_HOLD_MS));
-
-    // swap visibility
-    state.currentInfo = data;
-    $nextLayer.classList.remove('hidden');
-    $nextLayer.classList.add('visible');
-    $currentLayer.classList.remove('visible');
-    $currentLayer.classList.add('hidden');
-
-    // 旧playerを破棄してdivを戻す
-    const oldLayerId = state.activeLayer;
-    destroyPlayer(oldLayerId);
-    clearGlitch($currentLayer);
-
-    state.activeLayer = nextLayerId;
-
-    stopNoise();
-    showOverlaysInstant();
-    playGlitch($nextLayer, 'down');
-
-    hideLoading();
-    showInfo(data);
-    showOverlays();
-    updateGlobe(data.location, data.locationName);
-    updateCameraTime();
-    resetSwitchTimer(switchVideo);
-
-  } catch (err) {
-    console.error('switchVideo error:', err);
-    clearGlitch($currentLayer);
-    // 消えっぱなし防止
-    showOverlaysInstant();
-    stopNoise();
-    const delay = err.retryAfter > 0 ? err.retryAfter * 1000 : 3000;
-    setTimeout(switchVideo, delay);
-  } finally {
-    state.isSwitching = false;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      data = await fetchNext();
+      await createPlayer(nextLayerId, data.videoId);
+      success = true;
+      break;
+    } catch (err) {
+      console.warn(`switchVideo attempt ${attempt}/${MAX_ATTEMPTS} failed:`, err?.message || err);
+      // 失敗したplayerをクリーンアップして次の動画を試す
+      destroyPlayer(nextLayerId);
+      if (attempt < MAX_ATTEMPTS) {
+        await new Promise(r => setTimeout(r, RETRY_DELAY_MS));
+      }
+    }
   }
+
+  if (!success) {
+    // 全試行失敗：古い状態に戻す
+    console.error('switchVideo: all attempts failed, restoring previous state');
+    clearGlitch($currentLayer);
+    showOverlaysInstant();
+    stopNoise();
+    state.isSwitching = false;
+    setTimeout(switchVideo, 5000); // しばらく待ってからもう一度
+    return;
+  }
+
+  // 成功：intro UIを砂嵐で覆い隠す
+  await new Promise(r => setTimeout(r, POST_LOAD_HOLD_MS));
+
+  // swap visibility
+  state.currentInfo = data;
+  $nextLayer.classList.remove('hidden');
+  $nextLayer.classList.add('visible');
+  $currentLayer.classList.remove('visible');
+  $currentLayer.classList.add('hidden');
+
+  const oldLayerId = state.activeLayer;
+  destroyPlayer(oldLayerId);
+  clearGlitch($currentLayer);
+
+  state.activeLayer = nextLayerId;
+
+  stopNoise();
+  showOverlaysInstant();
+  playGlitch($nextLayer, 'down');
+
+  hideLoading();
+  showInfo(data);
+  showOverlays();
+  updateGlobe(data.location, data.locationName);
+  updateCameraTime();
+  resetSwitchTimer(switchVideo);
+
+  state.isSwitching = false;
 }
 
 export async function resumeVideo(data) {
