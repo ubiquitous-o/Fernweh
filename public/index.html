@@ -95,6 +95,12 @@
   .video-layer.hidden { display: none; }
   .video-layer.visible { display: block; }
 
+  /* --- Glitch effect (SVG filter: noise displacement + RGB shift, shadertoy XtK3W3 inspired) --- */
+  .video-layer.glitch {
+    filter: url(#video-glitch-filter);
+    will-change: filter;
+  }
+
   /* --- TV Noise overlay --- */
   .noise-overlay {
     position: absolute;
@@ -102,9 +108,10 @@
     z-index: 3;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.1s ease;
   }
-  .noise-overlay.active { opacity: 1; }
+  .noise-overlay.active {
+    opacity: 1;
+  }
   .noise-overlay canvas {
     width: 100%; height: 100%;
   }
@@ -488,6 +495,55 @@
   <div id="player-b"></div>
 </div>
 
+<!-- SVG glitch filter (Shadertoy XtK3W3 inspired: turbulence-driven horizontal displacement + RGB split) -->
+<svg style="position:absolute; width:0; height:0; pointer-events:none;" aria-hidden="true">
+  <defs>
+    <!-- filter領域を横3倍に拡張 + SourceGraphicを左右コピーして繋いだ拡張ソースを作る -->
+    <filter id="video-glitch-filter" x="-100%" y="0%" width="300%" height="100%" color-interpolation-filters="sRGB">
+      <!-- SourceGraphicを左右に複製: dxはJSで動的設定（layer幅） -->
+      <feOffset in="SourceGraphic" dx="0" dy="0" result="leftCopy"/>
+      <feOffset in="SourceGraphic" dx="0" dy="0" result="rightCopy"/>
+      <feMerge result="extended">
+        <feMergeNode in="leftCopy"/>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="rightCopy"/>
+      </feMerge>
+      <!-- 大きい帯（チャンク状の塊） -->
+      <feTurbulence type="fractalNoise" baseFrequency="0.001 0.012" numOctaves="1" seed="2" result="bigNoise"/>
+      <!-- 細い帯（高周波の細かいライン） -->
+      <feTurbulence type="fractalNoise" baseFrequency="0.001 0.18" numOctaves="1" seed="7" result="fineNoise"/>
+      <!-- 合成：大きい帯メイン + 細い帯トッピング -->
+      <feComposite in="bigNoise" in2="fineNoise" operator="arithmetic" k1="0" k2="0.75" k3="0.35" k4="0" result="noiseRaw"/>
+      <!-- アルファを定数0.5に固定 → yChannelSelector="A"でY変位を0にする -->
+      <feColorMatrix in="noiseRaw" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0 0.5" result="noise"/>
+      <feDisplacementMap in="extended" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="A" result="disp"/>
+      <feColorMatrix in="disp" type="matrix"
+        values="1 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 1 0" result="r"/>
+      <feOffset in="r" dx="0" dy="0" result="r2"/>
+      <feColorMatrix in="disp" type="matrix"
+        values="0 0 0 0 0
+                0 1 0 0 0
+                0 0 0 0 0
+                0 0 0 1 0" result="g"/>
+      <feColorMatrix in="disp" type="matrix"
+        values="0 0 0 0 0
+                0 0 0 0 0
+                0 0 1 0 0
+                0 0 0 1 0" result="b"/>
+      <feOffset in="b" dx="0" dy="0" result="b2"/>
+      <feBlend mode="screen" in="r2" in2="g" result="rg"/>
+      <feBlend mode="screen" in="rg" in2="b2"/>
+    </filter>
+  </defs>
+</svg>
+
 <!-- TV Noise -->
 <div class="noise-overlay" id="noise-overlay">
   <canvas id="noise-canvas"></canvas>
@@ -665,6 +721,100 @@
     if (noiseGL) noiseGL.stop();
   }
 
+  // ===== GLITCH (Shadertoy XtK3W3近似: SVGフィルタで水平変位 + RGBズレ) =====
+  const GLITCH_DURATION = 600;
+  const $glitchTurbBig = document.querySelector('#video-glitch-filter feTurbulence[result="bigNoise"]');
+  const $glitchTurbFine = document.querySelector('#video-glitch-filter feTurbulence[result="fineNoise"]');
+  const $glitchDisp = document.querySelector('#video-glitch-filter feDisplacementMap');
+  const $glitchOffsetR = document.querySelector('#video-glitch-filter feOffset[result="r2"]');
+  const $glitchOffsetB = document.querySelector('#video-glitch-filter feOffset[result="b2"]');
+  const $glitchLeftCopy = document.querySelector('#video-glitch-filter feOffset[result="leftCopy"]');
+  const $glitchRightCopy = document.querySelector('#video-glitch-filter feOffset[result="rightCopy"]');
+
+  function updateGlitchExtendDx() {
+    const w = window.innerWidth;
+    $glitchLeftCopy.setAttribute('dx', -w);
+    $glitchRightCopy.setAttribute('dx', w);
+  }
+  updateGlitchExtendDx();
+  window.addEventListener('resize', updateGlitchExtendDx);
+
+  let glitchRAF = null;
+  let glitchActiveLayer = null;
+
+  // direction: 'up' = 0→max（前奏、砂嵐に向けて強くなる）, 'down' = max→0（後奏、強い状態から弱まる）
+  function animateGlitchFilter(startTime, direction) {
+    const now = performance.now();
+    const t = (now - startTime) / GLITCH_DURATION;
+    if (t >= 1) {
+      // 'up'は終端で砂嵐が覆うのでフィルタは触らずに据え置き
+      if (direction === 'down') {
+        $glitchDisp.setAttribute('scale', 0);
+        $glitchOffsetR.setAttribute('dx', 0);
+        $glitchOffsetB.setAttribute('dx', 0);
+      }
+      glitchRAF = null;
+      return;
+    }
+    // 非対称エンベロープ：up = ease-in (t^2)、down = ease-out (1-t)^2
+    const env = direction === 'up'
+      ? t * t
+      : (1 - t) * (1 - t);
+
+    // 20msごとに離散ランダム（高速ジッター）
+    const step = Math.floor(t * (GLITCH_DURATION / 20));
+    const r1 = Math.sin(step * 12.9898) * 43758.5453;
+    const r2 = Math.sin(step * 78.233 + 1.7) * 43758.5453;
+    const r3 = Math.sin(step * 39.346 + 4.1) * 43758.5453;
+    const rand1 = r1 - Math.floor(r1);
+    const rand2 = r2 - Math.floor(r2);
+    const rand3 = r3 - Math.floor(r3);
+
+    const scale = (400 + rand1 * 1800) * env;
+    const rOff = (rand2 - 0.5) * 800 * env;
+    const bOff = (rand3 - 0.5) * 800 * env;
+
+    // 大きい帯: Y freq 0.015-0.06 → 帯高さ ~16-65px
+    $glitchTurbBig.setAttribute('seed', Math.floor(rand1 * 1000));
+    $glitchTurbBig.setAttribute('baseFrequency', `${0.0005 + rand2 * 0.002} ${0.015 + rand3 * 0.045}`);
+    // 細い帯: Y freq 0.15-0.5 → 帯高さ ~2-7px
+    $glitchTurbFine.setAttribute('seed', Math.floor(rand2 * 1000));
+    $glitchTurbFine.setAttribute('baseFrequency', `${0.0005 + rand3 * 0.002} ${0.15 + rand1 * 0.35}`);
+    $glitchDisp.setAttribute('scale', scale);
+    $glitchOffsetR.setAttribute('dx', rOff);
+    $glitchOffsetB.setAttribute('dx', bOff);
+
+    glitchRAF = requestAnimationFrame(() => animateGlitchFilter(startTime, direction));
+  }
+
+  function playGlitch(layer, direction = 'down') {
+    return new Promise((resolve) => {
+      if (layer) {
+        layer.classList.remove('glitch');
+        void layer.offsetWidth;
+        layer.classList.add('glitch');
+      }
+      glitchActiveLayer = layer;
+      if (glitchRAF) cancelAnimationFrame(glitchRAF);
+      animateGlitchFilter(performance.now(), direction);
+
+      setTimeout(() => {
+        if (direction === 'down' && layer) layer.classList.remove('glitch');
+        resolve();
+      }, GLITCH_DURATION);
+    });
+  }
+
+  function clearGlitch(layer) {
+    if (glitchRAF) { cancelAnimationFrame(glitchRAF); glitchRAF = null; }
+    if (layer) {
+      layer.classList.remove('glitch');
+    }
+    $glitchDisp.setAttribute('scale', 0);
+    $glitchOffsetR.setAttribute('dx', 0);
+    $glitchOffsetB.setAttribute('dx', 0);
+  }
+
   // ===== ELEMENTS =====
   const $layerA = document.getElementById('layer-a');
   const $layerB = document.getElementById('layer-b');
@@ -719,6 +869,7 @@
       $layer.classList.remove('hidden');
       $layer.classList.add('visible');
       stopNoise();
+      playGlitch($layer, 'down');
       $loading.classList.add('fade-out');
       showInfo(data);
       showOverlays();
@@ -994,7 +1145,13 @@
     if (!ytApiReady || isSwitching) return;
     isSwitching = true;
 
-    // 即座に砂嵐表示
+    // 前奏グリッチ: ease-inでピークまで完走 → 砂嵐
+    const $preGlitchLayer = currentInfo ? (activeLayer === 'a' ? $layerA : $layerB) : null;
+    if ($preGlitchLayer) {
+      await playGlitch($preGlitchLayer, 'up');
+    }
+
+    // 砂嵐表示
     startNoise();
 
     try {
@@ -1022,11 +1179,15 @@
         players[oldLayerId] = null;
       }
       $currentLayer.innerHTML = `<div id="player-${oldLayerId}"></div>`;
+      clearGlitch($currentLayer);
 
       activeLayer = nextLayerId;
 
       // 砂嵐停止
       stopNoise();
+
+      // 後奏グリッチ: 強い状態から徐々に弱くなる(ease-out)
+      playGlitch($nextLayer, 'down');
 
       // Hide loading
       $loading.classList.add('fade-out');
