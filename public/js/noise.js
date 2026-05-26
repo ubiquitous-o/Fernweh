@@ -75,8 +75,10 @@ function createNoiseRenderer() {
   });
 
   function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // 親(.noise-overlay)が16:9にクリップされてるので、その実サイズに合わせる
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = Math.max(1, Math.round(rect.width));
+    canvas.height = Math.max(1, Math.round(rect.height));
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.uniform2f(uRes, canvas.width, canvas.height);
   }
@@ -89,9 +91,19 @@ function createNoiseRenderer() {
     animId = requestAnimationFrame(render);
   }
 
+  function clear() {
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+  }
+
   return {
     start() { if (!animId) { resize(); render(); } },
-    stop() { if (animId) { cancelAnimationFrame(animId); animId = null; } },
+    stop() {
+      if (animId) { cancelAnimationFrame(animId); animId = null; }
+      // 最後のフレームが古いブラウザのcompositor layerに残ると黒帯側に静止画として
+      // 浮き出てしまう → 明示的にキャンバスを透明クリアする
+      clear();
+    },
   };
 }
 

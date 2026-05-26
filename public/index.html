@@ -20,15 +20,19 @@
 </head>
 <body>
 
-<!-- Video layer (single player, loadVideoById for switching) -->
-<div class="video-layer" id="video-layer">
-  <div id="player"></div>
+<!-- 16:9のフレーム枠（overflow:hiddenでSVGフィルタの染み出しをクリップ） -->
+<div class="video-frame" id="video-frame">
+  <!-- Video layer (single player, loadVideoById for switching) -->
+  <div class="video-layer" id="video-layer">
+    <div id="player"></div>
+  </div>
 </div>
 
 <!-- SVG glitch filter (Shadertoy XtK3W3 inspired: turbulence-driven horizontal displacement + RGB split) -->
 <svg style="position:absolute; width:0; height:0; pointer-events:none;" aria-hidden="true">
   <defs>
-    <!-- filter領域を横3倍に拡張 + SourceGraphicを左右コピーして繋いだ拡張ソースを作る -->
+    <!-- filter領域を横3倍に拡張 + SourceGraphicを左右コピーして繋いだ拡張ソースを作る。
+         外側 .video-frame で overflow:hidden するので、はみ出した分は16:9枠内にクリップされる。 -->
     <filter id="video-glitch-filter" x="-100%" y="0%" width="300%" height="100%" color-interpolation-filters="sRGB">
       <!-- SourceGraphicを左右に複製: dxはJSで動的設定（layer幅） -->
       <feOffset in="SourceGraphic" dx="0" dy="0" result="leftCopy"/>

@@ -52,6 +52,8 @@ export async function switchVideo() {
 
   } catch (err) {
     console.error('switchVideo error:', err);
+    // 前奏グリッチが残ったままにならないよう必ずクリーンアップ
+    clearGlitch($videoLayer);
     stopNoise();
     const delay = err.retryAfter > 0 ? err.retryAfter * 1000 : 3000;
     setTimeout(switchVideo, delay);
@@ -76,6 +78,7 @@ export async function resumeVideo(data) {
     updateCameraTime();
     resetSwitchTimer(switchVideo);
   } catch {
+    clearGlitch($videoLayer);
     switchVideo();
   } finally {
     state.isSwitching = false;

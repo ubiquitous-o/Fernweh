@@ -9,10 +9,12 @@ const $offsetR = document.querySelector('#video-glitch-filter feOffset[result="r
 const $offsetB = document.querySelector('#video-glitch-filter feOffset[result="b2"]');
 const $leftCopy = document.querySelector('#video-glitch-filter feOffset[result="leftCopy"]');
 const $rightCopy = document.querySelector('#video-glitch-filter feOffset[result="rightCopy"]');
+const $videoLayer = document.getElementById('video-layer');
 
-// 変位が画面外に出たとき、左右コピーから絵を引いてくるためにwidthぶんの dx を設定する
+// 変位が画面外に出たとき、左右コピーから絵を引いてくるためにvideo-layer幅ぶんの dx を設定。
+// video-layerは16:9でビューポート内に centered → window幅ではなく実際のレイヤー幅を使う。
 function updateExtendDx() {
-  const w = window.innerWidth;
+  const w = $videoLayer.clientWidth || window.innerWidth;
   $leftCopy.setAttribute('dx', -w);
   $rightCopy.setAttribute('dx', w);
 }
@@ -20,6 +22,13 @@ updateExtendDx();
 window.addEventListener('resize', updateExtendDx);
 
 let glitchRAF = null;
+let glitchTimeout = null;
+
+function resetFilterAttrs() {
+  $disp.setAttribute('scale', 0);
+  $offsetR.setAttribute('dx', 0);
+  $offsetB.setAttribute('dx', 0);
+}
 
 // direction: 'up' = 0→max（前奏、砂嵐に向けて強くなる）/ 'down' = max→0（後奏、強い状態から弱まる）
 function animate(startTime, direction) {
@@ -27,11 +36,7 @@ function animate(startTime, direction) {
   const t = (now - startTime) / GLITCH_DURATION;
   if (t >= 1) {
     // 'up'は砂嵐で覆い隠されるのでフィルタ値を据え置きにする
-    if (direction === 'down') {
-      $disp.setAttribute('scale', 0);
-      $offsetR.setAttribute('dx', 0);
-      $offsetB.setAttribute('dx', 0);
-    }
+    if (direction === 'down') resetFilterAttrs();
     glitchRAF = null;
     return;
   }
@@ -64,15 +69,20 @@ function animate(startTime, direction) {
 
 export function playGlitch(layer, direction = 'down') {
   return new Promise((resolve) => {
+    // 前回のRAF・終了タイマーを必ず止める（古いタイマーが新しいグリッチ中に発火して
+    // .glitchクラスを誤って外すレースを防ぐ）
+    if (glitchRAF) { cancelAnimationFrame(glitchRAF); glitchRAF = null; }
+    if (glitchTimeout) { clearTimeout(glitchTimeout); glitchTimeout = null; }
+
     if (layer) {
       layer.classList.remove('glitch');
       void layer.offsetWidth; // reflowで再アニメ
       layer.classList.add('glitch');
     }
-    if (glitchRAF) cancelAnimationFrame(glitchRAF);
     animate(performance.now(), direction);
 
-    setTimeout(() => {
+    glitchTimeout = setTimeout(() => {
+      glitchTimeout = null;
       if (direction === 'down' && layer) layer.classList.remove('glitch');
       resolve();
     }, GLITCH_DURATION);
@@ -81,8 +91,7 @@ export function playGlitch(layer, direction = 'down') {
 
 export function clearGlitch(layer) {
   if (glitchRAF) { cancelAnimationFrame(glitchRAF); glitchRAF = null; }
+  if (glitchTimeout) { clearTimeout(glitchTimeout); glitchTimeout = null; }
   if (layer) layer.classList.remove('glitch');
-  $disp.setAttribute('scale', 0);
-  $offsetR.setAttribute('dx', 0);
-  $offsetB.setAttribute('dx', 0);
+  resetFilterAttrs();
 }

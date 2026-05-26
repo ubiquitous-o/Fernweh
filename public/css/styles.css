@@ -61,12 +61,23 @@ html, body {
   user-select: none;
 }
 
-/* --- Video Layers --- */
+/* --- Video frame & layer --- */
+/* .video-frame: 中央16:9のクリップ枠。SVGフィルタのはみ出しはここでクリップする。
+   .video-layer: フレーム内に inset:0 で配置、フィルタ自体はこの要素に当てる。 */
+.video-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  overflow: hidden;
+}
 .video-layer {
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
-  z-index: 1;
 }
 .video-layer iframe {
   width: 100%; height: 100%;
@@ -81,12 +92,20 @@ html, body {
 }
 
 /* --- TV Noise overlay --- */
+/* 動画の16:9枠内に収まるよう中央寄せ。ビューポートが16:9より広いときは左右、
+   高いときは上下に黒帯が残る（動画の letterbox/pillarbox と一致）。 */
 .noise-overlay {
   position: absolute;
-  inset: 0;
+  top: 50%;
+  left: 50%;
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  transform: translate(-50%, -50%);
   z-index: 3;
   opacity: 0;
   pointer-events: none;
+  /* キャンバスがレイアウト外に染み出ないよう保険 */
+  overflow: hidden;
 }
 .noise-overlay.active {
   opacity: 1;
