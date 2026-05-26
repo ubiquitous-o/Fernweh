@@ -92,8 +92,6 @@
     border: none;
     pointer-events: none;
   }
-  .video-layer.hidden { display: none; }
-  .video-layer.visible { display: block; }
 
   /* --- Glitch effect (SVG filter: noise displacement + RGB shift, shadertoy XtK3W3 inspired) --- */
   .video-layer.glitch {
@@ -487,12 +485,9 @@
 <!-- YouTube IFrame API -->
 <script src="https://www.youtube.com/iframe_api"></script>
 
-<!-- Two video layers for crossfade -->
-<div class="video-layer visible" id="layer-a">
-  <div id="player-a"></div>
-</div>
-<div class="video-layer hidden" id="layer-b">
-  <div id="player-b"></div>
+<!-- Video layer (single player, loadVideoById for switching) -->
+<div class="video-layer" id="video-layer">
+  <div id="player"></div>
 </div>
 
 <!-- SVG glitch filter (Shadertoy XtK3W3 inspired: turbulence-driven horizontal displacement + RGB split) -->
@@ -607,7 +602,6 @@
   // ===== CONFIG =====
 
   // ===== STATE =====
-  let activeLayer = 'a';
   let switchTimer = null;
   let progressTimer = null;
   let switchStartTime = 0;
@@ -816,8 +810,7 @@
   }
 
   // ===== ELEMENTS =====
-  const $layerA = document.getElementById('layer-a');
-  const $layerB = document.getElementById('layer-b');
+  const $videoLayer = document.getElementById('video-layer');
   const $info = document.getElementById('info');
   const $infoTitle = document.getElementById('info-title');
   const $infoChannel = document.getElementById('info-channel');
@@ -838,8 +831,9 @@
 
   // ===== YouTube IFrame Player API =====
   let ytApiReady = false;
-  const players = { a: null, b: null };
-  const PLAYBACK_TIMEOUT = 15000; // Skip if not playing within 15s
+  let player = null;        // 単一のYT.Playerインスタンス（loadVideoByIdで動画切替）
+  let loadResolver = null;  // loadVideoById後のPLAYING待ち用
+  const PLAYBACK_TIMEOUT = 15000;
 
   const RESUME_KEY = 'fernweh_resume';
 
@@ -862,14 +856,12 @@
     isSwitching = true;
     startNoise();
     try {
-      const layerId = activeLayer;
-      await createPlayer(layerId, data.videoId);
+      await createPlayer(data.videoId);
+      // YT intro UIを覆い隠す期間
+      await new Promise(r => setTimeout(r, 4000));
       currentInfo = data;
-      const $layer = layerId === 'a' ? $layerA : $layerB;
-      $layer.classList.remove('hidden');
-      $layer.classList.add('visible');
       stopNoise();
-      playGlitch($layer, 'down');
+      playGlitch($videoLayer, 'down');
       $loading.classList.add('fade-out');
       showInfo(data);
       showOverlays();
@@ -897,33 +889,22 @@
     }
   }, 30000);
 
-  function createPlayer(layerId, videoId) {
+  // 初回のみ呼ぶ：YT.Playerインスタンスを1つ作る
+  function createPlayer(videoId) {
     return new Promise((resolve, reject) => {
-      const elementId = `player-${layerId}`;
       let settled = false;
-      let timeoutId = null;
-
-      // Timeout: fail if playback doesn't start
-      timeoutId = setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         if (!settled) {
           settled = true;
-          console.warn(`⏰ Playback timeout: ${videoId}`);
-          reject(new Error('Playback timeout'));
+          reject(new Error('Initial playback timeout'));
         }
       }, PLAYBACK_TIMEOUT);
 
-      // Destroy old player
-      if (players[layerId]) {
-        try { players[layerId].destroy(); } catch (e) {}
-        players[layerId] = null;
-      }
+      $videoLayer.innerHTML = `<div id="player"></div>`;
 
-      // Recreate player div
-      const $layer = layerId === 'a' ? $layerA : $layerB;
-      $layer.innerHTML = `<div id="${elementId}"></div>`;
-
-      players[layerId] = new YT.Player(elementId, {
+      player = new YT.Player('player', {
         videoId,
+        host: 'https://www.youtube-nocookie.com',
         playerVars: {
           autoplay: 1,
           mute: 1,
@@ -936,6 +917,10 @@
           playlist: videoId,
           enablejsapi: 1,
           origin: location.origin,
+          playsinline: 1,
+          disablekb: 1,
+          cc_load_policy: 0,
+          fs: 0,
         },
         events: {
           onReady: (e) => {
@@ -943,23 +928,66 @@
             e.target.playVideo();
           },
           onStateChange: (e) => {
-            // YT.PlayerState.PLAYING === 1
-            if (e.data === 1 && !settled) {
-              settled = true;
-              clearTimeout(timeoutId);
-              resolve();
+            // UNSTARTED=-1, ENDED=0, PLAYING=1, PAUSED=2, BUFFERING=3, CUED=5
+            if (e.data === 1) {
+              if (!settled) {
+                settled = true;
+                clearTimeout(timeoutId);
+                resolve();
+              }
+              // loadVideoById待ちのresolverがあれば解決
+              if (loadResolver) {
+                const r = loadResolver;
+                loadResolver = null;
+                r();
+              }
+            }
+            // 自動pauseを検出したら即座に再開
+            if (e.data === 2) {
+              try { e.target.playVideo(); } catch (err) {}
             }
           },
           onError: (e) => {
+            console.warn(`Player error (code ${e.data})`);
             if (!settled) {
               settled = true;
               clearTimeout(timeoutId);
-              console.warn(`❌ Player error (code ${e.data}): ${videoId}`);
               reject(new Error(`Player error: ${e.data}`));
+            }
+            // loadVideoBy中のエラーならrejectで返す
+            if (loadResolver) {
+              const r = loadResolver;
+              loadResolver = null;
+              r(new Error(`Player error: ${e.data}`));
             }
           },
         },
       });
+    });
+  }
+
+  // 切替時に呼ぶ：既存playerに新しい動画をロード、PLAYING到達まで待つ
+  function loadVideo(videoId) {
+    return new Promise((resolve, reject) => {
+      const timeoutId = setTimeout(() => {
+        if (loadResolver) {
+          loadResolver = null;
+          reject(new Error('Load timeout'));
+        }
+      }, PLAYBACK_TIMEOUT);
+
+      loadResolver = (err) => {
+        clearTimeout(timeoutId);
+        if (err) reject(err); else resolve();
+      };
+
+      try {
+        player.loadVideoById(videoId);
+      } catch (err) {
+        clearTimeout(timeoutId);
+        loadResolver = null;
+        reject(err);
+      }
     });
   }
 
@@ -1145,10 +1173,9 @@
     if (!ytApiReady || isSwitching) return;
     isSwitching = true;
 
-    // 前奏グリッチ: ease-inでピークまで完走 → 砂嵐
-    const $preGlitchLayer = currentInfo ? (activeLayer === 'a' ? $layerA : $layerB) : null;
-    if ($preGlitchLayer) {
-      await playGlitch($preGlitchLayer, 'up');
+    // 前奏グリッチ（playerがある＝動画再生中の場合のみ）
+    if (currentInfo && player) {
+      await playGlitch($videoLayer, 'up');
     }
 
     // 砂嵐表示
@@ -1158,49 +1185,30 @@
       $error.classList.remove('show');
       const data = await fetchNext();
 
-      const nextLayerId = activeLayer === 'a' ? 'b' : 'a';
-      const $nextLayer = nextLayerId === 'a' ? $layerA : $layerB;
-      const $currentLayer = activeLayer === 'a' ? $layerA : $layerB;
-
-      await createPlayer(nextLayerId, data.videoId);
-
-      // 再生開始 → 即座に切替
-      currentInfo = data;
-
-      $nextLayer.classList.remove('hidden');
-      $nextLayer.classList.add('visible');
-      $currentLayer.classList.remove('visible');
-      $currentLayer.classList.add('hidden');
-
-      // 旧プレーヤーを即破棄
-      const oldLayerId = activeLayer;
-      if (players[oldLayerId]) {
-        try { players[oldLayerId].destroy(); } catch (e) {}
-        players[oldLayerId] = null;
+      if (!player) {
+        await createPlayer(data.videoId);
+      } else {
+        await loadVideo(data.videoId);
       }
-      $currentLayer.innerHTML = `<div id="player-${oldLayerId}"></div>`;
-      clearGlitch($currentLayer);
 
-      activeLayer = nextLayerId;
+      // YT embedはvideo切替時に必ずタイトル/再生ボタン/ロゴオーバーレイを数秒間出す。
+      // playerVarsでは完全に抑制不能なので、その期間を砂嵐で覆い隠す。
+      await new Promise(r => setTimeout(r, 4000));
+
+      currentInfo = data;
+      clearGlitch($videoLayer);
 
       // 砂嵐停止
       stopNoise();
 
-      // 後奏グリッチ: 強い状態から徐々に弱くなる(ease-out)
-      playGlitch($nextLayer, 'down');
+      // 後奏グリッチ
+      playGlitch($videoLayer, 'down');
 
-      // Hide loading
       $loading.classList.add('fade-out');
-
-      // Show info
       showInfo(data);
       showOverlays();
-
-      // Update globe
       updateGlobe(data.location, data.locationName);
       updateCameraTime();
-
-      // Reset timer
       resetSwitchTimer();
 
     } catch (err) {
