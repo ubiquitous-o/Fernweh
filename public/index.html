@@ -34,23 +34,23 @@
 <!-- SVG glitch filter (Shadertoy XtK3W3 inspired: turbulence-driven horizontal displacement + RGB split) -->
 <svg style="position:absolute; width:0; height:0; pointer-events:none;" aria-hidden="true">
   <defs>
-    <!-- filter領域を横3倍に拡張 + SourceGraphicを左右コピーして繋いだ拡張ソースを作る。
-         外側 .video-frame で overflow:hidden するので、はみ出した分は16:9枠内にクリップされる。 -->
-    <filter id="video-glitch-filter" x="-100%" y="0%" width="300%" height="100%" color-interpolation-filters="sRGB">
-      <!-- SourceGraphicを左右に複製: dxはJSで動的設定（layer幅） -->
+    <!-- filter領域を横2倍に拡張。SourceGraphicを±半幅ずつシフトして
+         右半分→左側、左半分→右側のラップアラウンドを作る（フル3倍タイリングより軽量）。 -->
+    <filter id="video-glitch-filter" x="-50%" y="0%" width="200%" height="100%" color-interpolation-filters="sRGB">
+      <!-- SourceGraphicを±半幅シフト: dxはJSで動的設定 -->
       <feOffset in="SourceGraphic" dx="0" dy="0" result="leftCopy"/>
       <feOffset in="SourceGraphic" dx="0" dy="0" result="rightCopy"/>
+      <!-- 描画順: 左右コピー → 最後にSourceGraphicを最前面に。
+           これで原画は元の位置を維持しつつ、両側に半幅の wrap が広がる。 -->
       <feMerge result="extended">
         <feMergeNode in="leftCopy"/>
-        <feMergeNode in="SourceGraphic"/>
         <feMergeNode in="rightCopy"/>
+        <feMergeNode in="SourceGraphic"/>
       </feMerge>
-      <!-- 大きい帯（チャンク状の塊） -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.001 0.012" numOctaves="1" seed="2" result="bigNoise"/>
-      <!-- 細い帯（高周波の細かいライン） -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.001 0.18" numOctaves="1" seed="7" result="fineNoise"/>
-      <!-- 合成：大きい帯メイン + 細い帯トッピング -->
-      <feComposite in="bigNoise" in2="fineNoise" operator="arithmetic" k1="0" k2="0.75" k3="0.35" k4="0" result="noiseRaw"/>
+      <!-- WebGLで生成したフラクタルノイズをcanvas→blob URL経由で読み込む。
+           feTurbulenceの代わりに使うことでモバイルでのパフォーマンス向上。
+           shaderで big/fine 両方の周波数を1パスで合成。 -->
+      <feImage href="" result="noiseRaw" preserveAspectRatio="none"/>
       <!-- アルファを定数0.5に固定 → yChannelSelector="A"でY変位を0にする -->
       <feColorMatrix in="noiseRaw" type="matrix"
         values="1 0 0 0 0

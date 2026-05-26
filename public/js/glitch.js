@@ -1,28 +1,52 @@
 // Shadertoy XtK3W3近似のグリッチ演出：
-// SVGフィルタでターブレンスベースの水平変位 + RGBチャンネルずれを動的にアニメート。
+// SVGフィルタで水平変位 + RGBチャンネルずれを動的にアニメート。
+// feTurbulenceはモバイルで重いので、WebGLで生成したノイズをfeImageで供給する。
+import { renderGlitchNoise, glitchNoiseCanvas } from './glitchNoise.js';
+
 const GLITCH_DURATION = 600;
 
-const $turbBig = document.querySelector('#video-glitch-filter feTurbulence[result="bigNoise"]');
-const $turbFine = document.querySelector('#video-glitch-filter feTurbulence[result="fineNoise"]');
 const $disp = document.querySelector('#video-glitch-filter feDisplacementMap');
 const $offsetR = document.querySelector('#video-glitch-filter feOffset[result="r2"]');
 const $offsetB = document.querySelector('#video-glitch-filter feOffset[result="b2"]');
 const $leftCopy = document.querySelector('#video-glitch-filter feOffset[result="leftCopy"]');
 const $rightCopy = document.querySelector('#video-glitch-filter feOffset[result="rightCopy"]');
+const $feImage = document.querySelector('#video-glitch-filter feImage');
 const $videoFrame = document.getElementById('video-frame');
 
-// 変位が枠外に出たとき、左右コピーから絵を引いてくるためにframe幅ぶんの dx を設定。
-// .video-frame は16:9 centered → ビューポート幅ではなくframeの実幅を使う。
+// ノイズ更新スロットル: 50msに1回まで
+const NOISE_UPDATE_INTERVAL_MS = 50;
+
+// ハーフタイリング: 半幅シフトで右半分→左側 / 左半分→右側 のラップを作る
 function updateExtendDx() {
-  const w = $videoFrame.clientWidth || window.innerWidth;
-  $leftCopy.setAttribute('dx', -w);
-  $rightCopy.setAttribute('dx', w);
+  const halfW = ($videoFrame.clientWidth || window.innerWidth) / 2;
+  $leftCopy.setAttribute('dx', -halfW);
+  $rightCopy.setAttribute('dx', halfW);
 }
 updateExtendDx();
 window.addEventListener('resize', updateExtendDx);
 
+// WebGL noise canvas → blob URL → feImage の連携
+let pendingBlob = false;
+let lastBlobUrl = null;
+
+function pushNoiseToFeImage() {
+  if (pendingBlob) return; // エンコーダー詰まりを避ける
+  pendingBlob = true;
+  glitchNoiseCanvas.toBlob((blob) => {
+    pendingBlob = false;
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const prev = lastBlobUrl;
+    lastBlobUrl = url;
+    $feImage.setAttribute('href', url);
+    // 古いblob URLを解放
+    if (prev) URL.revokeObjectURL(prev);
+  });
+}
+
 let glitchRAF = null;
 let glitchTimeout = null;
+let lastNoiseUpdate = 0;
 
 function resetFilterAttrs() {
   $disp.setAttribute('scale', 0);
@@ -35,7 +59,6 @@ function animate(startTime, direction) {
   const now = performance.now();
   const t = (now - startTime) / GLITCH_DURATION;
   if (t >= 1) {
-    // 'up'は砂嵐で覆い隠されるのでフィルタ値を据え置きにする
     if (direction === 'down') resetFilterAttrs();
     glitchRAF = null;
     return;
@@ -54,12 +77,15 @@ function animate(startTime, direction) {
   const rOff = (rand2 - 0.5) * 800 * env;
   const bOff = (rand3 - 0.5) * 800 * env;
 
-  // 大きい帯: Y freq 0.015–0.06 → 帯高さ ~16–65px
-  $turbBig.setAttribute('seed', Math.floor(rand1 * 1000));
-  $turbBig.setAttribute('baseFrequency', `${0.0005 + rand2 * 0.002} ${0.015 + rand3 * 0.045}`);
-  // 細い帯: Y freq 0.15–0.5 → 帯高さ ~2–7px
-  $turbFine.setAttribute('seed', Math.floor(rand2 * 1000));
-  $turbFine.setAttribute('baseFrequency', `${0.0005 + rand3 * 0.002} ${0.15 + rand1 * 0.35}`);
+  // WebGLでノイズを再生成 → feImageへ（50msに1回までスロットル）
+  if (now - lastNoiseUpdate >= NOISE_UPDATE_INTERVAL_MS) {
+    lastNoiseUpdate = now;
+    const freqBigY = 15 + rand3 * 30;
+    const freqFineY = 100 + rand1 * 150;
+    renderGlitchNoise(rand1 * 1000, rand2 * 1000, freqBigY, freqFineY);
+    pushNoiseToFeImage();
+  }
+
   $disp.setAttribute('scale', scale);
   $offsetR.setAttribute('dx', rOff);
   $offsetB.setAttribute('dx', bOff);
@@ -69,8 +95,7 @@ function animate(startTime, direction) {
 
 export function playGlitch(layer, direction = 'down') {
   return new Promise((resolve) => {
-    // 前回のRAF・終了タイマーを必ず止める（古いタイマーが新しいグリッチ中に発火して
-    // .glitchクラスを誤って外すレースを防ぐ）
+    // 前回のRAF・終了タイマーを必ず止める
     if (glitchRAF) { cancelAnimationFrame(glitchRAF); glitchRAF = null; }
     if (glitchTimeout) { clearTimeout(glitchTimeout); glitchTimeout = null; }
 
@@ -79,6 +104,7 @@ export function playGlitch(layer, direction = 'down') {
       void layer.offsetWidth; // reflowで再アニメ
       layer.classList.add('glitch');
     }
+    lastNoiseUpdate = 0; // 新しいglitchは初回からノイズ更新
     animate(performance.now(), direction);
 
     glitchTimeout = setTimeout(() => {
