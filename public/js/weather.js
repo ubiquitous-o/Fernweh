@@ -129,18 +129,26 @@ async function updateWeather() {
   }
 }
 
+// Silkscreen は「1」だけ字幅が狭く（11.25 vs 13.50）、tabular-nums OpenType feature も
+// 持たない。各文字を 1ch 固定幅の inline-block span に包んで物理的に揃える。
+function monoChars(text) {
+  return [...text].map((c) => `<span class="ch">${c === ' ' ? '&nbsp;' : c}</span>`).join('');
+}
+
 function renderDay(daily, dayIndex) {
   const code = daily.weather_code[dayIndex];
   const tMax = Math.round(daily.temperature_2m_max[dayIndex]);
   const tMin = Math.round(daily.temperature_2m_min[dayIndex]);
   const precip = daily.precipitation_probability_max[dayIndex];
   const d = new Date(daily.time[dayIndex]);
-  document.getElementById(`weather-date-${dayIndex}`).textContent =
-    `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+  const dateText = `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+  const tempText = `${String(tMax).padStart(2, '0')}° / ${String(tMin).padStart(2, '0')}°`;
+  const precipText = `${String(precip).padStart(3, '0')}%`;
+  document.getElementById(`weather-date-${dayIndex}`).innerHTML = monoChars(dateText);
   document.getElementById(`weather-icon-${dayIndex}`).textContent = WEATHER_EMOJI[code] || '🌡️';
-  document.getElementById(`weather-temp-${dayIndex}`).textContent =
-    `${String(tMax).padStart(2, '0')}° / ${String(tMin).padStart(2, '0')}°`;
-  document.getElementById(`weather-precip-${dayIndex}`).textContent = `💧${String(precip).padStart(3, '0')}%`;
+  document.getElementById(`weather-temp-${dayIndex}`).innerHTML = monoChars(tempText);
+  // 💧 はそのまま、数値部分だけ等幅化
+  document.getElementById(`weather-precip-${dayIndex}`).innerHTML = `💧${monoChars(precipText)}`;
 }
 
 export async function initWeather() {

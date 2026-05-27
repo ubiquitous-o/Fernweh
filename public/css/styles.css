@@ -215,51 +215,63 @@ html, body {
 }
 
 /* --- Weather (below clock) --- */
+/* Grid layout: 4列がそれぞれ全行の最大幅に自動フィット。Silkscreenの不揃いな
+   字幅も絵文字幅差も「列単位の最大値」で吸収されるので、ピクセル揃え + 無駄余白なし。
+   .weather-day を display:contents にして、各<span>を直接grid cellとして参加させる。 */
 .weather-section {
   margin-top: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.weather-day {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: clamp(4px, 0.8vw, 10px);
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  row-gap: 4px;
+  column-gap: clamp(6px, 1vw, 12px);
+  justify-content: end;
   font-size: var(--weather-font);
   font-weight: 300;
   letter-spacing: 1px;
 }
 
+.weather-day {
+  display: contents;
+}
+
 .weather-label {
   color: var(--text-dim);
-  font-size: var(--weather-font);
   letter-spacing: 3px;
-  min-width: clamp(30px, 4vw, 50px);
   text-align: right;
 }
 
+/* Silkscreenは「1」が他数字より狭い等、純粋な等幅じゃない。各文字を 1ch
+   (= '0' の advance width) の固定幅boxに入れて、列単位での揃いを保証する。 */
+.weather-label .ch,
+.weather-temp .ch,
+.weather-precip .ch {
+  display: inline-block;
+  width: 1ch;
+  text-align: center;
+}
+
+/* 絵文字種別（U+2600帯 vs U+1F300+帯）でグリフ幅が変わるので幅を完全固定 + center寄せ。
+   min-width:0 と overflow:hidden は flex item デフォルトの min-content を抑える保険。 */
 .weather-icon {
-  font-size: var(--weather-font);
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6em;
+  min-width: 0;
+  overflow: hidden;
+  letter-spacing: 0;
 }
 
 .weather-temp {
   color: var(--text-secondary);
-  font-size: var(--weather-font);
   font-weight: 200;
-  letter-spacing: 1px;
   font-variant-numeric: tabular-nums;
-  min-width: clamp(55px, 7vw, 90px);
   text-align: right;
 }
 
 .weather-precip {
   color: var(--text-secondary);
-  font-size: var(--weather-font);
-  letter-spacing: 1px;
-  min-width: clamp(30px, 3.5vw, 44px);
   text-align: right;
 }
 
