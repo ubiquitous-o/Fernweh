@@ -97,23 +97,11 @@ export async function searchLiveVideos(query, order) {
 
 // videoIds（任意件数）に対して50件ずつvideos.listを叩き、id→description のマップを返す
 export async function fetchVideoDescriptions(videoIds) {
-  const details = await fetchVideoDetails(videoIds);
   const descriptions = {};
-  for (const id of Object.keys(details)) {
-    descriptions[id] = details[id].description || '';
-  }
-  return descriptions;
-}
-
-// videoIds（任意件数）に対して50件ずつvideos.listを叩き、id→詳細メタデータのマップを返す。
-// 削除済み/private な動画は API 応答に含まれないため、結果マップに存在しない=「使えない」。
-// 返るフィールド: { embeddable, privacyStatus, isLive, description }
-export async function fetchVideoDetails(videoIds) {
-  const details = {};
   for (let i = 0; i < videoIds.length; i += 50) {
     const batch = videoIds.slice(i, i + 50);
     const params = new URLSearchParams({
-      part: 'snippet,status',
+      part: 'snippet',
       id: batch.join(','),
       key: API_KEY,
     });
@@ -124,26 +112,10 @@ export async function fetchVideoDetails(videoIds) {
     }
     const data = await res.json();
     for (const item of (data.items || [])) {
-      details[item.id] = {
-        embeddable: item.status?.embeddable === true,
-        privacyStatus: item.status?.privacyStatus || 'unknown',
-        // liveBroadcastContent: 'live' | 'upcoming' | 'none'
-        // 配信終了した過去のライブは 'none' になる → これを弾く
-        isLive: item.snippet?.liveBroadcastContent === 'live',
-        description: item.snippet?.description || '',
-      };
+      descriptions[item.id] = item.snippet.description || '';
     }
   }
-  return details;
-}
-
-// fetchVideoDetails の戻り値を判定。API応答なし(=削除/private)もNG扱い。
-export function isUsableVideo(d) {
-  if (!d) return false;
-  if (!d.embeddable) return false;
-  if (d.privacyStatus !== 'public') return false;
-  if (!d.isLive) return false;
-  return true;
+  return descriptions;
 }
 
 // 検索結果からゲーム・音楽など非カメラ系を除外
