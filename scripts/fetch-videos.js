@@ -14,7 +14,7 @@ import { integrateGeocacheIntoDict } from './lib/geocode.js';
 import { resolveTimezone } from './lib/timezone.js';
 import { GEMINI_API_KEY, extractLocationsWithGemini } from './lib/gemini.js';
 import {
-  searchLiveVideos, fetchVideoDescriptions, filterCameraStreams,
+  searchLiveVideos, fetchVideoDetails, isUsableVideo, filterCameraStreams,
   generateQuery, SORT_ORDERS,
 } from './lib/youtube.js';
 import { resolveLocation } from './lib/resolveLocation.js';
@@ -72,20 +72,34 @@ async function main() {
     }
   }
 
-  // --- Phase 2: 説明文を新規候補 + 既存未解決まとめて取得 ---
-  const unresolved = existing.filter((v) => !v.location);
-  const allVideoIds = [
+  // --- Phase 1.5: 新規候補 + 既存全件のステータス検証 ---
+  // search.list の videoEmbeddable=true は不確実（配信終了・ドメイン制限を取りこぼす）
+  // ので、videos.list で再確認して非使用な動画を削る。同じ呼び出しで description も取れる。
+  const allCandidateIds = [
     ...newCandidates.map((c) => c.videoId),
-    ...unresolved.map((v) => v.videoId),
+    ...existing.map((v) => v.videoId),
   ];
-  const descriptions = await fetchVideoDescriptions(allVideoIds);
-  console.log(`説明文取得: ${Object.keys(descriptions).length}/${allVideoIds.length}件`);
+  const details = await fetchVideoDetails(allCandidateIds);
+  console.log(`videos.list: ${Object.keys(details).length}/${allCandidateIds.length}件 応答あり`);
+
+  const usableNewCandidates = newCandidates.filter((c) => isUsableVideo(details[c.videoId]));
+  const usableExisting = existing.filter((v) => isUsableVideo(details[v.videoId]));
+  const droppedNew = newCandidates.length - usableNewCandidates.length;
+  const droppedExisting = existing.length - usableExisting.length;
+  console.log(`非使用動画を除外: 新規 ${droppedNew}件 / 既存 ${droppedExisting}件`);
+
+  newCandidates.length = 0;
+  newCandidates.push(...usableNewCandidates);
+  existing = usableExisting;
+
+  // --- Phase 2: 取得済みdescriptionを各候補に展開 ---
+  const unresolved = existing.filter((v) => !v.location);
   for (const c of newCandidates) {
-    c.description = descriptions[c.videoId] || '';
+    c.description = details[c.videoId]?.description || '';
   }
   const unresolvedDescs = {};
   for (const v of unresolved) {
-    unresolvedDescs[v.videoId] = descriptions[v.videoId] || '';
+    unresolvedDescs[v.videoId] = details[v.videoId]?.description || '';
   }
   if (unresolved.length > 0) {
     console.log(`既存動画の再処理対象: ${unresolved.length}件 (location未設定)`);

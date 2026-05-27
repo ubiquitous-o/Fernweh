@@ -2,8 +2,15 @@
 // 切替時に inactive layer に新規 YT.Player を作成し、PLAYING になったら swap する。
 // 単一player + loadVideoById方式はbot検知に引っかかりやすいため避ける。
 import { getLayer } from './dom.js';
+import { addBlocked, recordFailure, clearFailure } from './videoPool.js';
 
-const PLAYBACK_TIMEOUT = 10000; // 失敗判定を早く（モバイルでの累積遅延対策）
+// API的にembeddable=trueでも実行時に失敗するエラー → 永続ブロック対象
+// 2: 無効ID, 100: 削除, 101/150: embed禁止 or ドメイン制限
+const PERMANENT_FAIL_CODES = new Set([2, 100, 101, 150]);
+
+// モバイル/低速回線で正常動画も巻き込まないよう、少し余裕を持たせる。
+// 暫定失敗は recordFailure 経由でカウントされ、連続失敗で blocked に昇格する。
+const PLAYBACK_TIMEOUT = 12000;
 
 // レイヤーIDごとのYT.Playerインスタンス
 export const players = { a: null, b: null };
@@ -17,6 +24,7 @@ export function createPlayer(layerId, videoId) {
     const timeoutId = setTimeout(() => {
       if (!settled) {
         settled = true;
+        recordFailure(videoId);
         console.warn(`Playback timeout: ${videoId}`);
         reject(new Error('Playback timeout'));
       }
@@ -62,6 +70,7 @@ export function createPlayer(layerId, videoId) {
           if (e.data === 1 && !settled) {
             settled = true;
             clearTimeout(timeoutId);
+            clearFailure(videoId);
             resolve();
           }
           // 隠しiframeでの謎の自動pauseを検出したら即座に再開
@@ -70,6 +79,13 @@ export function createPlayer(layerId, videoId) {
           }
         },
         onError: (e) => {
+          // 永続ブロック対象なら今後この動画は fetchNext で除外する。
+          // それ以外（5: HTML5 player error 等）は暫定失敗として recordFailure。
+          if (PERMANENT_FAIL_CODES.has(e.data)) {
+            addBlocked(videoId);
+          } else {
+            recordFailure(videoId);
+          }
           if (!settled) {
             settled = true;
             clearTimeout(timeoutId);
