@@ -3,7 +3,7 @@
 // 単一player + loadVideoById方式はbot検知に引っかかりやすいため避ける。
 import { getLayer } from './dom.js';
 
-const PLAYBACK_TIMEOUT = 10000; // 失敗判定を早く（モバイルでの累積遅延対策）
+const PLAYBACK_TIMEOUT = 12000; // モバイル/低速回線で正常動画を巻き込まない程度に余裕
 
 // レイヤーIDごとのYT.Playerインスタンス
 export const players = { a: null, b: null };
@@ -34,7 +34,6 @@ export function createPlayer(layerId, videoId) {
 
     players[layerId] = new YT.Player(elementId, {
       videoId,
-      host: 'https://www.youtube-nocookie.com',
       playerVars: {
         autoplay: 1,
         mute: 1,
