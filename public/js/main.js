@@ -1,7 +1,7 @@
 // エントリーポイント：各モジュールを統合して初期化する。
 import { state } from './state.js';
 import { startNoise } from './noise.js';
-import { switchVideo, resumeVideo } from './transitions.js';
+import { switchVideo, resumeVideo, initialSwitch } from './transitions.js';
 import { updateClock } from './clock.js';
 import { repositionCameraTime } from './clock.js';
 import { initWeather } from './weather.js';
@@ -25,7 +25,7 @@ window.onYouTubeIframeAPIReady = () => {
       return;
     } catch {}
   }
-  switchVideo();
+  initialSwitch();
 };
 
 // YouTube IFrame APIを動的にロード（onYouTubeIframeAPIReady定義後）
