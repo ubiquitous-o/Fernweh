@@ -16,6 +16,12 @@
 <meta name="twitter:title" content="Fernweh">
 <meta name="twitter:description" content="An ache for distant places. Fullscreen live cameras from around the world, cycling every hour.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+<!-- 砂嵐短縮: 起動で必ず叩くホストの握手(DNS+TCP+TLS)を前倒し + 必須JSONを並行取得 -->
+<link rel="preconnect" href="https://www.youtube.com">
+<link rel="preconnect" href="https://s.ytimg.com">
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://www.google.com">
+<link rel="preload" href="videos.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>

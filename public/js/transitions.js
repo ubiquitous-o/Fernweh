@@ -16,7 +16,7 @@ import { resetSwitchTimer } from './progress.js';
 
 // YT embedがvideo切替時に必ず出すタイトル/再生ボタン/ロゴオーバーレイを覆い隠す時間。
 // PLAYING到達後、この秒数経つとintro UIが消えるので 'ready' とみなす。
-const POST_LOAD_HOLD_MS = 4000;
+const POST_LOAD_HOLD_MS = 3700;
 // preload失敗時のリトライ間隔
 const PRELOAD_RETRY_MS = 3000;
 // switchVideo時にpreload失敗していたら何度試すか
