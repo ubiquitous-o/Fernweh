@@ -1,5 +1,366 @@
 [
   {
+    "videoId": "HfgIFGbdGJ0",
+    "title": "The World Live - Original Version | earthTV®",
+    "channel": "earthTV",
+    "thumbnail": "https://i.ytimg.com/vi/HfgIFGbdGJ0/hqdefault_live.jpg",
+    "query": "glacier Edinburgh webcam",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "fetchedAt": "2026-06-30T13:49:52.187Z"
+  },
+  {
+    "videoId": "edz0ux7JClE",
+    "title": "San Diego Web Cam Live (Rotating/Switched Feed) 4K",
+    "channel": "San Diego Web Cam",
+    "thumbnail": "https://i.ytimg.com/vi/edz0ux7JClE/hqdefault_live.jpg",
+    "query": "live view Frying Pan Tower",
+    "location": [
+      32.72,
+      -117.16
+    ],
+    "locationName": "San Diego, USA",
+    "timezone": "America/Los_Angeles",
+    "fetchedAt": "2026-06-30T13:49:52.187Z"
+  },
+  {
+    "videoId": "WEhuDqlxHmM",
+    "title": "Live Outer Banks, NC Webcam from Twiddy &amp; Company",
+    "channel": "Twiddy & Company Vacation Rentals",
+    "thumbnail": "https://i.ytimg.com/vi/WEhuDqlxHmM/hqdefault_live.jpg",
+    "query": "live view Frying Pan Tower",
+    "location": [
+      35.5669037,
+      -75.4688367
+    ],
+    "locationName": "Outer Banks, North Carolina",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-06-30T13:49:52.189Z"
+  },
+  {
+    "videoId": "GKOyGoRE0Tg",
+    "title": "Live Myrtle Beach View - Captain&#39;s Quarters Resort",
+    "channel": "Vacation Myrtle Beach",
+    "thumbnail": "https://i.ytimg.com/vi/GKOyGoRE0Tg/hqdefault_live.jpg",
+    "query": "live view Frying Pan Tower",
+    "location": [
+      33.6956461,
+      -78.8900409
+    ],
+    "locationName": "Myrtle Beach, South Carolina",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-06-30T13:49:52.189Z"
+  },
+  {
+    "videoId": "61pi8UjLOlo",
+    "title": "Lake Hood Seaplane Base, Anchorage, Alaska, USA | StreamTime LIVE",
+    "channel": "StreamTime Live",
+    "thumbnail": "https://i.ytimg.com/vi/61pi8UjLOlo/hqdefault_live.jpg",
+    "query": "live view Frying Pan Tower",
+    "location": [
+      61.22,
+      -149.9
+    ],
+    "locationName": "Anchorage, Alaska",
+    "timezone": "America/Anchorage",
+    "fetchedAt": "2026-06-30T13:49:52.189Z"
+  },
+  {
+    "videoId": "1RgjiOWGeXI",
+    "title": "Portrush Live Surf Cam",
+    "channel": "Advanced Overwatch CCTV & Security Solutions Northern Ireland",
+    "thumbnail": "https://i.ytimg.com/vi/1RgjiOWGeXI/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "fNY-ParaOsM",
+    "title": "Larne, Northern Ireland - Live Webcam",
+    "channel": "Larne Live Webcam",
+    "thumbnail": "https://i.ytimg.com/vi/fNY-ParaOsM/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "dMufmNEwXRc",
+    "title": "Live Webcam North Circular Road ( Facing North East)",
+    "channel": "LivefromIreland - Live Streaming Webcams",
+    "thumbnail": "https://i.ytimg.com/vi/dMufmNEwXRc/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      42.2150373,
+      -79.8358415
+    ],
+    "locationName": "North East, Pennsylvania",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "eSWxGOZLgCU",
+    "title": "North Circular Road Live Webcam (Facing North West)",
+    "channel": "LivefromIreland - Live Streaming Webcams",
+    "thumbnail": "https://i.ytimg.com/vi/eSWxGOZLgCU/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "Xlvq5RkOaBw",
+    "title": "Live Webcam Cabra Road Dublin Ireland  (Facing East)",
+    "channel": "LivefromIreland - Live Streaming Webcams",
+    "thumbnail": "https://i.ytimg.com/vi/Xlvq5RkOaBw/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "9o3Ik82Wt4w",
+    "title": "Live Webcam Cabra Dublin Ireland (Facing Nth West)",
+    "channel": "LivefromIreland - Live Streaming Webcams",
+    "thumbnail": "https://i.ytimg.com/vi/9o3Ik82Wt4w/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "M1t4rRSv_YM",
+    "title": "The Paddocks Riding Centre Live Webcam Dublin Ireland.",
+    "channel": "LivefromIreland - Live Streaming Webcams",
+    "thumbnail": "https://i.ytimg.com/vi/M1t4rRSv_YM/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "2UYUFoxWWIc",
+    "title": "Live Webcam Collins Avenue Dublin Ireland",
+    "channel": "LivefromIreland - Live Streaming Webcams",
+    "thumbnail": "https://i.ytimg.com/vi/2UYUFoxWWIc/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "zt3MCinVr5Q",
+    "title": "Puffin Colony – LIVE from National Trust Farne Islands 2026",
+    "channel": "National Trust",
+    "thumbnail": "https://i.ytimg.com/vi/zt3MCinVr5Q/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      55.6166651,
+      -1.6557996
+    ],
+    "locationName": "Farne Islands, England",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "Cj4bM-OoW9g",
+    "title": "Puffin Colony Cam - Skomer Island Livestream",
+    "channel": "The Wildlife Trust of South and West Wales",
+    "thumbnail": "https://i.ytimg.com/vi/Cj4bM-OoW9g/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      52.29,
+      -3.74
+    ],
+    "locationName": "Wales",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "lcVm-Izrpa0",
+    "title": "[LIVE] Irish Kevin&#39;s Duval Street",
+    "channel": "Seek Florida Keys",
+    "thumbnail": "https://i.ytimg.com/vi/lcVm-Izrpa0/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      27.99,
+      -81.76
+    ],
+    "locationName": "Florida, USA",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-06-30T13:49:52.190Z"
+  },
+  {
+    "videoId": "77akujLn4k8",
+    "title": "EarthCam Live - Western Wall  (Jerusalem, Israel)",
+    "channel": "EarthCam",
+    "thumbnail": "https://i.ytimg.com/vi/77akujLn4k8/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      31.7788472,
+      35.2257856
+    ],
+    "locationName": "Jerusalem, Israel",
+    "timezone": "Asia/Jerusalem",
+    "fetchedAt": "2026-06-30T13:49:52.194Z"
+  },
+  {
+    "videoId": "3nyPER2kzqk",
+    "title": "EarthCam Live: Dublin, Ireland",
+    "channel": "EarthCam",
+    "thumbnail": "https://i.ytimg.com/vi/3nyPER2kzqk/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.194Z"
+  },
+  {
+    "videoId": "Ksrleaxxxhw",
+    "title": "EarthCam Live: New Orleans Street View",
+    "channel": "EarthCam",
+    "thumbnail": "https://i.ytimg.com/vi/Ksrleaxxxhw/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      29.9561422,
+      -90.0733934
+    ],
+    "locationName": "New Orleans",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-06-30T13:49:52.194Z"
+  },
+  {
+    "videoId": "vrl61G-JUzU",
+    "title": "Live Bird Nest Box Cam | 24/7 Backyard Wildlife | Co. Wicklow, Ireland, 🇮🇪",
+    "channel": "DIY Craic",
+    "thumbnail": "https://i.ytimg.com/vi/vrl61G-JUzU/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.194Z"
+  },
+  {
+    "videoId": "h5rt6oSZOak",
+    "title": "Mountjoy Street Live Webcam Dublin Ireland",
+    "channel": "LivefromIreland - Live Streaming Webcams",
+    "thumbnail": "https://i.ytimg.com/vi/h5rt6oSZOak/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.194Z"
+  },
+  {
+    "videoId": "GL_2CrLwSDA",
+    "title": "LIVE Napili Sunset Beachfront Resort | 4K Maui Live Cam | Maui Beachfront View",
+    "channel": "Ozolio Live",
+    "thumbnail": "https://i.ytimg.com/vi/GL_2CrLwSDA/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      20.9859587,
+      -156.6672
+    ],
+    "locationName": "Napili, Hawaii",
+    "timezone": "Pacific/Honolulu",
+    "fetchedAt": "2026-06-30T13:49:52.195Z"
+  },
+  {
+    "videoId": "jy3fkOBIolk",
+    "title": "Dublin Port Poolbeg Lighthouse View: Live Ship Movements on the River Liffey",
+    "channel": "Dublin Port",
+    "thumbnail": "https://i.ytimg.com/vi/jy3fkOBIolk/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Dublin, Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.195Z"
+  },
+  {
+    "videoId": "OBJ5Q0lWbqk",
+    "title": "🔴 Tropical Murphy&#39;s Irish Pub | Live Webcam Stream | Chaweng | Koh Samui | Thailand | 2160p UHD 4K",
+    "channel": "The Real Samui Webcam",
+    "thumbnail": "https://i.ytimg.com/vi/OBJ5Q0lWbqk/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      9.5013945,
+      99.9956193
+    ],
+    "locationName": "Koh Samui",
+    "timezone": "Asia/Jakarta",
+    "fetchedAt": "2026-06-30T13:49:52.195Z"
+  },
+  {
+    "videoId": "L3iKvwoXZ38",
+    "title": "Midway Atoll NWR Wildlife Live Camera",
+    "channel": "Friends of Midway Atoll NWR",
+    "thumbnail": "https://i.ytimg.com/vi/L3iKvwoXZ38/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      28.2360511,
+      -177.3685632
+    ],
+    "locationName": "Midway Atoll",
+    "timezone": "Pacific/Pago_Pago",
+    "fetchedAt": "2026-06-30T13:49:52.195Z"
+  },
+  {
+    "videoId": "K_ye7QHXosQ",
+    "title": "Dublin Port City View: Live Ship Movements on the River Liffey",
+    "channel": "Dublin Port",
+    "thumbnail": "https://i.ytimg.com/vi/K_ye7QHXosQ/hqdefault_live.jpg",
+    "query": "live cam Ireland",
+    "location": [
+      53.35,
+      -6.26
+    ],
+    "locationName": "Dublin, Ireland",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-06-30T13:49:52.195Z"
+  },
+  {
     "videoId": "HHp4rjhJsWI",
     "title": "Moody Gardens Penguin Cam LIVE | Penguin Habitat Stream at the Aquarium in Galveston, Texas",
     "channel": "Moody Gardens",
@@ -259,9 +620,12 @@
     "channel": "Explore Live Nature Cams",
     "thumbnail": "https://i.ytimg.com/vi/DHUnz4dyb54/hqdefault_live.jpg",
     "query": "24/7 live cam wildlife",
-    "location": null,
-    "locationName": null,
-    "timezone": null,
+    "location": [
+      5.3783537,
+      132.9102573
+    ],
+    "locationName": "Palau",
+    "timezone": "Asia/Tokyo",
     "fetchedAt": "2026-06-30T10:46:18.834Z"
   },
   {
@@ -2413,369 +2777,5 @@
     "locationName": "Seattle, Washington",
     "timezone": "America/Los_Angeles",
     "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "OUc-R6Mtg0E",
-    "title": "LIVE Great Green Macaw Nest Cam: Costa Rica - Macaw Recovery Network | explore.org",
-    "channel": "Explore Sloth and Macaws: Rainforest Wildlife",
-    "thumbnail": "https://i.ytimg.com/vi/OUc-R6Mtg0E/hqdefault_live.jpg",
-    "query": "Costa Rica live camera",
-    "location": [
-      9.93,
-      -84.08
-    ],
-    "locationName": "Costa Rica",
-    "timezone": "America/Costa_Rica",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "4V5rtm9Nrfo",
-    "title": "LIVE Wild Scarlet Macaws: Lower Feeder Cam - Costa Rica | explore.org",
-    "channel": "Explore Sloth and Macaws: Rainforest Wildlife",
-    "thumbnail": "https://i.ytimg.com/vi/4V5rtm9Nrfo/hqdefault_live.jpg",
-    "query": "Costa Rica live camera",
-    "location": [
-      9.93,
-      -84.08
-    ],
-    "locationName": "Costa Rica",
-    "timezone": "America/Costa_Rica",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "Dr5zebXpO-M",
-    "title": "Storchennest Live Webcam in Bad Salzungen, Thüringen",
-    "channel": "Stadtverwaltung Bad Salzungen",
-    "thumbnail": "https://i.ytimg.com/vi/Dr5zebXpO-M/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      50.812318,
-      10.2320784
-    ],
-    "locationName": "Bad Salzungen, Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "ydYDqZQpim8",
-    "title": "Namibia: Live stream in the Namib Desert",
-    "channel": "NamibiaCam",
-    "thumbnail": "https://i.ytimg.com/vi/ydYDqZQpim8/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      -22.96,
-      18.49
-    ],
-    "locationName": "Namibia",
-    "timezone": "Africa/Windhoek",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "tAWFO8_O_7M",
-    "title": "The Best Of Norway&#39;s Railway SPRING and SUMMER Cab Views",
-    "channel": "RailCowGirl",
-    "thumbnail": "https://i.ytimg.com/vi/tAWFO8_O_7M/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      59.91,
-      10.75
-    ],
-    "locationName": "Norway",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "LwihxyJ4V20",
-    "title": "Zero Point Levi | Levi Ski Resort | Finland",
-    "channel": "Levi Ski Resort",
-    "thumbnail": "https://i.ytimg.com/vi/LwihxyJ4V20/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      61.92,
-      25.75
-    ],
-    "locationName": "Finland",
-    "timezone": "Europe/Helsinki",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "xXZqU5vnEug",
-    "title": "LIVE Safari Webcam | Maasai Mara, Kenya | African Wildlife at Mara Bushtops",
-    "channel": "Bushtops Safaris",
-    "thumbnail": "https://i.ytimg.com/vi/xXZqU5vnEug/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      -1.0959167,
-      35.8566088
-    ],
-    "locationName": "Maasai Mara, Kenya",
-    "timezone": "Asia/Riyadh",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "Rn_ga4yXkME",
-    "title": "🔴 Turystyczne ujęcia z polskich miast - WebCamera.pl",
-    "channel": "WebCamera.pl",
-    "thumbnail": "https://i.ytimg.com/vi/Rn_ga4yXkME/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      44.4761601,
-      -73.212906
-    ],
-    "locationName": "Burlington, Vermont",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "Cp4RRAEgpeU",
-    "title": "Live @ Santa Claus Village",
-    "channel": "City of Rovaniemi",
-    "thumbnail": "https://i.ytimg.com/vi/Cp4RRAEgpeU/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      66.54,
-      25.85
-    ],
-    "locationName": "Rovaniemi, Finland",
-    "timezone": "Europe/Helsinki",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "Li3Dvqlo5uE",
-    "title": "🔴 Destination Deutschland – 24/7 LIVE Stream Webcams Germany",
-    "channel": "feratel – your window to the world",
-    "thumbnail": "https://i.ytimg.com/vi/Li3Dvqlo5uE/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      52.52,
-      13.41
-    ],
-    "locationName": "Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-06-30T02:01:38.081Z"
-  },
-  {
-    "videoId": "enYFXf8u7Lc",
-    "title": "🔴 Schweiz Panorama – 24/7 LIVE Stream Webcams Swiss Alps",
-    "channel": "feratel – your window to the world",
-    "thumbnail": "https://i.ytimg.com/vi/enYFXf8u7Lc/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      46.3802707,
-      8.871155
-    ],
-    "locationName": "Swiss Alps",
-    "timezone": "Europe/Zurich",
-    "fetchedAt": "2026-06-30T02:01:38.083Z"
-  },
-  {
-    "videoId": "aYtgGjMDagw",
-    "title": "🔴 Spotlight Germany – 24/7 Live Webcams: Städte, Küsten &amp; Natur in HD",
-    "channel": "livespotting",
-    "thumbnail": "https://i.ytimg.com/vi/aYtgGjMDagw/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      52.52,
-      13.41
-    ],
-    "locationName": "Germany",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-06-30T02:01:38.083Z"
-  },
-  {
-    "videoId": "Dnw_l8f9rUc",
-    "title": "Live Camera Arvidsjaur",
-    "channel": "Live Arvidsjaur",
-    "thumbnail": "https://i.ytimg.com/vi/Dnw_l8f9rUc/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      65.666667,
-      19.25
-    ],
-    "locationName": "Arvidsjaur",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-06-30T02:01:38.083Z"
-  },
-  {
-    "videoId": "4jx0xcRcM3U",
-    "title": "Wetterpanorama Südtirol",
-    "channel": "PanoCloud",
-    "thumbnail": "https://i.ytimg.com/vi/4jx0xcRcM3U/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      46.6559455,
-      11.2302129
-    ],
-    "locationName": "Südtirol, Italy",
-    "timezone": "Europe/Rome",
-    "fetchedAt": "2026-06-30T02:01:38.083Z"
-  },
-  {
-    "videoId": "2C7vrUAIfu4",
-    "title": "🔴 Summer Escape – 24/7 LIVE Stream Webcams Europe",
-    "channel": "feratel – your window to the world",
-    "thumbnail": "https://i.ytimg.com/vi/2C7vrUAIfu4/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      51,
-      10
-    ],
-    "locationName": "Europe",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-06-30T02:01:38.083Z"
-  },
-  {
-    "videoId": "uZV_CZCAf8g",
-    "title": "FlyForFun Webcam Gaisberg Startplatz Nord",
-    "channel": "1. Drachenflieger- und Paragleiterclub Salzburg",
-    "thumbnail": "https://i.ytimg.com/vi/uZV_CZCAf8g/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      47.7981346,
-      13.0464806
-    ],
-    "locationName": "Salzburg, Austria",
-    "timezone": "Europe/Vienna",
-    "fetchedAt": "2026-06-30T02:01:38.085Z"
-  },
-  {
-    "videoId": "QJe1tGI1EZc",
-    "title": "Elephant Pan (Hyena Pan) - Botswana | Live Wildlife Camera",
-    "channel": "Africam",
-    "thumbnail": "https://i.ytimg.com/vi/QJe1tGI1EZc/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      -22.33,
-      24.68
-    ],
-    "locationName": "Botswana",
-    "timezone": "Africa/Johannesburg",
-    "fetchedAt": "2026-06-30T02:01:38.085Z"
-  },
-  {
-    "videoId": "UCgLr29bxO8",
-    "title": "Rhine Falls live | Rheinfall live - Webcam",
-    "channel": "Schaffhauserland Tourismus",
-    "thumbnail": "https://i.ytimg.com/vi/UCgLr29bxO8/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      47.677719,
-      8.6150718
-    ],
-    "locationName": "Rhine Falls, Switzerland",
-    "timezone": "Europe/Zurich",
-    "fetchedAt": "2026-06-30T02:01:38.087Z"
-  },
-  {
-    "videoId": "Y1qp-EVF_oU",
-    "title": "🔴 Dolomiten Panorama – 24/7 LIVE Stream Webcams Alpen Italien",
-    "channel": "feratel – your window to the world",
-    "thumbnail": "https://i.ytimg.com/vi/Y1qp-EVF_oU/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      46.294572,
-      12.0513238
-    ],
-    "locationName": "Dolomiten, Italy",
-    "timezone": "Europe/Rome",
-    "fetchedAt": "2026-06-30T02:01:38.088Z"
-  },
-  {
-    "videoId": "4Jw4cdCCzrk",
-    "title": "International live cameras and weather 🔴 LIVE Weather Service",
-    "channel": "Live Weather Service",
-    "thumbnail": "https://i.ytimg.com/vi/4Jw4cdCCzrk/hqdefault_live.jpg",
-    "query": "Austria live camera",
-    "location": [
-      44.4728965,
-      -73.1514614
-    ],
-    "locationName": "BTV Airport, Vermont",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-06-30T02:01:39.409Z"
-  },
-  {
-    "videoId": "_k-5U7IeK8g",
-    "title": "Tokyo Live Camera 東京ライブカメラ 勉強・作業・集中・リラックス with Lofi and soft jazz BGM",
-    "channel": "Tokyo Views ",
-    "thumbnail": "https://i.ytimg.com/vi/_k-5U7IeK8g/hqdefault_live.jpg",
-    "query": "live cam skyline",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-06-30T02:01:39.409Z"
-  },
-  {
-    "videoId": "oxT5R6I0N6E",
-    "title": "LIVE: Middle East real-time cameras from Iran, Israel, Qatar and more",
-    "channel": "Intel Cams | OSINT",
-    "thumbnail": "https://i.ytimg.com/vi/oxT5R6I0N6E/hqdefault_live.jpg",
-    "query": "live cam skyline",
-    "location": [
-      39.3014159,
-      -76.5888477
-    ],
-    "locationName": "Middle East",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-06-30T02:01:39.409Z"
-  },
-  {
-    "videoId": "IcZ-7sFi1HM",
-    "title": "LIVE: Ukraine real-time skyline cameras from Kharkiv, Donetsk, Kyiv, Sumy and more",
-    "channel": "Intel Cams | OSINT",
-    "thumbnail": "https://i.ytimg.com/vi/IcZ-7sFi1HM/hqdefault_live.jpg",
-    "query": "live cam skyline",
-    "location": [
-      50.45,
-      30.52
-    ],
-    "locationName": "Ukraine",
-    "timezone": "Europe/Kyiv",
-    "fetchedAt": "2026-06-30T02:01:39.409Z"
-  },
-  {
-    "videoId": "BSWhGNXxT9A",
-    "title": "🔴 Mersea Restaurant LIVE Bay View · San Francisco Skyline, Golden Gate &amp; Luxury Waterfront 🌉",
-    "channel": "Teleport.camera",
-    "thumbnail": "https://i.ytimg.com/vi/BSWhGNXxT9A/hqdefault_live.jpg",
-    "query": "live cam skyline",
-    "location": [
-      37.77,
-      -122.42
-    ],
-    "locationName": "San Francisco, USA",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-06-30T02:01:39.409Z"
-  },
-  {
-    "videoId": "z_fY1pj1VBw",
-    "title": "【Taipei Live Cam】象山看台北 - 4K即時影像 | Overlooking Taipei at the top of Xiangshan | 象山から望む台北 | Taipei 101",
-    "channel": "Taipei Travel Live Cam  台北觀光即時影像 ",
-    "thumbnail": "https://i.ytimg.com/vi/z_fY1pj1VBw/hqdefault_live.jpg",
-    "query": "live cam skyline",
-    "location": [
-      25.03,
-      121.57
-    ],
-    "locationName": "Taipei, Taiwan",
-    "timezone": "Asia/Taipei",
-    "fetchedAt": "2026-06-30T02:01:39.409Z"
-  },
-  {
-    "videoId": "nUdVtKcprJU",
-    "title": "Big 10 Curve at Arvada, Colorado, USA | LIVE Train Camera (PTZ)",
-    "channel": "Virtual Railfan",
-    "thumbnail": "https://i.ytimg.com/vi/nUdVtKcprJU/hqdefault_live.jpg",
-    "query": "live cam skyline",
-    "location": [
-      39.55,
-      -105.78
-    ],
-    "locationName": "Colorado, USA",
-    "timezone": "America/Denver",
-    "fetchedAt": "2026-06-30T02:01:39.409Z"
   }
 ]
