@@ -1,5 +1,842 @@
 [
   {
+    "videoId": "1zcIUk66HX4",
+    "title": "Utopia Village Top-of-Wall Underwater Reef Cam powered by EXPLORE.org",
+    "channel": "Explore Oceans",
+    "thumbnail": "https://i.ytimg.com/vi/1zcIUk66HX4/hqdefault_live.jpg",
+    "query": "live webcam Utila",
+    "location": [
+      51.5399964,
+      -0.1527828
+    ],
+    "locationName": "Utopia Village",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-08-04T20:59:39.823Z"
+  },
+  {
+    "videoId": "jzx_n25g3kA",
+    "title": "Utopia Village Sandy Channel Underwater Reef Cam powered by EXPLORE.org",
+    "channel": "Explore Oceans",
+    "thumbnail": "https://i.ytimg.com/vi/jzx_n25g3kA/hqdefault_live.jpg",
+    "query": "live webcam Utila",
+    "location": [
+      51.5399964,
+      -0.1527828
+    ],
+    "locationName": "Utopia Village",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-08-04T20:59:39.823Z"
+  },
+  {
+    "videoId": "Lv9t0hZTvz4",
+    "title": "Utopia Village Back-of-Dock Underwater Reef Cams powered by EXPLORE.org",
+    "channel": "Explore Oceans",
+    "thumbnail": "https://i.ytimg.com/vi/Lv9t0hZTvz4/hqdefault_live.jpg",
+    "query": "live webcam Utila",
+    "location": [
+      51.5399964,
+      -0.1527828
+    ],
+    "locationName": "Utopia Village",
+    "timezone": "Europe/London",
+    "fetchedAt": "2026-08-04T20:59:39.823Z"
+  },
+  {
+    "videoId": "SPj4hMttgJM",
+    "title": "Elvis&#39; Beach Bar LIVE HD Webcam from Sandy Ground, Anguilla, British West Indies",
+    "channel": "Caribbean Webcams",
+    "thumbnail": "https://i.ytimg.com/vi/SPj4hMttgJM/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      25.8479658,
+      -80.1201649
+    ],
+    "locationName": "Beach, Unknown",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-08-04T20:59:39.824Z"
+  },
+  {
+    "videoId": "_ZXMjk5K0_s",
+    "title": "🌴 Eagle Beach | Costa Linda Beach Resort | Aruba | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/_ZXMjk5K0_s/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      12.5013629,
+      -69.9618475
+    ],
+    "locationName": "Aruba",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.824Z"
+  },
+  {
+    "videoId": "loHbMM9JfCs",
+    "title": "🌴 LionsDive Beach Resort | Mambo Beach | Curaçao | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/loHbMM9JfCs/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      12.1176488,
+      -68.9309263
+    ],
+    "locationName": "Curaçao",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "28U-t3fA9ks",
+    "title": "🚢 Handelskade - Curacao World Heritage | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/28U-t3fA9ks/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      12.17,
+      -68.98
+    ],
+    "locationName": "Curacao",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "iSeH45R-8R0",
+    "title": "✈️  Maho Beach Saint Martin | Princess Juliana Airport Beach 24/7 | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/iSeH45R-8R0/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      18.0814066,
+      -63.0467131
+    ],
+    "locationName": "Saint Martin",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "EcumU_n6fTY",
+    "title": "🏄 Sorobon Luxury Beach Resort | Dunkerbeck Pro Center | Bonaire | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/EcumU_n6fTY/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      12.167,
+      -68.2876439
+    ],
+    "locationName": "Bonaire",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "IAkRcsPDO8w",
+    "title": "🌴 Royal Sea Aquarium Resort | Curacao | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/IAkRcsPDO8w/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      12.17,
+      -68.98
+    ],
+    "locationName": "Curacao",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "vxHKAImxUHk",
+    "title": "🌴 Simpson Bay Beach Resort | Saint Martin | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/vxHKAImxUHk/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      18.0814066,
+      -63.0467131
+    ],
+    "locationName": "Saint Martin",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "ZG_AIOUY-rE",
+    "title": "✈️ LIVE August 4 | Maho Beach Plane Spotting | SXM Airport St. Maarten (with ATC)",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/ZG_AIOUY-rE/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      25.8479658,
+      -80.1201649
+    ],
+    "locationName": "Beach, Unknown",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "0ImA9IcyQwA",
+    "title": "🏝️ Klein Curaçao | Mermaid Boat Trips | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/0ImA9IcyQwA/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      12.1176488,
+      -68.9309263
+    ],
+    "locationName": "Curaçao",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "-oiR7FxcwYU",
+    "title": "🏨 Avila Beach Hotel | Curacao 🌴☀️ | LIVE Cam 1",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/-oiR7FxcwYU/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      12.17,
+      -68.98
+    ],
+    "locationName": "Curacao",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "Thtj8Ht7Z_c",
+    "title": "Seychelles Ocean 4K (LIVE 24/7). Wild Beach &amp; Ocean Waves Sounds. Relaxing Ocean",
+    "channel": "Luxury Island",
+    "thumbnail": "https://i.ytimg.com/vi/Thtj8Ht7Z_c/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      -4.68,
+      55.49
+    ],
+    "locationName": "Seychelles",
+    "timezone": "Asia/Dubai",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "525dNEryfQ4",
+    "title": "🌴 Simpson Bay Beach &amp; Simpson Bay Resort | Saint Martin | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/525dNEryfQ4/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      18.0814066,
+      -63.0467131
+    ],
+    "locationName": "Saint Martin",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "_XL6F4N3qx0",
+    "title": "Grande Bay Resort live HD Webcam of Cruz Bay on St. John",
+    "channel": "St. John USVI",
+    "thumbnail": "https://i.ytimg.com/vi/_XL6F4N3qx0/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      18.3356013,
+      -64.7550406
+    ],
+    "locationName": "St. John",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "_P3fgFEG55E",
+    "title": "🏝️ Uninhabited Island Klein Curaçao 🐠🐢 Miss Ann Boat Trips | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/_P3fgFEG55E/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      12.1176488,
+      -68.9309263
+    ],
+    "locationName": "Curaçao",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "_Gf2CU5uXvU",
+    "title": "🌴Best Caribbean Beach Resorts LIVE | Curaçao • Sint Maarten • Aruba • Bonaire | August 4, 2026",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/_Gf2CU5uXvU/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      18.0423736,
+      -63.0549948
+    ],
+    "locationName": "Sint Maarten",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "zNvNY9xf9T4",
+    "title": "Lime Out Floating Taco Boat LIVE webcam from Coral Bay, St John, USVI",
+    "channel": "St. John USVI",
+    "thumbnail": "https://i.ytimg.com/vi/zNvNY9xf9T4/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      18.3356013,
+      -64.7550406
+    ],
+    "locationName": "St. John",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "PsRa6WGjbBo",
+    "title": "Christopher Columbus Live Webcam Seven Mile Beach",
+    "channel": "Christopher Columbus Condos-Grand Cayman",
+    "thumbnail": "https://i.ytimg.com/vi/PsRa6WGjbBo/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      43.3392616,
+      -89.0157723
+    ],
+    "locationName": "Columbus, Wisconsin",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "PeYZZinH1wI",
+    "title": "🔴 LIVE Port Miami Cruise Ship Departures and Arrivals | ICON of the Seas",
+    "channel": "Cruise Ships Live",
+    "thumbnail": "https://i.ytimg.com/vi/PeYZZinH1wI/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      25.76,
+      -80.19
+    ],
+    "locationName": "Miami, USA",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "LKymCnp4qf0",
+    "title": "🔴 Rick&#39;s Cafe - Negril, Jamaica - Live Cam",
+    "channel": "Beach Live Cams",
+    "thumbnail": "https://i.ytimg.com/vi/LKymCnp4qf0/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      18.11,
+      -77.3
+    ],
+    "locationName": "Jamaica",
+    "timezone": "America/Jamaica",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "2IQmpCXbOmM",
+    "title": "Iconic SXM Airport LIVE 24/7 – Sint Maarten Maho Beach",
+    "channel": "Flightradar24",
+    "thumbnail": "https://i.ytimg.com/vi/2IQmpCXbOmM/hqdefault_live.jpg",
+    "query": "live webcam Caribbean",
+    "location": [
+      18.0423736,
+      -63.0549948
+    ],
+    "locationName": "Sint Maarten",
+    "timezone": "America/Puerto_Rico",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "XsOU8JnEpNM",
+    "title": "ol Donyo Lodge | Wildlife Live Stream – Kenya",
+    "channel": "Africam",
+    "thumbnail": "https://i.ytimg.com/vi/XsOU8JnEpNM/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      -0.02,
+      37.91
+    ],
+    "locationName": "Kenya",
+    "timezone": "Asia/Riyadh",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "ME0dPuBtzug",
+    "title": "Namibia: Live stream in the Kalahari Desert",
+    "channel": "NamibiaCam",
+    "thumbnail": "https://i.ytimg.com/vi/ME0dPuBtzug/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      -23,
+      22
+    ],
+    "locationName": "Kalahari Desert",
+    "timezone": "Africa/Johannesburg",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "JMMoRwYo5kE",
+    "title": "Okaukuejo Resort, Wildlife Waterhole: Live camera stream in the Etosha National Park in Namibia",
+    "channel": "Namibia Wildlife Resorts",
+    "thumbnail": "https://i.ytimg.com/vi/JMMoRwYo5kE/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      -18.9913306,
+      15.7460551
+    ],
+    "locationName": "Etosha National Park",
+    "timezone": "Africa/Windhoek",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "ZVRUiKmCs84",
+    "title": "Kalahari Salt Pan | Conservation Live Cam",
+    "channel": "Africam",
+    "thumbnail": "https://i.ytimg.com/vi/ZVRUiKmCs84/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      -23,
+      22
+    ],
+    "locationName": "Kalahari",
+    "timezone": "Africa/Johannesburg",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "xCuJBoBr7VI",
+    "title": "Giraffe Live Cam African Savanna Zoo Live Stream 24/7",
+    "channel": "Ozolio Plus",
+    "thumbnail": "https://i.ytimg.com/vi/xCuJBoBr7VI/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      42.0944672,
+      -90.1567944
+    ],
+    "locationName": "Savanna, Illinois",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "qpukdDslCjk",
+    "title": "Wild Africa Live!  24/7 Safari Cam | Watch Lions, Elephants &amp; More",
+    "channel": "Africam",
+    "thumbnail": "https://i.ytimg.com/vi/qpukdDslCjk/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      11.5024338,
+      17.7578122
+    ],
+    "locationName": "Africa",
+    "timezone": "Africa/Ndjamena",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "dzylsC0KcOE",
+    "title": "Live HD Stream - Courtyard by Marriott South Padre Island Live Beach Webcam",
+    "channel": "South Padre Island",
+    "thumbnail": "https://i.ytimg.com/vi/dzylsC0KcOE/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      26.1036887,
+      -97.1646938
+    ],
+    "locationName": "South Padre Island, Texas",
+    "timezone": "America/Chicago",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "jG0uYl5S44E",
+    "title": "Live from Jack’s Camp | Kalahari Waterhole Cam - Elephants, Lions &amp; More",
+    "channel": "Africam",
+    "thumbnail": "https://i.ytimg.com/vi/jG0uYl5S44E/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      -23,
+      22
+    ],
+    "locationName": "Kalahari",
+    "timezone": "Africa/Johannesburg",
+    "fetchedAt": "2026-08-04T20:59:39.825Z"
+  },
+  {
+    "videoId": "DwKCna1mumk",
+    "title": "🔴 Hush Bar | Soi Green Mango | Chaweng | Koh Samui | Thailand | Live Street Webcam",
+    "channel": "The Real Samui Webcam",
+    "thumbnail": "https://i.ytimg.com/vi/DwKCna1mumk/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      9.5013945,
+      99.9956193
+    ],
+    "locationName": "Koh Samui",
+    "timezone": "Asia/Jakarta",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "5uZa3-RMFos",
+    "title": "WebcamSydney 1 Live Stream of Harbour 24/7 (~4K)",
+    "channel": "WebcamSydney",
+    "thumbnail": "https://i.ytimg.com/vi/5uZa3-RMFos/hqdefault_live.jpg",
+    "query": "webcam live desert",
+    "location": [
+      -33.8698439,
+      151.2082848
+    ],
+    "locationName": "Sydney, Australia",
+    "timezone": "Australia/Sydney",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "lA6TaaMGgDo",
+    "title": "【 LIVE 】東京都 新宿 24時間 ライブカメラ / 西武新宿駅 pepe前広場 交差点 （YUNIKA VISION前） Tokyo Shinjuku Live camera",
+    "channel": "インフォ新宿 channel",
+    "thumbnail": "https://i.ytimg.com/vi/lA6TaaMGgDo/hqdefault_live.jpg",
+    "query": "live webcam construction Shanghai",
+    "location": [
+      35.6937632,
+      139.7036319
+    ],
+    "locationName": "Shinjuku, Tokyo, Japan",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "tmlE1ct0cYk",
+    "title": "🔴 4K LIVE: Trainspotting on Prague Main Station | 24/7 LIVE",
+    "channel": "SlowTV",
+    "thumbnail": "https://i.ytimg.com/vi/tmlE1ct0cYk/hqdefault_live.jpg",
+    "query": "live webcam train railway Vienna",
+    "location": [
+      50.08,
+      14.44
+    ],
+    "locationName": "Prague, Czech Republic",
+    "timezone": "Europe/Prague",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "-m7Q2ee7BEA",
+    "title": "富士山パーキング ／ 富士山ライブ映像（Live camera of Mt,Fuji）",
+    "channel": "富士山パーキング",
+    "thumbnail": "https://i.ytimg.com/vi/-m7Q2ee7BEA/hqdefault_live.jpg",
+    "query": "live camera mountain Fiji",
+    "location": [
+      35.36,
+      138.73
+    ],
+    "locationName": "Fuji, Japan",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "mUIntPoHTss",
+    "title": "【4K LIVE】富士山麓の夜と田んぼ｜米農家の自作BGM・静岡 富士宮 / Mt. Fuji Live Cam",
+    "channel": "FUJI RICE 富士山麓の米農家",
+    "thumbnail": "https://i.ytimg.com/vi/mUIntPoHTss/hqdefault_live.jpg",
+    "query": "live camera mountain Fiji",
+    "location": [
+      35.36,
+      138.73
+    ],
+    "locationName": "Mt. Fuji, Japan",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "DqYtRGgHEbo",
+    "title": "富士山ライブカメラ[山梨]　live Camera Mt,Fuji",
+    "channel": "M.M.R 鉄道倉庫",
+    "thumbnail": "https://i.ytimg.com/vi/DqYtRGgHEbo/hqdefault_live.jpg",
+    "query": "live camera mountain Fiji",
+    "location": [
+      35.36,
+      138.73
+    ],
+    "locationName": "Fuji, Japan",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "e5fTf-gywY0",
+    "title": "【LIVE】富士山・日本平ライブカメラ Mt.Fuji, JAPAN | SBS NEWS6",
+    "channel": "SBSnews6",
+    "thumbnail": "https://i.ytimg.com/vi/e5fTf-gywY0/hqdefault_live.jpg",
+    "query": "live camera mountain Fiji",
+    "location": [
+      35.68,
+      139.69
+    ],
+    "locationName": "Japan",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "yGLI83HgsMw",
+    "title": "Mt Monadnock, Live Camera - New Hampshire, US",
+    "channel": "Boston and Maine Live",
+    "thumbnail": "https://i.ytimg.com/vi/yGLI83HgsMw/hqdefault_live.jpg",
+    "query": "live camera mountain Fiji",
+    "location": [
+      43.19,
+      -71.57
+    ],
+    "locationName": "New Hampshire, USA",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "0MLt9Jha2M8",
+    "title": "富士山ライブカメラ　富士吉田市　Mt.FUJI Live Camera",
+    "channel": "株式会社エッチ・エス・ストロング",
+    "thumbnail": "https://i.ytimg.com/vi/0MLt9Jha2M8/hqdefault_live.jpg",
+    "query": "live camera mountain Fiji",
+    "location": [
+      35.36,
+      138.73
+    ],
+    "locationName": "Fuji, Japan",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "PxzwnWh1dKk",
+    "title": "世界遺産富士山ライブカメラ(忍野八海から)[4K] - [4K]Mount Fuji webcams (Oshino Hakkai) from Japan. 【world heritage】",
+    "channel": "FujiyamaTV - FujigokoTV",
+    "thumbnail": "https://i.ytimg.com/vi/PxzwnWh1dKk/hqdefault_live.jpg",
+    "query": "live camera mountain Fiji",
+    "location": [
+      35.3628384,
+      138.7307677
+    ],
+    "locationName": "Mount Fuji, Japan",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "tDw-LV_EKJM",
+    "title": "🔴【ライブカメラ】富士山 ライブ映像｜富士宮 天気・現在の様子｜Mt Fuji Live Camera Japan",
+    "channel": "Yamamiya LiveCamera",
+    "thumbnail": "https://i.ytimg.com/vi/tDw-LV_EKJM/hqdefault_live.jpg",
+    "query": "live camera mountain Fiji",
+    "location": [
+      35.68,
+      139.69
+    ],
+    "locationName": "Japan",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "s--MDmshT3I",
+    "title": "【LIVE】函館山ライブカメラ ／ Mt. Hakodate Ropeway Live Camera",
+    "channel": "ＦＭいるか",
+    "thumbnail": "https://i.ytimg.com/vi/s--MDmshT3I/hqdefault_live.jpg",
+    "query": "live camera mountain Fiji",
+    "location": [
+      41.768793,
+      140.729008
+    ],
+    "locationName": "Hakodate, Japan",
+    "timezone": "Asia/Tokyo",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "N3ShIAO7H4Y",
+    "title": "Creative Live streaming from Prague (Czech Republic) by CamStreamer",
+    "channel": "CamStreamer",
+    "thumbnail": "https://i.ytimg.com/vi/N3ShIAO7H4Y/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      50.08,
+      14.44
+    ],
+    "locationName": "Prague, Czech Republic",
+    "timezone": "Europe/Prague",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "kuOmmVkOGN8",
+    "title": "🔴 LIVE: Planespotting at Prague Vaclav Havel Airport, Prague | 24/7 LIVE",
+    "channel": "SlowTV",
+    "thumbnail": "https://i.ytimg.com/vi/kuOmmVkOGN8/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      50.08,
+      14.44
+    ],
+    "locationName": "Prague, Czech Republic",
+    "timezone": "Europe/Prague",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "3C8W4Rlgiog",
+    "title": "ITS - Praha centrum živě",
+    "channel": "ITS akciová společnost",
+    "thumbnail": "https://i.ytimg.com/vi/3C8W4Rlgiog/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      50.0874654,
+      14.4212535
+    ],
+    "locationName": "Praha, Czech Republic",
+    "timezone": "Europe/Prague",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "a1mcaV3Sf9U",
+    "title": "🔴 LIVE 24/7  Rolling Cam Venice - Live Cam in Venice Italy - Livecam en direct #venice",
+    "channel": "I Love You Venice",
+    "thumbnail": "https://i.ytimg.com/vi/a1mcaV3Sf9U/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      45.44,
+      12.32
+    ],
+    "locationName": "Venice, Italy",
+    "timezone": "Europe/Rome",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "QIt1FaDMnQc",
+    "title": "Luzern live - Lucerne live",
+    "channel": "Tele1 - Zentralschweizer Fernsehen",
+    "thumbnail": "https://i.ytimg.com/vi/QIt1FaDMnQc/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      47.0505452,
+      8.3054682
+    ],
+    "locationName": "Lucerne, Switzerland",
+    "timezone": "Europe/Zurich",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "e2gC37ILQmk",
+    "title": "Ukraine live cam from Kyiv, Odessa, Kharkiv, Kramatorsk, Sloviansk, Donetsk, Dnipro...",
+    "channel": "TVL Trzcianka",
+    "thumbnail": "https://i.ytimg.com/vi/e2gC37ILQmk/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      50.45,
+      30.52
+    ],
+    "locationName": "Ukraine",
+    "timezone": "Europe/Kyiv",
+    "fetchedAt": "2026-08-04T20:59:39.826Z"
+  },
+  {
+    "videoId": "AQMaw6OAeHY",
+    "title": "Live Camera Axis M1135",
+    "channel": "use-IP Ltd",
+    "thumbnail": "https://i.ytimg.com/vi/AQMaw6OAeHY/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "fetchedAt": "2026-08-04T20:59:39.827Z"
+  },
+  {
+    "videoId": "7k7RTdANPqM",
+    "title": "ATL Axis Experience Center Live Stream",
+    "channel": "CamStreamer",
+    "thumbnail": "https://i.ytimg.com/vi/7k7RTdANPqM/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      33.7544657,
+      -84.3898151
+    ],
+    "locationName": "Atlanta, Georgia",
+    "timezone": "America/New_York",
+    "fetchedAt": "2026-08-04T20:59:39.827Z"
+  },
+  {
+    "videoId": "NIuO6hrFTrg",
+    "title": "🔴 Wetter-Panorama – 24/7 LIVE Stream Webcams Österreich",
+    "channel": "feratel – your window to the world",
+    "thumbnail": "https://i.ytimg.com/vi/NIuO6hrFTrg/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      48.21,
+      16.37
+    ],
+    "locationName": "Austria",
+    "timezone": "Europe/Vienna",
+    "fetchedAt": "2026-08-04T20:59:39.828Z"
+  },
+  {
+    "videoId": "MApnQlsX5AQ",
+    "title": "Nuuk Airport South",
+    "channel": "Greenland Airports",
+    "thumbnail": "https://i.ytimg.com/vi/MApnQlsX5AQ/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      64.1767049,
+      -51.7361444
+    ],
+    "locationName": "Nuuk, Greenland",
+    "timezone": "America/Nuuk",
+    "fetchedAt": "2026-08-04T20:59:39.828Z"
+  },
+  {
+    "videoId": "NtbquzembC8",
+    "title": "ACE Lanzarote Airport LIVE 24/7 - Canary Islands SPAIN",
+    "channel": "Flightradar24",
+    "thumbnail": "https://i.ytimg.com/vi/NtbquzembC8/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      28.9456805,
+      -13.6075882
+    ],
+    "locationName": "Lanzarote Airport, Canary Islands",
+    "timezone": "Atlantic/Canary",
+    "fetchedAt": "2026-08-04T20:59:39.828Z"
+  },
+  {
+    "videoId": "Cp4RRAEgpeU",
+    "title": "Live @ Santa Claus Village",
+    "channel": "City of Rovaniemi",
+    "thumbnail": "https://i.ytimg.com/vi/Cp4RRAEgpeU/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      66.54,
+      25.85
+    ],
+    "locationName": "Rovaniemi, Finland",
+    "timezone": "Europe/Helsinki",
+    "fetchedAt": "2026-08-04T20:59:39.828Z"
+  },
+  {
+    "videoId": "yMSc-qqW3To",
+    "title": "Geirangerfjord cruise port, Geiranger",
+    "channel": "Geirangerfjord cruise port",
+    "thumbnail": "https://i.ytimg.com/vi/yMSc-qqW3To/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      62.1031443,
+      7.0988588
+    ],
+    "locationName": "Geirangerfjord, Norway",
+    "timezone": "Europe/Berlin",
+    "fetchedAt": "2026-08-04T20:59:39.828Z"
+  },
+  {
+    "videoId": "6V39eDpTyas",
+    "title": "🔴 Slovakia – 24/7 LIVE Stream Webcams",
+    "channel": "feratel – your window to the world",
+    "thumbnail": "https://i.ytimg.com/vi/6V39eDpTyas/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      48.7411522,
+      19.4528646
+    ],
+    "locationName": "Slovakia",
+    "timezone": "Europe/Prague",
+    "fetchedAt": "2026-08-04T20:59:39.828Z"
+  },
+  {
+    "videoId": "Li3Dvqlo5uE",
+    "title": "🔴 Destination Deutschland – 24/7 LIVE Stream Webcams Germany",
+    "channel": "feratel – your window to the world",
+    "thumbnail": "https://i.ytimg.com/vi/Li3Dvqlo5uE/hqdefault_live.jpg",
+    "query": "live view Prague",
+    "location": [
+      52.52,
+      13.41
+    ],
+    "locationName": "Germany",
+    "timezone": "Europe/Berlin",
+    "fetchedAt": "2026-08-04T20:59:39.828Z"
+  },
+  {
     "videoId": "U_Jsbq9kYE8",
     "title": "Park Shore Waikiki Hotel Live Cam | Waikiki Beach, Honolulu",
     "channel": "Ozolio Plus",
@@ -1949,845 +2786,5 @@
     "locationName": "Shibuya, Tokyo, Japan",
     "timezone": "Asia/Tokyo",
     "fetchedAt": "2026-08-04T13:39:58.561Z"
-  },
-  {
-    "videoId": "7xdHH9KMSVk",
-    "title": "Flagstaff, Arizona, USA | LIVE Train Camera (PTZ)",
-    "channel": "Virtual Railfan",
-    "thumbnail": "https://i.ytimg.com/vi/7xdHH9KMSVk/hqdefault_live.jpg",
-    "query": "live webcam city",
-    "location": [
-      35.1987522,
-      -111.651822
-    ],
-    "locationName": "Flagstaff, Arizona",
-    "timezone": "America/Phoenix",
-    "fetchedAt": "2026-08-04T13:39:58.561Z"
-  },
-  {
-    "videoId": "AkqGOcpDvZU",
-    "title": "LIVE: Middle East real-time cameras from Iran, Israel, Qatar and more",
-    "channel": "Intel Cams | OSINT",
-    "thumbnail": "https://i.ytimg.com/vi/AkqGOcpDvZU/hqdefault_live.jpg",
-    "query": "live webcam city",
-    "location": [
-      39.3014159,
-      -76.5888477
-    ],
-    "locationName": "Middle East",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T13:39:58.561Z"
-  },
-  {
-    "videoId": "ShuBcJKNbl4",
-    "title": "🔴LIVE: 24/7 WEBCAMS around the world | FOX 10 Phoenix",
-    "channel": "FOX 10 Phoenix",
-    "thumbnail": "https://i.ytimg.com/vi/ShuBcJKNbl4/hqdefault_live.jpg",
-    "query": "live webcam city",
-    "location": [
-      33.4484367,
-      -112.074141
-    ],
-    "locationName": "Phoenix, Arizona",
-    "timezone": "America/Phoenix",
-    "fetchedAt": "2026-08-04T13:39:58.561Z"
-  },
-  {
-    "videoId": "hBaHx5WdnbQ",
-    "title": "富士山ライブ配信 ふもとっぱらキャンプサイトから - Mount Fuji Live from Fumotoppara (Shizuoka Japan)",
-    "channel": "ふもとっぱらチャンネル",
-    "thumbnail": "https://i.ytimg.com/vi/hBaHx5WdnbQ/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.3628384,
-      138.7307677
-    ],
-    "locationName": "Mount Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.561Z"
-  },
-  {
-    "videoId": "GsD9QQEKSzQ",
-    "title": "【LIVE】静岡市さった峠　広重の富士山 / Mt. Fuji (World Heritage Site): Live Streaming in Shizuoka City",
-    "channel": "静岡市さった峠 ライブカメラ",
-    "thumbnail": "https://i.ytimg.com/vi/GsD9QQEKSzQ/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      34.97496,
-      138.3834068
-    ],
-    "locationName": "Shizuoka City, Shizuoka Prefecture",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.561Z"
-  },
-  {
-    "videoId": "1cnReFAU04k",
-    "title": "【LIVE】河口湖からの「富士山ライブカメラ」&quot;mount fuji live camera&quot; from Lake Kawaguchiko (Yamanashi Japan)",
-    "channel": "【KTV】ケーブルテレビ河口湖",
-    "thumbnail": "https://i.ytimg.com/vi/1cnReFAU04k/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.4980895,
-      138.7691299
-    ],
-    "locationName": "Kawaguchiko, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.561Z"
-  },
-  {
-    "videoId": "F2NbYrc-gBU",
-    "title": "【LIVE】山中湖からの「富士山ライブカメラ」 &quot;mount fuji live camera&quot; from Lake Yamanakako FUJISAN (Japan Yamanashi)",
-    "channel": "【KTV】ケーブルテレビ河口湖",
-    "thumbnail": "https://i.ytimg.com/vi/F2NbYrc-gBU/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.4186632,
-      138.876814
-    ],
-    "locationName": "Yamanakako, Yamanashi Prefecture, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "PFqSE8GNfnE",
-    "title": "富士山・江ノ島ライブカメラ 湘南 鎌倉 波情報 渋滞情報   Mt.Fuji Live Camera Japan H.View camera 【The Noon 七里ヶ浜 Studio カメラ1 】",
-    "channel": "湘南ライブカメラ",
-    "thumbnail": "https://i.ytimg.com/vi/PFqSE8GNfnE/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "bdUbACCWmoY",
-    "title": "【LIVE】河口湖大石公園からの「富士山ライブカメラ」 &quot;mount fuji live camera&quot; from Lake Kawaguchiko Oishi Park  (Japan)",
-    "channel": "【KTV】ケーブルテレビ河口湖",
-    "thumbnail": "https://i.ytimg.com/vi/bdUbACCWmoY/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.4980895,
-      138.7691299
-    ],
-    "locationName": "Kawaguchiko, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "RvzsDpe3R4I",
-    "title": "🔴 Live: Mount Fuji Japan 24/7 | Stunning View from Shizuoka Fuji City |富士山ライブ",
-    "channel": "愛犬セロ君",
-    "thumbnail": "https://i.ytimg.com/vi/RvzsDpe3R4I/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.3628384,
-      138.7307677
-    ],
-    "locationName": "Mount Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "i_K6t2b26G4",
-    "title": "Tokyo Skyline Night View｜落ち着く音楽とともに信｜ Tokyo Live Camera Mt.Fuji &amp; Rainbow Bridge",
-    "channel": "TOKYO LIVE CAMERA",
-    "thumbnail": "https://i.ytimg.com/vi/i_K6t2b26G4/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "ViHMZfmURiw",
-    "title": "[4K Live] 富士山 ライブカメラ 静岡県富士市から  Mt.Fuji Live Camera",
-    "channel": "共同通信LiveCamera",
-    "thumbnail": "https://i.ytimg.com/vi/ViHMZfmURiw/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "Sv9hcJ3k5h4",
-    "title": "【4K】富士山ライブカメラ / 4K Live Camera Mt.FUJI　～河口湖～富士山パノラマロープウェイ",
-    "channel": "フジヤマNAVI",
-    "thumbnail": "https://i.ytimg.com/vi/Sv9hcJ3k5h4/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "so_3HK9HIdg",
-    "title": "【LIVE】精進湖からの「富士山ライブカメラ」　&quot;mount fuji live camera&quot; from Lake Shojiko (Yamanashi Japan)",
-    "channel": "【KTV】ケーブルテレビ河口湖",
-    "thumbnail": "https://i.ytimg.com/vi/so_3HK9HIdg/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.3628384,
-      138.7307677
-    ],
-    "locationName": "Mount Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "maMMEh-2Bsk",
-    "title": "富士山・芦ノ湖ライブカメラ　～箱根大観山・アネスト岩田ターンパイク箱根より～　/　Mt. Fuji and Lake Ashinoko Live Camera - from Hakone, Japan",
-    "channel": "箱根ターンパイク株式会社 Official YouTube Channel",
-    "thumbnail": "https://i.ytimg.com/vi/maMMEh-2Bsk/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Mt. Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "eU8A7QQOcso",
-    "title": "【富士山ライブカメラ】～河口湖～富士山パノラマロープウェイ展望台　提供：UTYテレビ山梨【Mt.Fuji Live Cam in Japan】",
-    "channel": "UTYテレビ山梨公式チャンネル",
-    "thumbnail": "https://i.ytimg.com/vi/eU8A7QQOcso/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "Joer2U0vki4",
-    "title": "富士山二合目のテーマパーク「ぐりんぱ」（静岡県）ライブカメラ/ &quot;Live Camera of &#39;Grinpa&#39; Theme Park at the 2nd Station of Mt. Fuji",
-    "channel": "フジヤマNAVI",
-    "thumbnail": "https://i.ytimg.com/vi/Joer2U0vki4/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Mt. Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "YQ4wbAl_7zo",
-    "title": "富士山ライブカメラ/河口湖駅前   Live camera of Mt,Fuji",
-    "channel": "fuji-net",
-    "thumbnail": "https://i.ytimg.com/vi/YQ4wbAl_7zo/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "Gn2CJjzY068",
-    "title": "ホテルマウント富士ライブカメラ/Live Camera Hotel Mt.fuji",
-    "channel": "フジヤマNAVI",
-    "thumbnail": "https://i.ytimg.com/vi/Gn2CJjzY068/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "54NpKx_efis",
-    "title": "身延七面山ライブカメラ #2",
-    "channel": "身延七面山ライブカメラ",
-    "thumbnail": "https://i.ytimg.com/vi/54NpKx_efis/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.6399328,
-      138.6380495
-    ],
-    "locationName": "Yamanashi Prefecture, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "DyYXe3LJOW8",
-    "title": "【LIVE】「富士山と新東名高速ライブカメラ」 View of Mt. Fuji &amp; Shin-Tomei Expressway Live Camera",
-    "channel": "【KTV】ケーブルテレビ河口湖",
-    "thumbnail": "https://i.ytimg.com/vi/DyYXe3LJOW8/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Mt. Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "_qdu714QT1E",
-    "title": "【富士山ライブカメラ】Mt.FUJI Live Camera",
-    "channel": "YBS山梨放送 公式チャンネル",
-    "thumbnail": "https://i.ytimg.com/vi/_qdu714QT1E/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "qqo7FNp8M6o",
-    "title": "【東京ライブカメラ】TOKYO LIVE CAMERA.  Mt&#39;Fuji from Tokyo  富士山 紅富士 赤富士 東京からの富士山    #東京ライブカメラ #富士山東京 #東京夜景",
-    "channel": "VICENTE AGEMATSU",
-    "thumbnail": "https://i.ytimg.com/vi/qqo7FNp8M6o/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "PW6zhYOkunI",
-    "title": "【Kawaguchiko Station Live Camera in Japan】富士急行線河口湖駅前　富士観光開発(株) 本社ライブカメラ　提供：UTYテレビ山梨",
-    "channel": "UTYテレビ山梨公式チャンネル",
-    "thumbnail": "https://i.ytimg.com/vi/PW6zhYOkunI/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.4980895,
-      138.7691299
-    ],
-    "locationName": "Kawaguchiko, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "4Hro9QIrsYA",
-    "title": "十国峠ライブカメラ（富士山ビュー） / Live Camera Jukkoku（view of Mt.Fuji）",
-    "channel": "フジヤマNAVI",
-    "thumbnail": "https://i.ytimg.com/vi/4Hro9QIrsYA/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "tuNC0ot0j9I",
-    "title": "【LIVE】葉山・富士山ライブカメラ　裕次郎灯台・江の島　波情報　&quot;mount fuji live camera&quot; from Hayama (Japan)",
-    "channel": "【KTV】ケーブルテレビ河口湖",
-    "thumbnail": "https://i.ytimg.com/vi/tuNC0ot0j9I/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.3628384,
-      138.7307677
-    ],
-    "locationName": "Mount Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "oe7SMLOEQk0",
-    "title": "富士山＆河口湖ライブカメラ / Mt.Fuji &amp; Lake Kawaguchiko livestream from Mizno hotel",
-    "channel": "official MIZNO HOTEL",
-    "thumbnail": "https://i.ytimg.com/vi/oe7SMLOEQk0/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.4980895,
-      138.7691299
-    ],
-    "locationName": "Kawaguchiko, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "hEUJeT5f0wM",
-    "title": "【LIVE-NO.2】富士山頂ライブカメラ CC102　東向きソーラーカメラ（通称ウミガメ）",
-    "channel": "富士山ライブカメラ　by 認定NPO法人富士山測候所を活用する会",
-    "thumbnail": "https://i.ytimg.com/vi/hEUJeT5f0wM/hqdefault_live.jpg",
-    "query": "live stream camera Fuji",
-    "location": [
-      35.3628384,
-      138.7307677
-    ],
-    "locationName": "Mount Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "fetchedAt": "2026-08-04T13:39:58.562Z"
-  },
-  {
-    "videoId": "jH3e5w4BWGA",
-    "title": "LIVE from the Zambezi River | Tembo Plains Safari Cam",
-    "channel": "Africam",
-    "thumbnail": "https://i.ytimg.com/vi/jH3e5w4BWGA/hqdefault_live.jpg",
-    "query": "Mana Pools live camera",
-    "location": [
-      -17.9154385,
-      25.8473781
-    ],
-    "locationName": "Zambezi River, Zimbabwe",
-    "timezone": "Africa/Johannesburg",
-    "fetchedAt": "2026-08-04T11:52:31.676Z"
-  },
-  {
-    "videoId": "QnvxSpZ9HPI",
-    "title": "Okaloosa Island - Live view from Wyndham Garden",
-    "channel": "Wyndham Garden Fort Walton Beach - Destin Hotel, FL",
-    "thumbnail": "https://i.ytimg.com/vi/QnvxSpZ9HPI/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      30.3976972,
-      -86.6073804
-    ],
-    "locationName": "Okaloosa Island, Florida",
-    "timezone": "America/Chicago",
-    "fetchedAt": "2026-08-04T11:52:31.676Z"
-  },
-  {
-    "videoId": "cmkAbDUEoyA",
-    "title": "Live Beach Cam Hollywood Beach Broadwalk, Florida",
-    "channel": "City of Hollywood",
-    "thumbnail": "https://i.ytimg.com/vi/cmkAbDUEoyA/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      26.01,
-      -80.12
-    ],
-    "locationName": "Hollywood Beach, Florida",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.677Z"
-  },
-  {
-    "videoId": "W01huIwqSEo",
-    "title": "Jewfish Creek Bridge, Live WebCam - Key Largo, Florida Keys",
-    "channel": "FloridaKeysTV",
-    "thumbnail": "https://i.ytimg.com/vi/W01huIwqSEo/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      27.99,
-      -81.76
-    ],
-    "locationName": "Florida, USA",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.677Z"
-  },
-  {
-    "videoId": "Y5ypYTZs-7o",
-    "title": "Key West Bight Marina Live WebCam - Key West, Florida Keys",
-    "channel": "FloridaKeysTV",
-    "thumbnail": "https://i.ytimg.com/vi/Y5ypYTZs-7o/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      24.5548262,
-      -81.8020722
-    ],
-    "locationName": "Key West, Florida",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.677Z"
-  },
-  {
-    "videoId": "_NmK1u6ZU8U",
-    "title": "Bryant Park Webcam",
-    "channel": "Bryant Park NYC",
-    "thumbnail": "https://i.ytimg.com/vi/_NmK1u6ZU8U/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      40.7537509,
-      -73.9835428
-    ],
-    "locationName": "Bryant Park, New York",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.677Z"
-  },
-  {
-    "videoId": "zl1woMXGGmQ",
-    "title": "Church Street Market Place Live Stream",
-    "channel": "Church Street Market Place",
-    "thumbnail": "https://i.ytimg.com/vi/zl1woMXGGmQ/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      44.4761601,
-      -73.212906
-    ],
-    "locationName": "Burlington, Vermont",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.677Z"
-  },
-  {
-    "videoId": "uY29Vmpptn4",
-    "title": "USA Now",
-    "channel": "Earth Now",
-    "thumbnail": "https://i.ytimg.com/vi/uY29Vmpptn4/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      39.7837304,
-      -100.445882
-    ],
-    "locationName": "USA",
-    "timezone": "America/Chicago",
-    "fetchedAt": "2026-08-04T11:52:31.677Z"
-  },
-  {
-    "videoId": "V7sUbjD_e3I",
-    "title": "The Edge Hotel Clearwater Beach",
-    "channel": "Clearwater Beach Live Cams",
-    "thumbnail": "https://i.ytimg.com/vi/V7sUbjD_e3I/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      27.9774736,
-      -82.8279313
-    ],
-    "locationName": "Clearwater Beach, Florida",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.677Z"
-  },
-  {
-    "videoId": "MAPDh0XDtZs",
-    "title": "Live Beach Views | Sea Watch Resort, Myrtle Beach",
-    "channel": "Vacation Myrtle Beach",
-    "thumbnail": "https://i.ytimg.com/vi/MAPDh0XDtZs/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      33.6956461,
-      -78.8900409
-    ],
-    "locationName": "Myrtle Beach, South Carolina",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.677Z"
-  },
-  {
-    "videoId": "VsuSbXPN93o",
-    "title": "Market Square West Live Cam",
-    "channel": "Newburyport.com",
-    "thumbnail": "https://i.ytimg.com/vi/VsuSbXPN93o/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      42.8116592,
-      -70.8719271
-    ],
-    "locationName": "Newburyport, Massachusetts",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "3nyPER2kzqk",
-    "title": "EarthCam Live: Dublin, Ireland",
-    "channel": "EarthCam",
-    "thumbnail": "https://i.ytimg.com/vi/3nyPER2kzqk/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      53.35,
-      -6.26
-    ],
-    "locationName": "Ireland",
-    "timezone": "Europe/London",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "S8afSTXKkdw",
-    "title": "Vilano Boat Ramp LIVE 24/7 | St. Augustine, Florida",
-    "channel": "St. Augustine Live",
-    "thumbnail": "https://i.ytimg.com/vi/S8afSTXKkdw/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      29.89,
-      -81.31
-    ],
-    "locationName": "St. Augustine, Florida",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "K8YnYfbS4Vk",
-    "title": "Fidler Pond Park",
-    "channel": "City of Goshen Environmental Resilience Department",
-    "thumbnail": "https://i.ytimg.com/vi/K8YnYfbS4Vk/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      41.5850394,
-      -85.8344491
-    ],
-    "locationName": "Goshen, Indiana",
-    "timezone": "America/Indiana/Indianapolis",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "rulGLEdCHZU",
-    "title": "Lyme Regis Harbour",
-    "channel": "Dorset Council UK",
-    "thumbnail": "https://i.ytimg.com/vi/rulGLEdCHZU/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      50.7252897,
-      -2.934559
-    ],
-    "locationName": "Lyme Regis, England",
-    "timezone": "Europe/London",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "-xH-9TxpRY8",
-    "title": "Marlborough, MA- LIVE STREAM",
-    "channel": "WMCT-TV Video Archive",
-    "thumbnail": "https://i.ytimg.com/vi/-xH-9TxpRY8/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      42.3468589,
-      -71.5525188
-    ],
-    "locationName": "Marlborough, Massachusetts",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "yPq9aNukckQ",
-    "title": "Glen Hazel (Hays) Bald Eagle Camera LIVE - Home of Mom &amp; HM2",
-    "channel": "PixCams",
-    "thumbnail": "https://i.ytimg.com/vi/yPq9aNukckQ/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      40.4072914,
-      -79.9292175
-    ],
-    "locationName": "Glen Hazel, Pennsylvania",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "41eq4VzCYc4",
-    "title": "Big Bear Bald Eagle Wide View - Cam 2",
-    "channel": "FOBBV CAM",
-    "thumbnail": "https://i.ytimg.com/vi/41eq4VzCYc4/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      34.24,
-      -116.91
-    ],
-    "locationName": "Big Bear, California",
-    "timezone": "America/Los_Angeles",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "cn5n30ntKDc",
-    "title": "🔴LIVE Cottage Garden Birds: Cardinals, Goldfinches, Orioles, Sleep, Nature Sounds, Cat TV",
-    "channel": "Birdsong & Squirrels",
-    "thumbnail": "https://i.ytimg.com/vi/cn5n30ntKDc/hqdefault_live.jpg",
-    "query": "live stream camera ocean Winter Garden",
-    "location": [
-      40.06,
-      -74.41
-    ],
-    "locationName": "New Jersey",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "y9t1g8Ike6g",
-    "title": "LIVE Bird Feeder &amp; Wildlife Cam - Gettysburg, PA",
-    "channel": "Gettysburg LiveCam",
-    "thumbnail": "https://i.ytimg.com/vi/y9t1g8Ike6g/hqdefault_live.jpg",
-    "query": "live cam nature",
-    "location": [
-      39.8308973,
-      -77.231012
-    ],
-    "locationName": "Gettysburg, Pennsylvania",
-    "timezone": "America/New_York",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "5e4lsEe4Vew",
-    "title": "International Wolf Center North Camera powered by EXPLORE.org",
-    "channel": "Explore Live Nature Cams",
-    "thumbnail": "https://i.ytimg.com/vi/5e4lsEe4Vew/hqdefault_live.jpg",
-    "query": "live cam nature",
-    "location": [
-      46.73,
-      -94.69
-    ],
-    "locationName": "Minnesota",
-    "timezone": "America/Chicago",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "cTsjMtjRLCo",
-    "title": "LIVE Kat&#39;s River View - Katmai National Park, Alaska | explore.org",
-    "channel": "Explore Bears",
-    "thumbnail": "https://i.ytimg.com/vi/cTsjMtjRLCo/hqdefault_live.jpg",
-    "query": "live cam nature",
-    "location": [
-      61.22,
-      -149.9
-    ],
-    "locationName": "Alaska, USA",
-    "timezone": "America/Anchorage",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "2mMGOAjWTnc",
-    "title": "Beaver Lodge – LIVE from National Trust Holnicote Estate",
-    "channel": "National Trust",
-    "thumbnail": "https://i.ytimg.com/vi/2mMGOAjWTnc/hqdefault_live.jpg",
-    "query": "live cam nature",
-    "location": [
-      51.1617509,
-      -3.0753867
-    ],
-    "locationName": "Somerset, England",
-    "timezone": "Europe/London",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "_wnjeiATFk4",
-    "title": "🔴LIVE Bird Cam 24/7 - Missouri Ozarks Cardinals, Blue Jays &amp; Woodpeckers | Real Sound, No Loops",
-    "channel": "Sun Prairie Farms | Ozarks Live Bird Cam",
-    "thumbnail": "https://i.ytimg.com/vi/_wnjeiATFk4/hqdefault_live.jpg",
-    "query": "live cam nature",
-    "location": [
-      38.1443725,
-      -92.6594744
-    ],
-    "locationName": "Missouri Ozarks",
-    "timezone": "America/Chicago",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "_h_ICRmlXgg",
-    "title": "Måløy Live",
-    "channel": "Live Norway",
-    "thumbnail": "https://i.ytimg.com/vi/_h_ICRmlXgg/hqdefault_live.jpg",
-    "query": "webcam live Måløy",
-    "location": [
-      61.93,
-      5.11
-    ],
-    "locationName": "Måløy, Norway",
-    "timezone": "Europe/Berlin",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "0wHWHAFnNh0",
-    "title": "Hvar, Croatia ☀ LIVE 24/7 WebCam",
-    "channel": "Hvar Live",
-    "thumbnail": "https://i.ytimg.com/vi/0wHWHAFnNh0/hqdefault_live.jpg",
-    "query": "live cam plaza",
-    "location": [
-      45.81,
-      15.98
-    ],
-    "locationName": "Croatia",
-    "timezone": "Europe/Belgrade",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "y0XPkjM9-P4",
-    "title": "LIVE - Scenic Cameras - Florida, Bahamas, Caribbean Islands and more. Even Alaska!",
-    "channel": "PTZtv",
-    "thumbnail": "https://i.ytimg.com/vi/y0XPkjM9-P4/hqdefault_live.jpg",
-    "query": "live cam plaza",
-    "location": [
-      15.41,
-      -61.37
-    ],
-    "locationName": "Caribbean",
-    "timezone": "America/Puerto_Rico",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "03pYP2Nmreo",
-    "title": "Vatican Media Live",
-    "channel": "Vatican News",
-    "thumbnail": "https://i.ytimg.com/vi/03pYP2Nmreo/hqdefault_live.jpg",
-    "query": "live cam plaza",
-    "location": [
-      41.9034912,
-      12.4528349
-    ],
-    "locationName": "Vatican",
-    "timezone": "Europe/Rome",
-    "fetchedAt": "2026-08-04T11:52:31.678Z"
-  },
-  {
-    "videoId": "77akujLn4k8",
-    "title": "EarthCam Live - Western Wall  (Jerusalem, Israel)",
-    "channel": "EarthCam",
-    "thumbnail": "https://i.ytimg.com/vi/77akujLn4k8/hqdefault_live.jpg",
-    "query": "live cam plaza",
-    "location": [
-      31.7788472,
-      35.2257856
-    ],
-    "locationName": "Jerusalem, Israel",
-    "timezone": "Asia/Jerusalem",
-    "fetchedAt": "2026-08-04T11:52:31.681Z"
-  },
-  {
-    "videoId": "zp6LNSoq000",
-    "title": "Western Wall, Temple Archaeological Park",
-    "channel": "Mt. of Olives Prayer Bridge",
-    "thumbnail": "https://i.ytimg.com/vi/zp6LNSoq000/hqdefault_live.jpg",
-    "query": "live cam plaza",
-    "location": [
-      31.7788472,
-      35.2257856
-    ],
-    "locationName": "Jerusalem",
-    "timezone": "Asia/Jerusalem",
-    "fetchedAt": "2026-08-04T11:52:31.682Z"
-  },
-  {
-    "videoId": "AfD16cDYBbE",
-    "title": "LIVE 🔴 WEBCAM from PUERTO del CARMEN BEACH - (Lanzarote, Canary Islands, Spain)",
-    "channel": "LanzaroteWebcam",
-    "thumbnail": "https://i.ytimg.com/vi/AfD16cDYBbE/hqdefault_live.jpg",
-    "query": "live cam plaza",
-    "location": [
-      28.2935785,
-      -16.6214471
-    ],
-    "locationName": "CANARY ISLANDS",
-    "timezone": "Atlantic/Canary",
-    "fetchedAt": "2026-08-04T11:52:31.682Z"
-  },
-  {
-    "videoId": "rxyNjFKwzJA",
-    "title": "🔴🚢 Vancouver LIVE Cam | Cruise Ship LiveStream 24/7 | City Views &amp; Canada Place | Alaska Season 2026",
-    "channel": "Vancouver City Views",
-    "thumbnail": "https://i.ytimg.com/vi/rxyNjFKwzJA/hqdefault_live.jpg",
-    "query": "live cam plaza",
-    "location": [
-      49.28,
-      -123.12
-    ],
-    "locationName": "Vancouver, Canada",
-    "timezone": "America/Vancouver",
-    "fetchedAt": "2026-08-04T11:52:31.682Z"
   }
 ]
