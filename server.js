@@ -5,13 +5,14 @@
 // （かつてあったランタイムYouTube検索APIは未使用だったため撤去。
 //   expressもv2.0.0で依存から外れており、これでnpm ci直後でも起動できる）
 import { createServer } from 'http';
-import { readFileSync, createReadStream, statSync } from 'fs';
+import { readFileSync, createReadStream, statSync, realpathSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, join, normalize, extname } from 'path';
+import { dirname, join, normalize, extname, sep } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PUBLIC_DIR = join(__dirname, 'public');
+const PUBLIC_REAL = realpathSync(PUBLIC_DIR);
 
 // --- Config ---
 // config.jsonはportにだけ使う（無ければデフォルト3333）。
@@ -37,15 +38,24 @@ const MIME = {
 
 const server = createServer((req, res) => {
   const urlPath = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
-  // normalizeで ../ を潰したうえでPUBLIC_DIR外へのエスケープを拒否
   const filePath = normalize(join(PUBLIC_DIR, urlPath === '/' ? 'index.html' : urlPath));
-  if (!filePath.startsWith(PUBLIC_DIR)) {
+  // シンボリックリンクを解決した実パスが public/ 配下（区切り付きで前方一致）で
+  // あることを確認してからエスケープを拒否する。startsWithだけだと
+  // 兄弟ディレクトリ（例: public-backup）やsymlink越えを通してしまう
+  let realPath;
+  try {
+    realPath = realpathSync(filePath);
+  } catch {
+    res.writeHead(404).end('Not Found');
+    return;
+  }
+  if (realPath !== PUBLIC_REAL && !realPath.startsWith(PUBLIC_REAL + sep)) {
     res.writeHead(403).end('Forbidden');
     return;
   }
   let stat;
   try {
-    stat = statSync(filePath);
+    stat = statSync(realPath);
   } catch {
     res.writeHead(404).end('Not Found');
     return;
@@ -55,10 +65,10 @@ const server = createServer((req, res) => {
     return;
   }
   res.writeHead(200, {
-    'Content-Type': MIME[extname(filePath).toLowerCase()] || 'application/octet-stream',
+    'Content-Type': MIME[extname(realPath).toLowerCase()] || 'application/octet-stream',
     'Content-Length': stat.size,
   });
-  createReadStream(filePath).pipe(res);
+  createReadStream(realPath).pipe(res);
 });
 
 server.listen(PORT, () => {

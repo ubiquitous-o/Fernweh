@@ -48,6 +48,19 @@ setTimeout(() => {
   }
 }, 30000);
 
+// --- 毎日の自動リロード（キオスク健全化） ---
+// YTプレイヤーを何日も生かし続けるとメモリが緩むため、1日1回
+// 深夜にページごと再起動して初期状態に戻す
+const DAILY_RELOAD_HOUR = 4;
+function msUntilDailyReload() {
+  const now = new Date();
+  const target = new Date(now);
+  target.setHours(DAILY_RELOAD_HOUR, 0, 0, 0);
+  if (target <= now) target.setDate(target.getDate() + 1);
+  return target - now;
+}
+setTimeout(() => location.reload(), msUntilDailyReload());
+
 // リサイズ時にグローブとカメラ時刻を再配置
 let resizeTimer = null;
 window.addEventListener('resize', () => {
