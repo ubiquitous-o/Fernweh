@@ -15,8 +15,9 @@ import { resolveTimezone } from './lib/timezone.js';
 import { GEMINI_API_KEY, extractLocationsWithGemini } from './lib/gemini.js';
 import {
   searchLiveVideos, fetchVideoDescriptions, filterCameraStreams,
-  generateQuery, SORT_ORDERS,
+  generateRegionQuery, SORT_ORDERS,
 } from './lib/youtube.js';
+import { REGIONS, regionOfTimezone } from './lib/regions.js';
 import { resolveLocation } from './lib/resolveLocation.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +26,7 @@ const OUTPUT_PATH = join(__dirname, '..', 'public', 'videos.json');
 
 const SEARCH_COUNT = 8; // 1回のcron実行で行うYouTube検索回数
 const MAX_VIDEOS = 200; // videos.jsonに保存する最大件数
+const REGION_CAP = 20;  // プール内で1地域が占められる最大本数（多様性の下限保証）
 
 function pick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -47,13 +49,32 @@ async function main() {
   const existingIds = new Set(existing.map((v) => v.videoId));
   const newCandidates = [];
 
-  // --- Phase 1: YouTube検索で新規候補を収集 ---
+  // --- Phase 1: YouTube検索で新規候補を収集（世界網羅の地域ローテーション） ---
+  // プールの地域別在庫を数え、不足している地域ほど高い重みで検索対象に選ぶ。
+  // 古いエントリはregion未記録なのでtimezoneから逆引きする
+  const regionTarget = Math.ceil(MAX_VIDEOS / REGIONS.length);
+  const regionCounts = {};
+  for (const v of existing) {
+    const id = v.region || regionOfTimezone(v.timezone);
+    if (id) regionCounts[id] = (regionCounts[id] || 0) + 1;
+  }
+  const pickRegionWeighted = () => {
+    const weights = REGIONS.map((r) => Math.max(1, regionTarget - (regionCounts[r.id] || 0)));
+    let t = Math.random() * weights.reduce((a, b) => a + b, 0);
+    for (let i = 0; i < REGIONS.length; i++) {
+      t -= weights[i];
+      if (t < 0) return REGIONS[i];
+    }
+    return REGIONS[REGIONS.length - 1];
+  };
+
   for (let i = 0; i < SEARCH_COUNT; i++) {
-    const query = generateQuery();
+    const region = pickRegionWeighted();
+    const query = generateRegionQuery(region);
     const order = pick(SORT_ORDERS);
     try {
-      const items = await searchLiveVideos(query, order);
-      console.log(`[${i + 1}/${SEARCH_COUNT}] "${query}" (${order}) -> ${items.length} results`);
+      const items = await searchLiveVideos(query, order, region);
+      console.log(`[${i + 1}/${SEARCH_COUNT}] [${region.id}] "${query}" (${order}) -> ${items.length} results`);
       const filtered = filterCameraStreams(items);
       for (const item of filtered) {
         const videoId = item.id.videoId;
@@ -65,6 +86,7 @@ async function main() {
           channel: item.snippet.channelTitle,
           thumbnail: item.snippet.thumbnails?.high?.url || '',
           query,
+          region: region.id,
         });
       }
     } catch (err) {
@@ -147,6 +169,7 @@ async function main() {
       location: coords,
       locationName: result?.name || null,
       timezone: resolveTimezone(coords),
+      region: c.region,
       fetchedAt: new Date().toISOString(),
     });
   }
@@ -177,10 +200,31 @@ async function main() {
     }
   }
 
-  // 新規を先頭にマージしてMAX_VIDEOS件で切る
-  const merged = [...newVideos, ...existing].slice(0, MAX_VIDEOS);
+  // 新規を先頭にマージし、地域ごとの上限を掛けてからMAX_VIDEOS件で切る。
+  // 上限がないと英語圏の大量流入が他地域を押し出してプールが偏る。
+  // 上限で溢れた分は、総枠が余っていれば新しい順に埋め戻す
+  const kept = [];
+  const overflow = [];
+  const perRegion = {};
+  for (const v of [...newVideos, ...existing]) {
+    const id = v.region || regionOfTimezone(v.timezone) || 'unknown';
+    if ((perRegion[id] || 0) < REGION_CAP) {
+      perRegion[id] = (perRegion[id] || 0) + 1;
+      kept.push(v);
+    } else {
+      overflow.push(v);
+    }
+  }
+  while (kept.length < MAX_VIDEOS && overflow.length > 0) {
+    kept.push(overflow.shift());
+  }
+  const merged = kept.slice(0, MAX_VIDEOS);
   writeFileSync(OUTPUT_PATH, JSON.stringify(merged, null, 2));
   console.log(`\nDone: ${newVideos.length} new videos added, ${merged.length} total in videos.json`);
+  console.log('地域分布:', Object.entries(perRegion)
+    .sort((a, b) => b[1] - a[1])
+    .map(([k, n]) => `${k}=${n}`)
+    .join(' '));
 }
 
 main().catch((err) => {
