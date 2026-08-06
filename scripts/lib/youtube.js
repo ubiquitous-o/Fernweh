@@ -55,7 +55,7 @@ export const TOPICS = [
 export const SORT_ORDERS = ['viewCount', 'relevance', 'date'];
 
 // 英語等のNGワード（\bはASCII単語境界なのでラテン文字専用）
-const EXCLUDE_PATTERNS = /\b(gaming|gameplay|fortnite|minecraft|gta|valorant|apex|cod|warzone|pubg|roblox|music|song|playlist|dj set|radio|podcast|talk|news|reaction|asmr|cooking|tutorial|how to|unbox|review|trailer|anime|cartoon|movie|film|episode|series|drama|vlog|mukbang|karaoke|concert|remix|GDP|population|count|disney|chatvote|room|earthquake|walking|dashboard|monitoring|seismic|live draw|live drawing|lotto|lottery|togel|jackpot|pcso|tracking)\b/i;
+const EXCLUDE_PATTERNS = /\b(gaming|gameplay|fortnite|minecraft|gta|valorant|apex|cod|warzone|pubg|roblox|music|song|playlist|dj set|radio|podcast|talk|\w*news\w*|live tv|reaction|asmr|cooking|tutorial|how to|unbox|review|trailer|anime|cartoon|movie|film|episode|series|drama|vlog|mukbang|karaoke|concert|remix|GDP|population|count|disney|chatvote|room|earthquake|walking|dashboard|monitoring|seismic|live draw|live drawing|lotto|lottery|togel|jackpot|pcso|tracking)\b/i;
 // CJKのNGワード。JSの\bはCJKで機能しない（アニメ|ディズニー を\b付きで書くと
 // 絶対にマッチしない）ため、境界なしの部分一致で別パターンにする
 const EXCLUDE_PATTERNS_CJK = /(アニメ|ディズニー|ゲーム|実況|作業用|ラジオ|雑談|ニュース|地震|音楽|歌ってみた|게임|뉴스|노래방|音樂|新聞|遊戲|航班動態|塔台通訊)/;
