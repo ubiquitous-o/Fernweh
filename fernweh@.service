@@ -1,3 +1,6 @@
+# ローカルサーバの常時起動（任意）。
+# 通常のキオスクはautostart.shがGitHub Pagesを直接表示するため不要。
+# オフライン検証やPagesを使わない構成のときだけ有効化する
 [Unit]
 Description=Fernweh - YouTube Live Camera Display
 After=network-online.target

@@ -50,7 +50,11 @@ setTimeout(() => {
 
 // --- 毎日の自動リロード（キオスク健全化） ---
 // YTプレイヤーを何日も生かし続けるとメモリが緩むため、1日1回
-// 深夜にページごと再起動して初期状態に戻す
+// 深夜にページごと再起動して初期状態に戻す。
+// JS Fullscreen APIのフルスクリーン中はリロードで解除され、
+// ユーザー操作なしでは復帰できないため、スキップして翌日に繰り越す。
+// キオスク起動（--kiosk）やF11・OSのフルスクリーンはウィンドウレベルなので
+// fullscreenElementはnullのまま＝通常どおりリロードされる
 const DAILY_RELOAD_HOUR = 4;
 function msUntilDailyReload() {
   const now = new Date();
@@ -59,7 +63,17 @@ function msUntilDailyReload() {
   if (target <= now) target.setDate(target.getDate() + 1);
   return target - now;
 }
-setTimeout(() => location.reload(), msUntilDailyReload());
+function scheduleDailyReload() {
+  setTimeout(() => {
+    if (document.fullscreenElement) {
+      console.log('Daily reload skipped (JS fullscreen active)');
+      scheduleDailyReload();
+      return;
+    }
+    location.reload();
+  }, msUntilDailyReload());
+}
+scheduleDailyReload();
 
 // リサイズ時にグローブとカメラ時刻を再配置
 let resizeTimer = null;
