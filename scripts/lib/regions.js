@@ -32,7 +32,7 @@ export const REGIONS = [
   {
     id: 'south-asia', regionCode: 'IN', lang: 'en',
     tz: ['Asia/Kolkata', 'Asia/Colombo', 'Asia/Kathmandu', 'Asia/Dhaka', 'Asia/Karachi'],
-    terms: ['live camera', 'live darshan', 'webcam live'],
+    terms: ['live camera', 'live view', 'webcam live'],
     places: ['India', 'Mumbai', 'Varanasi', 'Himalaya', 'Kathmandu', 'Colombo', 'Ganges'],
   },
   {
