@@ -62,6 +62,7 @@ const EXCLUDE_PATTERNS_CJK = /(アニメ|ディズニー|ゲーム|実況|作業
 
 const EXCLUDE_CHANNELS = new Set([
   'Utonish',
+  '公式クライミング・ランドのぼのぼ',
 ]);
 
 function pick(arr) {
