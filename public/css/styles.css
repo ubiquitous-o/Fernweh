@@ -90,9 +90,20 @@ html, body {
 }
 
 /* --- Glitch effect (SVG filter: noise displacement + RGB shift, shadertoy XtK3W3 inspired) --- */
+/* fallback用: Chromeはcross-origin iframeへの filter:url() を無視するので、
+   対応ブラウザでは .glitch-backdrop の backdrop-filter を使う（glitch.jsで分岐） */
 .video-layer.glitch {
   filter: url(#video-glitch-filter);
   will-change: filter;
+}
+.glitch-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.glitch-backdrop.active {
+  -webkit-backdrop-filter: url(#video-glitch-filter);
+  backdrop-filter: url(#video-glitch-filter);
 }
 
 /* --- TV Noise overlay --- */

@@ -35,6 +35,9 @@
   <div class="video-layer hidden" id="layer-b">
     <div id="player-b"></div>
   </div>
+  <!-- Chromeはcross-origin iframeに filter:url() を適用しない（Chrome 151で確認）。
+       このオーバーレイの backdrop-filter 経由なら動画ピクセルにもフィルタが乗る。 -->
+  <div class="glitch-backdrop" id="glitch-backdrop"></div>
 </div>
 
 <!-- SVG glitch filter (Shadertoy XtK3W3 inspired: turbulence-driven horizontal displacement + RGB split) -->

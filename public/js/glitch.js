@@ -12,6 +12,30 @@ const $leftCopy = document.querySelector('#video-glitch-filter feOffset[result="
 const $rightCopy = document.querySelector('#video-glitch-filter feOffset[result="rightCopy"]');
 const $feImage = document.querySelector('#video-glitch-filter feImage');
 const $videoFrame = document.getElementById('video-frame');
+const $backdrop = document.getElementById('glitch-backdrop');
+
+// Chromeはcross-origin iframe（YT埋め込み）に filter:url() を適用しない（Chrome 151で確認）。
+// backdrop-filterのオーバーレイ経由なら動画ピクセルにも乗るので、対応ブラウザではそちらを使う。
+const USE_BACKDROP = typeof CSS !== 'undefined'
+  && (CSS.supports('backdrop-filter', 'url(#video-glitch-filter)')
+    || CSS.supports('-webkit-backdrop-filter', 'url(#video-glitch-filter)'));
+
+function glitchOn(layer) {
+  if (USE_BACKDROP) {
+    $backdrop.classList.add('active');
+    return;
+  }
+  if (layer) {
+    layer.classList.remove('glitch');
+    void layer.offsetWidth; // reflowで再アニメ
+    layer.classList.add('glitch');
+  }
+}
+
+function glitchOff(layer) {
+  if (USE_BACKDROP) $backdrop.classList.remove('active');
+  if (layer) layer.classList.remove('glitch');
+}
 
 // ノイズ更新スロットル: 50msに1回まで
 const NOISE_UPDATE_INTERVAL_MS = 50;
@@ -99,17 +123,13 @@ export function playGlitch(layer, direction = 'down') {
     if (glitchRAF) { cancelAnimationFrame(glitchRAF); glitchRAF = null; }
     if (glitchTimeout) { clearTimeout(glitchTimeout); glitchTimeout = null; }
 
-    if (layer) {
-      layer.classList.remove('glitch');
-      void layer.offsetWidth; // reflowで再アニメ
-      layer.classList.add('glitch');
-    }
+    glitchOn(layer);
     lastNoiseUpdate = 0; // 新しいglitchは初回からノイズ更新
     animate(performance.now(), direction);
 
     glitchTimeout = setTimeout(() => {
       glitchTimeout = null;
-      if (direction === 'down' && layer) layer.classList.remove('glitch');
+      if (direction === 'down') glitchOff(layer);
       resolve();
     }, GLITCH_DURATION);
   });
@@ -118,6 +138,6 @@ export function playGlitch(layer, direction = 'down') {
 export function clearGlitch(layer) {
   if (glitchRAF) { cancelAnimationFrame(glitchRAF); glitchRAF = null; }
   if (glitchTimeout) { clearTimeout(glitchTimeout); glitchTimeout = null; }
-  if (layer) layer.classList.remove('glitch');
+  glitchOff(layer);
   resetFilterAttrs();
 }
