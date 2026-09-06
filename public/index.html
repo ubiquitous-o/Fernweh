@@ -26,7 +26,8 @@
 </head>
 <body>
 
-<!-- 16:9のフレーム枠（overflow:hiddenでSVGフィルタの染み出しをクリップ） -->
+<!-- 16:9のフレーム枠。ビューポートをcoverするサイズで中央配置、はみ出しはクロップ
+     （overflow:hiddenでSVGフィルタの染み出しもクリップ） -->
 <div class="video-frame" id="video-frame">
   <!-- 2レイヤーcrossfade: 切替時はinactive layerに新規YT.Player作成 → swap -->
   <div class="video-layer visible" id="layer-a">

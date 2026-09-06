@@ -62,14 +62,16 @@ html, body {
 }
 
 /* --- Video frame & layer --- */
-/* .video-frame: 中央16:9のクリップ枠。SVGフィルタのはみ出しはここでクリップする。
+/* .video-frame: 中央配置の16:9枠を「cover」で敷く。ビューポート（フルスクリーン時は画面）を
+   常に動画で埋め、16:9からはみ出す分はビューポート外にクロップされる（黒帯なし）。
+   SVGフィルタのはみ出しもここでクリップする。
    .video-layer: フレーム内に inset:0 で配置、フィルタ自体はこの要素に当てる。 */
 .video-frame {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(100vw, calc(100vh * 16 / 9));
-  height: min(100vh, calc(100vw * 9 / 16));
+  width: max(100vw, calc(100vh * 16 / 9));
+  height: max(100vh, calc(100vw * 9 / 16));
   transform: translate(-50%, -50%);
   z-index: 1;
   overflow: hidden;
@@ -107,15 +109,10 @@ html, body {
 }
 
 /* --- TV Noise overlay --- */
-/* 動画の16:9枠内に収まるよう中央寄せ。ビューポートが16:9より広いときは左右、
-   高いときは上下に黒帯が残る（動画の letterbox/pillarbox と一致）。 */
+/* 動画がビューポート全面をcoverするので、砂嵐もビューポート全面に敷く。 */
 .noise-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(100vw, calc(100vh * 16 / 9));
-  height: min(100vh, calc(100vw * 9 / 16));
-  transform: translate(-50%, -50%);
+  inset: 0;
   z-index: 3;
   opacity: 0;
   pointer-events: none;

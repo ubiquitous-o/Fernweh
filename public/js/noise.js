@@ -75,7 +75,7 @@ function createNoiseRenderer() {
   });
 
   function resize() {
-    // 親(.noise-overlay)が16:9にクリップされてるので、その実サイズに合わせる
+    // 親(.noise-overlay)はビューポート全面。その実サイズに合わせる
     const rect = canvas.getBoundingClientRect();
     canvas.width = Math.max(1, Math.round(rect.width));
     canvas.height = Math.max(1, Math.round(rect.height));
