@@ -1,5 +1,692 @@
 [
   {
+    "videoId": "xYqhMHETOgI",
+    "title": "Norway Now",
+    "channel": "Earth Now",
+    "thumbnail": "https://i.ytimg.com/vi/xYqhMHETOgI/hqdefault_live.jpg",
+    "query": "live camera Lofoten",
+    "location": [
+      59.91,
+      10.75
+    ],
+    "locationName": "Norway",
+    "timezone": "Europe/Berlin",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.970Z"
+  },
+  {
+    "videoId": "Dnw_l8f9rUc",
+    "title": "Live Camera Arvidsjaur",
+    "channel": "Live Arvidsjaur",
+    "thumbnail": "https://i.ytimg.com/vi/Dnw_l8f9rUc/hqdefault_live.jpg",
+    "query": "live camera Lofoten",
+    "location": [
+      65.666667,
+      19.25
+    ],
+    "locationName": "Arvidsjaur",
+    "timezone": "Europe/Berlin",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.970Z"
+  },
+  {
+    "videoId": "PFaytLiMc50",
+    "title": "秋葉原ライブカメラ Akihabara live camera YouTube Live version",
+    "channel": "Cerevo live camera",
+    "thumbnail": "https://i.ytimg.com/vi/PFaytLiMc50/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      35.7018928,
+      139.7743684
+    ],
+    "locationName": "Akihabara, Tokyo, Japan",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.970Z"
+  },
+  {
+    "videoId": "NIa-CKGHEEA",
+    "title": "Today Live 10 sep 2026 #live #today #aajtaklive #todayindia #camera #livecamera",
+    "channel": "Parvesh Dhiman vlogs",
+    "thumbnail": "https://i.ytimg.com/vi/NIa-CKGHEEA/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "lgbWAR5_5NY",
+    "title": "🌊 Minegahara Wave Cam 24/7 | Kamakura Live Camera | Shichirigahama Surf Report 🇯🇵",
+    "channel": "峰ヒルズcam",
+    "thumbnail": "https://i.ytimg.com/vi/lgbWAR5_5NY/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      35.3039934,
+      139.5140657
+    ],
+    "locationName": "Shichirigahama, Japan",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "ybfNOlpRxA8",
+    "title": "[LIVE] Live Camera Samarinda Indonesia 24/7  |  lofi 20260910",
+    "channel": "SamarindaLive",
+    "thumbnail": "https://i.ytimg.com/vi/ybfNOlpRxA8/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      -6.21,
+      106.85
+    ],
+    "locationName": "Indonesia",
+    "timezone": "Asia/Jakarta",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "janQU8SoHeM",
+    "title": "奈良県香芝市瓦口ライブカメラ Nara Kashiba Live camera.world.cam",
+    "channel": "奈良県香芝市瓦口ライブカメラ",
+    "thumbnail": "https://i.ytimg.com/vi/janQU8SoHeM/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      34.5415175,
+      135.6988328
+    ],
+    "locationName": "Kashiba, Nara, Japan",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "JGvyEjmTi0Y",
+    "title": "オノデンch【秋葉原ライブカメラ　Akihabara live camera】",
+    "channel": "オノデンch",
+    "thumbnail": "https://i.ytimg.com/vi/JGvyEjmTi0Y/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      35.7018928,
+      139.7743684
+    ],
+    "locationName": "Akihabara, Tokyo, Japan",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "EKpwEVTny1s",
+    "title": "北海道 札幌市東区本町一条ライブカメラ Hokkaido Sapporo Live camera.world.cam",
+    "channel": "北海道 札幌市東区本町一条ライブカメラ",
+    "thumbnail": "https://i.ytimg.com/vi/EKpwEVTny1s/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      43.06,
+      141.35
+    ],
+    "locationName": "Hokkaido, Japan",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "5K-jNyOFw98",
+    "title": "秋田県秋田市新屋扇町ライブカメラ Akita Akitashi Live camera.world.cam",
+    "channel": "秋田県秋田市新屋扇町ライブカメラ",
+    "thumbnail": "https://i.ytimg.com/vi/5K-jNyOFw98/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      39.6898802,
+      140.342608
+    ],
+    "locationName": "Akita, Japan",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "UA6iq0R5VJE",
+    "title": "新潟県柏崎市大字加納ライブカメラ Niigata Kashiwazaki Live Camera.world.cam",
+    "channel": "新潟県柏崎市大字加納ライブカメラ",
+    "thumbnail": "https://i.ytimg.com/vi/UA6iq0R5VJE/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      37.3719095,
+      138.5591406
+    ],
+    "locationName": "Kashiwazaki, Niigata Prefecture, Japan",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "0SSGuY55Ls4",
+    "title": "富士山ライブカメラ 山梨県富士吉田市 Yaamanashi Fujiyoshida Live camera.world.cam",
+    "channel": "富士山ライブカメラ  山梨県富士吉田市",
+    "thumbnail": "https://i.ytimg.com/vi/0SSGuY55Ls4/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      35.4874565,
+      138.8078281
+    ],
+    "locationName": "Fujiyoshida, Yamanashi, Japan",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "ffpwuJZvFOw",
+    "title": "埼玉県川口市東川口ライブカメラ Saitama Kawaguchi Live camera.world.cam",
+    "channel": "埼玉県川口市東川口ライブカメラ",
+    "thumbnail": "https://i.ytimg.com/vi/ffpwuJZvFOw/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      35.8616141,
+      139.6455666
+    ],
+    "locationName": "Saitama, Saitama Prefecture",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "l8sXOmE9iDc",
+    "title": "埼玉県大宮区吉敷町ライブカメラ Saitama Omiya Live camera.world.cam",
+    "channel": "埼玉県大宮区吉敷町ライブカメラ",
+    "thumbnail": "https://i.ytimg.com/vi/l8sXOmE9iDc/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      35.8616141,
+      139.6455666
+    ],
+    "locationName": "Saitama, Saitama Prefecture",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:12.971Z"
+  },
+  {
+    "videoId": "wx63caCS-Mw",
+    "title": "Town of Gibraltar Fish Creek Marina Live Camera",
+    "channel": "Town of Gibraltar Fish Creek Marina",
+    "thumbnail": "https://i.ytimg.com/vi/wx63caCS-Mw/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      45.1277686,
+      -87.2467256
+    ],
+    "locationName": "Fish Creek, Wisconsin",
+    "timezone": "America/Chicago",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "PaejOVXMptk",
+    "title": "🔴【LIVE】台灣高雄小港機場直播 RCKH/KHH Live Camera ATC  24/7即時影像🔴",
+    "channel": "丹丹的飛機窩",
+    "thumbnail": "https://i.ytimg.com/vi/PaejOVXMptk/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      22.6203348,
+      120.3120375
+    ],
+    "locationName": "Kaohsiung, Taiwan",
+    "timezone": "Asia/Taipei",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "Ajo0iFkX3EY",
+    "title": "🔴 Live Camera Stream | Henry Africa&#39;s Bar &amp; Café | Soi Green Mango | Koh Samui | Thailand | 2160p 4K",
+    "channel": "The Real Samui Webcam",
+    "thumbnail": "https://i.ytimg.com/vi/Ajo0iFkX3EY/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      9.5013945,
+      99.9956193
+    ],
+    "locationName": "Koh Samui",
+    "timezone": "Asia/Jakarta",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "xf0L7V23zK4",
+    "title": "富士山ライブカメラ/河口湖駅前   Live camera of Mt,Fuji",
+    "channel": "fuji-net",
+    "thumbnail": "https://i.ytimg.com/vi/xf0L7V23zK4/hqdefault_live.jpg",
+    "query": "live camera",
+    "location": [
+      35.36,
+      138.73
+    ],
+    "locationName": "Fuji, Japan",
+    "timezone": "Asia/Tokyo",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "XfGo4w9yZgM",
+    "title": "제주도 서귀포 마라도 cctv 지금 날씨 실시간 제주 오늘 라이브 캠, 펀제주 제주여행 필수영상  Jeju Island in South Korea Live Cam",
+    "channel": "펀제주",
+    "thumbnail": "https://i.ytimg.com/vi/XfGo4w9yZgM/hqdefault_live.jpg",
+    "query": "라이브 캠 제주",
+    "location": [
+      36.638392,
+      127.6961188
+    ],
+    "locationName": "South Korea",
+    "timezone": "Asia/Seoul",
+    "region": "korea",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "pz7rF65cJOA",
+    "title": "펀제주 제주도 서귀포 성산읍 지금 날씨 실시간 제주 오늘 라이브 캠,   Jeju Island in South Korea Live CCTV Cam Sungsanilchulbong",
+    "channel": "펀제주",
+    "thumbnail": "https://i.ytimg.com/vi/pz7rF65cJOA/hqdefault_live.jpg",
+    "query": "라이브 캠 제주",
+    "location": [
+      36.638392,
+      127.6961188
+    ],
+    "locationName": "South Korea",
+    "timezone": "Asia/Seoul",
+    "region": "korea",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "z2QHM5P_xs4",
+    "title": "[ 🔴LIVE ] 지금 제주는? | 날씨&amp;교통정보 실시간 라이브",
+    "channel": "젬비씨 JEMBC",
+    "thumbnail": "https://i.ytimg.com/vi/z2QHM5P_xs4/hqdefault_live.jpg",
+    "query": "라이브 캠 제주",
+    "location": [
+      33.4887737,
+      126.4987083
+    ],
+    "locationName": "Jeju, South Korea",
+    "timezone": "Asia/Seoul",
+    "region": "korea",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "MW3fisTCXRQ",
+    "title": "🔴 Beach Live Stream · House of Sanskara · Koh Phangan, Thailand (live stereo sound)",
+    "channel": "Teleport.camera",
+    "thumbnail": "https://i.ytimg.com/vi/MW3fisTCXRQ/hqdefault_live.jpg",
+    "query": "live camera Tahiti",
+    "location": [
+      9.7349503,
+      100.0305711
+    ],
+    "locationName": "Koh Phangan",
+    "timezone": "Asia/Jakarta",
+    "region": "oceania",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "hm9iAviOZ20",
+    "title": "Surfline TV | LIVE Surf Cams 24/7",
+    "channel": "Surfline",
+    "thumbnail": "https://i.ytimg.com/vi/hm9iAviOZ20/hqdefault_live.jpg",
+    "query": "live camera Tahiti",
+    "location": [
+      30.2490008,
+      -81.5170759
+    ],
+    "locationName": "Surfline, USA",
+    "timezone": "America/New_York",
+    "region": "oceania",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "iSeH45R-8R0",
+    "title": "✈️  Maho Beach Saint Martin | Princess Juliana Airport Beach 24/7 | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/iSeH45R-8R0/hqdefault_live.jpg",
+    "query": "live camera Tahiti",
+    "location": [
+      18.0814066,
+      -63.0467131
+    ],
+    "locationName": "Saint Martin",
+    "timezone": "America/Puerto_Rico",
+    "region": "oceania",
+    "fetchedAt": "2026-09-10T06:44:14.498Z"
+  },
+  {
+    "videoId": "kqX0J3QGKn0",
+    "title": "🔴 LIVE: Ultimate Kauai Webcam Tour 🌺 Poipu Beach, Princeville, Hanalei &amp; North Shore | NOW!",
+    "channel": "AlohaLiveCam",
+    "thumbnail": "https://i.ytimg.com/vi/kqX0J3QGKn0/hqdefault_live.jpg",
+    "query": "live camera Tahiti",
+    "location": [
+      22.0503838,
+      -159.5588624
+    ],
+    "locationName": "Kauai, Hawaii",
+    "timezone": "Pacific/Honolulu",
+    "region": "oceania",
+    "fetchedAt": "2026-09-10T06:44:14.499Z"
+  },
+  {
+    "videoId": "_ZXMjk5K0_s",
+    "title": "🌴 Eagle Beach | Costa Linda Beach Resort | Aruba | LIVE Cam",
+    "channel": "SHOWME Caribbean",
+    "thumbnail": "https://i.ytimg.com/vi/_ZXMjk5K0_s/hqdefault_live.jpg",
+    "query": "live camera Tahiti",
+    "location": [
+      12.5013629,
+      -69.9618475
+    ],
+    "locationName": "Aruba",
+    "timezone": "America/Puerto_Rico",
+    "region": "oceania",
+    "fetchedAt": "2026-09-10T06:44:14.499Z"
+  },
+  {
+    "videoId": "MkE5YevlhO8",
+    "title": "Live Camera - Tigh Na Mara",
+    "channel": "TighNaMaraResort",
+    "thumbnail": "https://i.ytimg.com/vi/MkE5YevlhO8/hqdefault_live.jpg",
+    "query": "live camera Tahiti",
+    "location": [
+      48.4105391,
+      -123.3731584
+    ],
+    "locationName": "Tigh Na Mara, Canada",
+    "timezone": "America/Vancouver",
+    "region": "oceania",
+    "fetchedAt": "2026-09-10T06:44:14.499Z"
+  },
+  {
+    "videoId": "3ATYHKN2hIg",
+    "title": "Lawai Beach Resort - Live Cam",
+    "channel": "Lawai Beach Resort",
+    "thumbnail": "https://i.ytimg.com/vi/3ATYHKN2hIg/hqdefault_live.jpg",
+    "query": "live camera Tahiti",
+    "location": [
+      21.9210453,
+      -159.5014514
+    ],
+    "locationName": "Lawai, Hawaii",
+    "timezone": "Pacific/Honolulu",
+    "region": "oceania",
+    "fetchedAt": "2026-09-10T06:44:14.499Z"
+  },
+  {
+    "videoId": "hvFJgkTBpNI",
+    "title": "Northumberland Aurora Cam LIVE Stream (Cresswell, UK)",
+    "channel": "Northumberland Astro",
+    "thumbnail": "https://i.ytimg.com/vi/hvFJgkTBpNI/hqdefault_live.jpg",
+    "query": "nordlys kamera",
+    "location": [
+      55.2352886,
+      -1.5398744
+    ],
+    "locationName": "Cresswell",
+    "timezone": "Europe/London",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:14.499Z"
+  },
+  {
+    "videoId": "JZ38uyr-J6o",
+    "title": "Northumberland Aurora Cam LIVE Stream (Embleton, UK)",
+    "channel": "Northumberland Astro",
+    "thumbnail": "https://i.ytimg.com/vi/JZ38uyr-J6o/hqdefault_live.jpg",
+    "query": "nordlys kamera",
+    "location": [
+      54.6500566,
+      -3.3153207
+    ],
+    "locationName": "Embleton",
+    "timezone": "Europe/London",
+    "region": "nordic",
+    "fetchedAt": "2026-09-10T06:44:14.499Z"
+  },
+  {
+    "videoId": "Rn_ga4yXkME",
+    "title": "🔴 Turystyczne ujęcia z polskich miast - WebCamera.pl",
+    "channel": "WebCamera.pl",
+    "thumbnail": "https://i.ytimg.com/vi/Rn_ga4yXkME/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      52.23,
+      21.01
+    ],
+    "locationName": "Poland",
+    "timezone": "Europe/Warsaw",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "uxC7Gf0_MwM",
+    "title": "🔴 50 najpiękniejszych plaż w Polsce, oglądaj przez cały rok - WebCamera.pl",
+    "channel": "WebCamera.pl",
+    "thumbnail": "https://i.ytimg.com/vi/uxC7Gf0_MwM/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      52.23,
+      21.01
+    ],
+    "locationName": "Poland",
+    "timezone": "Europe/Warsaw",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "W3Y2T66t--Y",
+    "title": "🔴 Kamery z turystycznych miejscowości w górach - WebCamera.pl",
+    "channel": "WebCamera.pl",
+    "thumbnail": "https://i.ytimg.com/vi/W3Y2T66t--Y/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      52.23,
+      21.01
+    ],
+    "locationName": "Poland",
+    "timezone": "Europe/Warsaw",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "56gp_U1l9U0",
+    "title": "Rondo Turbinowe Limanowa – Kamera na żywo 24/7 | Ruch drogowy i pogoda",
+    "channel": "EL-SAFE",
+    "thumbnail": "https://i.ytimg.com/vi/56gp_U1l9U0/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      49.7061713,
+      20.4217266
+    ],
+    "locationName": "Limanowa, Poland",
+    "timezone": "Europe/Warsaw",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "IcZ-7sFi1HM",
+    "title": "LIVE: Ukraine real-time skyline cameras from Kharkiv, Donetsk, Kyiv, Sumy and more",
+    "channel": "Intel Cams | OSINT",
+    "thumbnail": "https://i.ytimg.com/vi/IcZ-7sFi1HM/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      50.45,
+      30.52
+    ],
+    "locationName": "Ukraine",
+    "timezone": "Europe/Kyiv",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "yMxD3gdeXmk",
+    "title": "Jasna Góra Klasztor Ojców Paulinów – transmisja na żywo, ON-LINE, msza święta na żywo",
+    "channel": "Jasna Góra Klasztor Ojców Paulinów",
+    "thumbnail": "https://i.ytimg.com/vi/yMxD3gdeXmk/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      50.812763,
+      19.0971211
+    ],
+    "locationName": "Jasna Góra, Poland",
+    "timezone": "Europe/Warsaw",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "Li3Dvqlo5uE",
+    "title": "🔴 Destination Deutschland – 24/7 LIVE Stream Webcams Germany",
+    "channel": "feratel – your window to the world",
+    "thumbnail": "https://i.ytimg.com/vi/Li3Dvqlo5uE/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      52.52,
+      13.41
+    ],
+    "locationName": "Germany",
+    "timezone": "Europe/Berlin",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "a1mcaV3Sf9U",
+    "title": "🔴 LIVE 24/7  Rolling Cam Venice - Live Cam in Venice Italy - Livecam en direct #venice",
+    "channel": "I Love You Venice",
+    "thumbnail": "https://i.ytimg.com/vi/a1mcaV3Sf9U/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      45.44,
+      12.32
+    ],
+    "locationName": "Venice, Italy",
+    "timezone": "Europe/Rome",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "eb51ISty9AI",
+    "title": "Częstochowa kamera na żywo z wieży jasnogórskiej, Czestochowa LIVE WEBCAM",
+    "channel": "Abikus Streaming",
+    "thumbnail": "https://i.ytimg.com/vi/eb51ISty9AI/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      50.8120466,
+      19.113213
+    ],
+    "locationName": "Częstochowa, Poland",
+    "timezone": "Europe/Warsaw",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "VGnFLdQW39A",
+    "title": "🔴 24/7 NYC Live Cam | Times Square, skyline, streets, more",
+    "channel": "FOX 5 New York",
+    "thumbnail": "https://i.ytimg.com/vi/VGnFLdQW39A/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      40.7570095,
+      -73.9859724
+    ],
+    "locationName": "Times Square",
+    "timezone": "America/New_York",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "0wHWHAFnNh0",
+    "title": "Hvar, Croatia ☀ LIVE 24/7 WebCam",
+    "channel": "Hvar Live",
+    "thumbnail": "https://i.ytimg.com/vi/0wHWHAFnNh0/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      45.81,
+      15.98
+    ],
+    "locationName": "Croatia",
+    "timezone": "Europe/Belgrade",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "dzntyCTgJMQ",
+    "title": "RELACJA NA ŻYWO - OGLĄDAJ Telewizja Republika",
+    "channel": "Telewizja Republika",
+    "thumbnail": "https://i.ytimg.com/vi/dzntyCTgJMQ/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      52.23,
+      21.01
+    ],
+    "locationName": "Poland",
+    "timezone": "Europe/Warsaw",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "6V39eDpTyas",
+    "title": "🔴 Slovakia – 24/7 LIVE Stream Webcams",
+    "channel": "feratel – your window to the world",
+    "thumbnail": "https://i.ytimg.com/vi/6V39eDpTyas/hqdefault_live.jpg",
+    "query": "kamera na żywo",
+    "location": [
+      48.7411522,
+      19.4528646
+    ],
+    "locationName": "Slovakia",
+    "timezone": "Europe/Prague",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-09-10T06:44:14.500Z"
+  },
+  {
+    "videoId": "LdS7TXNmQgQ",
+    "title": "LIVE: Jerusalem as Israel–Iran Crisis Unfolds | 24/7",
+    "channel": "Daystar",
+    "thumbnail": "https://i.ytimg.com/vi/LdS7TXNmQgQ/hqdefault_live.jpg",
+    "query": "live view Jerusalem",
+    "location": [
+      31.7788472,
+      35.2257856
+    ],
+    "locationName": "Jerusalem, Israel",
+    "timezone": "Asia/Jerusalem",
+    "region": "middle-east",
+    "fetchedAt": "2026-09-10T06:44:14.504Z"
+  },
+  {
+    "videoId": "zp6LNSoq000",
+    "title": "Western Wall, Temple Archaeological Park",
+    "channel": "Mt. of Olives Prayer Bridge",
+    "thumbnail": "https://i.ytimg.com/vi/zp6LNSoq000/hqdefault_live.jpg",
+    "query": "live view Jerusalem",
+    "location": [
+      31.7788472,
+      35.2257856
+    ],
+    "locationName": "Jerusalem, Israel",
+    "timezone": "Asia/Jerusalem",
+    "region": "middle-east",
+    "fetchedAt": "2026-09-10T06:44:14.505Z"
+  },
+  {
+    "videoId": "AKGqd20ik_A",
+    "title": "Western Wall, the Kotel.",
+    "channel": "Mt. of Olives Prayer Bridge",
+    "thumbnail": "https://i.ytimg.com/vi/AKGqd20ik_A/hqdefault_live.jpg",
+    "query": "live view Jerusalem",
+    "location": [
+      31.7788472,
+      35.2257856
+    ],
+    "locationName": "Jerusalem, Israel",
+    "timezone": "Asia/Jerusalem",
+    "region": "middle-east",
+    "fetchedAt": "2026-09-10T06:44:14.506Z"
+  },
+  {
     "videoId": "sJn7eqgqXno",
     "title": "Arizona Snowbowl - Grand Canyon Express",
     "channel": "Arizona Snowbowl",
@@ -2299,695 +2986,5 @@
     "timezone": "America/Los_Angeles",
     "region": "usa",
     "fetchedAt": "2026-09-09T20:07:06.656Z"
-  },
-  {
-    "videoId": "FqHloN8tZLM",
-    "title": "LIVE: Colorado Springs and Pikes Peak Cam - 24/7 Weather &amp; Mountain Views",
-    "channel": "Colorado Springs Live Cam",
-    "thumbnail": "https://i.ytimg.com/vi/FqHloN8tZLM/hqdefault_live.jpg",
-    "query": "live cam Utah",
-    "location": [
-      38.8339578,
-      -104.825348
-    ],
-    "locationName": "Colorado Springs, Colorado",
-    "timezone": "America/Denver",
-    "region": "usa",
-    "fetchedAt": "2026-09-09T20:07:06.656Z"
-  },
-  {
-    "videoId": "b3xoQMejJzo",
-    "title": "Kamas City Live Cam",
-    "channel": "Russ Richards",
-    "thumbnail": "https://i.ytimg.com/vi/b3xoQMejJzo/hqdefault_live.jpg",
-    "query": "live cam Utah",
-    "location": [
-      40.6429578,
-      -111.280518
-    ],
-    "locationName": "Kamas, Utah",
-    "timezone": "America/Denver",
-    "region": "usa",
-    "fetchedAt": "2026-09-09T20:07:06.656Z"
-  },
-  {
-    "videoId": "08UBMud58ZE",
-    "title": "St. George Utah Red Hills Webcam - See.Cam",
-    "channel": "SeeCam",
-    "thumbnail": "https://i.ytimg.com/vi/08UBMud58ZE/hqdefault_live.jpg",
-    "query": "live cam Utah",
-    "location": [
-      39.32,
-      -111.09
-    ],
-    "locationName": "Utah, USA",
-    "timezone": "America/Denver",
-    "region": "usa",
-    "fetchedAt": "2026-09-09T20:07:06.656Z"
-  },
-  {
-    "videoId": "G1JJ_e-BFQs",
-    "title": "Oregon Coast Aquarium",
-    "channel": "KOIN 6",
-    "thumbnail": "https://i.ytimg.com/vi/G1JJ_e-BFQs/hqdefault_live.jpg",
-    "query": "live camera Oregon coast",
-    "location": [
-      43.8,
-      -120.55
-    ],
-    "locationName": "Oregon, USA",
-    "timezone": "America/Los_Angeles",
-    "region": "usa",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "KFPYXo72qDI",
-    "title": "Chinook Winds Casino Resort in Lincoln City, OR",
-    "channel": "KOIN 6",
-    "thumbnail": "https://i.ytimg.com/vi/KFPYXo72qDI/hqdefault_live.jpg",
-    "query": "live camera Oregon coast",
-    "location": [
-      40.8088861,
-      -96.7077751
-    ],
-    "locationName": "Lincoln, Nebraska",
-    "timezone": "America/Chicago",
-    "region": "usa",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "Ce_vAKq1kUA",
-    "title": "City of Seaside",
-    "channel": "KOIN 6",
-    "thumbnail": "https://i.ytimg.com/vi/Ce_vAKq1kUA/hqdefault_live.jpg",
-    "query": "live camera Oregon coast",
-    "location": [
-      45.993246,
-      -123.920213
-    ],
-    "locationName": "Seaside, Oregon",
-    "timezone": "America/Los_Angeles",
-    "region": "usa",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "ZGAf77sGw6Q",
-    "title": "LIVE Burrowing Owl Nest Cam - Oregon – Owl Research Institute | explore.org",
-    "channel": "Explore Owl Nests & California Condors",
-    "thumbnail": "https://i.ytimg.com/vi/ZGAf77sGw6Q/hqdefault_live.jpg",
-    "query": "live camera Oregon coast",
-    "location": [
-      43.8,
-      -120.55
-    ],
-    "locationName": "Oregon, USA",
-    "timezone": "America/Los_Angeles",
-    "region": "usa",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "_6thFzLFy2E",
-    "title": "Управляемая камера, Пермь, &quot;Пермская ярмарка&quot; | Live camera at Perm Expo with AI Chatbot",
-    "channel": "Nik CCTV",
-    "thumbnail": "https://i.ytimg.com/vi/_6thFzLFy2E/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      58.0108531,
-      56.2318528
-    ],
-    "locationName": "Perm, Russia",
-    "timezone": "Asia/Yekaterinburg",
-    "region": "russia-central-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "w_Dg2vC0tUE",
-    "title": "LIVE CAM Nevskiy avenue St. Petersburg Russia. Невский пр. Санкт-Петербург, Гостиный двор",
-    "channel": "Mobotix Webcams Russia | Marathon to 100k",
-    "thumbnail": "https://i.ytimg.com/vi/w_Dg2vC0tUE/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      59.95,
-      30.34
-    ],
-    "locationName": "St. Petersburg, Russia",
-    "timezone": "Europe/Moscow",
-    "region": "russia-central-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "2C7vrUAIfu4",
-    "title": "🔴 Summer Escape – 24/7 LIVE Stream Webcams Europe",
-    "channel": "feratel – your window to the world",
-    "thumbnail": "https://i.ytimg.com/vi/2C7vrUAIfu4/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      51,
-      10
-    ],
-    "locationName": "Europe",
-    "timezone": "Europe/Berlin",
-    "region": "russia-central-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "AkqGOcpDvZU",
-    "title": "LIVE: Middle East real-time cameras from Iran, Israel, Qatar and more",
-    "channel": "Intel Cams | OSINT",
-    "thumbnail": "https://i.ytimg.com/vi/AkqGOcpDvZU/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      39.3014159,
-      -76.5888477
-    ],
-    "locationName": "Middle East",
-    "timezone": "America/New_York",
-    "region": "russia-central-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "tj4knR4r1UU",
-    "title": "🔴 Live Now: 24/7 NASA Live Stream of Earth from Space (ISS)",
-    "channel": "afarTV",
-    "thumbnail": "https://i.ytimg.com/vi/tj4knR4r1UU/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      51.2861908,
-      7.5207184
-    ],
-    "locationName": "ISS",
-    "timezone": "Europe/Berlin",
-    "region": "russia-central-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "mt7uE-n0YPI",
-    "title": "🔴 4K Live Cam of Ponte delle Guglie Venice - View from Hotel Leone Venezia  - Live stream ライブカメラ",
-    "channel": "I Love You Venice",
-    "thumbnail": "https://i.ytimg.com/vi/mt7uE-n0YPI/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      45.44,
-      12.32
-    ],
-    "locationName": "Venice, Italy",
-    "timezone": "Europe/Rome",
-    "region": "russia-central-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "zMCea32gpmg",
-    "title": "EarthCam Live:  Abbey Road Crossing (London, England)",
-    "channel": "EarthCam",
-    "thumbnail": "https://i.ytimg.com/vi/zMCea32gpmg/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      51.51,
-      -0.13
-    ],
-    "locationName": "England",
-    "timezone": "Europe/London",
-    "region": "russia-central-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "n8lmPY3dEfA",
-    "title": "Vietnam Nha Trang live camera online / 나트랑 / Вьетнам Нячанг онлайн камера. ЖК Океанус",
-    "channel": "Аренда в Нячанге",
-    "thumbnail": "https://i.ytimg.com/vi/n8lmPY3dEfA/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      21.03,
-      105.85
-    ],
-    "locationName": "Vietnam",
-    "timezone": "Asia/Jakarta",
-    "region": "russia-central-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "1Clsrhhl944",
-    "title": "Kensington Cam 6 Philadelphia, PA.",
-    "channel": "Spotlight Rescue",
-    "thumbnail": "https://i.ytimg.com/vi/1Clsrhhl944/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      39.9527237,
-      -75.1635262
-    ],
-    "locationName": "Philadelphia, Pennsylvania",
-    "timezone": "America/New_York",
-    "region": "russia-central-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "jmVmZlsQIL8",
-    "title": "부산 광안대교  (4K LIVE CAM) 釜山 廣安大橋 Gwangandaegyo ライブカメラ Busan Diamond Bridge 광안리 廣安里海水浴場 Gwangalli Beach",
-    "channel": "광안대교",
-    "thumbnail": "https://i.ytimg.com/vi/jmVmZlsQIL8/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      35.18,
-      129.08
-    ],
-    "locationName": "Busan, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "LGuktGeHQxI",
-    "title": "[실시간 해운대해수욕장] 4K Live Cam Haeundae Busan, Transmisión en vivo de la cámara de Haeundae",
-    "channel": "Busan Haeundae Live [부산 해운대 라이브]",
-    "thumbnail": "https://i.ytimg.com/vi/LGuktGeHQxI/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      35.18,
-      129.08
-    ],
-    "locationName": "Busan, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "NBZdNZYF1gI",
-    "title": "[뷰 실화??] 부산 송정(해운대) 해수욕장 실시간 (올라호텔)  live streaming, Haeundae Songjeong Beach , Korea 260703",
-    "channel": "올라호텔ᅵ송정 해수욕장",
-    "thumbnail": "https://i.ytimg.com/vi/NBZdNZYF1gI/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      37.57,
-      126.98
-    ],
-    "locationName": "Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "TBOXgW5VV8s",
-    "title": "부산실시간 광안대교 Live Cam l &quot;Gwangandaegyo Bridge&quot;, Busan,Korea l 부산야경뷰 광안리해변 부산바다 바다라이브 한국바다 Oceanview",
-    "channel": "GiGAeyes Live TV",
-    "thumbnail": "https://i.ytimg.com/vi/TBOXgW5VV8s/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      35.18,
-      129.08
-    ],
-    "locationName": "Busan, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "FbaiWK-0MsI",
-    "title": "부산 광안대교 실시간 교통정보 釜山 廣安大橋 Gwangandaegyo LIVE CAM ライブカメラ Busan Diamond Bridge",
-    "channel": "광안대교",
-    "thumbnail": "https://i.ytimg.com/vi/FbaiWK-0MsI/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      35.18,
-      129.08
-    ],
-    "locationName": "Busan, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "FJlxNUM-AXQ",
-    "title": "부산 광안대교 하부 실시간 교통정보 釜山 廣安大橋 Gwangandaegyo LIVE CAM ライブカメラ Busan Diamond Bridge",
-    "channel": "광안대교",
-    "thumbnail": "https://i.ytimg.com/vi/FJlxNUM-AXQ/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      35.18,
-      129.08
-    ],
-    "locationName": "Busan, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "ufRTT1XhcSs",
-    "title": "부산 광안대교 실시간 교통정보 釜山 廣安大橋 Gwangandaegyo LIVE CAM ライブカメラ Busan Diamond Bridge",
-    "channel": "광안대교",
-    "thumbnail": "https://i.ytimg.com/vi/ufRTT1XhcSs/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      35.18,
-      129.08
-    ],
-    "locationName": "Busan, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "jF8-FvIj4-E",
-    "title": "[실시간 한강] 로파이 🎧 공부·집중·휴식을 위한 음악",
-    "channel": "Seoul Vibes",
-    "thumbnail": "https://i.ytimg.com/vi/jF8-FvIj4-E/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      37.57,
-      126.98
-    ],
-    "locationName": "Seoul, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "t5WpxyF8q5g",
-    "title": "[4K] 서울 동대문 라이브 SEOUL DDP LIVE CAMERA LOFI",
-    "channel": "DDP Live Seoul",
-    "thumbnail": "https://i.ytimg.com/vi/t5WpxyF8q5g/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      37.57,
-      126.98
-    ],
-    "locationName": "Seoul, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "yl11N0NuHVQ",
-    "title": "South Korea Now",
-    "channel": "Earth Now",
-    "thumbnail": "https://i.ytimg.com/vi/yl11N0NuHVQ/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      36.638392,
-      127.6961188
-    ],
-    "locationName": "South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "pdOv8BFAI4Q",
-    "title": "[실시간 한강] 피아노 🎹 힐링·명상·수면을 위한 음악",
-    "channel": "Seoul Vibes",
-    "thumbnail": "https://i.ytimg.com/vi/pdOv8BFAI4Q/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      37.57,
-      126.98
-    ],
-    "locationName": "Seoul, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "n8mJCRXGoXc",
-    "title": "강릉실시간 강문해변 Live Cam I &quot;Gangmoon beach&quot;, Gangwondo, Korea I 강릉바다 바다실시간 여행지 강원도일출 강릉일출",
-    "channel": "GiGAeyes Live TV",
-    "thumbnail": "https://i.ytimg.com/vi/n8mJCRXGoXc/hqdefault_live.jpg",
-    "query": "live camera korea 부산",
-    "location": [
-      37.57,
-      126.98
-    ],
-    "locationName": "Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "rA6X71qHx6A",
-    "title": "【東京ライブカメラ】TOKYO LIVE CAMERA.  Mt&#39;Fuji from Tokyo  富士山 紅富士 赤富士 東京からの富士山    #東京ライブカメラ #富士山東京 #東京夜景",
-    "channel": "VICENTE AGEMATSU",
-    "thumbnail": "https://i.ytimg.com/vi/rA6X71qHx6A/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.68,
-      139.69
-    ],
-    "locationName": "Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "TbGk8C0OspA",
-    "title": "🌊 Minegahara Wave Cam 24/7 | Kamakura Live Camera | Shichirigahama Surf Report 🇯🇵",
-    "channel": "峰ヒルズcam",
-    "thumbnail": "https://i.ytimg.com/vi/TbGk8C0OspA/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.3039934,
-      139.5140657
-    ],
-    "locationName": "Shichirigahama, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "9uDPWW85Cj0",
-    "title": "RaspberryPi Live Camera Stream from Italy, beautiful countryside for coding, studying &amp; scripting",
-    "channel": "Stream RaspberryPi",
-    "thumbnail": "https://i.ytimg.com/vi/9uDPWW85Cj0/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      41.9,
-      12.5
-    ],
-    "locationName": "Italy",
-    "timezone": "Europe/Rome",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "aDKHfRXhHns",
-    "title": "【LIVE】岐阜市 シネマティック ライブカメラ Gifu Cinematic LIVE camera",
-    "channel": "柳ケ瀬TV - サブch 岐阜 Yanagase Japan Sub channel",
-    "thumbnail": "https://i.ytimg.com/vi/aDKHfRXhHns/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.4230949,
-      136.7627526
-    ],
-    "locationName": "Gifu, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.659Z"
-  },
-  {
-    "videoId": "A0leG949luo",
-    "title": "What happened in live camera",
-    "channel": "Ujjawal Rajput",
-    "thumbnail": "https://i.ytimg.com/vi/A0leG949luo/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      41.9,
-      12.5
-    ],
-    "locationName": "Italy",
-    "timezone": "Europe/Rome",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "yT1ZN47yYPg",
-    "title": "Live Camera Danville,Ky",
-    "channel": "Kentucky",
-    "thumbnail": "https://i.ytimg.com/vi/yT1ZN47yYPg/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      37.84,
-      -84.27
-    ],
-    "locationName": "Kentucky, USA",
-    "timezone": "America/New_York",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "TXsNKGPrFMY",
-    "title": "🔴 Live Camera Crete | Rodia, Heraklion, Greece | 24/7 Sea View",
-    "channel": "ExpatOverland | Jimny2Crete",
-    "thumbnail": "https://i.ytimg.com/vi/TXsNKGPrFMY/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      37.98,
-      23.73
-    ],
-    "locationName": "Greece",
-    "timezone": "Europe/Athens",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "Z9UVk_tqwGI",
-    "title": "LIVE Camera Meteori Cerul din Bragadiru",
-    "channel": "ObservațiiAstronomice ",
-    "thumbnail": "https://i.ytimg.com/vi/Z9UVk_tqwGI/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      44.373512,
-      25.9804935
-    ],
-    "locationName": "Bragadiru, Romania",
-    "timezone": "Europe/Bucharest",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "3w4J_x2s4Ek",
-    "title": "LIVE CAMERA Kyoto【京都おすすめ】常寂光寺山門 と おぐら茶屋",
-    "channel": "おぐら茶屋・京のココ見といやす　my favorite KYOTO  [Ogura-chaya]",
-    "thumbnail": "https://i.ytimg.com/vi/3w4J_x2s4Ek/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.01,
-      135.77
-    ],
-    "locationName": "Kyoto, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "P0vHqFoA9Y8",
-    "title": "秋田県秋田市新屋扇町ライブカメラ Akita Akitashi Live camera.world.cam",
-    "channel": "秋田県秋田市新屋扇町ライブカメラ",
-    "thumbnail": "https://i.ytimg.com/vi/P0vHqFoA9Y8/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      39.6898802,
-      140.342608
-    ],
-    "locationName": "Akita, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "yWeOC3BWBrU",
-    "title": "富士山ライブカメラ 山梨県富士吉田市 Yaamanashi Fujiyoshida Live camera.world.cam",
-    "channel": "富士山ライブカメラ  山梨県富士吉田市",
-    "thumbnail": "https://i.ytimg.com/vi/yWeOC3BWBrU/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.4874565,
-      138.8078281
-    ],
-    "locationName": "Fujiyoshida, Yamanashi, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "L00jQXO3QRg",
-    "title": "岡山県倉敷市ライブカメラ Okayama Kurashiki Live Camera.world.cam",
-    "channel": "岡山県倉敷市ライブカメラ",
-    "thumbnail": "https://i.ytimg.com/vi/L00jQXO3QRg/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      34.5850791,
-      133.7719957
-    ],
-    "locationName": "Kurashiki, Okayama Prefecture, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "ne9JQX1faVg",
-    "title": "【Live-Japan】レストランまいづるライブカメラ・Kushiro - Hokkaido Live Camera",
-    "channel": "釧路夕焼け倶楽部",
-    "thumbnail": "https://i.ytimg.com/vi/ne9JQX1faVg/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      43.06,
-      141.35
-    ],
-    "locationName": "Hokkaido, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "Jv_2vPCbZUo",
-    "title": "🔴 Live Camera Stream | Bondi Aussie Bar &amp; Grill | Chaweng | Koh Samui | Thailand | 2160p 4K",
-    "channel": "The Real Samui Webcam",
-    "thumbnail": "https://i.ytimg.com/vi/Jv_2vPCbZUo/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      9.5013945,
-      99.9956193
-    ],
-    "locationName": "Koh Samui",
-    "timezone": "Asia/Jakarta",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "Gc0_z6Vv-_Q",
-    "title": "Live Camera / Modelvliegclub Friendship  in Dalfsen / Axis Q6115-E",
-    "channel": "Benny Breman",
-    "thumbnail": "https://i.ytimg.com/vi/Gc0_z6Vv-_Q/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      52.5117837,
-      6.2566367
-    ],
-    "locationName": "Dalfsen, Netherlands",
-    "timezone": "Europe/Brussels",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "pSucDAgmdY0",
-    "title": "🔴 PHILIPPINES Live camera, Bankerohan Market area, Davao City #philippines",
-    "channel": "JazBaz Philippines",
-    "thumbnail": "https://i.ytimg.com/vi/pSucDAgmdY0/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      14.6,
-      120.98
-    ],
-    "locationName": "Philippines",
-    "timezone": "Asia/Manila",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "Gyn8efd2Jv8",
-    "title": "［LIVE CAMERA］札幌 狸小路 ライブカメラ（４丁目） Tanukikoji Shopping Street in Sapporo, Hokkaido, Japan.",
-    "channel": "たぬきやLIVE",
-    "thumbnail": "https://i.ytimg.com/vi/Gyn8efd2Jv8/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      43.06,
-      141.35
-    ],
-    "locationName": "Hokkaido, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "south-asia",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
-  },
-  {
-    "videoId": "yjU8wtLn1k8",
-    "title": "Muizenberg Beach Live Webcam | REEF South Africa  @Reef-SA",
-    "channel": "REEF SOUTH AFRICA",
-    "thumbnail": "https://i.ytimg.com/vi/yjU8wtLn1k8/hqdefault_live.jpg",
-    "query": "webcam live",
-    "location": [
-      -30.56,
-      22.94
-    ],
-    "locationName": "South Africa",
-    "timezone": "Africa/Johannesburg",
-    "region": "western-europe",
-    "fetchedAt": "2026-09-09T20:07:06.660Z"
   }
 ]
