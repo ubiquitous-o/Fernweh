@@ -1,5 +1,20 @@
 [
   {
+    "videoId": "JXDRmgN_iiE",
+    "title": "LIVE Aurora Camera | Northern Lights &amp; Yukon Sky — Kaleido Lodge, Canada",
+    "channel": "Kaleido Lodge Yukon",
+    "thumbnail": "https://i.ytimg.com/vi/JXDRmgN_iiE/hqdefault_live.jpg",
+    "query": "live camera Yukon",
+    "location": [
+      45.42,
+      -75.7
+    ],
+    "locationName": "Canada",
+    "timezone": "America/Toronto",
+    "region": "canada",
+    "fetchedAt": "2026-10-15T02:04:21.531Z"
+  },
+  {
     "videoId": "SfFJHe2LFm8",
     "title": "Kamera kolej Solina - zapora, kolejka gondolowa, kamera obrotowa. Udostępnij na FB",
     "channel": "Transmi TO",
@@ -2938,20 +2953,5 @@
     "timezone": "America/Toronto",
     "region": "canada",
     "fetchedAt": "2026-10-12T19:27:43.146Z"
-  },
-  {
-    "videoId": "O9dNWYZxU_A",
-    "title": "☀️🌌 [LIVE 24/7] Aurores Boréales &amp; Météo Ciel Québec | Northern Lights Live (St-Hyacinthe)",
-    "channel": "AuroraQC",
-    "thumbnail": "https://i.ytimg.com/vi/O9dNWYZxU_A/hqdefault_live.jpg",
-    "query": "caméra en direct Quebec",
-    "location": [
-      24.638916,
-      46.7160104
-    ],
-    "locationName": "Riyadh, Saudi Arabia",
-    "timezone": "Asia/Riyadh",
-    "region": "canada",
-    "fetchedAt": "2026-10-12T19:27:43.147Z"
   }
 ]
