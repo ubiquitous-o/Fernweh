@@ -1,5 +1,626 @@
 [
   {
+    "videoId": "RovZl4DC1Ac",
+    "title": "WEBCAM NEPAL : LIVE STREAM FROM KAGBENI - MUSTANG - NEPAL.",
+    "channel": "WEBCAM NEPAL ANNAPURNA",
+    "thumbnail": "https://i.ytimg.com/vi/RovZl4DC1Ac/hqdefault_live.jpg",
+    "query": "live camera Himalaya",
+    "location": [
+      27.72,
+      85.32
+    ],
+    "locationName": "Nepal",
+    "timezone": "Asia/Kathmandu",
+    "region": "south-asia",
+    "fetchedAt": "2026-10-17T00:00:05.788Z"
+  },
+  {
+    "videoId": "b9vPWFvh2ZY",
+    "title": "Online Camera Vladivostok Center Веб-камера Владивосток Океанский пр-т",
+    "channel": "LIVEPOINTS",
+    "thumbnail": "https://i.ytimg.com/vi/b9vPWFvh2ZY/hqdefault_live.jpg",
+    "query": "прямая трансляция камера Владивосток",
+    "location": [
+      43.1150678,
+      131.8855768
+    ],
+    "locationName": "Vladivostok, Russia",
+    "timezone": "Asia/Vladivostok",
+    "region": "russia-central-asia",
+    "fetchedAt": "2026-10-17T00:00:05.789Z"
+  },
+  {
+    "videoId": "qnVWPEFJBbE",
+    "title": "Sea-EagleCAM4 Live Stream",
+    "channel": "Sea-EagleCAM4",
+    "thumbnail": "https://i.ytimg.com/vi/qnVWPEFJBbE/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      -33.842903,
+      151.072535
+    ],
+    "locationName": "Sydney Olympic Park, Australia",
+    "timezone": "Australia/Sydney",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:05.789Z"
+  },
+  {
+    "videoId": "pe4xqyzhrK8",
+    "title": "Winter Park Eagle Cam - Side Fixed Cam",
+    "channel": "Winter Park Eagle Cam",
+    "thumbnail": "https://i.ytimg.com/vi/pe4xqyzhrK8/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      28.5977707,
+      -81.3510264
+    ],
+    "locationName": "Winter Park",
+    "timezone": "America/New_York",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:05.789Z"
+  },
+  {
+    "videoId": "eMBkbxPLlaU",
+    "title": "LIVE 🔴 Bird Feeder &amp; Wildlife Camera Scotland UK | 24/7 Garden Birds &amp; Night Wildlife",
+    "channel": "Scottish Wildlife Garden",
+    "thumbnail": "https://i.ytimg.com/vi/eMBkbxPLlaU/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      55.95,
+      -3.19
+    ],
+    "locationName": "Scotland",
+    "timezone": "Europe/London",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:05.789Z"
+  },
+  {
+    "videoId": "eKO9-Rfy0co",
+    "title": "Wildlife Rescue of Dade County Eagle Nest Top Cam",
+    "channel": "Wildlife Rescue of Dade County",
+    "thumbnail": "https://i.ytimg.com/vi/eKO9-Rfy0co/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      37.1670484,
+      -94.8463851
+    ],
+    "locationName": "South Florida, USA",
+    "timezone": "America/Chicago",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.755Z"
+  },
+  {
+    "videoId": "3xZKCAkezrc",
+    "title": "Halloween Camera Rats | Animal spycam | Woody&#39;s Veilige Haven Texel | Graf",
+    "channel": "WoodysVeiligeHaven",
+    "thumbnail": "https://i.ytimg.com/vi/3xZKCAkezrc/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      53.0893718,
+      4.8213473
+    ],
+    "locationName": "Texel, Netherlands",
+    "timezone": "Europe/Brussels",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.757Z"
+  },
+  {
+    "videoId": "aMB9pH1pFbc",
+    "title": "🔴 LIVE New England Fall Bird Feeder &amp; Wildlife in 4K | Relaxing Nature Sounds | Highwood Park",
+    "channel": "Highwood Park",
+    "thumbnail": "https://i.ytimg.com/vi/aMB9pH1pFbc/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      51.51,
+      -0.13
+    ],
+    "locationName": "England",
+    "timezone": "Europe/London",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.757Z"
+  },
+  {
+    "videoId": "huYUT39x2NU",
+    "title": "🦀 Hermit Crab Cam LIVE 24/7 – Key Largo Florida Keys Wildlife",
+    "channel": "Crustacean Plantation Inc.",
+    "thumbnail": "https://i.ytimg.com/vi/huYUT39x2NU/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      27.99,
+      -81.76
+    ],
+    "locationName": "Florida, USA",
+    "timezone": "America/New_York",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.757Z"
+  },
+  {
+    "videoId": "uC0o_o5Nk6I",
+    "title": "🔴 LIVE Brooks Falls Bears 24/7 | Katmai Alaska Brown Bears · Nature Sounds",
+    "channel": "this_endless_grace",
+    "thumbnail": "https://i.ytimg.com/vi/uC0o_o5Nk6I/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      58.5549806,
+      -155.7915925
+    ],
+    "locationName": "Brooks Falls, Alaska",
+    "timezone": "America/Anchorage",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.757Z"
+  },
+  {
+    "videoId": "ZMixnJig8k0",
+    "title": "Red-billed Hornbill Bird Nest Cam 24/7 LIVE.",
+    "channel": "The Sloth Store",
+    "thumbnail": "https://i.ytimg.com/vi/ZMixnJig8k0/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.758Z"
+  },
+  {
+    "videoId": "UN1ulf1fXoQ",
+    "title": "Texas Wildlife in an Austin Backyard",
+    "channel": "Texas Backyard Wildlife",
+    "thumbnail": "https://i.ytimg.com/vi/UN1ulf1fXoQ/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      30.2711286,
+      -97.7436995
+    ],
+    "locationName": "Austin, Texas",
+    "timezone": "America/Chicago",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.758Z"
+  },
+  {
+    "videoId": "CD5Ns8rn4Qc",
+    "title": "🔴 LIVE South Texas Woods Bird Feeder Cam | Cardinals, Orioles, Blue Jays, Mockingbirds &amp; More",
+    "channel": "Texas Bird Feeder Cam",
+    "thumbnail": "https://i.ytimg.com/vi/CD5Ns8rn4Qc/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      26.1748895,
+      -98.1551404
+    ],
+    "locationName": "South Texas, USA",
+    "timezone": "America/Chicago",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.762Z"
+  },
+  {
+    "videoId": "D0GLw5HbGEk",
+    "title": "🔴 LIVE Morio Worms &amp; Darkling Beetles 🪲 | Insect Colony Cam",
+    "channel": "BoycesBalls",
+    "thumbnail": "https://i.ytimg.com/vi/D0GLw5HbGEk/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.764Z"
+  },
+  {
+    "videoId": "kgTzvayCx-c",
+    "title": "🔴 LIVE Hummingbird Hollow Garden Cam 🌺 | Migration Stopover | Blue Ridge Mountains, Virginia",
+    "channel": "The Robertson Rottie Ranch",
+    "thumbnail": "https://i.ytimg.com/vi/kgTzvayCx-c/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      37.3304814,
+      -79.8211759
+    ],
+    "locationName": "Blue Ridge Mountains, Virginia",
+    "timezone": "America/New_York",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.764Z"
+  },
+  {
+    "videoId": "rLDHw2bXwJY",
+    "title": "Buffet + Platform Nighttime Wildlife Cams - Brewers Fever &amp; the Woodland Night Shift",
+    "channel": "Green Valley Wildlife",
+    "thumbnail": "https://i.ytimg.com/vi/rLDHw2bXwJY/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      44.4308975,
+      -89.6884637
+    ],
+    "locationName": "Wisconsin, USA",
+    "timezone": "America/Chicago",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.764Z"
+  },
+  {
+    "videoId": "KEHMzwzZQbE",
+    "title": "APOPO 24/7 LIVE RAT CAM WITH AZIZ THE RAT! 🐀",
+    "channel": "APOPO",
+    "thumbnail": "https://i.ytimg.com/vi/KEHMzwzZQbE/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.765Z"
+  },
+  {
+    "videoId": "cpYJQyO1DgI",
+    "title": "🔴 LIVE Backyard Bird Feeder | Cardinals, Chickadees, Blue Jays &amp; Squirrels | Relaxing Nature Sounds",
+    "channel": "New Perfect Life 😎",
+    "thumbnail": "https://i.ytimg.com/vi/cpYJQyO1DgI/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      40.0757384,
+      -74.4041622
+    ],
+    "locationName": "New Jersey, USA",
+    "timezone": "America/New_York",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.765Z"
+  },
+  {
+    "videoId": "eD03Nfddc6E",
+    "title": "🌙 Whispering Waters Wildlife Oasis After Dark | LIVE Deer &amp; Wildlife Cam | Blue Ridge Mountains",
+    "channel": "The Robertson Rottie Ranch",
+    "thumbnail": "https://i.ytimg.com/vi/eD03Nfddc6E/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      37.3304814,
+      -79.8211759
+    ],
+    "locationName": "Blue Ridge Mountains, Virginia",
+    "timezone": "America/New_York",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.765Z"
+  },
+  {
+    "videoId": "UJvND_9ecrs",
+    "title": "Bass Rock 360 Live Stream",
+    "channel": "Scottish Seabird Centre",
+    "thumbnail": "https://i.ytimg.com/vi/UJvND_9ecrs/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      56.0774678,
+      -2.6405694
+    ],
+    "locationName": "Bass Rock, Scotland",
+    "timezone": "Europe/London",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.765Z"
+  },
+  {
+    "videoId": "aE4f0Kq_A_s",
+    "title": "LIVE Songbird Porch 24/7 🐦 Blue Ridge Mountain Birds • Cardinals, Finches, Deer &amp; Wildlife Cam",
+    "channel": "The Robertson Rottie Ranch",
+    "thumbnail": "https://i.ytimg.com/vi/aE4f0Kq_A_s/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      37.3304248,
+      -79.8212727
+    ],
+    "locationName": "Blue Ridge Mountains, Virginia, USA",
+    "timezone": "America/New_York",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.765Z"
+  },
+  {
+    "videoId": "UZI6Af-DveY",
+    "title": "Water tank along the creek. Birding Chiricahua mountains south eastern Arizona.",
+    "channel": "chiricahuamountains",
+    "thumbnail": "https://i.ytimg.com/vi/UZI6Af-DveY/hqdefault_live.jpg",
+    "query": "live camera animal",
+    "location": [
+      34.05,
+      -111.09
+    ],
+    "locationName": "Arizona, USA",
+    "timezone": "America/Phoenix",
+    "region": "usa",
+    "fetchedAt": "2026-10-17T00:00:07.765Z"
+  },
+  {
+    "videoId": "cZkowQ5DomI",
+    "title": "【HKTCS 薔琵通宵監視直播16-17/10/2026】即將快速增強超強颱風！下週或靠近台灣附近海域！後期路徑存變數！",
+    "channel": "香港颱風追蹤站HKTCS",
+    "thumbnail": "https://i.ytimg.com/vi/cZkowQ5DomI/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      23.9739374,
+      120.9820179
+    ],
+    "locationName": "Taiwan",
+    "timezone": "Asia/Taipei",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.765Z"
+  },
+  {
+    "videoId": "mFhc5zYz7OI",
+    "title": "「Hong Kong Softball Live」正在直播！",
+    "channel": "Hong Kong Softball Live",
+    "thumbnail": "https://i.ytimg.com/vi/mFhc5zYz7OI/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong, China",
+    "timezone": "Asia/Hong_Kong",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.766Z"
+  },
+  {
+    "videoId": "wukIoB9ox4w",
+    "title": "GCSE 學生注意！開始準備 Sixth Form 未？",
+    "channel": "升學界花姐 英國升學 vlog",
+    "thumbnail": "https://i.ytimg.com/vi/wukIoB9ox4w/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.766Z"
+  },
+  {
+    "videoId": "fWzc7SAh7Wo",
+    "title": "A Matter of Time, All The Time",
+    "channel": "Laufey",
+    "thumbnail": "https://i.ytimg.com/vi/fWzc7SAh7Wo/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.767Z"
+  },
+  {
+    "videoId": "LopAGwp-kSY",
+    "title": "舊野當新野 屋主照收貨 | 黑心裝修師傅 Low-Budget Repairs | 4K60",
+    "channel": "Chun佬",
+    "thumbnail": "https://i.ytimg.com/vi/LopAGwp-kSY/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong",
+    "timezone": "Asia/Hong_Kong",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.767Z"
+  },
+  {
+    "videoId": "Q04w-PxwOp0",
+    "title": "4/10/2026 半個月不見~ 我回來了!!!!1 #warframe",
+    "channel": "Rebecca’s World 漫花瞳",
+    "thumbnail": "https://i.ytimg.com/vi/Q04w-PxwOp0/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong",
+    "timezone": "Asia/Hong_Kong",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.767Z"
+  },
+  {
+    "videoId": "jyaHBrmLxus",
+    "title": "요트를 타고 보는 홍콩의 야경 🌃 | 홍콩 여행 LIVE | Hong Kong Night &amp; Star Ferry",
+    "channel": "발걸음의 세계여행",
+    "thumbnail": "https://i.ytimg.com/vi/jyaHBrmLxus/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong, China",
+    "timezone": "Asia/Hong_Kong",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.767Z"
+  },
+  {
+    "videoId": "gKme0miBuwQ",
+    "title": "【GA LIVE】要幾鐘意一樣嘢，先會將佢做埋生意？一個單車徑車友的「沉船」故事｜高端運動品牌 NAFAB 創辦人兼單車衫收藏家 Nathan Lok！",
+    "channel": "GYM AESTHETICS.",
+    "thumbnail": "https://i.ytimg.com/vi/gKme0miBuwQ/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.768Z"
+  },
+  {
+    "videoId": "g9eTxAa53xI",
+    "title": "七彩石翡翠直播|（10.15）玉哥和您一起挑选有性价比的高品质翡翠珠宝，一手货源现场直播代购！#翡翠#天然缅甸翡翠#翡翠直播#翡翠挂件#翡翠珠链#玉石#jewelry#手镯#戒面#jade",
+    "channel": "七彩石翡翠 ",
+    "thumbnail": "https://i.ytimg.com/vi/g9eTxAa53xI/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.769Z"
+  },
+  {
+    "videoId": "2zKW4oyYVZM",
+    "title": "ZTMY TV -Eight Years: An Archive-",
+    "channel": "ずっと真夜中でいいのに。 ZUTOMAYO",
+    "thumbnail": "https://i.ytimg.com/vi/2zKW4oyYVZM/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong",
+    "timezone": "Asia/Hong_Kong",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.769Z"
+  },
+  {
+    "videoId": "ScBtCcGZMDk",
+    "title": "🔴 HONGKONG LIVE 24/7 | 香港即時直播",
+    "channel": "World Live Cam 24",
+    "thumbnail": "https://i.ytimg.com/vi/ScBtCcGZMDk/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "8IoAUO1EKyA",
+    "title": "【香港直播】香港茶果嶺村寮屋區與前高嶺土礦場實況 | Cha Kwo Ling Village &amp; Ex-Kaolin Mine Livecam 隨舒適古典樂",
+    "channel": "Marcus Wong",
+    "thumbnail": "https://i.ytimg.com/vi/8IoAUO1EKyA/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      22.3011207,
+      114.2283352
+    ],
+    "locationName": "Cha Kwo Ling Village, Hong Kong",
+    "timezone": "Asia/Hong_Kong",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "UqDpTXTNVVw",
+    "title": "India Today TV LIVE: Abhijeet Dipke Detained | CJP&#39;s Tiranga March | Rahul Gandhi | Gyanesh Kumar",
+    "channel": "India Today",
+    "thumbnail": "https://i.ytimg.com/vi/UqDpTXTNVVw/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      28.61,
+      77.21
+    ],
+    "locationName": "India",
+    "timezone": "Asia/Kolkata",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "AOj2h6jTK6Q",
+    "title": "ATM LIVE - Ultra Fish&#39;n Sheep (HKG):",
+    "channel": "Asia Trail Master",
+    "thumbnail": "https://i.ytimg.com/vi/AOj2h6jTK6Q/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      51.2086975,
+      89.2343748
+    ],
+    "locationName": "Asia",
+    "timezone": "Asia/Krasnoyarsk",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "z5eFNgEY7FM",
+    "title": "🔴 LIVE: CX254 from London Heathrow to Hong Kong | MSFS24 DLSS5",
+    "channel": "轉子 Rotor guy",
+    "thumbnail": "https://i.ytimg.com/vi/z5eFNgEY7FM/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong, China",
+    "timezone": "Asia/Hong_Kong",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "KZeYtZOUhys",
+    "title": "Hong Kong live camera Live Stream",
+    "channel": "Hong Kong live camera",
+    "thumbnail": "https://i.ytimg.com/vi/KZeYtZOUhys/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong, China",
+    "timezone": "Asia/Hong_Kong",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "UI7-9wr0mLs",
+    "title": "🔴 利斯菲體育會 對 福塔雷薩|Sport Recife vs Fortaleza|巴西乙組聯賽·Brazilian Serie B|即時直播賽況．Live stream and tracker",
+    "channel": "Tipsme Hong Kong",
+    "thumbnail": "https://i.ytimg.com/vi/UI7-9wr0mLs/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      -8.0584933,
+      -34.8848193
+    ],
+    "locationName": "Recife, Brazil",
+    "timezone": "America/Recife",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "AaIE-pwnRLY",
+    "title": "🔴 米拉索 對 國際體育會|Mirassol vs Internacional - RS|巴西…·Campeonato Brasilei…|即時直播賽況．Live stream and tracker",
+    "channel": "Tipsme Hong Kong",
+    "thumbnail": "https://i.ytimg.com/vi/AaIE-pwnRLY/hqdefault_live.jpg",
+    "query": "即時影像 Hong Kong",
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong, China",
+    "timezone": "Asia/Hong_Kong",
+    "region": "greater-china",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "XXmUxYSoMr0",
+    "title": "LIVE Iceland NOW 🇮🇸 | 4K Aurora Borealis Real-Time Sky Camera – Iceland",
+    "channel": "Geimfarinn",
+    "thumbnail": "https://i.ytimg.com/vi/XXmUxYSoMr0/hqdefault_live.jpg",
+    "query": "live camera aurora borealis",
+    "location": [
+      64.15,
+      -21.94
+    ],
+    "locationName": "Iceland",
+    "timezone": "Africa/Abidjan",
+    "region": "africa",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "G-WVnv3sVag",
+    "title": "Seaside Northern lights / Aurora borealis live Ouluzipline.fi Nallikari West",
+    "channel": "Samimaka",
+    "thumbnail": "https://i.ytimg.com/vi/G-WVnv3sVag/hqdefault_live.jpg",
+    "query": "live camera aurora borealis",
+    "location": [
+      45.993246,
+      -123.920213
+    ],
+    "locationName": "Seaside, Oregon",
+    "timezone": "America/Los_Angeles",
+    "region": "africa",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
+    "videoId": "aVDO9iX9T0Y",
+    "title": "LIVE Aurora Camera | Northern Lights &amp; Yukon Sky — Kaleido Lodge, Canada",
+    "channel": "Kaleido Lodge Yukon",
+    "thumbnail": "https://i.ytimg.com/vi/aVDO9iX9T0Y/hqdefault_live.jpg",
+    "query": "live camera aurora borealis",
+    "location": [
+      45.42,
+      -75.7
+    ],
+    "locationName": "Canada",
+    "timezone": "America/Toronto",
+    "region": "africa",
+    "fetchedAt": "2026-10-17T00:00:07.770Z"
+  },
+  {
     "videoId": "eCHeZDEVSeU",
     "title": "LIVE Honolulu Harbor Webcam | Hawaii Ocean &amp; Cruise Ships 24/7",
     "channel": "The Bridge Guy",
@@ -1668,36 +2289,6 @@
     "fetchedAt": "2026-10-15T19:30:58.073Z"
   },
   {
-    "videoId": "8MRTtfSj3Oo",
-    "title": "[即時影像] ☸️ 花蓮和南寺 ☸️ Vandana Monastery live camera [Hualien, Taiwan]",
-    "channel": "和南寺迂園道一",
-    "thumbnail": "https://i.ytimg.com/vi/8MRTtfSj3Oo/hqdefault_live.jpg",
-    "query": "live camera taiwan",
-    "location": [
-      40.2263803,
-      -94.7180218
-    ],
-    "locationName": "Monastery, USA",
-    "timezone": "America/Chicago",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.073Z"
-  },
-  {
-    "videoId": "tAIGWWvd3bQ",
-    "title": "【LIVE】松柏嶺受天宮│風景即時影像│LIVE CAMERA│ライブカメラ│臺灣玄天上帝進香中心│TAIWAN",
-    "channel": "松柏嶺受天宮",
-    "thumbnail": "https://i.ytimg.com/vi/tAIGWWvd3bQ/hqdefault_live.jpg",
-    "query": "live camera taiwan",
-    "location": [
-      23.9739374,
-      120.9820179
-    ],
-    "locationName": "Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.073Z"
-  },
-  {
     "videoId": "3gZAs6WyPf4",
     "title": "Webcam Sydney Australia 4K 60fps HDR Live Stream",
     "channel": "Luis Angelo",
@@ -1726,246 +2317,6 @@
     "timezone": "Australia/Sydney",
     "region": "oceania",
     "fetchedAt": "2026-10-15T19:30:58.074Z"
-  },
-  {
-    "videoId": "zxSf3_T53eg",
-    "title": "【FGU 4KLiveCam｜GenAI LiveChat】佛光大學＠蘭陽平原 即時影像 Lanyang Plain Live View",
-    "channel": "佛光大學 Fo Guang University",
-    "thumbnail": "https://i.ytimg.com/vi/zxSf3_T53eg/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      24.7302791,
-      121.7631149
-    ],
-    "locationName": "Yilan County, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.074Z"
-  },
-  {
-    "videoId": "SHW14_jxGH4",
-    "title": "2026/10/15 22:38:07 4K Live stream, AI camera, 即時影像, 新北市 五股 五工六路, New Taipei City",
-    "channel": "拉普拉斯惡魔",
-    "thumbnail": "https://i.ytimg.com/vi/SHW14_jxGH4/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      25.0859392,
-      121.4787047
-    ],
-    "locationName": "New Taipei City, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.074Z"
-  },
-  {
-    "videoId": "ep8rclr0gqY",
-    "title": "【宜蘭 Starry Sky Live Cam】三星星空即時影像",
-    "channel": "親子觀星會",
-    "thumbnail": "https://i.ytimg.com/vi/ep8rclr0gqY/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      24.7302791,
-      121.7631149
-    ],
-    "locationName": "Yilan County, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.074Z"
-  },
-  {
-    "videoId": "lDiz7xeGDDs",
-    "title": "【宜蘭全天 Starry Sky Live Cam】宜蘭三星全天星空即時影像",
-    "channel": "親子觀星會",
-    "thumbnail": "https://i.ytimg.com/vi/lDiz7xeGDDs/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      24.7302791,
-      121.7631149
-    ],
-    "locationName": "Yilan County, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.074Z"
-  },
-  {
-    "videoId": "c_kHbmYK6sE",
-    "title": "【4K LIVE】九蛙疊像Nine Frogs Statue",
-    "channel": "九蛙伊達邵",
-    "thumbnail": "https://i.ytimg.com/vi/c_kHbmYK6sE/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      23.8523282,
-      120.928607
-    ],
-    "locationName": "Sun Moon Lake, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.074Z"
-  },
-  {
-    "videoId": "la49mVNBQYI",
-    "title": "三貂角即時影像",
-    "channel": "交通部航港局",
-    "thumbnail": "https://i.ytimg.com/vi/la49mVNBQYI/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      25.0859392,
-      121.4787047
-    ],
-    "locationName": "New Taipei City, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.074Z"
-  },
-  {
-    "videoId": "AsmL4dRdXrA",
-    "title": "【Live-Japan】函館駅前ライブカメラ① #函館 #HAKODATE #函館湾 #JR函館駅",
-    "channel": "HAKODATE LIVE CAMERA",
-    "thumbnail": "https://i.ytimg.com/vi/AsmL4dRdXrA/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      41.768793,
-      140.729008
-    ],
-    "locationName": "Hakodate, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.075Z"
-  },
-  {
-    "videoId": "mizy6R7JGdM",
-    "title": "🔴【上海即時影像】東方明珠 24小時高清直播｜黃浦江與外白渡橋全景｜Shanghai Live Stream",
-    "channel": "Brainrolling Workshop",
-    "thumbnail": "https://i.ytimg.com/vi/mizy6R7JGdM/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      31.23,
-      121.47
-    ],
-    "locationName": "Shanghai, China",
-    "timezone": "Asia/Shanghai",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.075Z"
-  },
-  {
-    "videoId": "wamdV7N__Zg",
-    "title": "新北市淡水區景點(即時影像) 淡水渡船頭 直播 #淡水河 #夕陽 #觀音山 #台北港 #淡水老街河岸 #淡水渡し船乗り場  Du Chuan Tou, Tamsui",
-    "channel": "紅樹林有線電視",
-    "thumbnail": "https://i.ytimg.com/vi/wamdV7N__Zg/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      25.0982344,
-      121.4605318
-    ],
-    "locationName": "Tamsui, New Taipei City, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:58.075Z"
-  },
-  {
-    "videoId": "9EGF2WkS_qA",
-    "title": "【4K LIVE】中興停車場Zhongxing Parking Lot",
-    "channel": "中興停車場",
-    "thumbnail": "https://i.ytimg.com/vi/9EGF2WkS_qA/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      33.9597677,
-      -83.376398
-    ],
-    "locationName": "Athens, Georgia",
-    "timezone": "America/New_York",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:59.584Z"
-  },
-  {
-    "videoId": "189alHicFLc",
-    "title": "【LIVE】大社青雲宮│即時影像│TAIWAN",
-    "channel": "大社青雲宮",
-    "thumbnail": "https://i.ytimg.com/vi/189alHicFLc/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      23.9739374,
-      120.9820179
-    ],
-    "locationName": "Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:59.584Z"
-  },
-  {
-    "videoId": "p7Wn1Sn0KDM",
-    "title": "新店垃圾焚化廠 即時影像",
-    "channel": "達和環保 新店分公司",
-    "thumbnail": "https://i.ytimg.com/vi/p7Wn1Sn0KDM/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      25.0635575,
-      121.4693944
-    ],
-    "locationName": "Xindian District, New Taipei City, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:59.585Z"
-  },
-  {
-    "videoId": "CJ8FA10bg3E",
-    "title": "[4K] 中角灣即時影像 Jhongjiao Bay Live Camera",
-    "channel": "北觀國家風景區管理處",
-    "thumbnail": "https://i.ytimg.com/vi/CJ8FA10bg3E/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      25.2389957,
-      121.6323645
-    ],
-    "locationName": "Jhongjiao Bay, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:59.585Z"
-  },
-  {
-    "videoId": "yWM6Z9yb3Ug",
-    "title": "24小時 LIVE 直播中-4K 2160P 台灣彰化 溪湖 即時影像 (天氣動態) ，Formosa Taiwan Changhua City Weather Livestream Video",
-    "channel": "飛訊安防科技",
-    "thumbnail": "https://i.ytimg.com/vi/yWM6Z9yb3Ug/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      24.0755667,
-      120.5444667
-    ],
-    "locationName": "Changhua, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:59.585Z"
-  },
-  {
-    "videoId": "0qDDAbNDCfo",
-    "title": "【LIVE】松柏嶺受天宮│門神視角即時影像│LIVE CAMERA│ライブカメラ│臺灣玄天上帝進香中心│TAIWAN",
-    "channel": "松柏嶺受天宮",
-    "thumbnail": "https://i.ytimg.com/vi/0qDDAbNDCfo/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      23.9739374,
-      120.9820179
-    ],
-    "locationName": "Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:59.585Z"
-  },
-  {
-    "videoId": "gNWeZsaqD98",
-    "title": "[4K] 觀音山即時影像 Guanyinshan Live Camera",
-    "channel": "北觀國家風景區管理處",
-    "thumbnail": "https://i.ytimg.com/vi/gNWeZsaqD98/hqdefault_live.jpg",
-    "query": "即時影像",
-    "location": [
-      25.135939,
-      121.4266759
-    ],
-    "locationName": "Guanyinshan, Taiwan",
-    "timezone": "Asia/Taipei",
-    "region": "greater-china",
-    "fetchedAt": "2026-10-15T19:30:59.585Z"
   },
   {
     "videoId": "zl-K_XGYJes",
@@ -2581,380 +2932,5 @@
     "timezone": "America/New_York",
     "region": "eastern-europe",
     "fetchedAt": "2026-10-14T22:45:38.891Z"
-  },
-  {
-    "videoId": "03avQwX6334",
-    "title": "The Giraffe Center Outdoor Cam | Live from Cheyenne Mountain Zoo",
-    "channel": "Cheyenne Mountain Zoo",
-    "thumbnail": "https://i.ytimg.com/vi/03avQwX6334/hqdefault_live.jpg",
-    "query": "live camera korea zoo",
-    "location": [
-      38.7713841,
-      -104.855441
-    ],
-    "locationName": "Cheyenne Mountain Zoo, Colorado, USA",
-    "timezone": "America/Denver",
-    "region": "korea",
-    "fetchedAt": "2026-10-14T22:45:38.891Z"
-  },
-  {
-    "videoId": "-pR0tv0LYws",
-    "title": "🔴 Weather WebCams from Poland / Pogoda w Polsce / Dane giełdowe - WebCamera.pl",
-    "channel": "WebCamera.pl",
-    "thumbnail": "https://i.ytimg.com/vi/-pR0tv0LYws/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      52.23,
-      21.01
-    ],
-    "locationName": "Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:38.891Z"
-  },
-  {
-    "videoId": "i8N7bJ5nP1I",
-    "title": "Leśny Karmnik LIVE 24/7 – Jelenie, Dziki i Rykowisko",
-    "channel": "Leśne Kamery Podkarpacia",
-    "thumbnail": "https://i.ytimg.com/vi/i8N7bJ5nP1I/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      49.8784697,
-      21.411865
-    ],
-    "locationName": "Brzostek, Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:40.464Z"
-  },
-  {
-    "videoId": "XylMGJPiog8",
-    "title": "Karmnik na Żywo – Dzikie Zwierzęta Jelenie, Jenot, sarny, dziki, lisy, borsuki i ptaki drapieżne",
-    "channel": "Leśne Kamery Podkarpacia",
-    "thumbnail": "https://i.ytimg.com/vi/XylMGJPiog8/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      49.8784697,
-      21.411865
-    ],
-    "locationName": "Brzostek, Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:40.464Z"
-  },
-  {
-    "videoId": "d1Hqy8eNi9w",
-    "title": "Barcelona Spain live cam from Baix Guinardo skyline internet eye",
-    "channel": "NicusNicusNicus(mil_house23)",
-    "thumbnail": "https://i.ytimg.com/vi/d1Hqy8eNi9w/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      41.39,
-      2.17
-    ],
-    "locationName": "Barcelona, Spain",
-    "timezone": "Europe/Madrid",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:40.464Z"
-  },
-  {
-    "videoId": "INKSzTgtE7Q",
-    "title": "Warszawa na żywo 🇵🇱 | Warsaw LIVE – panorama i Stadion Narodowy / City Skyline &amp; National Stadium",
-    "channel": "Warsaw Livestream",
-    "thumbnail": "https://i.ytimg.com/vi/INKSzTgtE7Q/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      52.23,
-      21.01
-    ],
-    "locationName": "Warsaw, Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:40.464Z"
-  },
-  {
-    "videoId": "B8VgAiRS4Lw",
-    "title": "🐔 Live Chicken Cam 24/7 | Hens, Garden &amp; Wildlife in Somerset",
-    "channel": "Hen & Harvest",
-    "thumbnail": "https://i.ytimg.com/vi/B8VgAiRS4Lw/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      51.1617509,
-      -3.0753867
-    ],
-    "locationName": "Somerset, England",
-    "timezone": "Europe/London",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:40.464Z"
-  },
-  {
-    "videoId": "jb_A2jP9_Vc",
-    "title": "Gniazdo Bocianie pod Sokółką - na żywo.",
-    "channel": "gospodyni agusia ",
-    "thumbnail": "https://i.ytimg.com/vi/jb_A2jP9_Vc/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      53.4049183,
-      23.4995562
-    ],
-    "locationName": "Sokółka, Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:40.465Z"
-  },
-  {
-    "videoId": "qJWD1n0ZtIw",
-    "title": "Transmisja na żywo - Tunel Pod Świną - wjazd od prawobrzeża - wyspa Wolin",
-    "channel": "Zarząd Dróg Miejskich i Żeglugi w Świnoujściu",
-    "thumbnail": "https://i.ytimg.com/vi/qJWD1n0ZtIw/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      53.8270329,
-      14.3356892
-    ],
-    "locationName": "Świnoujście, Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:41.818Z"
-  },
-  {
-    "videoId": "JZX1bXMcopI",
-    "title": "🔴Pierwszy raz z serią 😏 dzień 3 - Divinity: Original Sin 2 [POLSKI DUBBING] 🔴NA ŻYWO",
-    "channel": "DAVO Live",
-    "thumbnail": "https://i.ytimg.com/vi/JZX1bXMcopI/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      52.23,
-      21.01
-    ],
-    "locationName": "Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:41.820Z"
-  },
-  {
-    "videoId": "aRCOdbcaaKM",
-    "title": "Rewal na żywo: Ul. Saperska i Plaża",
-    "channel": "rewalkamera_pl",
-    "thumbnail": "https://i.ytimg.com/vi/aRCOdbcaaKM/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      54.0820674,
-      15.0141929
-    ],
-    "locationName": "Rewal, Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:41.820Z"
-  },
-  {
-    "videoId": "SCQkuqYhMXk",
-    "title": "Rewal na żywo - Przystań rybacka i Bałtyk",
-    "channel": "rewalkamera_pl",
-    "thumbnail": "https://i.ytimg.com/vi/SCQkuqYhMXk/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      54.0820674,
-      15.0141929
-    ],
-    "locationName": "Rewal, Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:41.820Z"
-  },
-  {
-    "videoId": "QIpPP4yYtpE",
-    "title": "Trzęsacz Na Żywo - Widok z Willi Mila na Nadmorski Kliff i Okolicę",
-    "channel": "rewalkamera_pl",
-    "thumbnail": "https://i.ytimg.com/vi/QIpPP4yYtpE/hqdefault_live.jpg",
-    "query": "kamera na żywo",
-    "location": [
-      54.0757405,
-      14.9927621
-    ],
-    "locationName": "Trzęsacz, Poland",
-    "timezone": "Europe/Warsaw",
-    "region": "eastern-europe",
-    "fetchedAt": "2026-10-14T22:45:41.820Z"
-  },
-  {
-    "videoId": "qCUA3yk6MrE",
-    "title": "北海道 札幌市東区本町一条ライブカメラ Hokkaido Sapporo Live camera.world.cam",
-    "channel": "北海道 札幌市東区本町一条ライブカメラ",
-    "thumbnail": "https://i.ytimg.com/vi/qCUA3yk6MrE/hqdefault_live.jpg",
-    "query": "ライブカメラ 配信 北海道",
-    "location": [
-      43.06,
-      141.35
-    ],
-    "locationName": "Hokkaido, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "japan",
-    "fetchedAt": "2026-10-14T19:47:20.578Z"
-  },
-  {
-    "videoId": "D2abCP31w4M",
-    "title": "🔴 Yogyakarta, New Orleans, Tokio y Davao EN DIRECTO · Webcams 24/7 con IA | Live cams",
-    "channel": "Pixel Cast",
-    "thumbnail": "https://i.ytimg.com/vi/D2abCP31w4M/hqdefault_live.jpg",
-    "query": "live cam New Orleans",
-    "location": [
-      29.9561422,
-      -90.0733934
-    ],
-    "locationName": "New Orleans",
-    "timezone": "America/Chicago",
-    "region": "usa",
-    "fetchedAt": "2026-10-14T19:47:33.599Z"
-  },
-  {
-    "videoId": "6qeP9yJZD08",
-    "title": "LIVE 🌙  FLORIDA Night Cam ☁️ Tuesday Raccoons, Opossums, Nature  #livecamera #live #wildlife",
-    "channel": "FL Birds Live Cam",
-    "thumbnail": "https://i.ytimg.com/vi/6qeP9yJZD08/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      27.99,
-      -81.76
-    ],
-    "locationName": "Florida, USA",
-    "timezone": "America/New_York",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
-  },
-  {
-    "videoId": "zh6abS0CQ5s",
-    "title": "🔴 LIVE 24/7 Severe Weather Coverage  - Live Storm Chasers And Tornado Warnings",
-    "channel": "More Max Velocity",
-    "thumbnail": "https://i.ytimg.com/vi/zh6abS0CQ5s/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      38.9,
-      -77.04
-    ],
-    "locationName": "United States",
-    "timezone": "America/New_York",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
-  },
-  {
-    "videoId": "wyEi0OPai5g",
-    "title": "Webcam Rio de Janeiro Copacabana Posto 6",
-    "channel": "Homes in Rio",
-    "thumbnail": "https://i.ytimg.com/vi/wyEi0OPai5g/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      -22.91,
-      -43.17
-    ],
-    "locationName": "Rio de Janeiro, Brazil",
-    "timezone": "America/Sao_Paulo",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
-  },
-  {
-    "videoId": "9w3por8E2uQ",
-    "title": "オノデンch【秋葉原ライブカメラ　Akihabara live camera】",
-    "channel": "オノデンch",
-    "thumbnail": "https://i.ytimg.com/vi/9w3por8E2uQ/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.7018928,
-      139.7743684
-    ],
-    "locationName": "Akihabara, Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
-  },
-  {
-    "videoId": "uVPN9N7XoYY",
-    "title": "【LIVE】新宿・歌舞伎町 ライブカメラ 2026/10/14 00:00〜",
-    "channel": "Kabukicho Live Camera",
-    "thumbnail": "https://i.ytimg.com/vi/uVPN9N7XoYY/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.6945429,
-      139.7027105
-    ],
-    "locationName": "Kabukicho, Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
-  },
-  {
-    "videoId": "M-xwyHmUvyU",
-    "title": "【富士山ライブカメラ】赤富士パワーを毎日お届け。&quot;Mt. Fuji live camera&quot; World heritage of JAPAN #富士山ライブ #山中湖ライブカメラ#赤富士 #紅富士",
-    "channel": "VICENTE AGEMATSU",
-    "thumbnail": "https://i.ytimg.com/vi/M-xwyHmUvyU/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.36,
-      138.73
-    ],
-    "locationName": "Mt. Fuji, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
-  },
-  {
-    "videoId": "1lmcgLo6uT8",
-    "title": "🔴Live東海道新幹線小田原駅ライブカメラ/Shinkansen Odawara Station Live Camera/Bullet train",
-    "channel": "こだまらいふ Kodama life / Shinkansen Japan bullet train",
-    "thumbnail": "https://i.ytimg.com/vi/1lmcgLo6uT8/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.2645301,
-      139.152246
-    ],
-    "locationName": "Odawara, Kanagawa, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
-  },
-  {
-    "videoId": "ncvEMktxVd4",
-    "title": "［LIVE CAMERA］札幌 狸小路 ライブカメラ（４丁目） Tanukikoji Shopping Street in Sapporo, Hokkaido, Japan.",
-    "channel": "たぬきやLIVE",
-    "thumbnail": "https://i.ytimg.com/vi/ncvEMktxVd4/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      43.06,
-      141.35
-    ],
-    "locationName": "Hokkaido, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
-  },
-  {
-    "videoId": "g1kiB4Ve4yQ",
-    "title": "🔴【LIVE】沖縄ライブカメラ・那覇 国際通り /Okinawa Live Camera 24/7",
-    "channel": "バクノビジョン",
-    "thumbnail": "https://i.ytimg.com/vi/g1kiB4Ve4yQ/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      26.34,
-      127.77
-    ],
-    "locationName": "Okinawa, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
-  },
-  {
-    "videoId": "AZWgPsla0C0",
-    "title": "BOY SAYONG ( CAM 3 ) INSIDE AGDAO PUBLIC MARKET DAVAO CITY ( ROSE STORE )",
-    "channel": "Maria Deseo - Philippines Live Webcam",
-    "thumbnail": "https://i.ytimg.com/vi/AZWgPsla0C0/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      7.07,
-      125.61
-    ],
-    "locationName": "Davao City, Philippines",
-    "timezone": "Asia/Manila",
-    "region": "nordic",
-    "fetchedAt": "2026-10-14T09:05:01.471Z"
   }
 ]
