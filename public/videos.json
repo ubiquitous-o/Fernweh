@@ -1,5 +1,110 @@
 [
   {
+    "videoId": "jZ6_-WlrezU",
+    "title": "Онлайн камера Нячанга на 17 октября 2026",
+    "channel": "Дядя Ваня Вьетнам",
+    "thumbnail": "https://i.ytimg.com/vi/jZ6_-WlrezU/hqdefault_live.jpg",
+    "query": "прямая трансляция камера",
+    "location": [
+      12.2084991,
+      109.2871204
+    ],
+    "locationName": "Nha Trang, Vietnam",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "region": "russia-central-asia",
+    "fetchedAt": "2026-10-17T08:05:13.531Z"
+  },
+  {
+    "videoId": "YtGDwWPngAU",
+    "title": "Прямая трансляция пользователя ак мечеть г. болгар камера 2",
+    "channel": "Чтение Корана ак мечеть Болгар",
+    "thumbnail": "https://i.ytimg.com/vi/YtGDwWPngAU/hqdefault_live.jpg",
+    "query": "прямая трансляция камера",
+    "location": [
+      55.7891871,
+      49.1526382
+    ],
+    "locationName": "Bulgar, Russia",
+    "timezone": "Europe/Moscow",
+    "region": "russia-central-asia",
+    "fetchedAt": "2026-10-17T08:05:14.975Z"
+  },
+  {
+    "videoId": "l-p2YdtZqiw",
+    "title": "Онлайн камера 2 ( 24/7 )РОССИЯ  г. Ленск .  Online camera 2 (24/7 ) RUSSIA  Lensk",
+    "channel": "LarryRos",
+    "thumbnail": "https://i.ytimg.com/vi/l-p2YdtZqiw/hqdefault_live.jpg",
+    "query": "прямая трансляция камера",
+    "location": [
+      55.76,
+      37.62
+    ],
+    "locationName": "Russia",
+    "timezone": "Europe/Moscow",
+    "region": "russia-central-asia",
+    "fetchedAt": "2026-10-17T08:05:14.975Z"
+  },
+  {
+    "videoId": "Zwqtl6wyyT4",
+    "title": "Нячанг камера онлайн 🔴 | Погода в Нячанге сейчас",
+    "channel": "VietVed Вьетнам",
+    "thumbnail": "https://i.ytimg.com/vi/Zwqtl6wyyT4/hqdefault_live.jpg",
+    "query": "прямая трансляция камера",
+    "location": [
+      12.2084991,
+      109.2871204
+    ],
+    "locationName": "Nha Trang, Vietnam",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "region": "russia-central-asia",
+    "fetchedAt": "2026-10-17T08:05:14.975Z"
+  },
+  {
+    "videoId": "NtmKkMuRzVM",
+    "title": "Live Bayou La Batre Lift Bridge CAM",
+    "channel": "Bayou Grill BLB",
+    "thumbnail": "https://i.ytimg.com/vi/NtmKkMuRzVM/hqdefault_live.jpg",
+    "query": "라이브 캠 bridge",
+    "location": [
+      30.4030511,
+      -88.2486876
+    ],
+    "locationName": "Bayou La Batre, Alabama",
+    "timezone": "America/Chicago",
+    "region": "korea",
+    "fetchedAt": "2026-10-17T08:05:16.433Z"
+  },
+  {
+    "videoId": "cX2SD6Cw9lI",
+    "title": "Tomahawk, Wi 4th Street &amp; Bridge Live Cam",
+    "channel": "Tomahawk Fishing Report",
+    "thumbnail": "https://i.ytimg.com/vi/cX2SD6Cw9lI/hqdefault_live.jpg",
+    "query": "라이브 캠 bridge",
+    "location": [
+      45.4710329,
+      -89.7314472
+    ],
+    "locationName": "Tomahawk, Wisconsin",
+    "timezone": "America/Chicago",
+    "region": "korea",
+    "fetchedAt": "2026-10-17T08:05:16.433Z"
+  },
+  {
+    "videoId": "C0gUJzasfog",
+    "title": "🔴 NYC Live Cam — Brooklyn Bridge &amp; Manhattan Bridge, East River 2026-10-17 3AM ET",
+    "channel": "Brooklyn Waterfront Cams",
+    "thumbnail": "https://i.ytimg.com/vi/C0gUJzasfog/hqdefault_live.jpg",
+    "query": "라이브 캠 bridge",
+    "location": [
+      40.7579554,
+      -73.9855319
+    ],
+    "locationName": "Manhattan, New York",
+    "timezone": "America/New_York",
+    "region": "korea",
+    "fetchedAt": "2026-10-17T08:05:16.433Z"
+  },
+  {
     "videoId": "-pR0tv0LYws",
     "title": "🔴 Weather WebCams from Poland / Pogoda w Polsce / Dane giełdowe - WebCamera.pl",
     "channel": "WebCamera.pl",
@@ -737,9 +842,12 @@
     "channel": "升學界花姐 英國升學 vlog",
     "thumbnail": "https://i.ytimg.com/vi/wukIoB9ox4w/hqdefault_live.jpg",
     "query": "即時影像 Hong Kong",
-    "location": null,
-    "locationName": null,
-    "timezone": null,
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong",
+    "timezone": "Asia/Hong_Kong",
     "region": "greater-china",
     "fetchedAt": "2026-10-17T00:00:07.766Z"
   },
@@ -848,9 +956,12 @@
     "channel": "World Live Cam 24",
     "thumbnail": "https://i.ytimg.com/vi/ScBtCcGZMDk/hqdefault_live.jpg",
     "query": "即時影像 Hong Kong",
-    "location": null,
-    "locationName": null,
-    "timezone": null,
+    "location": [
+      43.7403749,
+      -79.3217458
+    ],
+    "locationName": "Tesla",
+    "timezone": "America/Toronto",
     "region": "greater-china",
     "fetchedAt": "2026-10-17T00:00:07.770Z"
   },
@@ -2821,110 +2932,5 @@
     "timezone": "Asia/Tokyo",
     "region": "southeast-asia",
     "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "UGHx0llw_VY",
-    "title": "[LIVE] Kabukicho Live Camera Stream 2 2026/10/15 18:00",
-    "channel": "Kabukicho Live Camera",
-    "thumbnail": "https://i.ytimg.com/vi/UGHx0llw_VY/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.6945429,
-      139.7027105
-    ],
-    "locationName": "Kabukicho, Tokyo, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "southeast-asia",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "iZRbml7fnXI",
-    "title": "MSY Airport  LIVE 24/7 • New Orleans",
-    "channel": "Flightradar24",
-    "thumbnail": "https://i.ytimg.com/vi/iZRbml7fnXI/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      29.9561422,
-      -90.0733934
-    ],
-    "locationName": "New Orleans",
-    "timezone": "America/Chicago",
-    "region": "southeast-asia",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "M3xoKJ0cK00",
-    "title": "Cincinnati Skyline, Ohio River, Brent Spence Bridge - Livestream from Covington, Kentucky",
-    "channel": "Aaron Preslin",
-    "thumbnail": "https://i.ytimg.com/vi/M3xoKJ0cK00/hqdefault_live.jpg",
-    "query": "live camera river",
-    "location": [
-      39.1014537,
-      -84.5124602
-    ],
-    "locationName": "Cincinnati, Ohio",
-    "timezone": "America/New_York",
-    "region": "southern-europe",
-    "fetchedAt": "2026-10-15T08:38:25.488Z"
-  },
-  {
-    "videoId": "znmUEZUM9Zc",
-    "title": "London Webcam LIVE 4K | London Bridge &amp; River Thames | Golden Hinde",
-    "channel": "Beach Life Cams",
-    "thumbnail": "https://i.ytimg.com/vi/znmUEZUM9Zc/hqdefault_live.jpg",
-    "query": "live camera river",
-    "location": [
-      51.51,
-      -0.13
-    ],
-    "locationName": "London, England",
-    "timezone": "Europe/London",
-    "region": "southern-europe",
-    "fetchedAt": "2026-10-15T08:38:25.488Z"
-  },
-  {
-    "videoId": "X1l_sV4-1kQ",
-    "title": "Chao Phraya River, Bangkok, Thailand | Live Camera Stream",
-    "channel": "Randomly Entertained",
-    "thumbnail": "https://i.ytimg.com/vi/X1l_sV4-1kQ/hqdefault_live.jpg",
-    "query": "live camera river",
-    "location": [
-      15.87,
-      100.99
-    ],
-    "locationName": "Thailand",
-    "timezone": "Asia/Jakarta",
-    "region": "southern-europe",
-    "fetchedAt": "2026-10-15T08:38:25.488Z"
-  },
-  {
-    "videoId": "rqqsRFBVnk4",
-    "title": "Llangollen Live | Steam Railway, River Dee Kayakers, Bridge | North Wales. Please Subscribe!",
-    "channel": "River Dee Live Cam 🚂 Llangollen Views",
-    "thumbnail": "https://i.ytimg.com/vi/rqqsRFBVnk4/hqdefault_live.jpg",
-    "query": "live camera river",
-    "location": [
-      52.9487856,
-      -3.7601273
-    ],
-    "locationName": "North Wales",
-    "timezone": "Europe/London",
-    "region": "southern-europe",
-    "fetchedAt": "2026-10-15T08:38:25.488Z"
-  },
-  {
-    "videoId": "PwMjkiDvRG0",
-    "title": "LIVE White River Cam | Calico Rock Trout Dock | Arkansas Fishing and Wildlife",
-    "channel": "Calico Rock Trout Dock",
-    "thumbnail": "https://i.ytimg.com/vi/PwMjkiDvRG0/hqdefault_live.jpg",
-    "query": "live camera river",
-    "location": [
-      36.1195143,
-      -92.1359867
-    ],
-    "locationName": "Calico Rock, Arkansas",
-    "timezone": "America/Chicago",
-    "region": "southern-europe",
-    "fetchedAt": "2026-10-15T08:38:25.488Z"
   }
 ]
