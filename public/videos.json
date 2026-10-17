@@ -1,5 +1,122 @@
 [
   {
+    "videoId": "y5WRIHRBBco",
+    "title": "Jaam&#39;s Eatery Filipino local Food World Live Cam",
+    "channel": "Livecam nomad pH",
+    "thumbnail": "https://i.ytimg.com/vi/y5WRIHRBBco/hqdefault_live.jpg",
+    "query": "라이브 캠",
+    "location": null,
+    "locationName": null,
+    "timezone": null,
+    "region": "korea",
+    "fetchedAt": "2026-10-17T13:19:00.171Z"
+  },
+  {
+    "videoId": "elT43I__DHk",
+    "title": "🔴 Seoul Train Live Cam 24/7 | Korea KTX, Metro &amp; Freight Trains | 영등포역 기차 라이브",
+    "channel": "Seoul Rail Live",
+    "thumbnail": "https://i.ytimg.com/vi/elT43I__DHk/hqdefault_live.jpg",
+    "query": "라이브 캠",
+    "location": [
+      37.57,
+      126.98
+    ],
+    "locationName": "Seoul, South Korea",
+    "timezone": "Asia/Seoul",
+    "region": "korea",
+    "fetchedAt": "2026-10-17T13:19:00.171Z"
+  },
+  {
+    "videoId": "uRyZ7PAt9mk",
+    "title": "Stockholm city live cam 20261017",
+    "channel": "Flaming Fire",
+    "thumbnail": "https://i.ytimg.com/vi/uRyZ7PAt9mk/hqdefault_live.jpg",
+    "query": "live cam Stockholm",
+    "location": [
+      59.33,
+      18.07
+    ],
+    "locationName": "Stockholm, Sweden",
+    "timezone": "Europe/Berlin",
+    "region": "nordic",
+    "fetchedAt": "2026-10-17T13:19:00.171Z"
+  },
+  {
+    "videoId": "lvDxE5ONcYk",
+    "title": "🔴 LIVE African Safari | 6 Maasai Mara Wildlife Cameras | Kenya 24/7",
+    "channel": "SBC-TV | Maasai Mara Live Safari",
+    "thumbnail": "https://i.ytimg.com/vi/lvDxE5ONcYk/hqdefault_live.jpg",
+    "query": "live camera safari",
+    "location": [
+      -1.0959167,
+      35.8566088
+    ],
+    "locationName": "Maasai Mara, Kenya",
+    "timezone": "Asia/Riyadh",
+    "region": "eastern-europe",
+    "fetchedAt": "2026-10-17T13:19:00.171Z"
+  },
+  {
+    "videoId": "1QH44L9PsAo",
+    "title": "LIVE Patrolling Webcam: Bikini Beach, GBYC &amp; Gordon’s Bay Harbour (Cape Town, South Africa)",
+    "channel": "Cape Ocean Adventures ",
+    "thumbnail": "https://i.ytimg.com/vi/1QH44L9PsAo/hqdefault_live.jpg",
+    "query": "webcam live Cape Town",
+    "location": [
+      -30.56,
+      22.94
+    ],
+    "locationName": "South Africa",
+    "timezone": "Africa/Johannesburg",
+    "region": "africa",
+    "fetchedAt": "2026-10-17T13:19:00.171Z"
+  },
+  {
+    "videoId": "zGlGodTfncQ",
+    "title": "Strand Bodyboard Collective Live, False Bay, Cape Town - Strand beach cam",
+    "channel": "Cape Ocean Adventures ",
+    "thumbnail": "https://i.ytimg.com/vi/zGlGodTfncQ/hqdefault_live.jpg",
+    "query": "webcam live Cape Town",
+    "location": [
+      -33.93,
+      18.42
+    ],
+    "locationName": "Cape Town, South Africa",
+    "timezone": "Africa/Johannesburg",
+    "region": "africa",
+    "fetchedAt": "2026-10-17T13:19:00.171Z"
+  },
+  {
+    "videoId": "pUZ_T-NwC2Q",
+    "title": "Muizenberg Beach Live Webcam | REEF South Africa  @Reef-SA",
+    "channel": "REEF SOUTH AFRICA",
+    "thumbnail": "https://i.ytimg.com/vi/pUZ_T-NwC2Q/hqdefault_live.jpg",
+    "query": "webcam live Cape Town",
+    "location": [
+      -30.56,
+      22.94
+    ],
+    "locationName": "South Africa",
+    "timezone": "Africa/Johannesburg",
+    "region": "africa",
+    "fetchedAt": "2026-10-17T13:19:00.171Z"
+  },
+  {
+    "videoId": "xQGZlljQlCM",
+    "title": "Muizenberg Wave Watchers: Surf Webcam",
+    "channel": "Muizenberg Wave Watchers",
+    "thumbnail": "https://i.ytimg.com/vi/xQGZlljQlCM/hqdefault_live.jpg",
+    "query": "webcam live Cape Town",
+    "location": [
+      -34.0978389,
+      18.4845708
+    ],
+    "locationName": "Muizenberg, South Africa",
+    "timezone": "Africa/Johannesburg",
+    "region": "africa",
+    "fetchedAt": "2026-10-17T13:19:00.172Z"
+  },
+  {
     "videoId": "jZ6_-WlrezU",
     "title": "Онлайн камера Нячанга на 17 октября 2026",
     "channel": "Дядя Ваня Вьетнам",
@@ -917,9 +1034,12 @@
     "channel": "GYM AESTHETICS.",
     "thumbnail": "https://i.ytimg.com/vi/gKme0miBuwQ/hqdefault_live.jpg",
     "query": "即時影像 Hong Kong",
-    "location": null,
-    "locationName": null,
-    "timezone": null,
+    "location": [
+      22.32,
+      114.17
+    ],
+    "locationName": "Hong Kong",
+    "timezone": "Asia/Hong_Kong",
     "region": "greater-china",
     "fetchedAt": "2026-10-17T00:00:07.768Z"
   },
@@ -1622,9 +1742,12 @@
     "channel": "NDTV",
     "thumbnail": "https://i.ytimg.com/vi/DVkoiUkvyqk/hqdefault_live.jpg",
     "query": "live view Mumbai",
-    "location": null,
-    "locationName": null,
-    "timezone": null,
+    "location": [
+      43.7403749,
+      -79.3217458
+    ],
+    "locationName": "Tesla",
+    "timezone": "America/Toronto",
     "region": "south-asia",
     "fetchedAt": "2026-10-16T20:09:48.467Z"
   },
@@ -2812,125 +2935,5 @@
     "timezone": "Asia/Jakarta",
     "region": "southeast-asia",
     "fetchedAt": "2026-10-15T14:29:53.671Z"
-  },
-  {
-    "videoId": "8xCKUm8DXQ0",
-    "title": "Cámara en Vivo Cancún - Vista desde Hoteles Solaris (Live Cam 24/7)",
-    "channel": "Hoteles Solaris",
-    "thumbnail": "https://i.ytimg.com/vi/8xCKUm8DXQ0/hqdefault_live.jpg",
-    "query": "webcam live Cancún",
-    "location": [
-      21.1527467,
-      -86.8425761
-    ],
-    "locationName": "Cancún, Mexico",
-    "timezone": "America/Cancun",
-    "region": "central-america-caribbean",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "zdd31jqIKv4",
-    "title": "[실시간] 부산 송정해수욕장 라이브캠 24/7🔴Busan Beach Live Cam Korea🌊韓国 釜山 ライブカメラ",
-    "channel": "한국 산책 TV_Korea Walking Tours TV (KWTT)",
-    "thumbnail": "https://i.ytimg.com/vi/zdd31jqIKv4/hqdefault_live.jpg",
-    "query": "live view Busan",
-    "location": [
-      35.18,
-      129.08
-    ],
-    "locationName": "Busan, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "P-STvpyu1yA",
-    "title": "🔴 KOREA LIVE 24/7 | Seoul, Busan, Jeju | 한국 실시간 CCTV",
-    "channel": "World Live Cam 24",
-    "thumbnail": "https://i.ytimg.com/vi/P-STvpyu1yA/hqdefault_live.jpg",
-    "query": "live view Busan",
-    "location": [
-      37.57,
-      126.98
-    ],
-    "locationName": "Seoul, South Korea",
-    "timezone": "Asia/Seoul",
-    "region": "korea",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "Hh4XNA0Ea9A",
-    "title": "Cincinnati Zoo Giraffe Birth Watch - Indoor",
-    "channel": "The Cincinnati Zoo & Botanical Garden",
-    "thumbnail": "https://i.ytimg.com/vi/Hh4XNA0Ea9A/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      39.1014537,
-      -84.5124602
-    ],
-    "locationName": "Cincinnati, Ohio",
-    "timezone": "America/New_York",
-    "region": "southeast-asia",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "uDBYuEV4zjI",
-    "title": "Heathrow Airport LIVE 24/7",
-    "channel": "BIG JET TV",
-    "thumbnail": "https://i.ytimg.com/vi/uDBYuEV4zjI/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      51.467739,
-      -0.4587801
-    ],
-    "locationName": "Heathrow Airport",
-    "timezone": "Europe/London",
-    "region": "southeast-asia",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "fu-O3LWRWBc",
-    "title": "🔴LIVE Notting Hill Gate Station - London 4K Webcam",
-    "channel": "Notting Hill Gate Cam",
-    "thumbnail": "https://i.ytimg.com/vi/fu-O3LWRWBc/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      51.51,
-      -0.13
-    ],
-    "locationName": "London, England",
-    "timezone": "Europe/London",
-    "region": "southeast-asia",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "ac0v_QwqYfw",
-    "title": "🟢 Montego Bay Live 24/7 | Sam Sharpe Square, Jamaica | See Jamaica",
-    "channel": "See Jamaica ",
-    "thumbnail": "https://i.ytimg.com/vi/ac0v_QwqYfw/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      18.11,
-      -77.3
-    ],
-    "locationName": "Jamaica",
-    "timezone": "America/Jamaica",
-    "region": "southeast-asia",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
-  },
-  {
-    "videoId": "WV754-Pc4iA",
-    "title": "🔴Live東海道新幹線小田原駅ライブカメラ/Shinkansen Odawara Station Live Camera/Bullet train",
-    "channel": "こだまらいふ Kodama life / Shinkansen Japan bullet train",
-    "thumbnail": "https://i.ytimg.com/vi/WV754-Pc4iA/hqdefault_live.jpg",
-    "query": "live camera",
-    "location": [
-      35.2645301,
-      139.152246
-    ],
-    "locationName": "Odawara, Kanagawa, Japan",
-    "timezone": "Asia/Tokyo",
-    "region": "southeast-asia",
-    "fetchedAt": "2026-10-15T14:29:53.672Z"
   }
 ]
