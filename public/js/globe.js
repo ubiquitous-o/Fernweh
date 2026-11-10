@@ -32,6 +32,10 @@ export function updateGlobe(location, locationName) {
   globeRef.canvas.replaceWith(freshCanvas);
   globeRef.canvas = freshCanvas;
 
+  // 設定で右下の地球儀を隠しているあいだは、描かない（古い描画は上で破棄済み）。
+  // 設定で出し直したときは settings.js がもう一度ここを呼ぶ
+  if (document.body.classList.contains('hide-place')) return;
+
   const hasLocation = location && Array.isArray(location);
   const markers = hasLocation ? [{ location, size: 0.08 }] : [];
 
@@ -73,6 +77,10 @@ export function updateGlobe(location, locationName) {
 
   // ピンの2Dスクリーン座標を計算してラベルを配置
   const labelOffset = displaySize * (16 / 225);
+  // ラベルの右端は、球の右端（＝画面端の余白の線）より外へ出さない。
+  // 球はキャンバスの8割の大きさなので、右端はキャンバス幅の9割の位置
+  const labelRightLimit = displaySize * 0.9;
+  let labelHalfWidth = 0;
   function updateLabelPosition(phi, theta) {
     if (!hasLocation || !locationName) return;
     const [lat, lon] = location;
@@ -93,7 +101,8 @@ export function updateGlobe(location, locationName) {
     }
     const sx = radius + x1 * radius;
     const sy = radius - y2 * radius;
-    $globeLabel.style.left = sx + 'px';
+    if (!labelHalfWidth) labelHalfWidth = $globeLabel.offsetWidth / 2;
+    $globeLabel.style.left = Math.min(sx, labelRightLimit - labelHalfWidth) + 'px';
     if (lat >= 0) {
       // 北半球: ピンの上にラベル
       $globeLabel.style.top = (sy - labelOffset) + 'px';

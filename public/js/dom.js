@@ -15,6 +15,7 @@ export const $clockTime = document.getElementById('clock-time');
 export const $clockDate = document.getElementById('clock-date');
 
 export const $liveBadge = document.getElementById('live-badge');
+export const $controls = document.querySelector('.controls');
 export const $progress = document.getElementById('progress');
 export const $loading = document.getElementById('loading');
 
@@ -33,5 +34,7 @@ export const $weather = document.getElementById('weather');
 export const $weatherLocation = document.getElementById('weather-location');
 
 export const $btnSkip = document.getElementById('btn-skip');
+export const $btnSettings = document.getElementById('btn-settings');
+export const $settingsPanel = document.getElementById('settings-panel');
 export const $btnFullscreen = document.getElementById('btn-fullscreen');
 export const $btnInfo = document.getElementById('btn-info');

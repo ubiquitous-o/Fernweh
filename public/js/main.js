@@ -7,6 +7,8 @@ import { repositionCameraTime } from './clock.js';
 import { initWeather } from './weather.js';
 import { updateGlobe } from './globe.js';
 import { initInput } from './input.js';
+import { initSettings } from './settings.js';
+import { refreshMarquees } from './ui.js';
 import { shiftOverlays } from './burnin.js';
 
 const RESUME_KEY = 'fernweh_resume';
@@ -75,11 +77,12 @@ function scheduleDailyReload() {
 }
 scheduleDailyReload();
 
-// リサイズ時にグローブとカメラ時刻を再配置
+// リサイズ時にグローブとカメラ時刻を再配置し、流れる文字も測り直す
 let resizeTimer = null;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
+    refreshMarquees();
     if (state.currentInfo) {
       updateGlobe(state.currentInfo.location, state.currentInfo.locationName);
       repositionCameraTime();
@@ -89,6 +92,7 @@ window.addEventListener('resize', () => {
 
 // 初期化
 initInput();
+initSettings();
 updateClock();
 setInterval(updateClock, 10000);
 initWeather();

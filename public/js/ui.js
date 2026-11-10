@@ -2,7 +2,7 @@
 import { state } from './state.js';
 import {
   $info, $infoTitle, $infoChannel, $clock, $liveBadge, $cameraTime,
-  $loading, $error, $errorMsg, $btnInfo, $globe,
+  $loading, $error, $errorMsg, $btnInfo, $btnFullscreen, $globe, $controls,
 } from './dom.js';
 
 // 軌道ビューの幕が出ているあいだ、ぱっと隠す対象オーバーレイ
@@ -19,9 +19,74 @@ export function showOverlaysInstant() {
   $hideableOverlays.forEach((el) => el?.classList.remove('hide-during-orbit'));
 }
 
+// 流れる文字の速さ(px/秒)
+const MARQUEE_SPEED = 36;
+
+// el に文字を入れる。枠に収まらないときだけ、横に流す（見た目は styles.css の .marquee）。
+// 収まるときは文字を1つ置くだけ。収まらないときは同じ文字を2つ並べ、1つぶん流して継ぎ目なく繰り返す
+function setMarquee(el, text) {
+  el.dataset.text = text;
+  el.classList.remove('scrolling');
+  el.textContent = '';
+  const track = document.createElement('span');
+  track.className = 'marquee-track';
+  const item = document.createElement('span');
+  item.className = 'marquee-item';
+  item.textContent = text;
+  track.appendChild(item);
+  el.appendChild(track);
+
+  if (item.offsetWidth > el.clientWidth + 1) {
+    const copy = item.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    track.appendChild(copy);
+    el.classList.add('scrolling');
+    // 1周 = 文字1つぶん（繰り返しのあいだの空きを含む幅）
+    el.style.setProperty('--marquee-duration', `${item.offsetWidth / MARQUEE_SPEED}s`);
+  }
+}
+
+// 枠の幅や文字の幅が変わったとき（画面サイズの変更、フォントの読み込み完了、
+// 隠していた情報を出し直したとき）に、流すかどうかを測り直す
+export function refreshMarquees() {
+  for (const el of [$infoChannel, $infoTitle]) setMarquee(el, el.dataset.text || '');
+}
+document.fonts?.ready.then(refreshMarquees);
+
+// ボタン列の置き場所を決める。ふだんは上端の中央。
+// 縦長の画面で、上端の中央に置くと左上のLIVEや右上の時計に近すぎる（画面端の余白ぶんの空きが取れない）
+// ときだけ、右端の中央に移す（見た目は styles.css の body.controls-side）。
+// 設定でLIVEや時計を隠していれば、そのぶん上端が空くので上に置ける
+export function updateControlsPlacement() {
+  // 配置に使う幅と高さ（スマホでは window.innerWidth が配置の幅と食い違うことがあるので使わない）
+  const vw = document.documentElement.clientWidth;
+  let side = false;
+  if (document.documentElement.clientHeight > vw) {
+    const buttons = [...$controls.children];
+    const gap = parseFloat(getComputedStyle($controls).columnGap) || 0;
+    const rowWidth = buttons.reduce((w, b) => w + b.offsetWidth, 0) + gap * (buttons.length - 1);
+    const margin = parseFloat(getComputedStyle($liveBadge).left) || 0; // 画面端の余白（--edge）と同じ幅
+    // 隠している要素は幅0。そのときは画面の端までが空き
+    const liveRight = $liveBadge.offsetWidth ? $liveBadge.getBoundingClientRect().right : 0;
+    const clockLeft = $clock.offsetWidth ? $clock.getBoundingClientRect().left : vw;
+    const rowLeft = (vw - rowWidth) / 2;
+    side = rowLeft - liveRight < margin || clockLeft - (rowLeft + rowWidth) < margin;
+  }
+  document.body.classList.toggle('controls-side', side);
+}
+// 画面サイズのほか、時計パネルの幅（天気の読み込み）でも変わるので見張る。
+// 設定での表示切替のときは settings.js が直接呼ぶ
+window.addEventListener('resize', updateControlsPlacement);
+if (window.ResizeObserver) {
+  const watcher = new ResizeObserver(updateControlsPlacement);
+  watcher.observe($clock);
+  watcher.observe($liveBadge);
+}
+updateControlsPlacement();
+
 export function showInfo(data) {
-  $infoChannel.textContent = data.channel || '';
-  $infoTitle.textContent = data.title || '';
+  setMarquee($infoChannel, data.channel || '');
+  setMarquee($infoTitle, data.title || '');
   $infoTitle.href = `https://www.youtube.com/watch?v=${data.videoId}`;
   $info.classList.add('show');
 }
@@ -54,8 +119,11 @@ export function toggleFullscreen() {
   }
 }
 
-function updateFullscreenUI() {
+// 全画面の状態を、設定パネルのスイッチやリンクに反映する。
+// 全画面に入れなかったとき（ブラウザに拒否された等）にスイッチを戻すためにも呼ぶ
+export function updateFullscreenUI() {
   const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  $btnFullscreen.checked = isFS;
   $btnInfo.style.display = isFS ? 'none' : '';
   $infoTitle.style.pointerEvents = isFS ? 'none' : '';
   $infoTitle.style.textDecoration = isFS ? 'none' : '';

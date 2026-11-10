@@ -27,7 +27,8 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 | Click (screen) | Skip to next camera |
 | `Space` / `→` / `N` | Skip to next camera |
 | `F` / `F11` | Toggle fullscreen |
-| Mouse move | Show control buttons |
+| Mouse move | Show the control buttons (top centre; on a portrait screen too narrow for that, the right edge): next camera, settings |
+| `Esc` / click outside | Close the settings panel |
 
 ## Features
 
@@ -42,6 +43,8 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 - Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback)
 - Randomized search queries with multiple patterns for maximum discovery (300+ locations, 50+ topics)
 - Clickable video title — links to original YouTube video, resumes on browser back
+- Settings panel: show or hide each overlay (clock & weather, local time & globe, live badge, video info), toggle fullscreen; choices are saved in the browser
+- Long channel names and video titles scroll sideways (marquee) instead of being cut off
 - "City, Country" location labels on globe (auto line-break at comma)
   - **Note:** Globe labels are best-effort — location detection relies on video titles, channel names, and AI extraction, so labels may be inaccurate or missing for some streams
 - Client-side video pool refresh every 2 hours (follows server-side updates)
@@ -163,7 +166,8 @@ fernweh/
 │   │   ├── transitions.js        # switchVideo / resumeVideo flow (pre-glitch → orbit ascend / dive → post-glitch)
 │   │   ├── videoPool.js          # videos.json pool, watched-list, fetchNext
 │   │   ├── locations.js          # Runtime KNOWN_LOCATIONS dictionary fallback
-│   │   ├── ui.js                 # Info / loading / error / fullscreen toggle
+│   │   ├── ui.js                 # Info (with marquee) / loading / error / fullscreen toggle
+│   │   ├── settings.js           # Settings panel: overlay visibility toggles, saved in localStorage
 │   │   ├── progress.js           # Hourly switch timer + progress bar
 │   │   ├── clock.js               # Local clock + camera local time
 │   │   ├── weather.js             # Geolocation → Open-Meteo 7-day forecast

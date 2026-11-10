@@ -8,14 +8,13 @@
   --accent: rgba(255, 90, 60, 0.9);
 
   /* レイアウト */
-  --edge-x: clamp(20px, 3.5vw, 50px);
-  --edge-y: clamp(16px, 2.5vh, 40px);
+  /* 画面端の余白。上下左右すべて同じ幅にする（四隅のUIがこの線にそろう） */
+  --edge: clamp(18px, 2.6vw, 44px);
   --globe-size: clamp(120px, 18vw, 225px);
   --shift-x: 0px;
   --shift-y: 0px;
 
   /* Clock */
-  --clock-top: clamp(16px, 2.5vh, 30px);
   --clock-font-time: clamp(28px, 4.5vw, 56px);
   --clock-font-date: clamp(13px, 1.8vw, 22px);
   --clock-padding-x: clamp(10px, 1.5vw, 20px);
@@ -30,7 +29,6 @@
   --info-font-channel: clamp(10px, 1.1vw, 13px);
 
   /* Live badge */
-  --badge-top: clamp(20px, 3vh, 38px);
   --badge-font: clamp(11px, 1.3vw, 16px);
 
   /* Camera time */
@@ -43,7 +41,6 @@
   /* Controls */
   --ctrl-btn-size: clamp(32px, 3.5vw, 42px);
   --ctrl-btn-font: clamp(12px, 1.3vw, 16px);
-  --ctrl-right: clamp(16px, 2.5vw, 30px);
 
   /* Progress */
   --progress-height: clamp(2px, 0.35vh, 4px);
@@ -158,11 +155,11 @@ html, body {
 /* --- Info Overlay --- */
 .info-overlay {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: calc(var(--edge) + var(--shift-y));
+  left: calc(var(--edge) + var(--shift-x));
+  /* 右下の地球儀にかからない幅まで。収まらない文字は横に流す（.marquee） */
+  width: min(58vw, calc(100vw - var(--edge) * 2 - var(--globe-size) - 24px));
   z-index: 10;
-  padding: calc(var(--edge-y) + var(--shift-y)) calc(var(--edge-x) + var(--shift-x));
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -186,20 +183,49 @@ html, body {
   font-weight: 300;
   line-height: 1.4;
   color: var(--text-primary);
-  max-width: clamp(300px, 50vw, 700px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   text-decoration: none;
-  display: block;
 }
-.info-title:hover { text-decoration: underline; }
+/* 下線は中の文字に付ける（text-decoration は inline-block の子には伝わらない） */
+.info-title:hover .marquee-item { text-decoration: underline; }
+
+/* 流れる文字: 枠に収まらない文字だけ横にスクロールさせる（ui.js の setMarquee が組み立てる）。
+   収まるときは .marquee-track に文字が1つ入るだけで、動かない。
+   収まらないときは同じ文字を2つ並べ、ちょうど1つぶん左へ流して継ぎ目なく繰り返す */
+.marquee {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+}
+.marquee-item {
+  display: inline-block;
+}
+.marquee.scrolling .marquee-item {
+  /* 繰り返しのあいだの空き */
+  padding-right: 4em;
+}
+.marquee.scrolling .marquee-track {
+  animation: marquee-scroll var(--marquee-duration, 20s) linear infinite;
+  will-change: transform;
+}
+/* 流れている文字は、左右の端でふわっと消える */
+.marquee.scrolling {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 1.2em, #000 calc(100% - 2.5em), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 1.2em, #000 calc(100% - 2.5em), transparent 100%);
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 
 /* --- Top-right Clock --- */
 .clock-overlay {
   position: absolute;
-  top: calc(var(--clock-top) + var(--shift-y));
-  right: calc(var(--edge-x) + var(--shift-x));
+  top: calc(var(--edge) + var(--shift-y));
+  right: calc(var(--edge) + var(--shift-x));
   z-index: 10;
   text-align: right;
   opacity: 0;
@@ -303,8 +329,10 @@ html, body {
 /* --- Globe --- */
 .globe-container {
   position: absolute;
-  bottom: calc(var(--edge-y) + var(--shift-y));
-  right: calc(var(--edge-x) + var(--shift-x));
+  /* 地球儀の球はキャンバスの8割の大きさで描かれ、まわりに1割ずつ空きがある。
+     見た目の余白がほかの隅とそろうよう、その空きのぶんだけ外へ寄せる */
+  bottom: calc(var(--edge) - var(--globe-size) * 0.1 + var(--shift-y));
+  right: calc(var(--edge) - var(--globe-size) * 0.1 + var(--shift-x));
   z-index: 12;
   width: var(--globe-size);
   height: var(--globe-size);
@@ -339,8 +367,8 @@ html, body {
 
 .camera-time {
   position: absolute;
-  bottom: calc(var(--globe-size) + var(--edge-y) + 10px);
-  right: calc(var(--edge-x) + var(--shift-x));
+  bottom: calc(var(--globe-size) + var(--edge) + 10px);
+  right: calc(var(--edge) + var(--shift-x));
   z-index: 12;
   text-align: right;
   opacity: 0;
@@ -360,8 +388,8 @@ html, body {
 /* --- Live indicator --- */
 .live-badge {
   position: absolute;
-  top: calc(var(--badge-top) + var(--shift-y));
-  left: calc(var(--edge-x) + var(--shift-x));
+  top: calc(var(--edge) + var(--shift-y));
+  left: calc(var(--edge) + var(--shift-x));
   z-index: 10;
   display: flex;
   align-items: center;
@@ -402,24 +430,37 @@ html, body {
   opacity: 0.6;
 }
 
-/* --- Controls (right edge, vertically centered) --- */
+/* --- Controls ---
+   ふだんは上端の中央に横並び。縦長の画面で、上端にLIVEや時計と重ならずに置ける空きがないときだけ、
+   右端の中央に縦並び（body.controls-side。付け外しは js/ui.js の updateControlsPlacement）。
+   出し入れの動きは --ctrl-shown / --ctrl-hidden で決める */
 .controls {
+  --ctrl-shown: translateX(-50%);
+  --ctrl-hidden: translateX(-50%) translateY(-4px);
   position: absolute;
-  top: 50%;
-  right: var(--ctrl-right);
-  transform: translateY(-50%) translateX(4px);
+  top: var(--edge);
+  left: 50%;
+  transform: var(--ctrl-hidden);
   z-index: 20;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: clamp(8px, 1vw, 12px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
+body.controls-side .controls {
+  --ctrl-shown: translateY(-50%);
+  --ctrl-hidden: translateY(-50%) translateX(4px);
+  top: 50%;
+  left: auto;
+  right: var(--edge);
+  flex-direction: column;
+}
 body.mouse-active .controls {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(-50%);
+  transform: var(--ctrl-shown);
 }
 body.mouse-active { cursor: default; }
 
@@ -437,12 +478,134 @@ body.mouse-active { cursor: default; }
   backdrop-filter: blur(10px);
   font-size: var(--ctrl-btn-font);
 }
+/* 歯車の字は同じ文字サイズだと小さく見えるので、大きめにする */
+#btn-settings {
+  font-size: calc(var(--ctrl-btn-font) * 1.7);
+  line-height: 1;
+}
 .ctrl-btn:hover {
   border-color: rgba(255,255,255,0.5);
   color: var(--text-primary);
   background: rgba(255,255,255,0.1);
 }
-a.ctrl-btn { text-decoration: none; }
+/* 設定パネルを開いているあいだは、マウスを止めてもボタンとカーソルを出したままにする */
+body.settings-open .controls {
+  opacity: 1;
+  pointer-events: auto;
+  transform: var(--ctrl-shown);
+}
+body.settings-open { cursor: default; }
+body.settings-open #btn-settings {
+  border-color: rgba(255,255,255,0.5);
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.1);
+}
+
+/* --- Settings panel ---
+   ボタン列のすぐ隣に開く。ボタン列が上端のとき: その下。右端のとき（body.controls-side）: その左 */
+.settings-panel {
+  --panel-shown: translateX(-50%);
+  --panel-hidden: translateX(-50%) translateY(-6px);
+  position: absolute;
+  top: calc(var(--edge) + var(--ctrl-btn-size) + 14px);
+  left: 50%;
+  transform: var(--panel-hidden);
+  z-index: 21;
+  width: max-content;
+  min-width: 250px;
+  max-width: calc(100vw - var(--edge) * 2);
+  padding: 16px 18px;
+  background: var(--overlay-bg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+body.controls-side .settings-panel {
+  --panel-shown: translateY(-50%);
+  --panel-hidden: translateY(-50%) translateX(6px);
+  top: 50%;
+  left: auto;
+  right: calc(var(--edge) + var(--ctrl-btn-size) + 14px);
+  max-width: calc(100vw - var(--edge) * 2 - var(--ctrl-btn-size) - 14px);
+}
+body.settings-open .settings-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: var(--panel-shown);
+}
+.settings-title {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 8px 0;
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.settings-row:hover { color: var(--text-primary); }
+.settings-divider {
+  height: 1px;
+  margin: 8px 0;
+  background: rgba(255, 255, 255, 0.08);
+}
+/* スイッチ: 本体のチェックボックスは隠し、隣の .switch を見た目にする */
+.settings-row input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.switch {
+  position: relative;
+  flex: none;
+  width: 34px;
+  height: 18px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.14);
+  transition: background 0.2s ease;
+}
+.switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.settings-row input:checked + .switch { background: var(--accent); }
+.settings-row input:checked + .switch::after {
+  transform: translateX(16px);
+  background: #fff;
+}
+.settings-row input:focus-visible + .switch { outline: 1px solid rgba(255, 255, 255, 0.6); outline-offset: 2px; }
+.settings-arrow { color: var(--text-dim); }
+
+/* --- 設定で隠したUI（settings.js が body にクラスを付ける） --- */
+body.hide-clock .clock-overlay,
+body.hide-live .live-badge,
+body.hide-info .info-overlay,
+body.hide-place .globe-container,
+body.hide-place .camera-time {
+  display: none;
+}
 
 /* --- Loading state --- */
 .loading-overlay {

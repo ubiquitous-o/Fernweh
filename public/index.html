@@ -133,17 +133,46 @@
   <div class="globe-label" id="globe-label"></div>
 </div>
 
-<!-- Controls (right edge, vertically centered) -->
+<!-- Controls (top centre, in a row. On a portrait screen with no room there: right edge, in a column) -->
 <div class="controls">
-  <div class="ctrl-btn" id="btn-skip" title="Skip">⏭</div>
-  <div class="ctrl-btn" id="btn-fullscreen" title="Fullscreen">⛶</div>
-  <a class="ctrl-btn" id="btn-info" title="About" href="https://github.com/ubiquitous-o/Fernweh" target="_blank" rel="noopener">ℹ</a>
+  <div class="ctrl-btn" id="btn-skip" title="Next camera">⏭</div>
+  <div class="ctrl-btn" id="btn-settings" title="Settings">⚙</div>
+</div>
+
+<!-- Settings panel（設定ボタンで開く。表示の切替は js/settings.js、選んだ内容はブラウザに保存される） -->
+<div class="settings-panel" id="settings-panel">
+  <div class="settings-title">Settings</div>
+  <label class="settings-row">
+    <span>Clock &amp; weather</span>
+    <input type="checkbox" data-setting="clock" checked><span class="switch"></span>
+  </label>
+  <label class="settings-row">
+    <span>Local time &amp; globe</span>
+    <input type="checkbox" data-setting="place" checked><span class="switch"></span>
+  </label>
+  <label class="settings-row">
+    <span>Live badge</span>
+    <input type="checkbox" data-setting="live" checked><span class="switch"></span>
+  </label>
+  <label class="settings-row">
+    <span>Video info</span>
+    <input type="checkbox" data-setting="info" checked><span class="switch"></span>
+  </label>
+  <div class="settings-divider"></div>
+  <label class="settings-row">
+    <span>Fullscreen</span>
+    <input type="checkbox" id="btn-fullscreen"><span class="switch"></span>
+  </label>
+  <a class="settings-row" id="btn-info" href="https://github.com/ubiquitous-o/Fernweh" target="_blank" rel="noopener">
+    <span>About</span><span class="settings-arrow">↗</span>
+  </a>
 </div>
 
 <!-- Info -->
 <div class="info-overlay" id="info">
-  <div class="info-channel" id="info-channel"></div>
-  <a class="info-title" id="info-title" href="#" target="_blank" rel="noopener"></a>
+  <!-- 収まらない文字は横に流れる（.marquee。中身は js/ui.js の setMarquee が組み立てる） -->
+  <div class="info-channel marquee" id="info-channel"></div>
+  <a class="info-title marquee" id="info-title" href="#" target="_blank" rel="noopener"></a>
 </div>
 
 <!-- Progress -->
