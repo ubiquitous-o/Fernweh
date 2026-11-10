@@ -1,7 +1,8 @@
 // 軌道ビュー（orbit.js）の描画: 瞬く星空 + 本物の見た目の地球 + 光の柱。1枚のWebGLキャンバスに描く。
 //   - 星: 色温度・等級・瞬きが星ごとに違う。位置や色は頂点シェーダーが seed から計算する。
-//   - 地球: NASAの画像（昼 / 夜の街明かり / 海のマスク / 雲）を球に貼る。昼夜の境目は太陽の向きで決まり、
+//   - 地球: NASAの画像（昼 / 夜の街明かり / 海のマスク / 雲 / 標高）を球に貼る。昼夜の境目は太陽の向きで決まり、
 //     海には太陽の反射、縁には大気の青い光が出る。雲は地表に影を落とし、夜側では街明かりを隠す。
+//     標高からは山の陰影を作る（太陽に向いた斜面は明るく、背いた斜面は暗い）。
 //   - 光の柱: 地球上の場所から宇宙へ伸びる光の筋。近づくと太く見え、最後は視界を覆う。
 // カメラや時間の進み方はここでは持たない。orbit.js が毎フレーム scene を渡す。
 import { PREVIEWS } from './orbitTexturePreviews.js';
@@ -19,6 +20,7 @@ const TEXTURES = [
   { key: 'night', url: 'img/earth-night.jpg' }, // 夜の街明かり（Black Marble）
   { key: 'water', url: 'img/earth-water.jpg' }, // 海=白 / 陸=黒 のマスク
   { key: 'clouds', url: 'img/earth-clouds.jpg' }, // 雲の濃さ（白いほど厚い雲）
+  { key: 'height', url: 'img/earth-height.png' }, // 標高（白いほど高い）
 ];
 
 const STAR_VERTEX = `
@@ -96,6 +98,7 @@ const EARTH_FRAGMENT = `
   uniform sampler2D u_night;
   uniform sampler2D u_water;
   uniform sampler2D u_clouds;
+  uniform sampler2D u_height;
   uniform float u_cloudShift; // 雲が地表に対して東へ流れた量（画像座標）
   // 光の柱: 根元(A)と先端(B)の画面位置(px) / 太さ(px) / 根元と先端の奥行き(地球半径単位) / 濃さ
   uniform vec2 u_beamA[${MAX_BEAMS}];
@@ -109,6 +112,8 @@ const EARTH_FRAGMENT = `
 
   const vec3 ATMO = vec3(0.30, 0.56, 1.0);   // 大気の散乱光（青）
   const float CLOUD_GAMMA = 0.5;             // 雲の濃淡の持ち上げ（小さいほど薄い雲まで見える）
+  const float RELIEF = 5.5;                  // 山の陰影の強さ
+  const vec2 HEIGHT_STEP = vec2(1.5 / 2048.0, 1.5 / 1024.0); // 標高の傾きを測る間隔（画像の約1.5画素）
   const vec3 SUNSET = vec3(0.85, 0.48, 0.30); // 昼夜の境目の散乱光（夕焼け色）
 
   void main() {
@@ -183,6 +188,22 @@ const EARTH_FRAGMENT = `
       vec3 ground = mix(vec3(dot(day, vec3(0.299, 0.587, 0.114))), day, 0.86);
       vec3 lit = ground * sunColor * sun * 1.08;
 
+      // 地表上の東・北の向きと、太陽へ向かう向き（雲の影と山の陰影で使う）
+      vec3 east = normalize(vec3(e.z, 0.0, -e.x) + vec3(0.00001, 0.0, 0.0));
+      vec3 north = cross(e, east);
+      vec3 toSun = u_sun - e * sunDot;
+      vec2 sunOnGround = vec2(dot(toSun, east), dot(toSun, north));
+
+      // 山の陰影: 標高が東・北へどれだけ上がっているか（傾き）を測る。
+      // 太陽の側へ上っていく斜面は太陽に背を向けているので暗く、下っていく斜面は明るい。
+      // 太陽が低いほど sunOnGround が長くなり、陰影が強く出る
+      float h0 = texture2D(u_height, uv).r;
+      vec2 slope = vec2(
+        texture2D(u_height, uv + vec2(HEIGHT_STEP.x, 0.0)).r - h0,
+        texture2D(u_height, uv - vec2(0.0, HEIGHT_STEP.y)).r - h0
+      );
+      lit *= clamp(1.0 - RELIEF * dot(slope, sunOnGround), 0.45, 1.6);
+
       // 海: 斜めから見るほど空を映して明るくなる（フレネル）
       lit += water * pow(1.0 - mu, 4.0) * vec3(0.20, 0.34, 0.55) * sun * 0.55;
       // 海面の太陽の反射: 鋭い芯 + まわりの広いにじみ
@@ -200,11 +221,8 @@ const EARTH_FRAGMENT = `
       // 元の画像は薄い雲がとても暗い値で入っている。暗い側を持ち上げて、薄い雲の筋まで見せる
       float cloud = clamp(pow(texture2D(u_clouds, cloudUv).r, CLOUD_GAMMA) * 1.1, 0.0, 1.0);
       // 雲の影: 太陽の側へ少しずらした位置にある雲が、地表を暗くする。
-      // 太陽へ向かう地表上の向きを、東西・南北の成分に分けて画像座標のずれに直す
-      vec3 toSun = u_sun - e * sunDot;
-      vec3 east = normalize(vec3(e.z, 0.0, -e.x) + vec3(0.00001, 0.0, 0.0));
-      vec3 north = cross(e, east);
-      vec2 shadowOffset = vec2(dot(toSun, east) / 6.2831853, -dot(toSun, north) / 3.14159265) * 0.012;
+      // 太陽へ向かう地表上の向きを、画像座標のずれに直す
+      vec2 shadowOffset = vec2(sunOnGround.x / 6.2831853, -sunOnGround.y / 3.14159265) * 0.012;
       float shadow = clamp(pow(texture2D(u_clouds, cloudUv + shadowOffset).r, CLOUD_GAMMA) * 1.1, 0.0, 1.0);
       lit *= 1.0 - 0.4 * shadow;
       // 雲そのもの: 太陽の光で白く光る。高い位置にあるので、地表より少し先まで日が当たる
@@ -358,7 +376,7 @@ export function createOrbitRenderer(canvas) {
       uCenter: e.u('u_center'), uRadius: e.u('u_radius'), uRot: e.u('u_rot'), uSun: e.u('u_sun'),
       uHaze: e.u('u_haze'),
       uDay: e.u('u_day'), uNight: e.u('u_night'), uWater: e.u('u_water'),
-      uClouds: e.u('u_clouds'), uCloudShift: e.u('u_cloudShift'),
+      uClouds: e.u('u_clouds'), uCloudShift: e.u('u_cloudShift'), uHeight: e.u('u_height'),
       uBeamA: e.u('u_beamA'), uBeamB: e.u('u_beamB'), uBeamW: e.u('u_beamW'), uBeamZ: e.u('u_beamZ'),
       uBeamAlpha: e.u('u_beamAlpha'), uBeamColor: e.u('u_beamColor'),
       uBeamCover: e.u('u_beamCover'), uFill: e.u('u_fill'),
@@ -473,6 +491,7 @@ export function createOrbitRenderer(canvas) {
       gl.uniform1i(earth.uNight, 1);
       gl.uniform1i(earth.uWater, 2);
       gl.uniform1i(earth.uClouds, 3);
+      gl.uniform1i(earth.uHeight, 4);
       // 雲の流れ: 約30分で地球を一周する速さ（幕が出ているあいだは、ほぼ止まって見える）
       gl.uniform1f(earth.uCloudShift, (now * 0.001 * CLOUD_DRIFT) % 1);
       gl.uniform2f(earth.uCenter, ea.cx, ea.cy);

@@ -31,7 +31,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 
 ## Features
 
-- Orbit transition between live streams: the view rises to an inclined satellite orbit around a realistic whole Earth among the stars (real-time day/night terminator, clouds with shadows, city lights, atmospheric scattering), then dives into a pillar of light standing at the next camera's location (WebGL)
+- Orbit transition between live streams: the view rises to an inclined satellite orbit around a realistic whole Earth among the stars (real-time day/night terminator, clouds with shadows, mountain relief, city lights, atmospheric scattering), then dives into a pillar of light standing at the next camera's location (WebGL)
 - Interactive 3D globe showing camera location ([COBE](https://github.com/shuding/cobe))
 - Location detection from video title/channel/description ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
 - Dictionary-first optimization: skips Gemini API for known locations, saving RPD quota
@@ -149,7 +149,7 @@ fernweh/
 │   ├── index.html                # DOM + SVG glitch filter, loads css/styles.css and js/main.js
 │   ├── css/
 │   │   └── styles.css            # All styling
-│   ├── img/                      # Earth textures for the orbit view (day / night lights / water mask / clouds)
+│   ├── img/                      # Earth textures for the orbit view (day / night lights / water mask / clouds / height)
 │   ├── js/                       # ESM modules (no bundler; served as separate files)
 │   │   ├── main.js               # Entry — orchestrates init, dynamically loads YT IFrame API
 │   │   ├── state.js              # Shared mutable state
@@ -198,4 +198,4 @@ The frontend uses native ES modules (`<script type="module">`) — no build step
 
 ## Credits
 
-- Earth textures in `public/img/` are NASA imagery (Blue Marble, Black Marble / Earth at Night, cloud cover), taken from the example assets of [three-globe](https://github.com/vasturiano/three-globe) and [globe.gl](https://github.com/vasturiano/globe.gl) (both MIT). The night-lights and water-mask images were resized to 2048×1024; the cloud image is the alpha channel of the original PNG, saved as a 2048×1024 grayscale JPEG.
+- Earth textures in `public/img/` are NASA imagery (Blue Marble, Black Marble / Earth at Night, cloud cover, topography), taken from the example assets of [three-globe](https://github.com/vasturiano/three-globe) and [globe.gl](https://github.com/vasturiano/globe.gl) (both MIT). The night-lights and water-mask images were resized to 2048×1024; the cloud image is the alpha channel of the original PNG, saved as a 2048×1024 grayscale JPEG.
