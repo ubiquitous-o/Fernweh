@@ -450,6 +450,10 @@ const EARTH_FRAGMENT = `
 `;
 
 // canvas に描画器を作る。WebGLが使えなければ null。
+// options:
+//   sky:        false にすると空（星・天の川・惑星・月・太陽）を描かず、地球のまわりを透明にする。
+//               動画の上に重ねる小さな地球儀（globe.js）用。そのとき scene の sky / moon / planets / starDim は不要
+//   maxTexture: 画像をGPUへ渡すときの幅の上限(px)。小さく表示するなら小さくしてメモリを節約する
 //   size():           描画バッファの大きさ [w, h]（scene のpx値はこの座標系で渡す）
 //   draw(now, scene): 1フレーム描く（描画ループは呼び出し側が持つ）
 //   clear():          透明にクリアする
@@ -461,7 +465,7 @@ const EARTH_FRAGMENT = `
 //   beams: [{ ax, ay, bx, by(px、左下原点), width(px), z0, z1(地球半径単位の奥行き), alpha }],
 //   beamColor: [r, g, b], beamCover(0..1), fill(0..1),
 // }
-export function createOrbitRenderer(canvas) {
+export function createOrbitRenderer(canvas, { sky: withSky = true, maxTexture = Infinity } = {}) {
   // 星ごとの乱数（コンテキスト復元時も同じ星空を使う）
   // 1つの星 = 天球上の向き(x, y, z) / 明るさ / 色温度
   const STAR_FLOATS = 5;
@@ -538,7 +542,7 @@ export function createOrbitRenderer(canvas) {
     gl.bindTexture(gl.TEXTURE_2D, entry.tex);
     // GPUの上限より大きい画像は縮小してから渡す
     let source = entry.source;
-    const max = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+    const max = Math.min(gl.getParameter(gl.MAX_TEXTURE_SIZE), maxTexture);
     if (source.width > max) {
       const c = document.createElement('canvas');
       c.width = max;
@@ -673,109 +677,117 @@ export function createOrbitRenderer(canvas) {
       return [canvas.width, canvas.height];
     },
 
+    // canvas の表示サイズが（ウィンドウのリサイズ以外で）変わったときに呼ぶ。次に描くとき測り直す
+    invalidateSize() { sizeDirty = true; },
+
     draw(now, scene) {
       if (lost) return;
       if (sizeDirty) resize();
       const w = canvas.width, h = canvas.height;
 
-      gl.clearColor(0, 0, 0, 1);
+      // 空ありなら宇宙の黒、空なしなら透明（後ろのページが透ける）
+      gl.clearColor(0, 0, 0, withSky ? 1 : 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
       const ea = scene.earth;
       const cx = ea.cx, cy = ea.cy;
-      const focal = scene.sky.focal;
-      // 視線座標 → 地球座標。天球は地球に対して恒星時のぶんだけ回っている（赤経 = 経度 + 恒星時）ので、
-      // 視線座標 → 天球座標は、経度に恒星時を足した同じ形の回転になる
       const roll = ea.roll || 0;
       viewMatrix(rot, ea.lat, ea.lon, roll);
-      viewMatrix(skyRot, ea.lat, ea.lon + scene.sky.siderealAngle, roll);
 
-      // 太陽の画面上の位置と、地球に隠れていない割合。太陽は無限に遠いので、向きだけで決まる
-      const sunView = toView(rot, scene.sun);
-      const sunRadius = focal * Math.tan(BODY_RADIUS * SUN_SCALE);
-      let sunSpot = null;
-      if (sunView[2] < -0.05) {
-        const x = cx + (sunView[0] / -sunView[2]) * focal, y = cy + (sunView[1] / -sunView[2]) * focal;
-        const fromEarth = Math.hypot(x - cx, y - cy);
-        const vis = Math.min(1, Math.max(0, (fromEarth - (ea.radius - sunRadius)) / (2 * sunRadius)));
-        // 画面の外へ遠ざかるほど、まぶしさは届かなくなる
-        const off = Math.max(Math.abs(x - cx) / (w / 2), Math.abs(y - cy) / (h / 2));
-        const inFrame = Math.min(1, Math.max(0, (2.2 - off) / 1.2));
-        // 地球の縁のすぐ外にあるときは、大気を通った赤みがかった光になる
-        const low = Math.min(1, Math.max(0, 1 - (fromEarth - ea.radius) / (ea.radius * 0.06 + sunRadius * 2)));
-        if (vis * inFrame > 0.001) sunSpot = { x, y, vis, glare: vis * inFrame, low };
-      }
-      // 太陽が視界にあるあいだは、まぶしさで星や天の川が見えにくくなる
-      const skyDim = scene.starDim * (1 - 0.55 * (sunSpot ? sunSpot.glare : 0));
+      // 空（天の川・星・惑星・月）と、太陽の位置。空なしで作った描画器（右下の地球儀）では飛ばす
+      let sunSpot = null, sunRadius = 0;
+      if (withSky) {
+        const focal = scene.sky.focal;
+        // 視線座標 → 地球座標。天球は地球に対して恒星時のぶんだけ回っている（赤経 = 経度 + 恒星時）ので、
+        // 視線座標 → 天球座標は、経度に恒星時を足した同じ形の回転になる
+        viewMatrix(skyRot, ea.lat, ea.lon + scene.sky.siderealAngle, roll);
 
-      gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
-      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+        // 太陽の画面上の位置と、地球に隠れていない割合。太陽は無限に遠いので、向きだけで決まる
+        const sunView = toView(rot, scene.sun);
+        sunRadius = focal * Math.tan(BODY_RADIUS * SUN_SCALE);
+        if (sunView[2] < -0.05) {
+          const x = cx + (sunView[0] / -sunView[2]) * focal, y = cy + (sunView[1] / -sunView[2]) * focal;
+          const fromEarth = Math.hypot(x - cx, y - cy);
+          const vis = Math.min(1, Math.max(0, (fromEarth - (ea.radius - sunRadius)) / (2 * sunRadius)));
+          // 画面の外へ遠ざかるほど、まぶしさは届かなくなる
+          const off = Math.max(Math.abs(x - cx) / (w / 2), Math.abs(y - cy) / (h / 2));
+          const inFrame = Math.min(1, Math.max(0, (2.2 - off) / 1.2));
+          // 地球の縁のすぐ外にあるときは、大気を通った赤みがかった光になる
+          const low = Math.min(1, Math.max(0, 1 - (fromEarth - ea.radius) / (ea.radius * 0.06 + sunRadius * 2)));
+          if (vis * inFrame > 0.001) sunSpot = { x, y, vis, glare: vis * inFrame, low };
+        }
+        // 太陽が視界にあるあいだは、まぶしさで星や天の川が見えにくくなる
+        const skyDim = scene.starDim * (1 - 0.55 * (sunSpot ? sunSpot.glare : 0));
 
-      // 天の川（不透明に下地として描く）
-      gl.useProgram(sky.prog);
-      gl.blendFunc(gl.ONE, gl.ZERO);
-      gl.uniform2f(sky.uCenter, cx, cy);
-      gl.uniform1f(sky.uFocal, focal);
-      gl.uniformMatrix3fv(sky.uSky, false, skyRot);
-      gl.uniform1f(sky.uRadius, ea.radius);
-      gl.uniform1f(sky.uDim, skyDim);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+        gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
-      // 星（加算合成）
-      gl.useProgram(star.prog);
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
-      gl.bindBuffer(gl.ARRAY_BUFFER, starBuf);
-      gl.enableVertexAttribArray(1);
-      gl.vertexAttribPointer(0, 4, gl.FLOAT, false, STAR_FLOATS * 4, 0);
-      gl.vertexAttribPointer(1, 1, gl.FLOAT, false, STAR_FLOATS * 4, 16);
-      gl.uniformMatrix3fv(star.uSky, false, skyRot);
-      gl.uniform2f(star.uProj, focal / (w / 2), focal / (h / 2));
-      // 星は小さな点のまま。画面が大きいときだけ、短辺900pxを基準に少し大きくする
-      gl.uniform1f(star.uScale, Math.max(1, Math.min(w, h) / 900));
-      gl.uniform1f(star.uDim, skyDim);
-      gl.drawArrays(gl.POINTS, 0, STAR_COUNT);
+        // 天の川（不透明に下地として描く）
+        gl.useProgram(sky.prog);
+        gl.blendFunc(gl.ONE, gl.ZERO);
+        gl.uniform2f(sky.uCenter, cx, cy);
+        gl.uniform1f(sky.uFocal, focal);
+        gl.uniformMatrix3fv(sky.uSky, false, skyRot);
+        gl.uniform1f(sky.uRadius, ea.radius);
+        gl.uniform1f(sky.uDim, skyDim);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
-      // 惑星: 星と同じ描き方の光の点。いちばん明るい星より明るいものは、そのぶん大きくにじむ
-      const planetCount = Math.min(scene.planets.length, MAX_PLANETS);
-      if (planetCount > 0) {
-        scene.planets.slice(0, planetCount).forEach((p, i) => {
-          const o = i * STAR_FLOATS;
-          planetData[o] = p.dir[0];
-          planetData[o + 1] = p.dir[1];
-          planetData[o + 2] = p.dir[2];
-          planetData[o + 3] = Math.min(1.3, Math.max(0, (MAG_FAINT - p.mag) / (MAG_FAINT - MAG_BRIGHT)));
-          planetData[o + 4] = p.temp;
-        });
-        gl.bindBuffer(gl.ARRAY_BUFFER, planetBuf);
-        gl.bufferData(gl.ARRAY_BUFFER, planetData, gl.DYNAMIC_DRAW);
+        // 星（加算合成）
+        gl.useProgram(star.prog);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+        gl.bindBuffer(gl.ARRAY_BUFFER, starBuf);
+        gl.enableVertexAttribArray(1);
         gl.vertexAttribPointer(0, 4, gl.FLOAT, false, STAR_FLOATS * 4, 0);
         gl.vertexAttribPointer(1, 1, gl.FLOAT, false, STAR_FLOATS * 4, 16);
-        gl.drawArrays(gl.POINTS, 0, planetCount);
-      }
-      gl.disableVertexAttribArray(1);
-      gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
-      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+        gl.uniformMatrix3fv(star.uSky, false, skyRot);
+        gl.uniform2f(star.uProj, focal / (w / 2), focal / (h / 2));
+        // 星は小さな点のまま。画面が大きいときだけ、短辺900pxを基準に少し大きくする
+        gl.uniform1f(star.uScale, Math.max(1, Math.min(w, h) / 900));
+        gl.uniform1f(star.uDim, skyDim);
+        gl.drawArrays(gl.POINTS, 0, STAR_COUNT);
 
-      // 月（後ろの星を隠して重ねる）。月は近いので、カメラの位置のぶんだけ見える向きがずれる。
-      // カメラは地球の中心から「地球がいまの大きさに見える距離」だけ手前（視線座標の +z）にいる
-      const camDistance = Math.hypot(ea.radius, focal) / ea.radius;
-      const moonView = toView(rot, scene.moon).map((x) => x * MOON_DISTANCE);
-      moonView[2] -= camDistance;
-      if (moonView[2] < -1 && scene.starDim > 0.01) {
-        const mx = cx + (moonView[0] / -moonView[2]) * focal, my = cy + (moonView[1] / -moonView[2]) * focal;
-        const mr = focal * Math.tan(BODY_RADIUS * MOON_SCALE);
-        if (mx > -mr && mx < w + mr && my > -mr && my < h + mr) {
-          gl.useProgram(moon.prog);
-          gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-          gl.uniform2f(moon.uPos, mx, my);
-          gl.uniform1f(moon.uRadius, mr);
-          gl.uniform3f(moon.uSun, sunView[0], sunView[1], sunView[2]);
-          gl.uniform1f(moon.uDim, scene.starDim);
-          // 月のまわりだけ描く
-          gl.enable(gl.SCISSOR_TEST);
-          gl.scissor(Math.floor(mx - mr - 2), Math.floor(my - mr - 2), Math.ceil(mr * 2 + 4), Math.ceil(mr * 2 + 4));
-          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-          gl.disable(gl.SCISSOR_TEST);
+        // 惑星: 星と同じ描き方の光の点。いちばん明るい星より明るいものは、そのぶん大きくにじむ
+        const planetCount = Math.min(scene.planets.length, MAX_PLANETS);
+        if (planetCount > 0) {
+          scene.planets.slice(0, planetCount).forEach((p, i) => {
+            const o = i * STAR_FLOATS;
+            planetData[o] = p.dir[0];
+            planetData[o + 1] = p.dir[1];
+            planetData[o + 2] = p.dir[2];
+            planetData[o + 3] = Math.min(1.3, Math.max(0, (MAG_FAINT - p.mag) / (MAG_FAINT - MAG_BRIGHT)));
+            planetData[o + 4] = p.temp;
+          });
+          gl.bindBuffer(gl.ARRAY_BUFFER, planetBuf);
+          gl.bufferData(gl.ARRAY_BUFFER, planetData, gl.DYNAMIC_DRAW);
+          gl.vertexAttribPointer(0, 4, gl.FLOAT, false, STAR_FLOATS * 4, 0);
+          gl.vertexAttribPointer(1, 1, gl.FLOAT, false, STAR_FLOATS * 4, 16);
+          gl.drawArrays(gl.POINTS, 0, planetCount);
+        }
+        gl.disableVertexAttribArray(1);
+        gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+        gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+        // 月（後ろの星を隠して重ねる）。月は近いので、カメラの位置のぶんだけ見える向きがずれる。
+        // カメラは地球の中心から「地球がいまの大きさに見える距離」だけ手前（視線座標の +z）にいる
+        const camDistance = Math.hypot(ea.radius, focal) / ea.radius;
+        const moonView = toView(rot, scene.moon).map((x) => x * MOON_DISTANCE);
+        moonView[2] -= camDistance;
+        if (moonView[2] < -1 && scene.starDim > 0.01) {
+          const mx = cx + (moonView[0] / -moonView[2]) * focal, my = cy + (moonView[1] / -moonView[2]) * focal;
+          const mr = focal * Math.tan(BODY_RADIUS * MOON_SCALE);
+          if (mx > -mr && mx < w + mr && my > -mr && my < h + mr) {
+            gl.useProgram(moon.prog);
+            gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+            gl.uniform2f(moon.uPos, mx, my);
+            gl.uniform1f(moon.uRadius, mr);
+            gl.uniform3f(moon.uSun, sunView[0], sunView[1], sunView[2]);
+            gl.uniform1f(moon.uDim, scene.starDim);
+            // 月のまわりだけ描く
+            gl.enable(gl.SCISSOR_TEST);
+            gl.scissor(Math.floor(mx - mr - 2), Math.floor(my - mr - 2), Math.ceil(mr * 2 + 4), Math.ceil(mr * 2 + 4));
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            gl.disable(gl.SCISSOR_TEST);
+          }
         }
       }
 

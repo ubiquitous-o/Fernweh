@@ -329,7 +329,7 @@ html, body {
 /* --- Globe --- */
 .globe-container {
   position: absolute;
-  /* 地球儀の球はキャンバスの8割の大きさで描かれ、まわりに1割ずつ空きがある。
+  /* 地球はこの枠の8割の大きさで描かれ（js/globe.js の RADIUS）、まわりに1割ずつ空きがある。
      見た目の余白がほかの隅とそろうよう、その空きのぶんだけ外へ寄せる */
   bottom: calc(var(--edge) - var(--globe-size) * 0.1 + var(--shift-y));
   right: calc(var(--edge) - var(--globe-size) * 0.1 + var(--shift-x));
@@ -359,10 +359,13 @@ html, body {
   transition: opacity 0.2s ease;
 }
 .globe-label.show { opacity: 1; }
+/* キャンバスは枠より一回り大きい（js/globe.js の CANVAS_SCALE）。地球の外へ伸びる光の柱が切れないように */
 .globe-container canvas {
-  width: 100%;
-  height: 100%;
-  filter: invert(1);
+  position: absolute;
+  left: -15%;
+  top: -15%;
+  width: 130%;
+  height: 130%;
 }
 
 .camera-time {

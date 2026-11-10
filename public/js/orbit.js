@@ -127,6 +127,12 @@ function subsolarPoint(date) {
   return [declination, rad(-15 * (utcHours - 12))];
 }
 
+// いまの太陽の向き（地球座標の単位ベクトル）。右下の地球儀（globe.js）も同じ昼夜で描く
+export function sunDirection(date = new Date()) {
+  const [lat, lon] = subsolarPoint(date);
+  return dirFor(lat, lon);
+}
+
 // 2000年1月1日正午(UTC)からの日数
 const daysSinceJ2000 = (date) => date.getTime() / 86400000 + 2440587.5 - 2451545.0;
 
