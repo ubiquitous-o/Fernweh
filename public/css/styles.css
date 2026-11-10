@@ -657,6 +657,35 @@ body.hide-place .camera-time {
   color: var(--accent);
   animation: lock-on 0.45s steps(1, end) 1;
 }
+/* 行き先を失った（.alarm。場所の分からない映像）: 警報。赤い文字が速く点滅し続け、枠も赤く明滅する */
+.loading-overlay.locked.alarm .loading-status {
+  color: #ff3b30;
+  animation: alarm-blink 0.36s steps(1, end) infinite;
+}
+.loading-overlay.alarm .loading-text {
+  animation: alarm-box 0.36s steps(1, end) infinite;
+}
+@keyframes alarm-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@keyframes alarm-box {
+  0% { background: rgba(110, 0, 0, 0.75); box-shadow: 0 0 0 1px rgba(255, 59, 48, 0.9); }
+  50% { background: rgba(0, 0, 0, 0.6); box-shadow: 0 0 0 1px rgba(255, 59, 48, 0.25); }
+}
+/* 墜落が始まった（.crashing）: 警報が速くなり、表示ががたがた揺れる */
+.loading-overlay.crashing .loading-text {
+  animation: alarm-box 0.18s steps(1, end) infinite, crash-shake 0.1s steps(1, end) infinite;
+}
+.loading-overlay.locked.crashing .loading-status {
+  animation-duration: 0.18s;
+}
+@keyframes crash-shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(3px, -2px); }
+  50% { transform: translate(-3px, 2px); }
+  75% { transform: translate(2px, 3px); }
+}
 .loading-overlay.locked .loading-place:not(:empty) {
   display: block;
   animation: lock-on 0.45s steps(1, end) 1;

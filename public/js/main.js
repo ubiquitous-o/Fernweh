@@ -9,6 +9,7 @@ import { initInput } from './input.js';
 import { initSettings } from './settings.js';
 import { refreshMarquees } from './ui.js';
 import { shiftOverlays } from './burnin.js';
+import { withTestOverrides } from './videoPool.js';
 
 const RESUME_KEY = 'fernweh_resume';
 
@@ -22,7 +23,7 @@ window.onYouTubeIframeAPIReady = () => {
     sessionStorage.removeItem(RESUME_KEY);
     try {
       const data = JSON.parse(saved);
-      resumeVideo(data);
+      resumeVideo(withTestOverrides(data));
       return;
     } catch {}
   }

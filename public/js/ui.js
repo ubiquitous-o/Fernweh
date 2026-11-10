@@ -105,15 +105,25 @@ const $loadingPlace = document.getElementById('loading-place');
 export function showSearching() {
   $loadingStatus.textContent = 'Scanning for destination...';
   $loadingPlace.textContent = '';
-  $loading.classList.remove('locked', 'fade-out');
+  $loading.classList.remove('locked', 'alarm', 'crashing', 'fade-out');
 }
 
-// 行き先が決まった（光の柱が立ち上がるのと同時に呼ぶ）。地名が分かっていれば下に出す
-export function showLocked(locationName) {
-  $loadingStatus.textContent = 'Destination locked';
-  $loadingPlace.textContent = locationName || '';
-  $loading.classList.remove('fade-out');
+// 行き先が決まった（光の柱が立ち上がるのと同時に呼ぶ）。地名が分かっていれば下に出す。
+// 場所の分からない映像（known = false）のときは柱が立たない。行き先を失ったエラーとして警報を出す
+// （赤い点滅。見た目は styles.css の .alarm）。このあと墜落が始まったら showCrashing を呼ぶ
+export function showLocked(locationName, known = true) {
+  $loadingStatus.textContent = known ? 'Destination locked' : '!! Navigation error !!';
+  $loadingPlace.textContent = known ? (locationName || '') : 'Destination not found';
+  $loading.classList.remove('fade-out', 'crashing');
   $loading.classList.add('locked');
+  $loading.classList.toggle('alarm', !known);
+}
+
+// 墜落が始まった（警報の続き）。表示が揺れ出し、高度を失っていることを告げる
+export function showCrashing() {
+  $loadingStatus.textContent = '!! System failure !!';
+  $loadingPlace.textContent = 'Losing altitude';
+  $loading.classList.add('crashing');
 }
 
 export function hideLoading() {

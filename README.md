@@ -33,6 +33,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 ## Features
 
 - Orbit transition between live streams: the view rises to an inclined satellite orbit around a realistic whole Earth (real-time day/night terminator, clouds with shadows, mountain relief, city lights, atmospheric scattering), then dives into a pillar of light standing at the next camera's location (WebGL)
+- Streams with no known location get no pillar: the readout raises a navigation error and the camera spins down into a crash on some distant land, whiting out into the stream
 - Realistic sky behind the Earth: a star field and the Milky Way that turn as the camera orbits, with the Sun, the Moon and the five naked-eye planets at their real positions (the Moon shows its real phase)
 - Interactive 3D globe showing camera location ([COBE](https://github.com/shuding/cobe))
 - Location detection from video title/channel/description ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
@@ -122,6 +123,8 @@ YOUTUBE_API_KEY=your_key node scripts/fetch-videos.js
 # Serve the static site
 npx serve public
 ```
+
+Open the site with `?test=unknown` (for example `http://localhost:3000/?test=unknown`) to treat every stream as location-unknown and try the crash transition.
 
 ## Local Server Mode (Optional)
 

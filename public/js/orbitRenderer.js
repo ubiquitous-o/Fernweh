@@ -247,7 +247,7 @@ const EARTH_FRAGMENT = `
 
   uniform vec2 u_center;   // 地球の中心(px、左下原点)
   uniform float u_radius;  // 地球の半径(px)
-  uniform mat3 u_rot;      // 視線座標 → 地球座標（列 = 東 / 北 / 正面）
+  uniform mat3 u_rot;      // 視線座標 → 地球座標（列 = 画面右 / 画面上 / 正面。ふだんは 東 / 北 / 正面）
   uniform vec3 u_sun;      // 太陽の向き（地球座標）
   uniform float u_haze;    // 0..1 降りるほど地表が霞む
   uniform sampler2D u_day;
@@ -457,7 +457,7 @@ const EARTH_FRAGMENT = `
 //   sky: { focal(空の透視投影の焦点距離 px), siderealAngle(恒星時 rad) }, starDim,
 //   moon: [x, y, z](地球の中心から見た月の向き。地球座標),
 //   planets: [{ dir: [x, y, z](天球座標), mag(等級), temp(色温度 0..1) }],
-//   earth: { cx, cy(左下原点), radius, lat, lon(rad) }, sun: [x, y, z], haze,
+//   earth: { cx, cy(左下原点), radius, lat, lon(rad), roll(rad。視線を軸にしたカメラの回転) }, sun: [x, y, z], haze,
 //   beams: [{ ax, ay, bx, by(px、左下原点), width(px), z0, z1(地球半径単位の奥行き), alpha }],
 //   beamColor: [r, g, b], beamCover(0..1), fill(0..1),
 // }
@@ -648,11 +648,16 @@ export function createOrbitRenderer(canvas) {
   const planetData = new Float32Array(MAX_PLANETS * STAR_FLOATS);
 
   // カメラが (lat, lon) の真上にいるときの、視線座標 → 球の座標の回転。
-  // 列は「画面右 = 東 / 画面上 = 北 / 手前 = カメラのいる向き」
-  function viewMatrix(out, lat, lon) {
+  // 列は「画面右 / 画面上 / 手前 = カメラのいる向き」。roll が 0 なら画面右 = 東、画面上 = 北。
+  // roll はカメラを視線を軸に回す角度（墜落のきりもみ）
+  function viewMatrix(out, lat, lon, roll) {
     const cl = Math.cos(lat), sl = Math.sin(lat), co = Math.cos(lon), so = Math.sin(lon);
-    out[0] = co;       out[1] = 0;  out[2] = -so;
-    out[3] = -sl * so; out[4] = cl; out[5] = -sl * co;
+    const cr = Math.cos(roll), sr = Math.sin(roll);
+    const east = [co, 0, -so], north = [-sl * so, cl, -sl * co];
+    for (let k = 0; k < 3; k++) {
+      out[k] = cr * east[k] + sr * north[k];
+      out[3 + k] = -sr * east[k] + cr * north[k];
+    }
     out[6] = cl * so;  out[7] = sl; out[8] = cl * co;
   }
   // 球の座標の向き → 視線座標（x = 画面右 / y = 画面上 / z = 手前）
@@ -681,8 +686,9 @@ export function createOrbitRenderer(canvas) {
       const focal = scene.sky.focal;
       // 視線座標 → 地球座標。天球は地球に対して恒星時のぶんだけ回っている（赤経 = 経度 + 恒星時）ので、
       // 視線座標 → 天球座標は、経度に恒星時を足した同じ形の回転になる
-      viewMatrix(rot, ea.lat, ea.lon);
-      viewMatrix(skyRot, ea.lat, ea.lon + scene.sky.siderealAngle);
+      const roll = ea.roll || 0;
+      viewMatrix(rot, ea.lat, ea.lon, roll);
+      viewMatrix(skyRot, ea.lat, ea.lon + scene.sky.siderealAngle, roll);
 
       // 太陽の画面上の位置と、地球に隠れていない割合。太陽は無限に遠いので、向きだけで決まる
       const sunView = toView(rot, scene.sun);

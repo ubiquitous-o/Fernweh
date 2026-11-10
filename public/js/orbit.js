@@ -10,6 +10,10 @@
 //     中に入った瞬間に、呼び出し側がグリッチで映像を出す。
 //   - 切替時: 映像がグリッチしながら柱の光の白に溶ける → 柱の方向へまっすぐ引きながら、
 //     軌道の動きへなめらかに合流する → 次の場所に柱が立つ → 飛び込む。
+//   - 場所の分からない映像のときは、柱を立てない（知らない場所を指さない）。行き先を失って墜落する:
+//     カメラはきりもみで回りながら、どこかの陸地へ加速して落ちていき、視界が白くなったところで
+//     グリッチで映像が出る。そこから離れるときは、ふつうの場所と同じ動きで引くが、柱は立っていない
+//     （白く飛んだ視界が晴れていくだけ）。
 // ここはカメラの動きと幕の制御を持つ。描画は orbitRenderer.js。
 // 幕の出入りは .orbit-overlay の opacity transition でフェード（styles.css）。
 // ページを開いた時点では幕は最初から出ている（index.html で active を付けてある）。
@@ -71,6 +75,17 @@ const BEAM_COLOR = [1.0, 0.98, 0.95];
 const WASH_LEVEL = 0.95;
 // 降りるにつれて地表がうっすら霞む度合いの上限（大気の中に入った感じを出す）
 const HAZE_MAX = 0.25;
+// 墜落（場所の分からない映像へ落ちる動き）:
+//   CRASH_TURNS: 落ちきるまでにカメラがきりもみで回る回数
+//   CRASH_SPIN:  回る速さの増え方（1 = 一定の速さ。大きいほど、はじめはゆっくりで最後に激しく回る）
+//   CRASH_FALL:  落ちる速さの増え方（1 = 一定の速さ。大きいほど、最後に一気に落ちる。減速はしない）
+//   CRASH_NEAR / CRASH_FAR: 落ちる先を探す範囲（カメラの真下から何度〜何度離れた陸地か）。
+//     90 が地球の縁で、それより大きいと見えていない裏側。遠くへ、地球を回り込みながら落ちていく
+const CRASH_TURNS = 2;
+const CRASH_SPIN = 2;
+const CRASH_FALL = 2;
+const CRASH_NEAR = 80;
+const CRASH_FAR = 140;
 // 空（星・天の川・月・太陽）を見るカメラの縦の画角(度)。
 // カメラは軌道を回りながらいつも地球を向いているので、回るにつれて空全体が流れていく。
 // 画角が狭いほど空は大きく写り、速く流れて見える
@@ -220,6 +235,8 @@ const cam = {
   spin: 1,    // 軌道を進む速さの係数（飛び込み中は 0）
   follow: 1,  // 緯度を軌道に従わせる度合い。0 = lat を直接動かす（飛び込み中）.. 1 = 軌道どおり
   latHold: 0, // follow が 0 のとき基準にする緯度（上昇を始めたときの緯度）
+  roll: 0,    // 視線を軸にしたカメラの回転(rad)。ふだんは 0（画面の上が北）。墜落のきりもみで使う
+  wash: 0,    // 0..1 視界が白く飛んでいる度合い（墜落の最後。柱の光の代わりに視界を覆う）
 };
 // 軌道上の位置（位相）。直下点の緯度は 傾き × sin(位相) で南北に行き来する
 let orbitPhase = 0.6;
@@ -231,8 +248,10 @@ cam.lat = orbitLat();
 // 光の柱: { location:[緯度, 経度](度), dir(地球座標), appear(0..1 明るさ), rise(0..1 伸び具合),
 //           target(いま向かっている/入っている柱か) }
 let beams = [];
-// いま入っている場所（次に上昇するとき、そこから離れる）
+// いま入っている場所 [緯度, 経度](度)（次に上昇するとき、そこから離れる）と、
+// そこが映像の本当の場所か（false = 場所の分からない映像で、墜落した場所。柱は立っていない）
 let lastLocation = null;
+let lastKnown = false;
 
 const makeBeam = (location, appear, rise = appear) => ({
   location,
@@ -273,12 +292,52 @@ function resetToOrbit() {
   cam.entering = false;
   cam.spin = 1;
   cam.follow = 1;
+  cam.roll = 0;
+  cam.wash = 0;
   beams = [];
 }
 
-// 位置情報が無い映像の行き先: 適当な場所（カメラの多い緯度帯）
-function randomLocation() {
-  return [-35 + Math.random() * 90, -180 + Math.random() * 360];
+// 陸か海かを調べるための地図。海のマスク画像（海 = 白 / 陸 = 黒）を小さく読み込んでおく
+const LAND_W = 360, LAND_H = 180;
+let landMap = null;
+{
+  const img = new Image();
+  img.onload = () => {
+    try {
+      const c = document.createElement('canvas');
+      c.width = LAND_W;
+      c.height = LAND_H;
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0, LAND_W, LAND_H);
+      landMap = ctx.getImageData(0, 0, LAND_W, LAND_H).data;
+    } catch {}
+  };
+  img.src = 'img/earth-water.jpg';
+}
+const isLand = (lat, lon) => {
+  if (!landMap) return true;
+  const x = Math.min(LAND_W - 1, Math.floor(((lon + 180) / 360) * LAND_W));
+  const y = Math.min(LAND_H - 1, Math.floor(((90 - lat) / 180) * LAND_H));
+  return landMap[(y * LAND_W + x) * 4] < 70;
+};
+
+// 墜落する先: どこかの陸地 [緯度, 経度](度)。カメラの真下から CRASH_NEAR〜CRASH_FAR 度離れた範囲
+// （地球の縁から裏側にかけて）から選ぶ。その範囲に陸地が見つからなければ、地球上のどこかの陸地。
+// 南極と北極圏の奥は避ける
+function randomLand() {
+  const here = dirFor(cam.lat, cam.lon);
+  const nearest = Math.cos(rad(CRASH_NEAR)), farthest = Math.cos(rad(CRASH_FAR));
+  let anyLand = null;
+  for (let i = 0; i < 600; i++) {
+    const lat = Math.asin(-0.75 + 1.68 * Math.random()) / rad(1);
+    const lon = -180 + 360 * Math.random();
+    if (!isLand(lat, lon)) continue;
+    const d = dirFor(rad(lat), rad(lon));
+    const closeness = d[0] * here[0] + d[1] * here[1] + d[2] * here[2];
+    if (closeness < nearest && closeness > farthest) return [lat, lon];
+    if (!anyLand) anyLand = [lat, lon];
+  }
+  return anyLand || [cam.lat / rad(1), cam.lon / rad(1)];
 }
 
 // ---------- 描画 ----------
@@ -309,6 +368,7 @@ function buildScene() {
 
   // 地球はいつも画面中央。カメラが柱の真上に着くと、柱は先端をこちらへ向けて画面中央に来る
   const cx = w / 2, cy = h / 2;
+  const rollCos = Math.cos(cam.roll), rollSin = Math.sin(cam.roll);
 
   const date = new Date();
   const [sunLat, sunLon] = subsolarPoint(date);
@@ -320,13 +380,15 @@ function buildScene() {
     moon: moonDirection(date),
     planets: planets(date),
     starDim: 1 - 0.8 * covered,
-    earth: { cx, cy, radius, lat: cam.lat, lon: cam.lon },
+    earth: { cx, cy, radius, lat: cam.lat, lon: cam.lon, roll: cam.roll },
     sun: dirFor(sunLat, sunLon),
     haze: HAZE_MAX * clamp01((cam.zoom - 0.5) / 0.5),
     beams: beams.map((b) => {
       // 根元は地表、先端は地表から BEAM_LENGTH だけ外（立ち上がる途中は、その伸び具合ぶん）。
       // 画面上の位置と奥行きに直す
       const v = viewDir(b.dir, cam.lat, cam.lon);
+      // カメラが視線を軸に回っているぶん、画面上の位置も回す
+      [v[0], v[1]] = [v[0] * rollCos + v[1] * rollSin, -v[0] * rollSin + v[1] * rollCos];
       const tip = 1 + BEAM_LENGTH * b.rise;
       return {
         ax: cx + v[0] * radius, ay: cy + v[1] * radius,
@@ -341,7 +403,8 @@ function buildScene() {
     // 残りを光で満たして「中に入った」状態にする。
     // 入るときは丸い光がほぼ画面を白くしきってからの、最後の仕上げだけ。
     // 引くときは、視界の大半が光のあいだ
-    fill: cam.entering ? clamp01((cam.plunge - 0.96) / 0.04) : clamp01((covered - 0.55) / 0.45),
+    // 墜落のときは柱が無く、視界そのものが白く飛ぶ（wash）
+    fill: Math.max(cam.wash, cam.entering ? clamp01((cam.plunge - 0.96) / 0.04) : clamp01((covered - 0.55) / 0.45)),
   };
 }
 
@@ -415,12 +478,13 @@ const diveEnter = (u, ms) => {
 };
 const leaveLight = (e, ms) => Math.pow(clamp01(1 - (e * ms) / BEAM_ENTER_MS), BEAM_RUSH);
 
-// location（[緯度, 経度]。不明なら null）に、光の柱をふわっと立ち上げる。
+// location（[緯度, 経度]）に、光の柱をふわっと立ち上げる。
 // 根元から伸びながら明るくなる。カメラは軌道を回ったまま動かさない。
-// 柱を立てた場所を返す（不明だった場合は、ここで決めた場所）→ そのまま diveTo に渡す
+// 場所が不明（null）なら柱は立てない。受け取った location をそのまま返す → そのまま diveTo に渡す
 export function raiseBeam(location) {
   showVeil();
-  const loc = Array.isArray(location) ? location : randomLocation();
+  if (!Array.isArray(location)) return null;
+  const loc = location;
   if (!beams.some((b) => b.location === loc)) {
     const beam = makeBeam(loc, 0);
     // まだ向かってはいない（突入を始めた時点で行き先になる）
@@ -435,14 +499,62 @@ export function raiseBeam(location) {
   return loc;
 }
 
-// location（[緯度, 経度]。不明なら null）に立つ光の柱へ飛び込む。
-// カメラは柱の真上へ回り、そのまま柱をまっすぐ見下ろしながら上から中へ降りる。
-// 柱は先に raiseBeam で立てておく（立っていなければ、飛び込みながら立てる）。
-// 解決した時点でカメラは柱の中にいる（視界は光で満ちている）→ 呼び出し側がグリッチで映像を出す
-export async function diveTo(location, ms = DIVE_MS) {
+// 場所の分からない映像へ: 墜落する。柱は立たない。
+// カメラはきりもみで回りながら（だんだん速く）、どこかの陸地へ加速して落ちていく。
+// 最後は柱の光の代わりに視界が白く飛ぶ。解決した時点で視界は真っ白 → 呼び出し側がグリッチで映像を出す。
+// 落ちた場所は覚えておき、次に離れるときはそこから引く（柱は立てない）
+async function crash(ms) {
   cancelTweens();
   showVeil();
-  const loc = Array.isArray(location) ? location : randomLocation();
+  const loc = randomLand();
+
+  // それまでの柱（離れてきた場所）は、序盤で消えていく
+  const fading = beams.map((b) => ({ b, appear: b.appear }));
+  for (const f of fading) f.b.target = false;
+
+  const lon0 = cam.lon, lat0 = cam.lat, zoom0 = cam.zoom;
+  cam.entering = false;
+  cam.plunge = 0;
+  const drift = ORBIT_SPEED * cam.spin;
+  const DRIFT_TAU = 0.5;
+  const driftAt = (sec) => drift * DRIFT_TAU * (1 - Math.exp(-sec / DRIFT_TAU));
+  cam.spin = 0;
+  cam.follow = 0;
+  const lat1 = rad(loc[0]);
+  const turn = angleDelta(lon0 + driftAt(ms / 1000), rad(loc[1]));
+  // 回る向きは毎回どちらか
+  const spinDir = Math.random() < 0.5 ? 1 : -1;
+
+  await tween(ms, (u) => {
+    // 落ちる先の真上へ寄っていく動きは、ふつうの飛び込みと同じ
+    const turned = diveTurn(u);
+    cam.lon = lon0 + driftAt(u * ms / 1000) + turn * turned;
+    cam.lat = lerp(lat0, lat1, turned);
+    // 落下ときりもみは加速し続ける（最後まで減速しない）
+    cam.zoom = lerp(zoom0, 1, Math.pow(u, CRASH_FALL));
+    cam.roll = spinDir * CRASH_TURNS * Math.PI * 2 * Math.pow(u, CRASH_SPIN);
+    // 最後の BEAM_ENTER_MS で視界が白く飛ぶ（柱へ入るときの光と同じ進み方）
+    cam.wash = diveEnter(u, ms);
+    for (const f of fading) f.b.appear = f.appear * (1 - clamp01(u * 3));
+  });
+
+  beams = [];
+  lastLocation = loc;
+  lastKnown = false;
+}
+
+// location（[緯度, 経度]）に立つ光の柱へ飛び込む。
+// カメラは柱の真上へ回り、そのまま柱をまっすぐ見下ろしながら上から中へ降りる。
+// 柱は先に raiseBeam で立てておく（立っていなければ、飛び込みながら立てる）。
+// 解決した時点でカメラは柱の中にいる（視界は光で満ちている）→ 呼び出し側がグリッチで映像を出す。
+// 場所が不明（null）のときは、柱へ飛び込む代わりに墜落する（crash）
+export async function diveTo(location, ms = DIVE_MS) {
+  if (!Array.isArray(location)) return crash(ms);
+  cancelTweens();
+  showVeil();
+  const loc = location;
+  cam.roll = 0;
+  cam.wash = 0;
 
   // それまでの柱（離れてきた場所）は、飛び込みの序盤で消えていく
   let beam = beams.find((b) => b.location === loc);
@@ -481,11 +593,12 @@ export async function diveTo(location, ms = DIVE_MS) {
 
   beams = [beam];
   lastLocation = loc;
+  lastKnown = true;
 }
 
 // 行き先が見つからなかったとき、離れてきた場所へ戻る
 export function diveBack() {
-  return diveTo(lastLocation, RETURN_MS);
+  return diveTo(lastKnown ? lastLocation : null, RETURN_MS);
 }
 
 // いま入っている柱から軌道へ戻る。前奏グリッチと同時に呼ぶ。流れは:
@@ -498,29 +611,37 @@ export function diveBack() {
 //   done:    軌道まで上がりきった時点（続けて raiseBeam / diveTo / diveBack できる）
 export function ascend() {
   cancelTweens();
-  // 柱の中（= 映像のなか。光が視界を覆っている）、場所の真上から始める
-  const loc = lastLocation || randomLocation();
+  // 柱の中（= 映像のなか。光が視界を覆っている）、場所の真上から始める。
+  // 墜落して入った場所（場所の分からない映像）には柱が無い。同じ白い視界から同じ動きで引くが、
+  // 光は柱に縮むのではなく、そのまま晴れていく
+  const known = lastKnown && !!lastLocation;
+  const loc = lastLocation || randomLand();
   lastLocation = loc;
   const lat0 = rad(loc[0]);
   cam.lon = rad(loc[1]);
   cam.lat = lat0;
   cam.latHold = lat0;
   cam.zoom = 1;
-  cam.plunge = 1;
+  cam.plunge = known ? 1 : 0;
+  cam.roll = 0;
+  cam.wash = known ? 0 : 1;
   cam.entering = false;
   cam.spin = 0;
   cam.follow = 0;
   // 軌道には、いまの緯度にいちばん近い位置から合流する（緯度の動きがいちばん小さくて済む）
   orbitPhase = Math.asin(Math.max(-1, Math.min(1, lat0 / rad(ORBIT_INCLINATION))));
-  beams = [makeBeam(loc, 1)];
+  beams = known ? [makeBeam(loc, 1)] : [];
   showVeil();
 
   const covered = sleep(FADE_IN_MS);
   const done = covered.then(() => tween(ASCEND_MS, (e) => {
     // 引く: 引き始めが速く、軌道の高さへ向けて長くなだらかに減速する
     cam.zoom = Math.pow(1 - e, ASCEND_ZOOM_POWER);
-    // 光: 突入で光に入る動きを逆向きにたどる（引き始めに縮んで柱に戻る）
-    cam.plunge = leaveLight(e, ASCEND_MS);
+    // 光: 突入で光に入る動きを逆向きにたどる（引き始めに縮んで柱に戻る）。
+    // 柱の無い場所からは、同じ進み方で白い視界が晴れる
+    const light = leaveLight(e, ASCEND_MS);
+    cam.plunge = known ? light : 0;
+    cam.wash = known ? 0 : light;
     // 軌道へ合流: はじめはまっすぐ引き、途中から軌道の動き（進む速さと緯度）へなめらかに移る。
     // 始まりも終わりも速さの変化が 0 なので、上がりきった瞬間から軌道の動きそのものになる
     const t = clamp01((e - ASCEND_MERGE_FROM) / (1 - ASCEND_MERGE_FROM));

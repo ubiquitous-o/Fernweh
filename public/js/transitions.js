@@ -10,7 +10,7 @@ import { playGlitch, clearGlitch } from './glitch.js';
 import { createPlayer, destroyPlayer } from './player.js';
 import { fetchNext } from './videoPool.js';
 import {
-  showInfo, showOverlays, hideLoading, showSearching, showLocked, clearError,
+  showInfo, showOverlays, hideLoading, showSearching, showLocked, showCrashing, clearError,
   hideOverlaysInstant, showOverlaysInstant,
 } from './ui.js';
 import { updateGlobe } from './globe.js';
@@ -25,6 +25,9 @@ const PRELOAD_RETRY_MS = 3000;
 // switchVideo時にpreload失敗していたら何度試すか
 const MAX_INLINE_ATTEMPTS = 3;
 const INLINE_RETRY_DELAY_MS = 500;
+// 場所の分からない映像のとき、行き先を失った警報（Navigation error）を出してから
+// 墜落（System failure）が始まるまでを、ふつうの「柱が立ってから飛び込むまで」よりこれだけ長くする
+const ERROR_HOLD_MS = 1000;
 
 // --- preload: 非アクティブレイヤーに次の動画を事前ロード ---
 
@@ -216,10 +219,12 @@ export async function switchVideo() {
   }
 
   // 軌道を回ったまま、次のカメラの場所に光の柱が立ち上がる → 少し間をおいて飛び込む
-  // → 柱の中に入った瞬間に切替え、グリッチで映像を出す
+  // → 柱の中に入った瞬間に切替え、グリッチで映像を出す。
+  // 場所の分からない映像のときは柱は立たず、きりもみで回りながら、どこかの陸地へ墜落する（orbit.js）
   const spot = raiseBeam(state.preload.data.location);
-  showLocked(state.preload.data.locationName);
-  await new Promise((r) => setTimeout(r, BEAM_LEAD_MS));
+  showLocked(state.preload.data.locationName, Array.isArray(state.preload.data.location));
+  await new Promise((r) => setTimeout(r, BEAM_LEAD_MS + (spot ? 0 : ERROR_HOLD_MS)));
+  if (!spot) showCrashing();
   await diveTo(spot);
   performSwap();
   hideOrbit();
@@ -267,8 +272,9 @@ async function loadInitial(data) {
   // 「軌道を回ったまま光の柱が立ち上がる → 少し間をおく → 飛び込む」に充てる
   await new Promise((r) => setTimeout(r, Math.max(0, POST_LOAD_HOLD_MS - BEAM_LEAD_MS - DIVE_MS)));
   const spot = raiseBeam(data.location);
-  showLocked(data.locationName);
-  await new Promise((r) => setTimeout(r, BEAM_LEAD_MS));
+  showLocked(data.locationName, Array.isArray(data.location));
+  await new Promise((r) => setTimeout(r, BEAM_LEAD_MS + (spot ? 0 : ERROR_HOLD_MS)));
+  if (!spot) showCrashing();
   await diveTo(spot);
 
   state.currentInfo = data;
