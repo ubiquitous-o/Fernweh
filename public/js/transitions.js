@@ -10,7 +10,7 @@ import { playGlitch, clearGlitch } from './glitch.js';
 import { createPlayer, destroyPlayer } from './player.js';
 import { fetchNext } from './videoPool.js';
 import {
-  showInfo, showOverlays, hideLoading, clearError,
+  showInfo, showOverlays, hideLoading, showSearching, showLocked, clearError,
   hideOverlaysInstant, showOverlaysInstant,
 } from './ui.js';
 import { updateGlobe } from './globe.js';
@@ -187,10 +187,13 @@ export async function switchVideo() {
   if (fromInfo) {
     const glitching = playGlitch($currentLayer, 'up');
     leaving = ascend();
+    // 映像が光に覆われたら、目的地を探している表示を出す
+    leaving.covered.then(showSearching);
     // グリッチが終わり幕が覆いきったら解除（幕の裏でフィルタを回し続けない）
     Promise.all([glitching, leaving.covered]).then(() => clearGlitch($currentLayer));
   } else {
     showOrbit();
+    showSearching();
     leaving = { done: Promise.resolve() };
   }
 
@@ -202,6 +205,7 @@ export async function switchVideo() {
     console.error('switchVideo: preload not ready after retries');
     if (fromInfo) {
       await diveBack();
+      hideLoading();
       hideOrbit();
       showOverlaysInstant();
       playGlitch($currentLayer, 'down');
@@ -214,6 +218,7 @@ export async function switchVideo() {
   // 軌道を回ったまま、次のカメラの場所に光の柱が立ち上がる → 少し間をおいて飛び込む
   // → 柱の中に入った瞬間に切替え、グリッチで映像を出す
   const spot = raiseBeam(state.preload.data.location);
+  showLocked(state.preload.data.locationName);
   await new Promise((r) => setTimeout(r, BEAM_LEAD_MS));
   await diveTo(spot);
   performSwap();
@@ -230,6 +235,7 @@ async function loadInitial(data) {
   state.isSwitching = true;
   hideOverlaysInstant();
   showOrbit();
+  showSearching();
 
   const layerId = state.activeLayer;
   const $layer = getLayer(layerId);
@@ -261,6 +267,7 @@ async function loadInitial(data) {
   // 「軌道を回ったまま光の柱が立ち上がる → 少し間をおく → 飛び込む」に充てる
   await new Promise((r) => setTimeout(r, Math.max(0, POST_LOAD_HOLD_MS - BEAM_LEAD_MS - DIVE_MS)));
   const spot = raiseBeam(data.location);
+  showLocked(data.locationName);
   await new Promise((r) => setTimeout(r, BEAM_LEAD_MS));
   await diveTo(spot);
 

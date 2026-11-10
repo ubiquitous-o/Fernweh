@@ -77,10 +77,11 @@ export function updateGlobe(location, locationName) {
 
   // ピンの2Dスクリーン座標を計算してラベルを配置
   const labelOffset = displaySize * (16 / 225);
-  // ラベルの右端は、球の右端（＝画面端の余白の線）より外へ出さない。
-  // 球はキャンバスの8割の大きさなので、右端はキャンバス幅の9割の位置
-  const labelRightLimit = displaySize * 0.9;
+  // ラベルの右端と下端は、球の右端と下端（＝画面端の余白の線）より外へ出さない。
+  // 球はキャンバスの8割の大きさなので、右端と下端はキャンバスの9割の位置
+  const labelLimit = displaySize * 0.9;
   let labelHalfWidth = 0;
+  let labelHeight = 0;
   function updateLabelPosition(phi, theta) {
     if (!hasLocation || !locationName) return;
     const [lat, lon] = location;
@@ -101,15 +102,18 @@ export function updateGlobe(location, locationName) {
     }
     const sx = radius + x1 * radius;
     const sy = radius - y2 * radius;
-    if (!labelHalfWidth) labelHalfWidth = $globeLabel.offsetWidth / 2;
-    $globeLabel.style.left = Math.min(sx, labelRightLimit - labelHalfWidth) + 'px';
+    if (!labelHalfWidth) {
+      labelHalfWidth = $globeLabel.offsetWidth / 2;
+      labelHeight = $globeLabel.offsetHeight;
+    }
+    $globeLabel.style.left = Math.min(sx, labelLimit - labelHalfWidth) + 'px';
     if (lat >= 0) {
       // 北半球: ピンの上にラベル
       $globeLabel.style.top = (sy - labelOffset) + 'px';
       $globeLabel.style.transform = 'translate(-50%, -100%)';
     } else {
       // 南半球: ピンの下にラベル
-      $globeLabel.style.top = (sy + labelOffset) + 'px';
+      $globeLabel.style.top = Math.min(sy + labelOffset, labelLimit - labelHeight) + 'px';
       $globeLabel.style.transform = 'translate(-50%, 0%)';
     }
     $globeLabel.style.opacity = String(Math.min(1, (z2 - 0.2) * 3));

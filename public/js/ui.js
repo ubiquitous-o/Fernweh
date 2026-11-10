@@ -97,6 +97,25 @@ export function showOverlays() {
   if (state.currentInfo?.timezone) $cameraTime.classList.add('show');
 }
 
+// --- 宇宙船の計器ふうの表示（軌道ビューのあいだ、地球の下に出す） ---
+const $loadingStatus = document.getElementById('loading-status');
+const $loadingPlace = document.getElementById('loading-place');
+
+// 目的地を探しているあいだ（起動時、切替えで軌道へ戻ったあと）
+export function showSearching() {
+  $loadingStatus.textContent = 'Scanning for destination...';
+  $loadingPlace.textContent = '';
+  $loading.classList.remove('locked', 'fade-out');
+}
+
+// 行き先が決まった（光の柱が立ち上がるのと同時に呼ぶ）。地名が分かっていれば下に出す
+export function showLocked(locationName) {
+  $loadingStatus.textContent = 'Destination locked';
+  $loadingPlace.textContent = locationName || '';
+  $loading.classList.remove('fade-out');
+  $loading.classList.add('locked');
+}
+
 export function hideLoading() {
   $loading.classList.add('fade-out');
 }

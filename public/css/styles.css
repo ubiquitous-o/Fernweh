@@ -615,13 +615,15 @@ body.hide-place .camera-time {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* 画面の中央には地球があるので、その下（地球と画面の下端のあいだ）に置く */
+  justify-content: flex-end;
+  padding: 0 var(--edge) 5vh;
   background: transparent;
+  pointer-events: none;
   transition: opacity 0.3s ease;
 }
 .loading-overlay.fade-out {
   opacity: 0;
-  pointer-events: none;
 }
 
 .loading-text {
@@ -634,11 +636,38 @@ body.hide-place .camera-time {
   padding: 10px 24px;
   border-radius: 4px;
   text-align: center;
+}
+/* 探しているあいだ: ゆっくり明滅 */
+.loading-status {
   animation: breathe 2s ease-in-out infinite;
 }
 @keyframes breathe {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
+}
+/* 行き先が決まった（.locked）: 明滅をやめ、計器が点滅して確定する。下に地名を出す */
+.loading-place {
+  display: none;
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 4px;
+}
+.loading-overlay.locked .loading-status {
+  color: var(--accent);
+  animation: lock-on 0.45s steps(1, end) 1;
+}
+.loading-overlay.locked .loading-place:not(:empty) {
+  display: block;
+  animation: lock-on 0.45s steps(1, end) 1;
+}
+@keyframes lock-on {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  40% { opacity: 0; }
+  60% { opacity: 1; }
+  80% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 /* --- 軌道ビューの幕が出ているあいだのオーバーレイ非表示 ---

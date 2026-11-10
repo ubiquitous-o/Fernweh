@@ -179,9 +179,13 @@
 <!-- Progress -->
 <div class="progress-bar" id="progress"></div>
 
-<!-- Loading -->
+<!-- 宇宙船の計器ふうの表示。軌道ビューのあいだ、地球の下に出す（起動時と切替時。js/ui.js）。
+     目的地を探しているあいだは「Scanning...」、光の柱が立ったら「Destination locked」と行き先の地名 -->
 <div class="loading-overlay" id="loading">
-  <div class="loading-text">Exploring the world live camera...</div>
+  <div class="loading-text">
+    <div class="loading-status" id="loading-status">Scanning for destination...</div>
+    <div class="loading-place" id="loading-place"></div>
+  </div>
 </div>
 
 <!-- Error -->
