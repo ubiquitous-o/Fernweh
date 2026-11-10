@@ -39,11 +39,11 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 - Auto-learning from geocache: previously resolved locations are merged into the dictionary at startup, reducing Gemini calls over time
 - Full video description fetching via YouTube videos.list API for improved location accuracy
 - Camera local time & time difference from your timezone (via [geo-tz](https://github.com/evansiroky/timezone-boundary-builder) at build-time)
-- Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/))
-- Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback)
+- Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/)) — off by default, turn it on in the settings panel
+- Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback); your location is only looked up once the clock & weather overlay is turned on
 - Randomized search queries with multiple patterns for maximum discovery (300+ locations, 50+ topics)
 - Clickable video title — links to original YouTube video, resumes on browser back
-- Settings panel: show or hide each overlay (clock & weather, local time & globe, live badge, video info), toggle fullscreen; choices are saved in the browser
+- Settings panel: show or hide each overlay (clock & weather, local time & globe, live badge, video info), toggle fullscreen; choices are saved in the browser. Everything is shown by default except clock & weather
 - Long channel names and video titles scroll sideways (marquee) instead of being cut off
 - "City, Country" location labels on globe (auto line-break at comma)
   - **Note:** Globe labels are best-effort — location detection relies on video titles, channel names, and AI extraction, so labels may be inaccurate or missing for some streams

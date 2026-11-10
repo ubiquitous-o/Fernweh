@@ -4,7 +4,6 @@ import { showOrbit } from './orbit.js';
 import { switchVideo, resumeVideo, initialSwitch } from './transitions.js';
 import { updateClock } from './clock.js';
 import { repositionCameraTime } from './clock.js';
-import { initWeather } from './weather.js';
 import { updateGlobe } from './globe.js';
 import { initInput } from './input.js';
 import { initSettings } from './settings.js';
@@ -95,7 +94,6 @@ initInput();
 initSettings();
 updateClock();
 setInterval(updateClock, 10000);
-initWeather();
 setInterval(shiftOverlays, 10 * 60 * 1000);
 
 // 初回ロード時から軌道ビューの幕を表示（動画ロード中も覆う）

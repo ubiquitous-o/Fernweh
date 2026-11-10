@@ -139,12 +139,13 @@
   <div class="ctrl-btn" id="btn-settings" title="Settings">⚙</div>
 </div>
 
-<!-- Settings panel（設定ボタンで開く。表示の切替は js/settings.js、選んだ内容はブラウザに保存される） -->
+<!-- Settings panel（設定ボタンで開く。表示の切替は js/settings.js、選んだ内容はブラウザに保存される。
+     スイッチの初期状態は settings.js が入れる。既定は「Clock & weather」だけオフ） -->
 <div class="settings-panel" id="settings-panel">
   <div class="settings-title">Settings</div>
   <label class="settings-row">
     <span>Clock &amp; weather</span>
-    <input type="checkbox" data-setting="clock" checked><span class="switch"></span>
+    <input type="checkbox" data-setting="clock"><span class="switch"></span>
   </label>
   <label class="settings-row">
     <span>Local time &amp; globe</span>

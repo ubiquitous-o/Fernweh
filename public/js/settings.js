@@ -1,4 +1,4 @@
-// 設定: 画面のどのUIを出すかを切り替える。右のボタン列の設定ボタンでパネルを開く。
+// 設定: 画面のどのUIを出すかを切り替える。ボタン列の設定ボタンでパネルを開く。
 //   clock: 右上の時計と天気 / place: 右下の現地時刻と地球儀 / live: 左上のLIVE / info: 左下の映像の情報
 // 選んだ内容はブラウザ（localStorage）に保存され、次に開いたときも引き継がれる。
 // 隠すときは body にクラスを付けるだけで、実際に消すのは styles.css。
@@ -7,6 +7,7 @@ import { $btnSettings, $settingsPanel } from './dom.js';
 import { updateGlobe } from './globe.js';
 import { updateCameraTime } from './clock.js';
 import { refreshMarquees, updateControlsPlacement } from './ui.js';
+import { initWeather } from './weather.js';
 
 const STORAGE_KEY = 'fernweh_settings';
 // 設定の項目 → 隠すときに body へ付けるクラス
@@ -16,8 +17,9 @@ const HIDE_CLASS = {
   live: 'hide-live',
   info: 'hide-info',
 };
-// 既定はすべて表示
-const settings = { clock: true, place: true, live: true, info: true };
+// 既定は「時計と天気」だけ隠し、ほかは表示。
+// 天気には現在地が要るので、位置の取得は「時計と天気」を出したときに初めて行う
+const settings = { clock: false, place: true, live: true, info: true };
 
 function load() {
   try {
@@ -42,6 +44,7 @@ function apply() {
 
 // 表示を切り替えたあと、隠れているあいだは止めていた描画や、隠れていて測れなかった幅をやり直す
 function refresh(key) {
+  if (key === 'clock' && settings.clock) initWeather();
   if (key === 'place' && state.currentInfo) {
     // 隠すときは地球儀の描画を止め、出すときは作り直す（どちらも updateGlobe が面倒を見る）
     updateGlobe(state.currentInfo.location, state.currentInfo.locationName);
@@ -67,6 +70,9 @@ load();
 apply();
 
 export function initSettings() {
+  // 前回から「時計と天気」を出したままなら、起動時に位置と天気を取りに行く
+  if (settings.clock) initWeather();
+
   for (const input of $settingsPanel.querySelectorAll('input[data-setting]')) {
     const key = input.dataset.setting;
     input.checked = settings[key];
