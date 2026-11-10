@@ -1,7 +1,7 @@
 // 軌道ビュー（orbit.js）の描画: 瞬く星空 + 本物の見た目の地球 + 光の柱。1枚のWebGLキャンバスに描く。
 //   - 星: 色温度・等級・瞬きが星ごとに違う。位置や色は頂点シェーダーが seed から計算する。
-//   - 地球: NASAの画像（昼 / 夜の街明かり / 海のマスク）を球に貼る。昼夜の境目は太陽の向きで決まり、
-//     海には太陽の反射、縁には大気の青い光が出る。
+//   - 地球: NASAの画像（昼 / 夜の街明かり / 海のマスク / 雲）を球に貼る。昼夜の境目は太陽の向きで決まり、
+//     海には太陽の反射、縁には大気の青い光が出る。雲は地表に影を落とし、夜側では街明かりを隠す。
 //   - 光の柱: 地球上の場所から宇宙へ伸びる光の筋。近づくと太く見え、最後は視界を覆う。
 // カメラや時間の進み方はここでは持たない。orbit.js が毎フレーム scene を渡す。
 import { PREVIEWS } from './orbitTexturePreviews.js';
@@ -9,6 +9,8 @@ import { PREVIEWS } from './orbitTexturePreviews.js';
 const STAR_COUNT = 600;
 // 描画解像度の上限（長辺px）。これより大きい画面では縮小して描き、CSSで拡大表示する
 const MAX_PIXELS = 1600;
+// 雲が地表に対して東へ流れる速さ（1秒あたり、地球一周を1として）
+const CLOUD_DRIFT = 0.00055;
 // 同時に描ける光の柱の数（シェーダーの配列長）
 const MAX_BEAMS = 2;
 
@@ -16,6 +18,7 @@ const TEXTURES = [
   { key: 'day', url: 'img/earth-day.jpg' },     // 昼の地球（Blue Marble）
   { key: 'night', url: 'img/earth-night.jpg' }, // 夜の街明かり（Black Marble）
   { key: 'water', url: 'img/earth-water.jpg' }, // 海=白 / 陸=黒 のマスク
+  { key: 'clouds', url: 'img/earth-clouds.jpg' }, // 雲の濃さ（白いほど厚い雲）
 ];
 
 const STAR_VERTEX = `
@@ -92,6 +95,8 @@ const EARTH_FRAGMENT = `
   uniform sampler2D u_day;
   uniform sampler2D u_night;
   uniform sampler2D u_water;
+  uniform sampler2D u_clouds;
+  uniform float u_cloudShift; // 雲が地表に対して東へ流れた量（画像座標）
   // 光の柱: 根元(A)と先端(B)の画面位置(px) / 太さ(px) / 根元と先端の奥行き(地球半径単位) / 濃さ
   uniform vec2 u_beamA[${MAX_BEAMS}];
   uniform vec2 u_beamB[${MAX_BEAMS}];
@@ -102,7 +107,9 @@ const EARTH_FRAGMENT = `
   uniform float u_beamCover; // 0..1 柱が視界を覆っている度合い（覆うほど柱を上下に伸ばす）
   uniform float u_fill;      // 0..1 柱の中に入りきった = 画面全体が光
 
-  const vec3 ATMO = vec3(0.30, 0.56, 1.0);
+  const vec3 ATMO = vec3(0.30, 0.56, 1.0);   // 大気の散乱光（青）
+  const float CLOUD_GAMMA = 0.5;             // 雲の濃淡の持ち上げ（小さいほど薄い雲まで見える）
+  const vec3 SUNSET = vec3(0.85, 0.48, 0.30); // 昼夜の境目の散乱光（夕焼け色）
 
   void main() {
     vec2 p = (gl_FragCoord.xy - u_center) / u_radius;
@@ -162,36 +169,79 @@ const EARTH_FRAGMENT = `
       vec3 night = texture2D(u_night, uv).rgb;
       float water = texture2D(u_water, uv).r;
 
-      // 昼: 太陽の拡散光 + 海面の反射
       float sunDot = dot(e, u_sun);
-      float dayAmount = smoothstep(-0.12, 0.2, sunDot);
-      vec3 lit = day * (0.22 + 0.88 * pow(clamp(sunDot, 0.0, 1.0), 0.65));
       vec3 view = u_rot[2];
-      float glint = pow(max(dot(e, normalize(u_sun + view)), 0.0), 70.0);
-      lit += vec3(1.0, 0.93, 0.8) * glint * water * 0.45;
-      // 夜: 街明かり（画像はもともと暗い青 + 明かり。少し持ち上げる）
-      vec3 dark = night * 1.35;
-      col = mix(dark, lit, dayAmount);
-      // 昼夜の境目にごく弱い夕焼け色
-      float dusk = smoothstep(-0.12, 0.03, sunDot) * (1.0 - smoothstep(0.03, 0.28, sunDot));
-      col += vec3(0.30, 0.13, 0.04) * dusk * 0.25;
+      // 視線と地表のなす角の余弦。真上から見ると 1、縁へ近づくほど 0（大気を斜めに長く通って見える）
+      float mu = n.z;
 
-      // 大気: 縁へ向かって青く。昼側ほど強い
-      float sunny = 0.12 + 0.88 * smoothstep(-0.3, 0.3, sunDot);
-      col += ATMO * pow(1.0 - n.z, 2.6) * sunny * 0.85;
+      // --- 昼の地表 ---
+      // 太陽光の当たり具合。昼夜の境目はなだらかに落ちる
+      float sun = smoothstep(-0.06, 0.32, sunDot);
+      // 低い太陽の光は大気を長く通って赤みを帯びる（境目の近くは夕焼け色）
+      vec3 sunColor = mix(vec3(1.0, 0.55, 0.28), vec3(1.0, 0.98, 0.94), smoothstep(0.0, 0.35, sunDot));
+      // 元の画像は彩度が強い。宇宙から見た落ち着いた色へ少し寄せる
+      vec3 ground = mix(vec3(dot(day, vec3(0.299, 0.587, 0.114))), day, 0.86);
+      vec3 lit = ground * sunColor * sun * 1.08;
+
+      // 海: 斜めから見るほど空を映して明るくなる（フレネル）
+      lit += water * pow(1.0 - mu, 4.0) * vec3(0.20, 0.34, 0.55) * sun * 0.55;
+      // 海面の太陽の反射: 鋭い芯 + まわりの広いにじみ
+      float ndh = max(dot(e, normalize(u_sun + view)), 0.0);
+      float glint = pow(ndh, 140.0) * 0.5 + pow(ndh, 24.0) * 0.14;
+      lit += sunColor * glint * water * sun;
+
+      // --- 夜の地表 ---
+      // 画像は「暗い青の地表 + 街明かり」。明かり（赤み・黄みが青より強い部分）を取り出して暖色で光らせる
+      float lights = max(night.r - night.b, 0.0);
+      vec3 dark = night * 0.5 + vec3(1.0, 0.78, 0.48) * lights * 3.4;
+      // --- 雲 ---
+      // 雲は地表の上を少しずつ東へ流れる
+      vec2 cloudUv = vec2(uv.x + u_cloudShift, uv.y);
+      // 元の画像は薄い雲がとても暗い値で入っている。暗い側を持ち上げて、薄い雲の筋まで見せる
+      float cloud = clamp(pow(texture2D(u_clouds, cloudUv).r, CLOUD_GAMMA) * 1.1, 0.0, 1.0);
+      // 雲の影: 太陽の側へ少しずらした位置にある雲が、地表を暗くする。
+      // 太陽へ向かう地表上の向きを、東西・南北の成分に分けて画像座標のずれに直す
+      vec3 toSun = u_sun - e * sunDot;
+      vec3 east = normalize(vec3(e.z, 0.0, -e.x) + vec3(0.00001, 0.0, 0.0));
+      vec3 north = cross(e, east);
+      vec2 shadowOffset = vec2(dot(toSun, east) / 6.2831853, -dot(toSun, north) / 3.14159265) * 0.012;
+      float shadow = clamp(pow(texture2D(u_clouds, cloudUv + shadowOffset).r, CLOUD_GAMMA) * 1.1, 0.0, 1.0);
+      lit *= 1.0 - 0.4 * shadow;
+      // 雲そのもの: 太陽の光で白く光る。高い位置にあるので、地表より少し先まで日が当たる
+      vec3 cloudLit = vec3(0.95, 0.97, 1.0) * sunColor * smoothstep(-0.12, 0.28, sunDot);
+      lit = mix(lit, cloudLit, cloud * 0.9);
+      // 夜側では、雲が街明かりを隠す
+      dark *= 1.0 - 0.75 * cloud;
+
+      // 街明かりは日が差すと見えなくなる
+      col = lit + dark * (1.0 - smoothstep(-0.15, 0.1, sunDot));
+
+      // --- 大気 ---
+      // 大気を通る道のり。真上から見ると短く、縁へ近づくと長い
+      float path = 1.0 / (mu + 0.12);
+      float scatter = 1.0 - exp(-0.11 * path);
+      // 太陽に照らされた大気の散乱光。昼側は青く、昼夜の境目では夕焼け色に寄る
+      float airLight = smoothstep(-0.15, 0.3, sunDot);
+      vec3 airColor = mix(SUNSET, ATMO, smoothstep(-0.05, 0.3, sunDot));
+      // 地表の色は大気で少し弱まり、そのぶん散乱光が乗る（中央は淡い霞、縁は青い帯になる）
+      col = col * (1.0 - 0.55 * scatter) + airColor * scatter * airLight * 0.95;
       // 降りるにつれ、地表が青白くうっすら霞む
-      col = mix(col, mix(vec3(0.02, 0.03, 0.06), vec3(0.42, 0.58, 0.85), dayAmount), u_haze);
+      col = mix(col, mix(vec3(0.02, 0.03, 0.06), vec3(0.42, 0.58, 0.85), sun), u_haze);
 
       // 縁を1.5pxでなめらかに
       alpha = smoothstep(1.0, 1.0 - 1.5 / u_radius, r);
       col *= alpha;
     } else {
-      // 地球の外側: 縁から外へ減衰する大気の光。昼側ほど強い
+      // 地球の外側: 縁に沿った薄く明るい大気の層 + その外へ広がる淡い光。
+      // 太陽の当たる側だけ光り、昼夜の境目では夕焼け色に寄る
       vec3 e = u_rot * vec3(p / r, 0.0);
-      float sunny = 0.10 + 0.90 * smoothstep(-0.4, 0.3, dot(e, u_sun));
-      float glow = exp(-(r - 1.0) / 0.028) * sunny;
-      col = ATMO * glow * 0.75;
-      alpha = glow * 0.5;
+      float sunDot = dot(e, u_sun);
+      float airLight = smoothstep(-0.15, 0.3, sunDot);
+      vec3 airColor = mix(SUNSET, ATMO, smoothstep(-0.05, 0.3, sunDot));
+      float h = r - 1.0;
+      float glow = (exp(-h / 0.010) * 0.7 + exp(-h / 0.045) * 0.2) * airLight;
+      col = airColor * glow;
+      alpha = glow * 0.6;
     }
 
     // 光の柱は、光の量に応じて柱の色へ寄せる（足し込むと昼の地表の上で白飛びする）。
@@ -308,6 +358,7 @@ export function createOrbitRenderer(canvas) {
       uCenter: e.u('u_center'), uRadius: e.u('u_radius'), uRot: e.u('u_rot'), uSun: e.u('u_sun'),
       uHaze: e.u('u_haze'),
       uDay: e.u('u_day'), uNight: e.u('u_night'), uWater: e.u('u_water'),
+      uClouds: e.u('u_clouds'), uCloudShift: e.u('u_cloudShift'),
       uBeamA: e.u('u_beamA'), uBeamB: e.u('u_beamB'), uBeamW: e.u('u_beamW'), uBeamZ: e.u('u_beamZ'),
       uBeamAlpha: e.u('u_beamAlpha'), uBeamColor: e.u('u_beamColor'),
       uBeamCover: e.u('u_beamCover'), uFill: e.u('u_fill'),
@@ -421,6 +472,9 @@ export function createOrbitRenderer(canvas) {
       gl.uniform1i(earth.uDay, 0);
       gl.uniform1i(earth.uNight, 1);
       gl.uniform1i(earth.uWater, 2);
+      gl.uniform1i(earth.uClouds, 3);
+      // 雲の流れ: 約30分で地球を一周する速さ（幕が出ているあいだは、ほぼ止まって見える）
+      gl.uniform1f(earth.uCloudShift, (now * 0.001 * CLOUD_DRIFT) % 1);
       gl.uniform2f(earth.uCenter, ea.cx, ea.cy);
       gl.uniform1f(earth.uRadius, ea.radius);
       gl.uniformMatrix3fv(earth.uRot, false, rot);
