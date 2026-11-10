@@ -35,7 +35,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 - Orbit transition between live streams: the view rises to an inclined satellite orbit around a realistic whole Earth (real-time day/night terminator, clouds with shadows, mountain relief, city lights, atmospheric scattering), then dives into a pillar of light standing at the next camera's location (WebGL)
 - Streams with no known location get no pillar: the readout raises a navigation error and the camera spins down into a crash on some distant land, whiting out into the stream
 - Realistic sky behind the Earth: a star field and the Milky Way that turn as the camera orbits, with the Sun, the Moon and the five naked-eye planets at their real positions (the Moon shows its real phase)
-- Corner globe showing the camera location: the same realistic Earth as the orbit view (real-time day/night, city lights), with the camera circling it above the equator and a pillar of light at the location
+- Corner globe showing the camera location: the same realistic Earth as the orbit view (real-time day/night, city lights), with the camera circling it above the equator and a pillar of light at the location; a tag with the place name and local time is tied to the pillar by a leader line
 - Location detection from video title/channel/description ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
 - Dictionary-first optimization: skips Gemini API for known locations, saving RPD quota
 - Auto-learning from geocache: previously resolved locations are merged into the dictionary at startup, reducing Gemini calls over time
@@ -67,7 +67,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 [Browser]
   → Loads video candidates from videos.json
   → YouTube IFrame Player API for playback
-  → Corner globe (the orbit view's Earth renderer): the camera orbits the Earth; a light pillar marks the location, with its name above
+  → Corner globe (the orbit view's Earth renderer): the camera orbits the Earth; a light pillar marks the location, linked by a leader line to a tag with the place name and local time
   → Camera local time + time difference (from timezone in videos.json)
   → Orbit view (WebGL textured Earth + stars, Sun and Moon) with a dive into the camera location during loading / switching
   → Geolocation API / IP API → Open-Meteo for weather

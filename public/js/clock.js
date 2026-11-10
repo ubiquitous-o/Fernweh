@@ -1,8 +1,8 @@
 // メイン時計とカメラ現地時刻の表示。
+// カメラ現地時刻は、右下の地球儀の札の中（地名の下）に出る。置き場所は globe.js と styles.css が決める。
 import { state } from './state.js';
 import {
   $clockTime, $clockDate, $cameraTime, $cameraTimeClock, $cameraTimeDiff,
-  $globe, $globeLabel,
 } from './dom.js';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -53,23 +53,5 @@ export function updateCameraTime() {
     timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false,
   }).format(now);
   $cameraTimeDiff.textContent = formatTimeDiff(getTimezoneDiffMinutes(now, tz));
-  repositionCameraTime();
   $cameraTime.classList.add('show');
-}
-
-// グローブ上のラベルにかぶらないようcamera-timeのbottomを調整。
-// globe.jsからも呼ばれる。
-export function repositionCameraTime() {
-  const viewH = window.innerHeight;
-  const globeRect = $globe.getBoundingClientRect();
-  const baseBottom = viewH - globeRect.top + 10;
-  const labelVisible = $globeLabel.classList.contains('show')
-    && parseFloat($globeLabel.style.opacity || '0') > 0;
-  if (labelVisible) {
-    const labelRect = $globeLabel.getBoundingClientRect();
-    const needed = viewH - labelRect.top + 4;
-    $cameraTime.style.bottom = Math.max(baseBottom, needed) + 'px';
-  } else {
-    $cameraTime.style.bottom = baseBottom + 'px';
-  }
 }

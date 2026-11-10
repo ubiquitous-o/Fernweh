@@ -341,24 +341,81 @@ html, body {
   pointer-events: none;
 }
 .globe-container.show { opacity: 0.95; }
-.globe-label {
+/* 札: 地名と現地時刻をまとめた小さな表示。地球の上、画面端の余白の線に右をそろえて置く
+   （位置は js/globe.js が決める）。中身が何も無いときは出さない */
+.globe-tag {
   position: absolute;
+  z-index: 1;
   width: max-content;
-  text-align: center;
-  transform: translate(-50%, -50%);
+  padding: 6px 10px 7px;
+  text-align: right;
+  background: var(--overlay-bg);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
+}
+.globe-tag:not(:has(.globe-label:not(:empty), .camera-time.show)) {
+  display: none;
+}
+/* 地名: 1行目（街や地域）を大きく、2行目以降（国など）は小さく淡く */
+.globe-label {
   font-size: var(--globe-label-font);
   font-weight: 600;
   color: #fff;
-  background: rgba(51, 102, 255, 0.9);
-  padding: 1px 6px;
-  border-radius: 3px;
-  letter-spacing: 0;
-  white-space: pre-line;
-  line-height: 1.2;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+  letter-spacing: 1px;
+  line-height: 1.15;
+  white-space: nowrap;
 }
-.globe-label.show { opacity: 1; }
+.globe-label .globe-label-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.62em;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+}
+/* 場所の分からない映像のとき、地球の真ん中に重ねる表示 */
+.globe-unknown {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: none;
+  width: max-content;
+  padding: 5px 9px 6px;
+  font-size: calc(var(--globe-label-font) * 0.7);
+  font-weight: 600;
+  letter-spacing: 2px;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--overlay-bg);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 4px;
+  backdrop-filter: blur(6px);
+}
+.globe-unknown.show { display: block; }
+/* 場所の分からない映像のときは、札（現地時刻も含めて）を出さない */
+.globe-unknown.show ~ .globe-tag { display: none; }
+/* 札と映像の場所（光の柱の根元）をつなぐ引き出し線（端点は js/globe.js が毎フレーム動かす） */
+.globe-leader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.globe-leader line {
+  stroke: rgba(255, 255, 255, 0.75);
+  stroke-width: 1;
+}
+.globe-leader circle {
+  fill: #fff;
+}
 /* キャンバスは枠より一回り大きい（js/globe.js の CANVAS_SCALE）。地球の外へ伸びる光の柱が切れないように */
 .globe-container canvas {
   position: absolute;
@@ -368,24 +425,26 @@ html, body {
   height: 130%;
 }
 
+/* 現地時刻（札の中、地名の下）。時差を横に添える。タイムゾーンが分からない映像では出さない */
 .camera-time {
-  position: absolute;
-  bottom: calc(var(--globe-size) + var(--edge) + 10px);
-  right: calc(var(--edge) + var(--shift-x));
-  z-index: 12;
-  text-align: right;
-  opacity: 0;
-  transition: opacity 1.2s ease, bottom 0.4s ease;
-  pointer-events: none;
+  display: none;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 8px;
 }
-.camera-time.show { opacity: 1; }
+.camera-time.show { display: flex; }
+.globe-label:not(:empty) + .camera-time.show {
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
 .camera-time-clock {
   font-size: var(--ct-font-clock); font-weight: 200;
   letter-spacing: 2px; color: var(--text-primary); line-height: 1;
 }
 .camera-time-diff {
   font-size: var(--ct-font-diff); font-weight: 300;
-  letter-spacing: 2px; color: var(--text-secondary); margin-top: 2px;
+  letter-spacing: 2px; color: var(--text-secondary);
 }
 
 /* --- Live indicator --- */
@@ -605,8 +664,7 @@ body.settings-open .settings-panel {
 body.hide-clock .clock-overlay,
 body.hide-live .live-badge,
 body.hide-info .info-overlay,
-body.hide-place .globe-container,
-body.hide-place .camera-time {
+body.hide-place .globe-container {
   display: none;
 }
 

@@ -3,7 +3,6 @@ import { state } from './state.js';
 import { showOrbit } from './orbit.js';
 import { switchVideo, resumeVideo, initialSwitch } from './transitions.js';
 import { updateClock } from './clock.js';
-import { repositionCameraTime } from './clock.js';
 import { updateGlobe } from './globe.js';
 import { initInput } from './input.js';
 import { initSettings } from './settings.js';
@@ -77,7 +76,7 @@ function scheduleDailyReload() {
 }
 scheduleDailyReload();
 
-// リサイズ時にグローブとカメラ時刻を再配置し、流れる文字も測り直す
+// リサイズ時にグローブを配置し直し、流れる文字も測り直す
 let resizeTimer = null;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
@@ -85,7 +84,6 @@ window.addEventListener('resize', () => {
     refreshMarquees();
     if (state.currentInfo) {
       updateGlobe(state.currentInfo.location, state.currentInfo.locationName);
-      repositionCameraTime();
     }
   }, 500);
 });

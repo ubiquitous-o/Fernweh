@@ -6,8 +6,8 @@ import {
 } from './dom.js';
 
 // 軌道ビューの幕が出ているあいだ、ぱっと隠す対象オーバーレイ
-// （時計＋天気の clock-overlay は常時表示のままにする）
-const $hideableOverlays = [$liveBadge, $info, $globe, $cameraTime];
+// （時計＋天気の clock-overlay は常時表示のままにする。現地時刻は地球儀 $globe の中にある）
+const $hideableOverlays = [$liveBadge, $info, $globe];
 
 // 幕が出るタイミングで瞬時に非表示
 export function hideOverlaysInstant() {

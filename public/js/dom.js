@@ -25,6 +25,10 @@ export const $errorMsg = document.getElementById('error-msg');
 export const $globe = document.getElementById('globe-container');
 export const globeRef = { canvas: document.getElementById('globe-canvas') };
 export const $globeLabel = document.getElementById('globe-label');
+export const $globeTag = document.getElementById('globe-tag');
+export const $globeUnknown = document.getElementById('globe-unknown');
+export const $globeLeaderLine = document.getElementById('globe-leader-line');
+export const $globeLeaderDot = document.getElementById('globe-leader-dot');
 
 export const $cameraTime = document.getElementById('camera-time');
 export const $cameraTimeClock = document.getElementById('camera-time-clock');

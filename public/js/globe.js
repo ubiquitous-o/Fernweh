@@ -1,11 +1,14 @@
 // 右下の小さな地球儀。軌道ビューと同じ「本物の見た目の地球」（orbitRenderer.js）で描く。
 // 地球は動かさず、カメラが赤道の真上を東へ回り続ける（北が上。見える向きは経度だけが変わる）:
 //   - 昼夜の境目は実際の時刻どおり。カメラが夜側へ回ると、街明かりが見える。
-//   - 映像の場所には光の柱が立つ。地名のラベルは地球の上に出したまま動かさない。
+//   - 映像の場所には光の柱が立つ。
+//   - 地球の上には札（地名と現地時刻）が出ていて、柱の根元（映像の場所）と細い引き出し線でつながっている。
+//     札は動かさず、線だけが場所を追う。場所が地球の裏へ回っているあいだ、線は消えて札だけが残る。
 //   - 映像が切り替わると、カメラはその場所の少し手前から回り始める（切り替わってすぐ柱が見える）。
-//   - 場所の分からない映像のときは、柱が無く、中央に「Location unknown」と出る。
-import { $globe, $globeLabel, globeRef } from './dom.js';
-import { repositionCameraTime } from './clock.js';
+//   - 場所の分からない映像のときは、柱も線も札も無く、地球の上に重ねて「Location unknown」とだけ出る。
+import {
+  $globe, $globeLabel, $globeTag, $globeUnknown, $globeLeaderLine, $globeLeaderDot, globeRef,
+} from './dom.js';
 import { createOrbitRenderer } from './orbitRenderer.js';
 import { sunDirection } from './orbit.js';
 
@@ -26,6 +29,8 @@ const PIN_LENGTH = 0.55;
 const PIN_WIDTH = 0.035;
 const PIN_COLOR = [1.0, 0.98, 0.95];
 const PIN_APPEAR = 0.8;
+// 札と柱の届く範囲とのあいだの空き(px)
+const TAG_GAP = 6;
 // 表示は小さいので、画像は小さくして使う（幅px）
 const TEXTURE_WIDTH = 1024;
 
@@ -42,6 +47,36 @@ let camLon = 0;
 // 描画ループが回っているか
 let running = false;
 let lastFrame = 0;
+// 札の位置と大きさ（枠 .globe-container の左上からのpx）。中身が変わると大きさも変わるので、ときどき測り直す
+let tagBox = null;
+let tagMeasuredAt = -Infinity;
+
+// 引き出し線: 札の下の辺から、柱の根元（枠の左上からのpx）まで。strength(0..1) は線の濃さ
+function drawLeader(now, tipX, tipY, strength) {
+  if (now - tagMeasuredAt > 1000) {
+    tagMeasuredAt = now;
+    tagBox = $globeTag.offsetWidth
+      ? { left: $globeTag.offsetLeft, right: $globeTag.offsetLeft + $globeTag.offsetWidth,
+        bottom: $globeTag.offsetTop + $globeTag.offsetHeight }
+      : null;
+  }
+  if (!tagBox || strength <= 0.01) {
+    $globeLeaderLine.style.opacity = '0';
+    $globeLeaderDot.style.opacity = '0';
+    return;
+  }
+  // 札の側の端は、下の辺のうち柱の先にいちばん近いところ（角は避ける）
+  const inset = Math.min(10, (tagBox.right - tagBox.left) / 2);
+  const startX = Math.max(tagBox.left + inset, Math.min(tagBox.right - inset, tipX));
+  $globeLeaderLine.setAttribute('x1', startX);
+  $globeLeaderLine.setAttribute('y1', tagBox.bottom);
+  $globeLeaderLine.setAttribute('x2', tipX);
+  $globeLeaderLine.setAttribute('y2', tipY);
+  $globeLeaderDot.setAttribute('cx', tipX);
+  $globeLeaderDot.setAttribute('cy', tipY);
+  $globeLeaderLine.style.opacity = String(strength);
+  $globeLeaderDot.style.opacity = String(strength);
+}
 
 function frame() {
   // 設定で隠されたら止める（出し直したときは updateGlobe がもう一度始める）
@@ -74,6 +109,14 @@ function frame() {
       width: PIN_WIDTH * radius,
       alpha: appear,
     });
+    // 引き出し線は柱の根元（映像の場所）へ。場所が地球の裏へ回っているあいだは消す
+    // （縁を越えるあたりで、なだらかに現れて消える）
+    const size = $globe.offsetWidth;
+    const reach = RADIUS * size;
+    const seen = Math.max(0, Math.min(1, v[2] / 0.12));
+    drawLeader(now, size / 2 + v[0] * reach, size / 2 - v[1] * reach, appear * seen);
+  } else {
+    drawLeader(now, 0, 0, 0);
   }
 
   renderer.draw(now, {
@@ -110,38 +153,32 @@ export function updateGlobe(location, locationName) {
   // 切り替えのあいだ地球儀は隠れているので、飛んだことは見えない
   if (hasLocation) camLon = rad(location[1]) - START_BEHIND;
 
-  // ラベル。カメラは回り続けるので、ラベルは場所を追わせず、決まった位置に出したままにする
-  $globeLabel.style.opacity = '1';
-  if (hasLocation && locationName) {
-    $globeLabel.textContent = locationName.replace(/,\s*/g, '\n');
-    const maxLineLen = locationName.split(/,\s*/).reduce((m, s) => Math.max(m, s.length), 0);
-    const scale = displaySize / 225;
-    const base = maxLineLen > 22 ? 14 : maxLineLen > 18 ? 17 : 20;
-    $globeLabel.style.fontSize = (base * scale) + 'px';
-    $globeLabel.style.textAlign = '';
-    $globeLabel.classList.add('show');
-    // 地球のすぐ上、左右は地球の中央。ただし右端は、地球の右端（＝画面端の余白の線）より外へ出さない
-    const rightLimit = displaySize * (0.5 + RADIUS);
-    const halfWidth = $globeLabel.offsetWidth / 2;
-    $globeLabel.style.left = Math.min(displaySize / 2, rightLimit - halfWidth) + 'px';
-    $globeLabel.style.top = (displaySize * (0.5 - RADIUS) - displaySize * (6 / 225)) + 'px';
-    $globeLabel.style.transform = 'translate(-50%, -100%)';
-  } else if (!hasLocation) {
-    $globeLabel.innerHTML = 'Location<br>unknown';
-    $globeLabel.classList.add('show');
-    // 地球の中央に固定表示
-    $globeLabel.style.left = '50%';
-    $globeLabel.style.top = '50%';
-    $globeLabel.style.transform = 'translate(-50%, -50%)';
-    $globeLabel.style.textAlign = 'center';
-  } else {
-    $globeLabel.textContent = '';
-    $globeLabel.classList.remove('show');
-    $globeLabel.style.left = '';
-    $globeLabel.style.top = '';
-    $globeLabel.style.opacity = '';
+  // 場所の分からない映像のときは、地球の上に重ねて「Location unknown」と出す。
+  // そのとき札は現地時刻ごと隠れる（styles.css の .globe-unknown）
+  $globeUnknown.classList.toggle('show', !hasLocation);
+
+  // 札の地名。1行目（「,」の前）を大きく、残りは小さく淡く出す。
+  // 現地時刻は clock.js が同じ札の中に入れる
+  $globeLabel.textContent = '';
+  const name = hasLocation ? (locationName || '') : '';
+  if (name) {
+    const [main, ...rest] = name.split(/,\s*/);
+    // 長い名前は字を小さくして、札が広がりすぎないようにする
+    const base = main.length > 22 ? 14 : main.length > 18 ? 17 : 20;
+    $globeLabel.style.fontSize = (base * (displaySize / 225)) + 'px';
+    $globeLabel.append(main);
+    if (rest.length) {
+      const sub = document.createElement('span');
+      sub.className = 'globe-label-sub';
+      sub.textContent = rest.join(', ');
+      $globeLabel.append(sub);
+    }
   }
-  repositionCameraTime();
+  // 札の置き場所: 右は地球の右端（＝画面端の余白の線）にそろえ、下は柱が届く範囲のすぐ上。
+  // カメラは回り続けるので、札は場所を追わせず、ここに出したままにする
+  $globeTag.style.right = (displaySize * (0.5 - RADIUS)) + 'px';
+  $globeTag.style.bottom = (displaySize * (0.5 + RADIUS * (1 + PIN_LENGTH)) + TAG_GAP) + 'px';
+  tagMeasuredAt = -Infinity;
 
   if (!running) {
     running = true;
