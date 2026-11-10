@@ -15,7 +15,7 @@ import {
 } from './ui.js';
 import { updateGlobe } from './globe.js';
 import { updateCameraTime } from './clock.js';
-import { resetSwitchTimer } from './progress.js';
+import { resetSwitchTimer, holdSwitchTimer } from './progress.js';
 
 // YT embedがvideo切替時に必ず出すタイトル/再生ボタン/ロゴオーバーレイを覆い隠す時間。
 // PLAYING到達後、この秒数経つとintro UIが消えるので 'ready' とみなす。
@@ -176,6 +176,8 @@ async function waitForPreloadReady() {
 export async function switchVideo() {
   if (!state.ytApiReady || state.isSwitching) return;
   state.isSwitching = true;
+  // 進捗バーを0に戻し、次の映像が出るまで数えるのを止める（出たら performSwap が数え始める）
+  holdSwitchTimer();
 
   const $currentLayer = getLayer(state.activeLayer);
   const fromInfo = state.currentInfo;

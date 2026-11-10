@@ -18,7 +18,7 @@
 
 **🌍️🌍️🌍️Live Demo:** https://ubiquitous-o.github.io/Fernweh/ 🌍️🌍️🌍️
 
-A fullscreen web app that automatically cycles through YouTube live cameras at the top of every hour. Hosted on **GitHub Pages** with video data refreshed by **GitHub Actions**.
+A fullscreen web app that automatically cycles through YouTube live cameras — every minute by default, or at any interval you set. Hosted on **GitHub Pages** with video data refreshed by **GitHub Actions**.
 
 ## Controls
 
@@ -45,12 +45,12 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 - Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback); your location is only looked up once the clock & weather overlay is turned on
 - Randomized search queries with multiple patterns for maximum discovery (300+ locations, 50+ topics)
 - Clickable video title — links to original YouTube video, resumes on browser back
-- Settings panel: show or hide each overlay (clock & weather, local time & globe, live badge, video info), toggle fullscreen; choices are saved in the browser. Everything is shown by default except clock & weather
+- Settings panel: show or hide each overlay (clock & weather, local time & globe, live badge, video info), set how often the camera switches, toggle fullscreen; choices are saved in the browser. Everything is shown by default except clock & weather
 - Long channel names and video titles scroll sideways (marquee) instead of being cut off
 - "City, Country" location labels on globe (auto line-break at comma)
   - **Note:** Globe labels are best-effort — location detection relies on video titles, channel names, and AI extraction, so labels may be inaccurate or missing for some streams
 - Client-side video pool refresh every 2 hours (follows server-side updates)
-- Auto-switch at the top of each hour with progress bar
+- Auto-switch with progress bar — 1 minute after a camera comes on by default; pick an interval from 1 minute to 24 hours with the +/- buttons in the settings panel (applied when the panel closes)
 - Auto-retry on playback failures
 - Kiosk-friendly — Silkscreen bitmap font, cursor auto-hides, burn-in prevention
 
@@ -171,8 +171,8 @@ fernweh/
 │   │   ├── locations.js          # Runtime KNOWN_LOCATIONS dictionary fallback
 │   │   ├── ui.js                 # Info (with marquee) / loading / error / fullscreen toggle
 │   │   ├── entities.js           # Decodes HTML entities in titles (shared with scripts/)
-│   │   ├── settings.js           # Settings panel: overlay visibility toggles, saved in localStorage
-│   │   ├── progress.js           # Hourly switch timer + progress bar
+│   │   ├── settings.js           # Settings panel: overlay visibility toggles + switch interval, saved in localStorage
+│   │   ├── progress.js           # Switch timer (interval from settings) + progress bar
 │   │   ├── clock.js               # Local clock + camera local time
 │   │   ├── weather.js             # Geolocation → Open-Meteo 7-day forecast
 │   │   ├── globe.js               # Corner globe: realistic Earth seen from an orbiting camera, with a light pillar at the location
