@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fernweh</title>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="c23583e8-01e5-46bd-aa13-8d875e042c39"></script>
-<meta name="description" content="An ache for distant places. Fullscreen live cameras from around the world, cycling every hour with a 3D globe and weather overlay.">
+<meta name="description" content="An ache for distant places. Fullscreen live cameras from around the world, cycling automatically with a 3D globe and weather overlay.">
 <meta property="og:title" content="Fernweh">
-<meta property="og:description" content="An ache for distant places. Fullscreen live cameras from around the world, cycling every hour.">
+<meta property="og:description" content="An ache for distant places. Fullscreen live cameras from around the world, cycling automatically.">
 <meta property="og:url" content="https://ubiquitous-o.github.io/Fernweh/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://ubiquitous-o.github.io/Fernweh/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://ubiquitous-o.github.io/Fernweh/og-image.png">
 <meta name="twitter:title" content="Fernweh">
-<meta name="twitter:description" content="An ache for distant places. Fullscreen live cameras from around the world, cycling every hour.">
+<meta name="twitter:description" content="An ache for distant places. Fullscreen live cameras from around the world, cycling automatically.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
 <!-- 起動時の待ち時間短縮: 起動で必ず叩くホストの握手(DNS+TCP+TLS)を前倒し + 必須JSONを並行取得 -->
 <link rel="preconnect" href="https://www.youtube.com">
@@ -147,8 +147,8 @@
   <div class="ctrl-btn" id="btn-settings" title="Settings">⚙</div>
 </div>
 
-<!-- Settings panel（設定ボタンで開く。表示の切替は js/settings.js、選んだ内容はブラウザに保存される。
-     スイッチの初期状態は settings.js が入れる。既定は「Clock & weather」だけオフ） -->
+<!-- Settings panel（設定ボタンで開く。表示の切替と切り替えの間隔は js/settings.js、選んだ内容はブラウザに保存される。
+     スイッチと間隔の初期状態は settings.js が入れる。既定は「Clock & weather」だけオフ、間隔は1分） -->
 <div class="settings-panel" id="settings-panel">
   <div class="settings-title">Settings</div>
   <label class="settings-row">
@@ -168,6 +168,17 @@
     <input type="checkbox" data-setting="info" checked><span class="switch"></span>
   </label>
   <div class="settings-divider"></div>
+  <!-- 映像を切り替える間隔(分)。＋/−ボタンで選び、パネルを閉じたときに効く
+       （きざみは js/settings.js、範囲と既定は js/progress.js） -->
+  <div class="settings-row settings-interval">
+    <span>Switch every</span>
+    <span class="stepper">
+      <button type="button" class="stepper-btn" data-step="-1" aria-label="Shorter interval">-</button>
+      <span class="stepper-value" id="setting-interval" aria-live="polite"></span>
+      <span class="stepper-unit">min</span>
+      <button type="button" class="stepper-btn" data-step="1" aria-label="Longer interval">+</button>
+    </span>
+  </div>
   <label class="settings-row">
     <span>Fullscreen</span>
     <input type="checkbox" id="btn-fullscreen"><span class="switch"></span>

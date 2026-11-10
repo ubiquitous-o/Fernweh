@@ -658,6 +658,44 @@ body.settings-open .settings-panel {
 }
 .settings-row input:focus-visible + .switch { outline: 1px solid rgba(255, 255, 255, 0.6); outline-offset: 2px; }
 .settings-arrow { color: var(--text-dim); }
+/* 切り替えの間隔: −ボタン・数字・「min」・＋ボタン */
+.settings-interval { cursor: default; }
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.stepper-value {
+  min-width: 4ch;
+  letter-spacing: 1px;
+  text-align: right;
+  color: var(--text-primary);
+}
+.stepper-unit { color: var(--text-dim); }
+.stepper-btn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  font: inherit;
+  font-size: 11px;
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.stepper-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+.stepper-btn:focus-visible { outline: 1px solid rgba(255, 255, 255, 0.6); outline-offset: 2px; }
 
 /* --- 設定で隠したUI（settings.js が body にクラスを付ける） --- */
 body.hide-clock .clock-overlay,
