@@ -54,14 +54,20 @@ const ASCEND_ZOOM_POWER = 3;
 // 引く動きのうち、軌道の動きへ合流し始める時点（進行 0..1）。それまでは柱の方向へまっすぐ引く
 const ASCEND_MERGE_FROM = 0.15;
 // 光の柱: 長さ(地球の半径に対する比) / 軌道での太さ(半幅px、短辺600px基準) / 降りきるまでに太る倍率
-const BEAM_LENGTH = 0.3;
-const BEAM_PX = 1.6;
+const BEAM_LENGTH = 0.45;
+const BEAM_PX = 2.4;
 const BEAM_GROW = 1.5;
-// 柱へ入る動き: 光は飛び込みの最後の BEAM_ENTER_MS だけで視界を覆う（それまでは小さな光の点のまま）。
-// 柱はカメラからの距離に反比例して太く見える（BEAM_RUSH はその詰まり方の指数）。
-// BEAM_COVER は視界を覆いきったとみなす太さ（画面対角線比）
+// 柱の光の出入り: 飛び込みの最後（引くときは最初）の BEAM_ENTER_MS をかけて、光が太る（縮む）。
+// 太さは「一定の倍率で変わり続ける」形（対数補間）。BEAM_COVER は視界を覆ったとみなす太さ（画面対角線比）。
+//
+// 入るとき: 丸い光そのものを、画面よりずっと大きく（BEAM_ENTER_FULL、画面対角線比）なるまで太らせる。
+//   光は中心がいちばん明るく縁へなだらかに落ちるので、中心から端へ順に白くなっていく。
+//   進み方は「ゆっくり始まり、途中で速く、最後はなだらか」（S字）。加速したまま終わると、
+//   太さが跳ね上がったところで突然真っ白になって止まり、なめらかに見えない
+// 引くとき: BEAM_COVER の太さから縮む。BEAM_RUSH は進み方の偏り（大きいほど最初に一気に縮む）
 const BEAM_ENTER_MS = 1000;
-const BEAM_RUSH = 3;
+const BEAM_ENTER_FULL = 1.3;
+const BEAM_RUSH = 2.2;
 const BEAM_COVER = 0.8;
 // 柱の光の色（ほぼ白）と、その光で視界が満ちたときの明るさ（細い柱のときを1として）
 const BEAM_COLOR = [1.0, 0.98, 0.95];
@@ -108,6 +114,7 @@ const cam = {
   lon: 0,     // 直下点の経度(rad)。増えるとカメラが東へ進む
   zoom: 0,    // 0 = 軌道の高さ（地球全体が見える）.. 1 = 降りきった高さ（目的地の上空）
   plunge: 0,  // 0 = 柱は遠くの細い筋 .. 1 = 柱の中に入りきった（光が視界を覆う）
+  entering: false, // 柱へ入っていく途中か（光の広がり方が、引くときと違う）
   spin: 1,    // 軌道を進む速さの係数（飛び込み中は 0）
   follow: 1,  // 緯度を軌道に従わせる度合い。0 = lat を直接動かす（飛び込み中）.. 1 = 軌道どおり
   latHold: 0, // follow が 0 のとき基準にする緯度（上昇を始めたときの緯度）
@@ -161,6 +168,7 @@ function resetToOrbit() {
   cancelTweens();
   cam.zoom = 0;
   cam.plunge = 0;
+  cam.entering = false;
   cam.spin = 1;
   cam.follow = 1;
   beams = [];
@@ -187,12 +195,12 @@ function buildScene() {
 
   // 柱の太さ。遠くでは細い筋で、降りるにつれ少し太る
   const thin = BEAM_PX * unit * (1 + BEAM_GROW * cam.zoom);
-  // 柱へ入る: カメラから柱までの距離 dist が 1 → ほぼ0 へ詰まり、柱は 1/dist で太く見える。
-  // plunge が 1 のとき、ちょうど視界を覆いきる太さになるように距離の終点を決める
+  // 柱の光の太さ: 細い筋から、対数補間で太る（毎瞬おなじ倍率で変わっていく）。
+  // 入るときは画面よりずっと大きくなるまで太らせ、丸い光が中心から端へ順に画面を白くしていく。
+  // 引くときは、視界を覆う太さ（cover）から縮む
   const cover = BEAM_COVER * diag;
-  const distEnd = Math.pow(thin / cover, 1 / BEAM_RUSH);
-  const dist = Math.pow(1 - cam.plunge * (1 - distEnd), BEAM_RUSH);
-  const entering = thin / dist;
+  const full = cam.entering ? BEAM_ENTER_FULL * diag : cover;
+  const entering = thin * Math.pow(full / thin, cam.plunge);
   const covered = clamp01(entering / cover);
   // 柱が太く見えるほど光を WASH_LEVEL まで落として眩しさを抑える
   const bright = lerp(1, WASH_LEVEL, covered);
@@ -224,8 +232,10 @@ function buildScene() {
     }),
     beamColor: [BEAM_COLOR[0] * bright, BEAM_COLOR[1] * bright, BEAM_COLOR[2] * bright],
     beamCover: covered,
-    // 視界の大半が柱の光になったら、残りも光で満たして「中に入った」状態にする
-    fill: clamp01((covered - 0.55) / 0.45),
+    // 残りを光で満たして「中に入った」状態にする。
+    // 入るときは丸い光がほぼ画面を白くしきってからの、最後の仕上げだけ。
+    // 引くときは、視界の大半が光のあいだ
+    fill: cam.entering ? clamp01((cam.plunge - 0.96) / 0.04) : clamp01((covered - 0.55) / 0.45),
   };
 }
 
@@ -286,14 +296,20 @@ export function hideOrbit() {
 // ---------- カメラワーク ----------
 
 // 飛び込みの進行 u(0..1) に対する、各要素の進み具合。
-//   向き: 柱の真上へ回る動き。ease-out で、降下より先（DIVE_TURN_BY の時点）に終わる
+//   向き: 柱の真上へ回る動き。ease-out で、降下より先（DIVE_TURN_BY の時点）に終わる。
+//         減速しきって止まる（途中で打ち切ると、長い柱の先端の動きが急に止まって見える）
 //   高度: ease-out。出だしが速く、目的地の上空へ向けて減速する
-//   柱へ入る: 最後の BEAM_ENTER_MS だけで、光が一気に視界を覆う
-// 向きも高度も、減速しきる手前（DIVE_SETTLE）で終点に着くように ease-out の前半だけを使う
+//   柱へ入る: 最後の BEAM_ENTER_MS をかけて、光が太って視界を覆う（diveEnter）。
+//             引くときは、同じ時間をかけて縮む（leaveLight。最初に一気に縮む）
+// 高度は、減速しきる手前（DIVE_SETTLE）で終点に着くように ease-out の前半だけを使う
 const settle = (t, power) => easeOut(t * DIVE_SETTLE, power) / easeOut(DIVE_SETTLE, power);
-const diveTurn = (u) => settle(clamp01(u / DIVE_TURN_BY), EASE_POWER);
+const diveTurn = (u) => easeOut(clamp01(u / DIVE_TURN_BY), EASE_POWER);
 const diveZoom = (u) => settle(u, ZOOM_EASE_POWER);
-const divePlunge = (u, ms) => Math.pow(clamp01(1 - ((1 - u) * ms) / BEAM_ENTER_MS), 2);
+const diveEnter = (u, ms) => {
+  const t = clamp01(1 - ((1 - u) * ms) / BEAM_ENTER_MS);
+  return t * t * (3 - 2 * t);
+};
+const leaveLight = (e, ms) => Math.pow(clamp01(1 - (e * ms) / BEAM_ENTER_MS), BEAM_RUSH);
 
 // location（[緯度, 経度]。不明なら null）に、光の柱をふわっと立ち上げる。
 // 根元から伸びながら明るくなる。カメラは軌道を回ったまま動かさない。
@@ -336,6 +352,7 @@ export async function diveTo(location, ms = DIVE_MS) {
   const appear0 = beam.appear, rise0 = beam.rise;
 
   const lon0 = cam.lon, lat0 = cam.lat, zoom0 = cam.zoom, plunge0 = cam.plunge;
+  cam.entering = true;
   // 軌道を進む動きは急に止めず、惰性で少し流れてから目的地へ向かう
   const drift = ORBIT_SPEED * cam.spin;
   const DRIFT_TAU = 0.5;
@@ -350,7 +367,7 @@ export async function diveTo(location, ms = DIVE_MS) {
     cam.lon = lon0 + driftAt(u * ms / 1000) + turn * turned;
     cam.lat = lerp(lat0, lat1, turned);
     cam.zoom = lerp(zoom0, 1, diveZoom(u));
-    cam.plunge = lerp(plunge0, 1, divePlunge(u, ms));
+    cam.plunge = lerp(plunge0, 1, diveEnter(u, ms));
     // 柱がまだ立ちきっていなければ、序盤のうちに立ちきる
     const grown = clamp01(u * 6);
     beam.appear = lerp(appear0, 1, grown);
@@ -386,6 +403,7 @@ export function ascend() {
   cam.latHold = lat0;
   cam.zoom = 1;
   cam.plunge = 1;
+  cam.entering = false;
   cam.spin = 0;
   cam.follow = 0;
   // 軌道には、いまの緯度にいちばん近い位置から合流する（緯度の動きがいちばん小さくて済む）
@@ -398,7 +416,7 @@ export function ascend() {
     // 引く: 引き始めが速く、軌道の高さへ向けて長くなだらかに減速する
     cam.zoom = Math.pow(1 - e, ASCEND_ZOOM_POWER);
     // 光: 突入で光に入る動きを逆向きにたどる（引き始めに縮んで柱に戻る）
-    cam.plunge = divePlunge(1 - e, ASCEND_MS);
+    cam.plunge = leaveLight(e, ASCEND_MS);
     // 軌道へ合流: はじめはまっすぐ引き、途中から軌道の動き（進む速さと緯度）へなめらかに移る。
     // 始まりも終わりも速さの変化が 0 なので、上がりきった瞬間から軌道の動きそのものになる
     const t = clamp01((e - ASCEND_MERGE_FROM) / (1 - ASCEND_MERGE_FROM));

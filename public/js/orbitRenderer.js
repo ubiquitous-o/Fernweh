@@ -127,7 +127,12 @@ const EARTH_FRAGMENT = `
     for (int i = 0; i < ${MAX_BEAMS}; i++) {
       if (u_beamAlpha[i] > 0.0) {
         vec2 ab = u_beamB[i] - u_beamA[i];
-        float along = dot(gl_FragCoord.xy - u_beamA[i], ab) / max(dot(ab, ab), 0.0001);
+        // 画面上の柱の長さと向き。真上から見ると長さはほぼ 0 になるので、0 で割らないよう下限を置く
+        float len = max(length(ab), 0.001);
+        vec2 dir = ab / max(length(ab), 0.000001);
+        vec2 rel = gl_FragCoord.xy - u_beamA[i];
+        // 柱に沿った位置（根元 0 → 先端 1）
+        float along = dot(rel, dir) / len;
         // 柱へ入るときは上下に伸ばす（端の丸みを見せず、縦の光の帯のまま視界を覆う）
         float reach = 1.0 + 8.0 * u_beamCover;
         float t = clamp(along, -3.0 * u_beamCover, reach);
@@ -139,14 +144,22 @@ const EARTH_FRAGMENT = `
         float glow = 0.2 * exp(-1.6 * max(x - 0.6, 0.0));
         // 根元には小さな光だまり
         float foot = 0.5 * exp(-distance(gl_FragCoord.xy, u_beamA[i]) / (w * 1.6 + 1.5));
-        // 先端は端を見せずに宇宙へ溶けていく。ただし柱を真上から見ているとき（画面上の長さが
-        // 太さより短い）は丸い光として見えるので、溶かさない
-        float endOn = 1.0 - smoothstep(1.0, 3.0, length(ab) / w);
-        float tip = mix(1.0 - smoothstep(0.25, 0.95, along / reach), 1.0, endOn);
+        // 先端は端を見せずに宇宙へ溶けていく。
+        // ただし視線が柱を斜めに貫くと、このピクセルには柱のいろいろな高さの部分が重なって見える。
+        // 太さの数倍ぶん（柱の長さを 1 とした span）だけ根元寄りの明るさを使う。
+        // 横から見ると span は小さく、従来どおり先端が溶ける。真上から見ると画面上の長さが 0 に近づいて
+        // span が大きくなり、全体が根元の明るさ = 丸い光になる。その間は連続して変わるので、
+        // 近づくときに描き方が切り替わって見えることがない
+        float span = 2.5 * w / len;
+        float tip = 1.0 - smoothstep(0.25, 0.95, max(along - span, 0.0) / reach);
         // 柱は地表より外にあるので、隠れるのは地球の真裏に回った部分だけ
-        // （奥行きが負で、かつ地球の円の内側に重なるところ）
-        float zb = mix(u_beamZ[i].x, u_beamZ[i].y, t);
-        float rb = length(nearest - u_center) / u_radius;
+        // （奥行きが負で、かつ地球の円の内側に重なるところ）。
+        // 判定は本来の柱の範囲（根元 0 .. 先端 1）で行う。柱へ入るときは描画上 t を根元より下や
+        // 先端より先へ伸ばしているが、その値のまま奥行きを外挿すると、根元より下が「地球の裏」と
+        // 誤判定されて、光の半分が消えてしまう
+        float tOnBeam = clamp(t, 0.0, 1.0);
+        float zb = mix(u_beamZ[i].x, u_beamZ[i].y, tOnBeam);
+        float rb = length(u_beamA[i] + ab * tOnBeam - u_center) / u_radius;
         float visible = max(smoothstep(-0.02, 0.02, zb), smoothstep(0.985, 1.0, rb));
         beam = max(beam, clamp((core + glow) * tip + foot, 0.0, 1.0) * visible * u_beamAlpha[i]);
       }
