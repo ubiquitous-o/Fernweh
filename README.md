@@ -32,7 +32,8 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 
 ## Features
 
-- Orbit transition between live streams: the view rises to an inclined satellite orbit around a realistic whole Earth among the stars (real-time day/night terminator, clouds with shadows, mountain relief, city lights, atmospheric scattering), then dives into a pillar of light standing at the next camera's location (WebGL)
+- Orbit transition between live streams: the view rises to an inclined satellite orbit around a realistic whole Earth (real-time day/night terminator, clouds with shadows, mountain relief, city lights, atmospheric scattering), then dives into a pillar of light standing at the next camera's location (WebGL)
+- Realistic sky behind the Earth: a star field and the Milky Way that turn as the camera orbits, with the Sun, the Moon and the five naked-eye planets at their real positions (the Moon shows its real phase)
 - Interactive 3D globe showing camera location ([COBE](https://github.com/shuding/cobe))
 - Location detection from video title/channel/description ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
 - Dictionary-first optimization: skips Gemini API for known locations, saving RPD quota
@@ -67,7 +68,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
   → YouTube IFrame Player API for playback
   → COBE globe with pin-tracking label
   → Camera local time + time difference (from timezone in videos.json)
-  → Orbit view (WebGL textured Earth + stars) with a dive into the camera location during loading / switching
+  → Orbit view (WebGL textured Earth + stars, Sun and Moon) with a dive into the camera location during loading / switching
   → Geolocation API / IP API → Open-Meteo for weather
 
 [Location Detection (build-time)]
@@ -158,7 +159,7 @@ fernweh/
 │   │   ├── state.js              # Shared mutable state
 │   │   ├── dom.js                # Cached DOM element refs
 │   │   ├── orbit.js              # Orbit-view veil: camera choreography (ascend / dive to location)
-│   │   ├── orbitRenderer.js      # WebGL renderer for the orbit view: stars, textured Earth, light pillars
+│   │   ├── orbitRenderer.js      # WebGL renderer for the orbit view: stars, Milky Way, Sun, Moon, planets, textured Earth, light pillars
 │   │   ├── orbitTexturePreviews.js # Tiny embedded Earth textures shown until the full images load
 │   │   ├── cobe.js               # Loader for the COBE globe library (corner globe)
 │   │   ├── glitch.js             # SVG-filter video glitch animation

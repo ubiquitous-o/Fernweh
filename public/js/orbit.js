@@ -2,6 +2,9 @@
 //   - 星空の中に地球が丸ごと浮かんでいる。カメラは傾いた衛星軌道を回っていて、
 //     地球が回りながら北半球と南半球をゆっくり行き来して見える（軌道ビュー）。
 //     昼夜の境目は実際の時刻どおり。夜側には街明かりが見える。
+//   - カメラはいつも地球を向いているので、軌道を回るにつれて後ろの空（星・天の川）が流れていく。
+//     太陽・月・惑星（水星・金星・火星・木星・土星）は実際の位置にあり、地球の向こう側に来たときに見える
+//     （月は実際の満ち欠け）。
 //   - 映像が決まると、軌道を回ったまま、そのライブカメラの場所に光の柱がふわっと立ち上がる。
 //     少し間をおいてから、カメラが柱の真上へ向かい、そのまま上から柱の中へ降りる。
 //     中に入った瞬間に、呼び出し側がグリッチで映像を出す。
@@ -68,6 +71,10 @@ const BEAM_COLOR = [1.0, 0.98, 0.95];
 const WASH_LEVEL = 0.95;
 // 降りるにつれて地表がうっすら霞む度合いの上限（大気の中に入った感じを出す）
 const HAZE_MAX = 0.25;
+// 空（星・天の川・月・太陽）を見るカメラの縦の画角(度)。
+// カメラは軌道を回りながらいつも地球を向いているので、回るにつれて空全体が流れていく。
+// 画角が狭いほど空は大きく写り、速く流れて見える
+const SKY_FOV = 60;
 
 const lerp = (a, b, t) => a + (b - a) * t;
 const clamp01 = (t) => Math.min(1, Math.max(0, t));
@@ -103,6 +110,103 @@ function subsolarPoint(date) {
   const declination = rad(-23.44) * Math.cos((2 * Math.PI * (dayOfYear + 10)) / 365);
   const utcHours = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
   return [declination, rad(-15 * (utcHours - 12))];
+}
+
+// 2000年1月1日正午(UTC)からの日数
+const daysSinceJ2000 = (date) => date.getTime() / 86400000 + 2440587.5 - 2451545.0;
+
+// グリニッジ恒星時(rad)。天球（星の座標）が地球に対してどれだけ回っているか。
+// 赤経 α の星は、経度 α - 恒星時 の地点の真上にある
+function siderealAngle(date) {
+  return rad((280.46061837 + 360.98564736629 * daysSinceJ2000(date)) % 360);
+}
+
+// 地球の中心から見た月の向き（地球座標の単位ベクトル）。略算式で、誤差は1度以内
+function moonDirection(date) {
+  const T = daysSinceJ2000(date) / 36525;
+  const s = (deg) => Math.sin(rad(deg));
+  // 黄経・黄緯(度)
+  const lon = 218.32 + 481267.881 * T
+    + 6.29 * s(135.0 + 477198.87 * T) - 1.27 * s(259.3 - 413335.36 * T)
+    + 0.66 * s(235.7 + 890534.22 * T) + 0.21 * s(269.9 + 954397.74 * T)
+    - 0.19 * s(357.5 + 35999.05 * T) - 0.11 * s(186.5 + 966404.03 * T);
+  const lat = 5.13 * s(93.3 + 483202.02 * T) + 0.28 * s(228.2 + 960400.89 * T)
+    - 0.28 * s(318.3 + 6003.15 * T) - 0.17 * s(217.6 - 407332.21 * T);
+  // 黄道座標 → 赤道座標（赤経・赤緯）
+  const l = rad(lon), b = rad(lat), tilt = rad(23.439);
+  const x = Math.cos(b) * Math.cos(l);
+  const y = Math.cos(tilt) * Math.cos(b) * Math.sin(l) - Math.sin(tilt) * Math.sin(b);
+  const z = Math.sin(tilt) * Math.cos(b) * Math.sin(l) + Math.cos(tilt) * Math.sin(b);
+  return dirFor(Math.asin(z), Math.atan2(y, x) - siderealAngle(date));
+}
+
+// 惑星（肉眼で見える5つ）と地球の軌道要素: [軌道の大きさ(au), つぶれ具合, 傾き, 平均黄経, 近日点の黄経, 昇交点の黄経](角度は度)。
+// 1行目が2000年の値、2行目が100年あたりの変化（JPLの略算用の要素。1800〜2050年で誤差は1度未満）。
+// mag: 太陽と地球からそれぞれ1auの距離にあるとしたときの等級 / temp: 色（0 = 橙 .. 1 = 青白。星と同じ尺度）
+const PLANETS = [
+  { name: 'Mercury', mag: 1.0, temp: 0.42,
+    orbit: [[0.38709927, 0.20563593, 7.00497902, 252.25032350, 77.45779628, 48.33076593],
+      [0.00000037, 0.00001906, -0.00594749, 149472.67411175, 0.16047689, -0.12534081]] },
+  { name: 'Venus', mag: -4.4, temp: 0.47,
+    orbit: [[0.72333566, 0.00677672, 3.39467605, 181.97909950, 131.60246718, 76.67984255],
+      [0.00000390, -0.00004107, -0.00078890, 58517.81538729, 0.00268329, -0.27769418]] },
+  { name: 'Mars', mag: -1.52, temp: 0.0,
+    orbit: [[1.52371034, 0.09339410, 1.84969142, -4.55343205, -23.94362959, 49.55953891],
+      [0.00001847, 0.00007882, -0.00813131, 19140.30268499, 0.44441088, -0.29257343]] },
+  { name: 'Jupiter', mag: -9.4, temp: 0.4,
+    orbit: [[5.20288700, 0.04838624, 1.30439695, 34.39644051, 14.72847983, 100.47390909],
+      [-0.00011607, -0.00013253, -0.00183714, 3034.74612775, 0.21252668, 0.20469106]] },
+  { name: 'Saturn', mag: -8.88, temp: 0.32,
+    orbit: [[9.53667594, 0.05386179, 2.48599187, 49.95424423, 92.59887831, 113.66242448],
+      [-0.00125060, -0.00050991, 0.00193609, 1222.49362201, -0.41897216, -0.28867794]] },
+];
+const EARTH_ORBIT = [[1.00000261, 0.01671123, -0.00001531, 100.46457166, 102.93768193, 0.0],
+  [0.00000562, -0.00004392, -0.01294668, 35999.37244981, 0.32327364, 0.0]];
+
+// 軌道要素から、太陽を中心とした位置（黄道座標、au）を求める。T は2000年からの経過（100年単位）
+function orbitPosition(orbit, T) {
+  const [a, e, tilt, meanLon, periLon, nodeLon] = orbit[0].map((v, i) => v + orbit[1][i] * T);
+  // 軌道上の位置: 平均近点角からケプラー方程式を解く
+  const M = rad((((meanLon - periLon) % 360) + 540) % 360 - 180);
+  let E = M;
+  for (let i = 0; i < 8; i++) E -= (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+  const xp = a * (Math.cos(E) - e), yp = a * Math.sqrt(1 - e * e) * Math.sin(E);
+  // 軌道面 → 黄道座標
+  const w = rad(periLon - nodeLon), node = rad(nodeLon), inc = rad(tilt);
+  const cw = Math.cos(w), sw = Math.sin(w), cn = Math.cos(node), sn = Math.sin(node);
+  const ci = Math.cos(inc), si = Math.sin(inc);
+  return [
+    (cw * cn - sw * sn * ci) * xp + (-sw * cn - cw * sn * ci) * yp,
+    (cw * sn + sw * cn * ci) * xp + (-sw * sn + cw * cn * ci) * yp,
+    sw * si * xp + cw * si * yp,
+  ];
+}
+
+// 地球から見た惑星の向き（天球座標の単位ベクトル。星と同じ座標）と、見かけの等級。
+// 惑星は星のあいだをゆっくりとしか動かないので、1分ごとに計算し直せば十分
+let planetCache = { at: -Infinity, list: [] };
+function planets(date) {
+  if (Math.abs(date.getTime() - planetCache.at) < 60000) return planetCache.list;
+  const T = daysSinceJ2000(date) / 36525;
+  const earth = orbitPosition(EARTH_ORBIT, T);
+  const tilt = rad(23.439);
+  const list = PLANETS.map((p) => {
+    const pos = orbitPosition(p.orbit, T);
+    const x = pos[0] - earth[0], y = pos[1] - earth[1], z = pos[2] - earth[2];
+    const fromEarth = Math.hypot(x, y, z), fromSun = Math.hypot(pos[0], pos[1], pos[2]);
+    const sunToEarth = Math.hypot(earth[0], earth[1], earth[2]);
+    const lit = 0.5 + (fromSun * fromSun + fromEarth * fromEarth - sunToEarth * sunToEarth) / (4 * fromSun * fromEarth);
+    // 黄道座標 → 赤道座標 → 天球上の向き（dirFor と同じ並び: 赤経90度 / 北 / 赤経0度）
+    const yq = Math.cos(tilt) * y - Math.sin(tilt) * z, zq = Math.sin(tilt) * y + Math.cos(tilt) * z;
+    return {
+      dir: [yq / fromEarth, zq / fromEarth, x / fromEarth],
+      // 遠いほど暗い。内側の惑星は、地球から見て欠けているぶんも暗くなる（lit = 照らされて見える割合）
+      mag: p.mag + 5 * Math.log10(fromSun * fromEarth) - 2.5 * Math.log10(Math.max(lit, 0.02)),
+      temp: p.temp,
+    };
+  });
+  planetCache = { at: date.getTime(), list };
+  return list;
 }
 
 // ---------- カメラの状態（描画とは独立。WebGLが無くても時間どおり進む） ----------
@@ -206,11 +310,15 @@ function buildScene() {
   // 地球はいつも画面中央。カメラが柱の真上に着くと、柱は先端をこちらへ向けて画面中央に来る
   const cx = w / 2, cy = h / 2;
 
-  const [sunLat, sunLon] = subsolarPoint(new Date());
+  const date = new Date();
+  const [sunLat, sunLon] = subsolarPoint(date);
 
   return {
-    // カメラが軌道を進むと星空も流れる。柱の光に包まれるほど星を沈める
-    pan: [cam.lon * 0.15, cam.lat * 0.3],
+    // 空はカメラの向きから透視投影で描く（カメラが軌道を進むと空全体が流れる）。
+    // 柱の光に包まれるほど星を沈める
+    sky: { focal: (h / 2) / Math.tan(rad(SKY_FOV / 2)), siderealAngle: siderealAngle(date) },
+    moon: moonDirection(date),
+    planets: planets(date),
     starDim: 1 - 0.8 * covered,
     earth: { cx, cy, radius, lat: cam.lat, lon: cam.lon },
     sun: dirFor(sunLat, sunLon),
