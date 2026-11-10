@@ -342,16 +342,16 @@ html, body {
 }
 .globe-container.show { opacity: 0.95; }
 /* 札: 地名と現地時刻をまとめた小さな表示。地球の上、画面端の余白の線に右をそろえて置く
-   （位置は js/globe.js が決める）。中身が何も無いときは出さない */
+   （位置は js/globe.js が決める）。中身が何も無いときは出さない。
+   パネルの見た目（地・角の丸み・余白。枠線なし）は右上の時計（.clock-overlay）に合わせてある */
 .globe-tag {
   position: absolute;
   z-index: 1;
   width: max-content;
-  padding: 6px 10px 7px;
+  padding: var(--clock-padding-y) var(--clock-padding-x);
   text-align: right;
   background: var(--overlay-bg);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 4px;
+  border-radius: 8px;
   backdrop-filter: blur(6px);
 }
 .globe-tag:not(:has(.globe-label:not(:empty), .camera-time.show)) {
@@ -383,7 +383,7 @@ html, body {
   z-index: 1;
   display: none;
   width: max-content;
-  padding: 5px 9px 6px;
+  padding: 6px 10px 7px;
   font-size: calc(var(--globe-label-font) * 0.7);
   font-weight: 600;
   letter-spacing: 2px;
@@ -392,8 +392,7 @@ html, body {
   text-transform: uppercase;
   color: #fff;
   background: var(--overlay-bg);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 4px;
+  border-radius: 8px;
   backdrop-filter: blur(6px);
 }
 .globe-unknown.show { display: block; }
