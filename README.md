@@ -170,6 +170,7 @@ fernweh/
 │   │   ├── videoPool.js          # videos.json pool, watched-list, fetchNext
 │   │   ├── locations.js          # Runtime KNOWN_LOCATIONS dictionary fallback
 │   │   ├── ui.js                 # Info (with marquee) / loading / error / fullscreen toggle
+│   │   ├── entities.js           # Decodes HTML entities in titles (shared with scripts/)
 │   │   ├── settings.js           # Settings panel: overlay visibility toggles, saved in localStorage
 │   │   ├── progress.js           # Hourly switch timer + progress bar
 │   │   ├── clock.js               # Local clock + camera local time
