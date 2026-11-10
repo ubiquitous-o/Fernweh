@@ -1,6 +1,7 @@
 // COBEで3Dグローブを描画。動画切替ごとに位置ピン+ラベルを更新。
 import { $globe, $globeLabel, globeRef } from './dom.js';
 import { repositionCameraTime } from './clock.js';
+import { cobeReady } from './cobe.js';
 
 const GLOBE_THETA = 0.15; // 固定の微チルト — 北極を上に保つ
 
@@ -8,9 +9,7 @@ let globeInstance = null;
 let createGlobeFn = null;
 
 // COBEをESMでプリロード
-import('https://esm.sh/cobe@0.6.3')
-  .then(m => { createGlobeFn = m.default; })
-  .catch(e => console.warn('Globe library failed to load:', e));
+cobeReady.then((fn) => { createGlobeFn = fn; });
 
 function getDisplaySize() {
   return $globe.offsetWidth;

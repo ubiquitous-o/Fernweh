@@ -98,9 +98,16 @@ html, body {
   filter: url(#video-glitch-filter);
   will-change: filter;
 }
+/* .video-frame と同じ位置・大きさ（cover）で、軌道ビューの幕(z-index:3)より上に重ねる。
+   こうすると幕が出ているあいだもグリッチが隠れず、幕ごとグリッチが掛かる。
+   backdrop-filter の効く範囲は自分の箱の中だけなので、はみ出しのクリップは要らない */
 .glitch-backdrop {
   position: absolute;
-  inset: 0;
+  left: calc(50vw - max(50vw, 100vh * 8 / 9));
+  top: calc(50vh - max(50vh, 100vw * 9 / 32));
+  width: max(100vw, calc(100vh * 16 / 9));
+  height: max(100vh, calc(100vw * 9 / 16));
+  z-index: 4;
   pointer-events: none;
 }
 .glitch-backdrop.active {
@@ -108,21 +115,31 @@ html, body {
   backdrop-filter: url(#video-glitch-filter);
 }
 
-/* --- TV Noise overlay --- */
-/* 動画がビューポート全面をcoverするので、砂嵐もビューポート全面に敷く。 */
-.noise-overlay {
+/* --- 軌道ビューの幕（起動時・切替時） --- */
+/* 動画がビューポート全面をcoverするので、幕もビューポート全面に敷く。
+   星空と地球は1枚のキャンバスに描く（js/orbit.js / js/orbitRenderer.js）。 */
+.orbit-overlay {
   position: absolute;
   inset: 0;
+  /* WebGLが使えない環境でも黒い幕として機能させる */
+  background: #000;
   z-index: 3;
   opacity: 0;
   pointer-events: none;
   /* キャンバスがレイアウト外に染み出ないよう保険 */
   overflow: hidden;
+  /* 幕の出入りは、グリッチ(0.6秒)に対して入りと出が鏡映しになるようにする（orbit.js と揃える）。
+     出（突入して映像が出るとき）: グリッチがいちばん強い最初の0.3秒で幕が消える。
+     カーブは入りと対称になる ease-in-out */
+  transition: opacity 0.3s ease-in-out;
 }
-.noise-overlay.active {
+.orbit-overlay.active {
   opacity: 1;
+  /* 入り（映像から引くとき）: 出の逆再生。最初の0.3秒は映像の上でグリッチだけが育ち、
+     グリッチがいちばん強くなる後半の0.3秒で幕が重なる（0.3秒待ってから0.3秒でフェード） */
+  transition: opacity 0.3s ease-in-out 0.3s;
 }
-.noise-overlay canvas {
+.orbit-overlay canvas {
   width: 100%; height: 100%;
 }
 
@@ -461,13 +478,13 @@ a.ctrl-btn { text-decoration: none; }
   50% { opacity: 1; }
 }
 
-/* --- Noise期間中のオーバーレイ非表示 ---
+/* --- 軌道ビューの幕が出ているあいだのオーバーレイ非表示 ---
    オーバーレイ自身のopacity/transform transitionを使ってフェードout/in。
    初回表示と同じ挙動: info-overlayだけ translateY(8px) で下にスライド。 */
-.noise-hidden {
+.hide-during-orbit {
   opacity: 0 !important;
 }
-.info-overlay.noise-hidden {
+.info-overlay.hide-during-orbit {
   transform: translateY(8px) !important;
 }
 

@@ -31,7 +31,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 
 ## Features
 
-- TV static noise transition between live streams (WebGL shader)
+- Orbit transition between live streams: the view rises to an inclined satellite orbit around a realistic whole Earth among the stars (real-time day/night terminator, city lights, atmosphere), then dives into a pillar of light standing at the next camera's location (WebGL)
 - Interactive 3D globe showing camera location ([COBE](https://github.com/shuding/cobe))
 - Location detection from video title/channel/description ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
 - Dictionary-first optimization: skips Gemini API for known locations, saving RPD quota
@@ -64,7 +64,7 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
   → YouTube IFrame Player API for playback
   → COBE globe with pin-tracking label
   → Camera local time + time difference (from timezone in videos.json)
-  → WebGL shader TV noise during loading
+  → Orbit view (WebGL textured Earth + stars) with a dive into the camera location during loading / switching
   → Geolocation API / IP API → Open-Meteo for weather
 
 [Location Detection (build-time)]
@@ -149,14 +149,18 @@ fernweh/
 │   ├── index.html                # DOM + SVG glitch filter, loads css/styles.css and js/main.js
 │   ├── css/
 │   │   └── styles.css            # All styling
+│   ├── img/                      # Earth textures for the orbit view (day / night lights / water mask)
 │   ├── js/                       # ESM modules (no bundler; served as separate files)
 │   │   ├── main.js               # Entry — orchestrates init, dynamically loads YT IFrame API
 │   │   ├── state.js              # Shared mutable state
 │   │   ├── dom.js                # Cached DOM element refs
-│   │   ├── noise.js              # WebGL TV-noise shader
+│   │   ├── orbit.js              # Orbit-view veil: camera choreography (ascend / dive to location)
+│   │   ├── orbitRenderer.js      # WebGL renderer for the orbit view: stars, textured Earth, light pillars
+│   │   ├── orbitTexturePreviews.js # Tiny embedded Earth textures shown until the full images load
+│   │   ├── cobe.js               # Loader for the COBE globe library (corner globe)
 │   │   ├── glitch.js             # SVG-filter video glitch animation
 │   │   ├── player.js             # Single YT.Player wrapper + loadVideoById
-│   │   ├── transitions.js        # switchVideo / resumeVideo flow (pre-glitch → noise → post-glitch)
+│   │   ├── transitions.js        # switchVideo / resumeVideo flow (pre-glitch → orbit ascend / dive → post-glitch)
 │   │   ├── videoPool.js          # videos.json pool, watched-list, fetchNext
 │   │   ├── locations.js          # Runtime KNOWN_LOCATIONS dictionary fallback
 │   │   ├── ui.js                 # Info / loading / error / fullscreen toggle
@@ -191,3 +195,7 @@ fernweh/
 ```
 
 The frontend uses native ES modules (`<script type="module">`) — no build step. Files in `public/` are uploaded verbatim by `deploy-pages.yml`, so adding a new module is just dropping it into `public/js/` and importing it.
+
+## Credits
+
+- Earth textures in `public/img/` are NASA imagery (Blue Marble, Black Marble / Earth at Night), taken from the example assets of [three-globe](https://github.com/vasturiano/three-globe) (MIT). The night-lights and water-mask images were resized to 2048×1024.

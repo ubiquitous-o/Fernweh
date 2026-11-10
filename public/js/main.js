@@ -1,6 +1,6 @@
 // エントリーポイント：各モジュールを統合して初期化する。
 import { state } from './state.js';
-import { startNoise } from './noise.js';
+import { showOrbit } from './orbit.js';
 import { switchVideo, resumeVideo, initialSwitch } from './transitions.js';
 import { updateClock } from './clock.js';
 import { repositionCameraTime } from './clock.js';
@@ -94,5 +94,5 @@ setInterval(updateClock, 10000);
 initWeather();
 setInterval(shiftOverlays, 10 * 60 * 1000);
 
-// 初回ロード時から砂嵐表示（動画ロード中も覆う）
-startNoise();
+// 初回ロード時から軌道ビューの幕を表示（動画ロード中も覆う）
+showOrbit();

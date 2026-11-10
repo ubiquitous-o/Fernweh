@@ -5,18 +5,18 @@ import {
   $loading, $error, $errorMsg, $btnInfo, $globe,
 } from './dom.js';
 
-// 砂嵐期間中にぱっと隠す対象オーバーレイ
+// 軌道ビューの幕が出ているあいだ、ぱっと隠す対象オーバーレイ
 // （時計＋天気の clock-overlay は常時表示のままにする）
 const $hideableOverlays = [$liveBadge, $info, $globe, $cameraTime];
 
-// 砂嵐開始タイミングで瞬時に非表示
+// 幕が出るタイミングで瞬時に非表示
 export function hideOverlaysInstant() {
-  $hideableOverlays.forEach((el) => el?.classList.add('noise-hidden'));
+  $hideableOverlays.forEach((el) => el?.classList.add('hide-during-orbit'));
 }
 
-// 砂嵐停止タイミングで瞬時に再表示
+// 幕が消えるタイミングで瞬時に再表示
 export function showOverlaysInstant() {
-  $hideableOverlays.forEach((el) => el?.classList.remove('noise-hidden'));
+  $hideableOverlays.forEach((el) => el?.classList.remove('hide-during-orbit'));
 }
 
 export function showInfo(data) {

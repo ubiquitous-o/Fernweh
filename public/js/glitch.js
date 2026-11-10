@@ -78,7 +78,7 @@ function resetFilterAttrs() {
   $offsetB.setAttribute('dx', 0);
 }
 
-// direction: 'up' = 0→max（前奏、砂嵐に向けて強くなる）/ 'down' = max→0（後奏、強い状態から弱まる）
+// direction: 'up' = 0→max（前奏、軌道ビューの幕に向けて強くなる）/ 'down' = max→0（後奏、強い状態から弱まる）
 function animate(startTime, direction) {
   const now = performance.now();
   const t = (now - startTime) / GLITCH_DURATION;

@@ -16,12 +16,16 @@
 <meta name="twitter:title" content="Fernweh">
 <meta name="twitter:description" content="An ache for distant places. Fullscreen live cameras from around the world, cycling every hour.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
-<!-- 砂嵐短縮: 起動で必ず叩くホストの握手(DNS+TCP+TLS)を前倒し + 必須JSONを並行取得 -->
+<!-- 起動時の待ち時間短縮: 起動で必ず叩くホストの握手(DNS+TCP+TLS)を前倒し + 必須JSONを並行取得 -->
 <link rel="preconnect" href="https://www.youtube.com">
 <link rel="preconnect" href="https://s.ytimg.com">
 <link rel="preconnect" href="https://i.ytimg.com">
 <link rel="preconnect" href="https://www.google.com">
 <link rel="preload" href="videos.json" as="fetch" crossorigin>
+<!-- 軌道ビューの地球の画像を、JSの読み込みと並行して先に取り始める -->
+<link rel="preload" href="img/earth-day.jpg" as="image">
+<link rel="preload" href="img/earth-night.jpg" as="image">
+<link rel="preload" href="img/earth-water.jpg" as="image">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -36,9 +40,6 @@
   <div class="video-layer hidden" id="layer-b">
     <div id="player-b"></div>
   </div>
-  <!-- Chromeはcross-origin iframeに filter:url() を適用しない（Chrome 151で確認）。
-       このオーバーレイの backdrop-filter 経由なら動画ピクセルにもフィルタが乗る。 -->
-  <div class="glitch-backdrop" id="glitch-backdrop"></div>
 </div>
 
 <!-- SVG glitch filter (Shadertoy XtK3W3 inspired: turbulence-driven horizontal displacement + RGB split) -->
@@ -91,10 +92,16 @@
   </defs>
 </svg>
 
-<!-- TV Noise -->
-<div class="noise-overlay" id="noise-overlay">
-  <canvas id="noise-canvas"></canvas>
+<!-- 軌道ビューの幕（起動時・切替時。星空の中の地球へ飛び込む演出。js/orbit.js）。
+     ページを開いた瞬間から見せるため、最初から active にしておく -->
+<div class="orbit-overlay active" id="orbit-overlay">
+  <canvas id="orbit-canvas"></canvas>
 </div>
+
+<!-- グリッチ用オーバーレイ。Chromeはcross-origin iframeに filter:url() を適用しない（Chrome 151で確認）が、
+     このオーバーレイの backdrop-filter 経由なら動画ピクセルにもフィルタが乗る。
+     軌道ビューの幕より上に置く: 幕が重なっていてもグリッチが隠れず、光や地球ごとグリッチする -->
+<div class="glitch-backdrop" id="glitch-backdrop"></div>
 
 <!-- Vignette -->
 <div class="vignette"></div>

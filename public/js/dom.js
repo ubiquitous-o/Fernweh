@@ -3,8 +3,8 @@ export const $videoFrame = document.getElementById('video-frame');
 export const $layerA = document.getElementById('layer-a');
 export const $layerB = document.getElementById('layer-b');
 export function getLayer(id) { return id === 'a' ? $layerA : $layerB; }
-export const $noiseOverlay = document.getElementById('noise-overlay');
-export const $noiseCanvas = document.getElementById('noise-canvas');
+export const $orbitOverlay = document.getElementById('orbit-overlay');
+export const $orbitCanvas = document.getElementById('orbit-canvas');
 
 export const $info = document.getElementById('info');
 export const $infoTitle = document.getElementById('info-title');
