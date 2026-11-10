@@ -34,17 +34,11 @@ const ORBIT_INCLINATION = 30;
 // 軌道ビューの地球の半径。画面の短辺に対する比（地球全体が画面に収まる大きさ）
 const ORBIT_RADIUS = 0.36;
 // 飛び込みきったときの地球の半径。画面対角線に対する比。
-// 終盤はここでゆっくり止まるので、画像がぼやけない「地方が見渡せる高さ」にとどめる
+// 終盤はここでゆっくりになるので、画像がぼやけない「地方が見渡せる高さ」にとどめる
 const SURFACE_RADIUS = 2.0;
-// 飛び込みのカメラと地球の動きのイージング（ease-out の強さ）。最初が速く、最後はゆっくりになる。
-// 大きいほど緩急が強い
-const EASE_POWER = 3;
-// ズーム（高度）だけのイージングの強さ。回転より弱くして、出だしで一気に寄りすぎないようにする。
-// 小さいほどズームがゆっくり均一に進む
-const ZOOM_EASE_POWER = 2;
-// 減速をどこまでやりきってから光に入るか（1 = 完全に止まってから。小さいほど、まだ動いているうちに入る）。
-// 1 だと柱の真上でとどまる時間が長くなる
-const DIVE_SETTLE = 0.7;
+// 飛び込みのカメラの緩急の強さ。カメラはゆっくり動き出し、途中で速くなり、光に近づくとまたゆっくりになる
+// （回る動きも降りる動きも同じ形）。1 = 一定の速さ。大きいほど出だしと終わりがゆっくりで、途中が速い
+const DIVE_EASE = 2;
 // 飛び込みでは、柱の真上へ回る動きを降下より先に終える。
 // 進行がここに達した時点で真上に着く（1 なら降下と同時、小さいほど早い）
 const DIVE_TURN_BY = 0.8;
@@ -77,7 +71,11 @@ const HAZE_MAX = 0.25;
 
 const lerp = (a, b, t) => a + (b - a) * t;
 const clamp01 = (t) => Math.min(1, Math.max(0, t));
-const easeOut = (t, power = EASE_POWER) => 1 - Math.pow(1 - t, power);
+// 両側がゆるやかなカーブ（ゆっくり → 速く → ゆっくり）。power が大きいほど緩急が強い
+const easeInOut = (t, power) => {
+  const a = Math.pow(t, power);
+  return a / (a + Math.pow(1 - t, power));
+};
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const rad = (deg) => deg * (Math.PI / 180);
 
@@ -296,15 +294,13 @@ export function hideOrbit() {
 // ---------- カメラワーク ----------
 
 // 飛び込みの進行 u(0..1) に対する、各要素の進み具合。
-//   向き: 柱の真上へ回る動き。ease-out で、降下より先（DIVE_TURN_BY の時点）に終わる。
-//         減速しきって止まる（途中で打ち切ると、長い柱の先端の動きが急に止まって見える）
-//   高度: ease-out。出だしが速く、目的地の上空へ向けて減速する
+//   向き: 柱の真上へ回る動き。降下より先（DIVE_TURN_BY の時点）に終わる
+//   高度: 目的地の上空へ降りる動き
+//   どちらも、ゆっくり動き出して途中で速くなり、終わりはまたゆっくりになる（DIVE_EASE）
 //   柱へ入る: 最後の BEAM_ENTER_MS をかけて、光が太って視界を覆う（diveEnter）。
 //             引くときは、同じ時間をかけて縮む（leaveLight。最初に一気に縮む）
-// 高度は、減速しきる手前（DIVE_SETTLE）で終点に着くように ease-out の前半だけを使う
-const settle = (t, power) => easeOut(t * DIVE_SETTLE, power) / easeOut(DIVE_SETTLE, power);
-const diveTurn = (u) => easeOut(clamp01(u / DIVE_TURN_BY), EASE_POWER);
-const diveZoom = (u) => settle(u, ZOOM_EASE_POWER);
+const diveTurn = (u) => easeInOut(clamp01(u / DIVE_TURN_BY), DIVE_EASE);
+const diveZoom = (u) => easeInOut(u, DIVE_EASE);
 const diveEnter = (u, ms) => {
   const t = clamp01(1 - ((1 - u) * ms) / BEAM_ENTER_MS);
   return t * t * (3 - 2 * t);
