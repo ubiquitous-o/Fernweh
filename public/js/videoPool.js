@@ -49,6 +49,15 @@ async function loadVideoPool() {
   lastPoolFetch = Date.now();
 }
 
+// 動作確認用: URL に ?test=unknown を付けて開くと、すべての映像を「場所不明」として扱う
+// （光の柱を立てずに降りる動きや「Destination unknown」「Location unknown」の表示を確かめるため）
+const TEST_UNKNOWN_LOCATION = new URLSearchParams(window.location.search).get('test') === 'unknown';
+// 映像の情報に、動作確認用の上書きをかける（ふだんは何もしない）。
+// 次の映像を取るとき（fetchNext）と、リロードで前の映像を再開するとき（main.js）の両方で通す
+export function withTestOverrides(video) {
+  return TEST_UNKNOWN_LOCATION ? { ...video, location: null, locationName: null } : video;
+}
+
 export async function fetchNext() {
   const poolStale = Date.now() - lastPoolFetch > POOL_REFRESH_INTERVAL;
   if (!videosLoaded || videoPool.length === 0 || poolStale) {
@@ -67,5 +76,5 @@ export async function fetchNext() {
       video.locationName = guess.name;
     }
   }
-  return video;
+  return withTestOverrides(video);
 }

@@ -8,14 +8,13 @@
   --accent: rgba(255, 90, 60, 0.9);
 
   /* レイアウト */
-  --edge-x: clamp(20px, 3.5vw, 50px);
-  --edge-y: clamp(16px, 2.5vh, 40px);
+  /* 画面端の余白。上下左右すべて同じ幅にする（四隅のUIがこの線にそろう） */
+  --edge: clamp(18px, 2.6vw, 44px);
   --globe-size: clamp(120px, 18vw, 225px);
   --shift-x: 0px;
   --shift-y: 0px;
 
   /* Clock */
-  --clock-top: clamp(16px, 2.5vh, 30px);
   --clock-font-time: clamp(28px, 4.5vw, 56px);
   --clock-font-date: clamp(13px, 1.8vw, 22px);
   --clock-padding-x: clamp(10px, 1.5vw, 20px);
@@ -30,7 +29,6 @@
   --info-font-channel: clamp(10px, 1.1vw, 13px);
 
   /* Live badge */
-  --badge-top: clamp(20px, 3vh, 38px);
   --badge-font: clamp(11px, 1.3vw, 16px);
 
   /* Camera time */
@@ -43,7 +41,6 @@
   /* Controls */
   --ctrl-btn-size: clamp(32px, 3.5vw, 42px);
   --ctrl-btn-font: clamp(12px, 1.3vw, 16px);
-  --ctrl-right: clamp(16px, 2.5vw, 30px);
 
   /* Progress */
   --progress-height: clamp(2px, 0.35vh, 4px);
@@ -98,9 +95,16 @@ html, body {
   filter: url(#video-glitch-filter);
   will-change: filter;
 }
+/* .video-frame と同じ位置・大きさ（cover）で、軌道ビューの幕(z-index:3)より上に重ねる。
+   こうすると幕が出ているあいだもグリッチが隠れず、幕ごとグリッチが掛かる。
+   backdrop-filter の効く範囲は自分の箱の中だけなので、はみ出しのクリップは要らない */
 .glitch-backdrop {
   position: absolute;
-  inset: 0;
+  left: calc(50vw - max(50vw, 100vh * 8 / 9));
+  top: calc(50vh - max(50vh, 100vw * 9 / 32));
+  width: max(100vw, calc(100vh * 16 / 9));
+  height: max(100vh, calc(100vw * 9 / 16));
+  z-index: 4;
   pointer-events: none;
 }
 .glitch-backdrop.active {
@@ -108,21 +112,31 @@ html, body {
   backdrop-filter: url(#video-glitch-filter);
 }
 
-/* --- TV Noise overlay --- */
-/* 動画がビューポート全面をcoverするので、砂嵐もビューポート全面に敷く。 */
-.noise-overlay {
+/* --- 軌道ビューの幕（起動時・切替時） --- */
+/* 動画がビューポート全面をcoverするので、幕もビューポート全面に敷く。
+   星空と地球は1枚のキャンバスに描く（js/orbit.js / js/orbitRenderer.js）。 */
+.orbit-overlay {
   position: absolute;
   inset: 0;
+  /* WebGLが使えない環境でも黒い幕として機能させる */
+  background: #000;
   z-index: 3;
   opacity: 0;
   pointer-events: none;
   /* キャンバスがレイアウト外に染み出ないよう保険 */
   overflow: hidden;
+  /* 幕の出入りは、グリッチ(0.6秒)に対して入りと出が鏡映しになるようにする（orbit.js と揃える）。
+     出（突入して映像が出るとき）: グリッチがいちばん強い最初の0.3秒で幕が消える。
+     カーブは入りと対称になる ease-in-out */
+  transition: opacity 0.3s ease-in-out;
 }
-.noise-overlay.active {
+.orbit-overlay.active {
   opacity: 1;
+  /* 入り（映像から引くとき）: 出の逆再生。最初の0.3秒は映像の上でグリッチだけが育ち、
+     グリッチがいちばん強くなる後半の0.3秒で幕が重なる（0.3秒待ってから0.3秒でフェード） */
+  transition: opacity 0.3s ease-in-out 0.3s;
 }
-.noise-overlay canvas {
+.orbit-overlay canvas {
   width: 100%; height: 100%;
 }
 
@@ -141,11 +155,11 @@ html, body {
 /* --- Info Overlay --- */
 .info-overlay {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: calc(var(--edge) + var(--shift-y));
+  left: calc(var(--edge) + var(--shift-x));
+  /* 右下の地球儀にかからない幅まで。収まらない文字は横に流す（.marquee） */
+  width: min(58vw, calc(100vw - var(--edge) * 2 - var(--globe-size) - 24px));
   z-index: 10;
-  padding: calc(var(--edge-y) + var(--shift-y)) calc(var(--edge-x) + var(--shift-x));
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -169,20 +183,49 @@ html, body {
   font-weight: 300;
   line-height: 1.4;
   color: var(--text-primary);
-  max-width: clamp(300px, 50vw, 700px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   text-decoration: none;
-  display: block;
 }
-.info-title:hover { text-decoration: underline; }
+/* 下線は中の文字に付ける（text-decoration は inline-block の子には伝わらない） */
+.info-title:hover .marquee-item { text-decoration: underline; }
+
+/* 流れる文字: 枠に収まらない文字だけ横にスクロールさせる（ui.js の setMarquee が組み立てる）。
+   収まるときは .marquee-track に文字が1つ入るだけで、動かない。
+   収まらないときは同じ文字を2つ並べ、ちょうど1つぶん左へ流して継ぎ目なく繰り返す */
+.marquee {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+}
+.marquee-item {
+  display: inline-block;
+}
+.marquee.scrolling .marquee-item {
+  /* 繰り返しのあいだの空き */
+  padding-right: 4em;
+}
+.marquee.scrolling .marquee-track {
+  animation: marquee-scroll var(--marquee-duration, 20s) linear infinite;
+  will-change: transform;
+}
+/* 流れている文字は、左右の端でふわっと消える */
+.marquee.scrolling {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 1.2em, #000 calc(100% - 2.5em), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 1.2em, #000 calc(100% - 2.5em), transparent 100%);
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 
 /* --- Top-right Clock --- */
 .clock-overlay {
   position: absolute;
-  top: calc(var(--clock-top) + var(--shift-y));
-  right: calc(var(--edge-x) + var(--shift-x));
+  top: calc(var(--edge) + var(--shift-y));
+  right: calc(var(--edge) + var(--shift-x));
   z-index: 10;
   text-align: right;
   opacity: 0;
@@ -286,8 +329,10 @@ html, body {
 /* --- Globe --- */
 .globe-container {
   position: absolute;
-  bottom: calc(var(--edge-y) + var(--shift-y));
-  right: calc(var(--edge-x) + var(--shift-x));
+  /* 地球はこの枠の8割の大きさで描かれ（js/globe.js の RADIUS）、まわりに1割ずつ空きがある。
+     見た目の余白がほかの隅とそろうよう、その空きのぶんだけ外へ寄せる */
+  bottom: calc(var(--edge) - var(--globe-size) * 0.1 + var(--shift-y));
+  right: calc(var(--edge) - var(--globe-size) * 0.1 + var(--shift-x));
   z-index: 12;
   width: var(--globe-size);
   height: var(--globe-size);
@@ -296,55 +341,116 @@ html, body {
   pointer-events: none;
 }
 .globe-container.show { opacity: 0.95; }
-.globe-label {
+/* 札: 地名と現地時刻をまとめた小さな表示。地球の上、画面端の余白の線に右をそろえて置く
+   （位置は js/globe.js が決める）。中身が何も無いときは出さない。
+   パネルの見た目（地・角の丸み・余白。枠線なし）は右上の時計（.clock-overlay）に合わせてある */
+.globe-tag {
   position: absolute;
+  z-index: 1;
   width: max-content;
-  text-align: center;
-  transform: translate(-50%, -50%);
+  padding: var(--clock-padding-y) var(--clock-padding-x);
+  text-align: right;
+  background: var(--overlay-bg);
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+}
+.globe-tag:not(:has(.globe-label:not(:empty), .camera-time.show)) {
+  display: none;
+}
+/* 地名: 1行目（街や地域）を大きく、2行目以降（国など）は小さく淡く */
+.globe-label {
   font-size: var(--globe-label-font);
   font-weight: 600;
   color: #fff;
-  background: rgba(51, 102, 255, 0.9);
-  padding: 1px 6px;
-  border-radius: 3px;
-  letter-spacing: 0;
-  white-space: pre-line;
-  line-height: 1.2;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+  letter-spacing: 1px;
+  line-height: 1.15;
+  white-space: nowrap;
 }
-.globe-label.show { opacity: 1; }
-.globe-container canvas {
+.globe-label .globe-label-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.62em;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+}
+/* 場所の分からない映像のとき、地球の真ん中に重ねる表示 */
+.globe-unknown {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: none;
+  width: max-content;
+  padding: 6px 10px 7px;
+  font-size: calc(var(--globe-label-font) * 0.7);
+  font-weight: 600;
+  letter-spacing: 2px;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--overlay-bg);
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+}
+.globe-unknown.show { display: block; }
+/* 場所の分からない映像のときは、札（現地時刻も含めて）を出さない */
+.globe-unknown.show ~ .globe-tag { display: none; }
+/* 札と映像の場所（光の柱の根元）をつなぐ引き出し線（端点は js/globe.js が毎フレーム動かす） */
+.globe-leader {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
-  filter: invert(1);
-}
-
-.camera-time {
-  position: absolute;
-  bottom: calc(var(--globe-size) + var(--edge-y) + 10px);
-  right: calc(var(--edge-x) + var(--shift-x));
-  z-index: 12;
-  text-align: right;
-  opacity: 0;
-  transition: opacity 1.2s ease, bottom 0.4s ease;
+  overflow: visible;
   pointer-events: none;
 }
-.camera-time.show { opacity: 1; }
+.globe-leader line {
+  stroke: rgba(255, 255, 255, 0.75);
+  stroke-width: 1;
+}
+.globe-leader circle {
+  fill: #fff;
+}
+/* キャンバスは枠より一回り大きい（js/globe.js の CANVAS_SCALE）。地球の外へ伸びる光の柱が切れないように */
+.globe-container canvas {
+  position: absolute;
+  left: -15%;
+  top: -15%;
+  width: 130%;
+  height: 130%;
+}
+
+/* 現地時刻（札の中、地名の下）。時差を横に添える。タイムゾーンが分からない映像では出さない */
+.camera-time {
+  display: none;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.camera-time.show { display: flex; }
+.globe-label:not(:empty) + .camera-time.show {
+  margin-top: 6px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
 .camera-time-clock {
   font-size: var(--ct-font-clock); font-weight: 200;
   letter-spacing: 2px; color: var(--text-primary); line-height: 1;
 }
 .camera-time-diff {
   font-size: var(--ct-font-diff); font-weight: 300;
-  letter-spacing: 2px; color: var(--text-secondary); margin-top: 2px;
+  letter-spacing: 2px; color: var(--text-secondary);
 }
 
 /* --- Live indicator --- */
 .live-badge {
   position: absolute;
-  top: calc(var(--badge-top) + var(--shift-y));
-  left: calc(var(--edge-x) + var(--shift-x));
+  top: calc(var(--edge) + var(--shift-y));
+  left: calc(var(--edge) + var(--shift-x));
   z-index: 10;
   display: flex;
   align-items: center;
@@ -385,24 +491,37 @@ html, body {
   opacity: 0.6;
 }
 
-/* --- Controls (right edge, vertically centered) --- */
+/* --- Controls ---
+   ふだんは上端の中央に横並び。縦長の画面で、上端にLIVEや時計と重ならずに置ける空きがないときだけ、
+   右端の中央に縦並び（body.controls-side。付け外しは js/ui.js の updateControlsPlacement）。
+   出し入れの動きは --ctrl-shown / --ctrl-hidden で決める */
 .controls {
+  --ctrl-shown: translateX(-50%);
+  --ctrl-hidden: translateX(-50%) translateY(-4px);
   position: absolute;
-  top: 50%;
-  right: var(--ctrl-right);
-  transform: translateY(-50%) translateX(4px);
+  top: var(--edge);
+  left: 50%;
+  transform: var(--ctrl-hidden);
   z-index: 20;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: clamp(8px, 1vw, 12px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
+body.controls-side .controls {
+  --ctrl-shown: translateY(-50%);
+  --ctrl-hidden: translateY(-50%) translateX(4px);
+  top: 50%;
+  left: auto;
+  right: var(--edge);
+  flex-direction: column;
+}
 body.mouse-active .controls {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(-50%);
+  transform: var(--ctrl-shown);
 }
 body.mouse-active { cursor: default; }
 
@@ -420,12 +539,133 @@ body.mouse-active { cursor: default; }
   backdrop-filter: blur(10px);
   font-size: var(--ctrl-btn-font);
 }
+/* 歯車の字は同じ文字サイズだと小さく見えるので、大きめにする */
+#btn-settings {
+  font-size: calc(var(--ctrl-btn-font) * 1.7);
+  line-height: 1;
+}
 .ctrl-btn:hover {
   border-color: rgba(255,255,255,0.5);
   color: var(--text-primary);
   background: rgba(255,255,255,0.1);
 }
-a.ctrl-btn { text-decoration: none; }
+/* 設定パネルを開いているあいだは、マウスを止めてもボタンとカーソルを出したままにする */
+body.settings-open .controls {
+  opacity: 1;
+  pointer-events: auto;
+  transform: var(--ctrl-shown);
+}
+body.settings-open { cursor: default; }
+body.settings-open #btn-settings {
+  border-color: rgba(255,255,255,0.5);
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.1);
+}
+
+/* --- Settings panel ---
+   ボタン列のすぐ隣に開く。ボタン列が上端のとき: その下。右端のとき（body.controls-side）: その左 */
+.settings-panel {
+  --panel-shown: translateX(-50%);
+  --panel-hidden: translateX(-50%) translateY(-6px);
+  position: absolute;
+  top: calc(var(--edge) + var(--ctrl-btn-size) + 14px);
+  left: 50%;
+  transform: var(--panel-hidden);
+  z-index: 21;
+  width: max-content;
+  min-width: 250px;
+  max-width: calc(100vw - var(--edge) * 2);
+  padding: 16px 18px;
+  background: var(--overlay-bg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+body.controls-side .settings-panel {
+  --panel-shown: translateY(-50%);
+  --panel-hidden: translateY(-50%) translateX(6px);
+  top: 50%;
+  left: auto;
+  right: calc(var(--edge) + var(--ctrl-btn-size) + 14px);
+  max-width: calc(100vw - var(--edge) * 2 - var(--ctrl-btn-size) - 14px);
+}
+body.settings-open .settings-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: var(--panel-shown);
+}
+.settings-title {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 8px 0;
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.settings-row:hover { color: var(--text-primary); }
+.settings-divider {
+  height: 1px;
+  margin: 8px 0;
+  background: rgba(255, 255, 255, 0.08);
+}
+/* スイッチ: 本体のチェックボックスは隠し、隣の .switch を見た目にする */
+.settings-row input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.switch {
+  position: relative;
+  flex: none;
+  width: 34px;
+  height: 18px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.14);
+  transition: background 0.2s ease;
+}
+.switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.settings-row input:checked + .switch { background: var(--accent); }
+.settings-row input:checked + .switch::after {
+  transform: translateX(16px);
+  background: #fff;
+}
+.settings-row input:focus-visible + .switch { outline: 1px solid rgba(255, 255, 255, 0.6); outline-offset: 2px; }
+.settings-arrow { color: var(--text-dim); }
+
+/* --- 設定で隠したUI（settings.js が body にクラスを付ける） --- */
+body.hide-clock .clock-overlay,
+body.hide-live .live-badge,
+body.hide-info .info-overlay,
+body.hide-place .globe-container {
+  display: none;
+}
 
 /* --- Loading state --- */
 .loading-overlay {
@@ -435,13 +675,15 @@ a.ctrl-btn { text-decoration: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* 画面の中央には地球があるので、その下（地球と画面の下端のあいだ）に置く */
+  justify-content: flex-end;
+  padding: 0 var(--edge) 5vh;
   background: transparent;
+  pointer-events: none;
   transition: opacity 0.3s ease;
 }
 .loading-overlay.fade-out {
   opacity: 0;
-  pointer-events: none;
 }
 
 .loading-text {
@@ -454,20 +696,76 @@ a.ctrl-btn { text-decoration: none; }
   padding: 10px 24px;
   border-radius: 4px;
   text-align: center;
+}
+/* 探しているあいだ: ゆっくり明滅 */
+.loading-status {
   animation: breathe 2s ease-in-out infinite;
 }
 @keyframes breathe {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
+/* 行き先が決まった（.locked）: 明滅をやめ、計器が点滅して確定する。下に地名を出す */
+.loading-place {
+  display: none;
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 4px;
+}
+.loading-overlay.locked .loading-status {
+  color: var(--accent);
+  animation: lock-on 0.45s steps(1, end) 1;
+}
+/* 行き先を失った（.alarm。場所の分からない映像）: 警報。赤い文字が速く点滅し続け、枠も赤く明滅する */
+.loading-overlay.locked.alarm .loading-status {
+  color: #ff3b30;
+  animation: alarm-blink 0.36s steps(1, end) infinite;
+}
+.loading-overlay.alarm .loading-text {
+  animation: alarm-box 0.36s steps(1, end) infinite;
+}
+@keyframes alarm-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+@keyframes alarm-box {
+  0% { background: rgba(110, 0, 0, 0.75); box-shadow: 0 0 0 1px rgba(255, 59, 48, 0.9); }
+  50% { background: rgba(0, 0, 0, 0.6); box-shadow: 0 0 0 1px rgba(255, 59, 48, 0.25); }
+}
+/* 墜落が始まった（.crashing）: 警報が速くなり、表示ががたがた揺れる */
+.loading-overlay.crashing .loading-text {
+  animation: alarm-box 0.18s steps(1, end) infinite, crash-shake 0.1s steps(1, end) infinite;
+}
+.loading-overlay.locked.crashing .loading-status {
+  animation-duration: 0.18s;
+}
+@keyframes crash-shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(3px, -2px); }
+  50% { transform: translate(-3px, 2px); }
+  75% { transform: translate(2px, 3px); }
+}
+.loading-overlay.locked .loading-place:not(:empty) {
+  display: block;
+  animation: lock-on 0.45s steps(1, end) 1;
+}
+@keyframes lock-on {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  40% { opacity: 0; }
+  60% { opacity: 1; }
+  80% { opacity: 0; }
+  100% { opacity: 1; }
+}
 
-/* --- Noise期間中のオーバーレイ非表示 ---
+/* --- 軌道ビューの幕が出ているあいだのオーバーレイ非表示 ---
    オーバーレイ自身のopacity/transform transitionを使ってフェードout/in。
    初回表示と同じ挙動: info-overlayだけ translateY(8px) で下にスライド。 */
-.noise-hidden {
+.hide-during-orbit {
   opacity: 0 !important;
 }
-.info-overlay.noise-hidden {
+.info-overlay.hide-during-orbit {
   transform: translateY(8px) !important;
 }
 

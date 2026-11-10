@@ -151,7 +151,12 @@ function renderDay(daily, dayIndex) {
   document.getElementById(`weather-precip-${dayIndex}`).innerHTML = `💧${monoChars(precipText)}`;
 }
 
+// 位置の取得と天気の取得を始める。何度呼ばれても、始めるのは最初の1回だけ。
+// 設定で「時計と天気」を出しているときにだけ呼ばれる（js/settings.js）。隠しているあいだは位置を取らない
+let started = false;
 export async function initWeather() {
+  if (started) return;
+  started = true;
   const cached = getCachedLocation();
   if (cached) {
     weatherLocation = cached;

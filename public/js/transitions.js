@@ -1,13 +1,16 @@
 // 動画切替の中心ロジック（preload方式）：
-// 非アクティブレイヤーで次の動画を事前ロード → タップ時に既にPLAYING状態なら砂嵐なしで瞬間swap。
+// 非アクティブレイヤーで次の動画を事前ロードしておき、切替時は軌道ビューの幕（orbit.js）で
+// 「今の場所から軌道へ上昇 → 次のカメラの場所へ飛び込む」演出を挟んでswapする。
 import { state } from './state.js';
 import { getLayer } from './dom.js';
-import { startNoise, stopNoise } from './noise.js';
+import {
+  showOrbit, hideOrbit, ascend, raiseBeam, diveTo, diveBack, DIVE_MS, BEAM_LEAD_MS,
+} from './orbit.js';
 import { playGlitch, clearGlitch } from './glitch.js';
 import { createPlayer, destroyPlayer } from './player.js';
 import { fetchNext } from './videoPool.js';
 import {
-  showInfo, showOverlays, hideLoading, clearError,
+  showInfo, showOverlays, hideLoading, showSearching, showLocked, showCrashing, clearError,
   hideOverlaysInstant, showOverlaysInstant,
 } from './ui.js';
 import { updateGlobe } from './globe.js';
@@ -22,6 +25,9 @@ const PRELOAD_RETRY_MS = 3000;
 // switchVideo時にpreload失敗していたら何度試すか
 const MAX_INLINE_ATTEMPTS = 3;
 const INLINE_RETRY_DELAY_MS = 500;
+// 場所の分からない映像のとき、行き先を失った警報（Navigation error）を出してから
+// 墜落（System failure）が始まるまでを、ふつうの「柱が立ってから飛び込むまで」よりこれだけ長くする
+const ERROR_HOLD_MS = 1000;
 
 // --- preload: 非アクティブレイヤーに次の動画を事前ロード ---
 
@@ -172,41 +178,56 @@ export async function switchVideo() {
   state.isSwitching = true;
 
   const $currentLayer = getLayer(state.activeLayer);
-
-  // 前奏グリッチ（playerがある＝動画再生中の場合のみ）
-  if (state.currentInfo) {
-    await playGlitch($currentLayer, 'up');
-  }
+  const fromInfo = state.currentInfo;
 
   hideOverlaysInstant();
   clearError();
 
-  // preloadが 'ready' なら砂嵐スキップで即swap
-  if (state.preload.status === 'ready') {
-    performSwap();
-    playGlitch(getLayer(state.activeLayer), 'down');
-    showOverlaysInstant();
-    state.isSwitching = false;
-    return;
+  // 映像を再生中なら、前奏グリッチの開始と同時に軌道ビューの幕を重ね始める。
+  // 映像はグリッチしながら光の柱の白に溶け、そのあとカメラが柱からまっすぐ引いて軌道へ戻る。
+  // 映像が無ければ、軌道から地球を眺めるだけ
+  let leaving;
+  if (fromInfo) {
+    const glitching = playGlitch($currentLayer, 'up');
+    leaving = ascend();
+    // 映像が光に覆われたら、目的地を探している表示を出す
+    leaving.covered.then(showSearching);
+    // グリッチが終わり幕が覆いきったら解除（幕の裏でフィルタを回し続けない）
+    Promise.all([glitching, leaving.covered]).then(() => clearGlitch($currentLayer));
+  } else {
+    showOrbit();
+    showSearching();
+    leaving = { done: Promise.resolve() };
   }
 
-  // 'ready' でない → 砂嵐表示しながら preloadが ready になるのを待つ
-  startNoise();
-  const success = await waitForPreloadReady();
+  // 軌道へ戻るあいだに preload が ready になるのを待つ（未readyなら軌道を回りながら待つ）
+  const [success] = await Promise.all([waitForPreloadReady(), leaving.done]);
 
   if (!success) {
-    // 全リトライ失敗：古い状態に戻す
+    // 全リトライ失敗：元の場所へ戻る
     console.error('switchVideo: preload not ready after retries');
-    clearGlitch($currentLayer);
-    showOverlaysInstant();
-    stopNoise();
+    if (fromInfo) {
+      await diveBack();
+      hideLoading();
+      hideOrbit();
+      showOverlaysInstant();
+      playGlitch($currentLayer, 'down');
+    }
     state.isSwitching = false;
     setTimeout(switchVideo, 5000);
     return;
   }
 
+  // 軌道を回ったまま、次のカメラの場所に光の柱が立ち上がる → 少し間をおいて飛び込む
+  // → 柱の中に入った瞬間に切替え、グリッチで映像を出す。
+  // 場所の分からない映像のときは柱は立たず、きりもみで回りながら、どこかの陸地へ墜落する（orbit.js）
+  const spot = raiseBeam(state.preload.data.location);
+  showLocked(state.preload.data.locationName, Array.isArray(state.preload.data.location));
+  await new Promise((r) => setTimeout(r, BEAM_LEAD_MS + (spot ? 0 : ERROR_HOLD_MS)));
+  if (!spot) showCrashing();
+  await diveTo(spot);
   performSwap();
-  stopNoise();
+  hideOrbit();
   showOverlaysInstant();
   playGlitch(getLayer(state.activeLayer), 'down');
   state.isSwitching = false;
@@ -218,7 +239,8 @@ export async function switchVideo() {
 async function loadInitial(data) {
   state.isSwitching = true;
   hideOverlaysInstant();
-  startNoise();
+  showOrbit();
+  showSearching();
 
   const layerId = state.activeLayer;
   const $layer = getLayer(layerId);
@@ -246,12 +268,19 @@ async function loadInitial(data) {
     return;
   }
 
-  await new Promise((r) => setTimeout(r, POST_LOAD_HOLD_MS));
+  // 映像が決まった → YTのintro UIが消えるのを待つ。待ち時間の最後を
+  // 「軌道を回ったまま光の柱が立ち上がる → 少し間をおく → 飛び込む」に充てる
+  await new Promise((r) => setTimeout(r, Math.max(0, POST_LOAD_HOLD_MS - BEAM_LEAD_MS - DIVE_MS)));
+  const spot = raiseBeam(data.location);
+  showLocked(data.locationName, Array.isArray(data.location));
+  await new Promise((r) => setTimeout(r, BEAM_LEAD_MS + (spot ? 0 : ERROR_HOLD_MS)));
+  if (!spot) showCrashing();
+  await diveTo(spot);
 
   state.currentInfo = data;
   $layer.classList.remove('hidden');
   $layer.classList.add('visible');
-  stopNoise();
+  hideOrbit();
   showOverlaysInstant();
   playGlitch($layer, 'down');
 

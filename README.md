@@ -27,21 +27,26 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 | Click (screen) | Skip to next camera |
 | `Space` / `→` / `N` | Skip to next camera |
 | `F` / `F11` | Toggle fullscreen |
-| Mouse move | Show control buttons |
+| Mouse move | Show the control buttons (top centre; on a portrait screen too narrow for that, the right edge): next camera, settings |
+| `Esc` / click outside | Close the settings panel |
 
 ## Features
 
-- TV static noise transition between live streams (WebGL shader)
-- Interactive 3D globe showing camera location ([COBE](https://github.com/shuding/cobe))
+- Orbit transition between live streams: the view rises to an inclined satellite orbit around a realistic whole Earth (real-time day/night terminator, clouds with shadows, mountain relief, city lights, atmospheric scattering), then dives into a pillar of light standing at the next camera's location (WebGL)
+- Streams with no known location get no pillar: the readout raises a navigation error and the camera spins down into a crash on some distant land, whiting out into the stream
+- Realistic sky behind the Earth: a star field and the Milky Way that turn as the camera orbits, with the Sun, the Moon and the five naked-eye planets at their real positions (the Moon shows its real phase)
+- Corner globe showing the camera location: the same realistic Earth as the orbit view (real-time day/night, city lights), with the camera circling it above the equator and a pillar of light at the location; a tag with the place name and local time is tied to the pillar by a leader line
 - Location detection from video title/channel/description ([Gemini API](https://ai.google.dev/) batch extraction + dictionary-first matching + fallback) with [Nominatim](https://nominatim.openstreetmap.org/) geocoding
 - Dictionary-first optimization: skips Gemini API for known locations, saving RPD quota
 - Auto-learning from geocache: previously resolved locations are merged into the dictionary at startup, reducing Gemini calls over time
 - Full video description fetching via YouTube videos.list API for improved location accuracy
 - Camera local time & time difference from your timezone (via [geo-tz](https://github.com/evansiroky/timezone-boundary-builder) at build-time)
-- Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/))
-- Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback)
+- Clock and 7-day weather forecast overlay (via [Open-Meteo](https://open-meteo.com/)) — off by default, turn it on in the settings panel
+- Geolocation-based weather (browser Geolocation API → IP fallback → Tokyo fallback); your location is only looked up once the clock & weather overlay is turned on
 - Randomized search queries with multiple patterns for maximum discovery (300+ locations, 50+ topics)
 - Clickable video title — links to original YouTube video, resumes on browser back
+- Settings panel: show or hide each overlay (clock & weather, local time & globe, live badge, video info), toggle fullscreen; choices are saved in the browser. Everything is shown by default except clock & weather
+- Long channel names and video titles scroll sideways (marquee) instead of being cut off
 - "City, Country" location labels on globe (auto line-break at comma)
   - **Note:** Globe labels are best-effort — location detection relies on video titles, channel names, and AI extraction, so labels may be inaccurate or missing for some streams
 - Client-side video pool refresh every 2 hours (follows server-side updates)
@@ -62,9 +67,9 @@ A fullscreen web app that automatically cycles through YouTube live cameras at t
 [Browser]
   → Loads video candidates from videos.json
   → YouTube IFrame Player API for playback
-  → COBE globe with pin-tracking label
+  → Corner globe (the orbit view's Earth renderer): the camera orbits the Earth; a light pillar marks the location, linked by a leader line to a tag with the place name and local time
   → Camera local time + time difference (from timezone in videos.json)
-  → WebGL shader TV noise during loading
+  → Orbit view (WebGL textured Earth + stars, Sun and Moon) with a dive into the camera location during loading / switching
   → Geolocation API / IP API → Open-Meteo for weather
 
 [Location Detection (build-time)]
@@ -119,6 +124,8 @@ YOUTUBE_API_KEY=your_key node scripts/fetch-videos.js
 npx serve public
 ```
 
+Open the site with `?test=unknown` (for example `http://localhost:3000/?test=unknown`) to treat every stream as location-unknown and try the crash transition.
+
 ## Local Server Mode (Optional)
 
 For dedicated hardware (N100 kiosk, Raspberry Pi, etc.), the Express server is still available:
@@ -149,21 +156,25 @@ fernweh/
 │   ├── index.html                # DOM + SVG glitch filter, loads css/styles.css and js/main.js
 │   ├── css/
 │   │   └── styles.css            # All styling
+│   ├── img/                      # Earth textures for the orbit view (day / night lights / water mask / clouds / height)
 │   ├── js/                       # ESM modules (no bundler; served as separate files)
 │   │   ├── main.js               # Entry — orchestrates init, dynamically loads YT IFrame API
 │   │   ├── state.js              # Shared mutable state
 │   │   ├── dom.js                # Cached DOM element refs
-│   │   ├── noise.js              # WebGL TV-noise shader
+│   │   ├── orbit.js              # Orbit-view veil: camera choreography (ascend / dive to location)
+│   │   ├── orbitRenderer.js      # WebGL renderer for the orbit view: stars, Milky Way, Sun, Moon, planets, textured Earth, light pillars
+│   │   ├── orbitTexturePreviews.js # Tiny embedded Earth textures shown until the full images load
 │   │   ├── glitch.js             # SVG-filter video glitch animation
 │   │   ├── player.js             # Single YT.Player wrapper + loadVideoById
-│   │   ├── transitions.js        # switchVideo / resumeVideo flow (pre-glitch → noise → post-glitch)
+│   │   ├── transitions.js        # switchVideo / resumeVideo flow (pre-glitch → orbit ascend / dive → post-glitch)
 │   │   ├── videoPool.js          # videos.json pool, watched-list, fetchNext
 │   │   ├── locations.js          # Runtime KNOWN_LOCATIONS dictionary fallback
-│   │   ├── ui.js                 # Info / loading / error / fullscreen toggle
+│   │   ├── ui.js                 # Info (with marquee) / loading / error / fullscreen toggle
+│   │   ├── settings.js           # Settings panel: overlay visibility toggles, saved in localStorage
 │   │   ├── progress.js           # Hourly switch timer + progress bar
 │   │   ├── clock.js               # Local clock + camera local time
 │   │   ├── weather.js             # Geolocation → Open-Meteo 7-day forecast
-│   │   ├── globe.js               # COBE globe with pin-tracking label
+│   │   ├── globe.js               # Corner globe: realistic Earth seen from an orbiting camera, with a light pillar at the location
 │   │   ├── input.js               # Mouse / keyboard / click handlers
 │   │   └── burnin.js              # Periodic overlay shift (kiosk burn-in prevention)
 │   └── videos.json               # Video candidates (generated by Actions)
@@ -191,3 +202,7 @@ fernweh/
 ```
 
 The frontend uses native ES modules (`<script type="module">`) — no build step. Files in `public/` are uploaded verbatim by `deploy-pages.yml`, so adding a new module is just dropping it into `public/js/` and importing it.
+
+## Credits
+
+- Earth textures in `public/img/` are NASA imagery (Blue Marble, Black Marble / Earth at Night, cloud cover, topography), taken from the example assets of [three-globe](https://github.com/vasturiano/three-globe) and [globe.gl](https://github.com/vasturiano/globe.gl) (both MIT). The night-lights and water-mask images were resized to 2048×1024; the cloud image is the alpha channel of the original PNG, saved as a 2048×1024 grayscale JPEG.
