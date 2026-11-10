@@ -1,5 +1,6 @@
 // 動画候補プール管理：videos.jsonをロードし、視聴済みを除外、シャッフル、次の動画を返す。
 import { guessLocation } from './locations.js';
+import { decodeEntities } from './entities.js';
 
 const WATCHED_KEY = 'fernweh_watched';
 const MAX_WATCHED = 150;
@@ -70,7 +71,8 @@ export async function fetchNext() {
   addWatched(video.videoId);
   // 場所情報が未設定ならランタイムで推測
   if (!video.location) {
-    const guess = guessLocation(video.title, video.channel);
+    // &amp; などの文字参照を地名と見まちがえないよう、元の文字に戻してから探す
+    const guess = guessLocation(decodeEntities(video.title), decodeEntities(video.channel));
     if (guess) {
       video.location = guess.coords;
       video.locationName = guess.name;

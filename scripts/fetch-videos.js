@@ -19,6 +19,7 @@ import {
 } from './lib/youtube.js';
 import { REGIONS, regionOfTimezone } from './lib/regions.js';
 import { resolveLocation } from './lib/resolveLocation.js';
+import { decodeEntities } from '../public/js/entities.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -44,6 +45,12 @@ async function main() {
     existing = JSON.parse(readFileSync(OUTPUT_PATH, 'utf-8'));
   } catch {
     // 初回 or 破損 → 空から始める
+  }
+  // 以前の実行で保存した題名・チャンネル名には &amp; などが残っているので、元の文字に戻す
+  // （新規ぶんは searchLiveVideos が戻してから返す）
+  for (const v of existing) {
+    v.title = decodeEntities(v.title);
+    v.channel = decodeEntities(v.channel);
   }
 
   const existingIds = new Set(existing.map((v) => v.videoId));

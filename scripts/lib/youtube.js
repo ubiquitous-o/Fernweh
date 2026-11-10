@@ -5,6 +5,8 @@
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+// フロントと同じ戻し方を使う（DOMを使わない文字列処理なのでNodeでも動く）
+import { decodeEntities } from '../../public/js/entities.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -103,7 +105,15 @@ export async function searchLiveVideos(query, order, region = null) {
     throw new Error(`YouTube API error: ${res.status} - ${err}`);
   }
   const data = await res.json();
-  return data.items || [];
+  const items = data.items || [];
+  // searchは題名とチャンネル名をHTMLエスケープ済み（&amp; &#39; &quot; 等）で返すので、ここで元の文字に戻す。
+  // このあとの除外判定・地名の辞書マッチ・Gemini・videos.jsonへの保存は、すべて戻した文字で行う
+  for (const item of items) {
+    if (!item.snippet) continue;
+    item.snippet.title = decodeEntities(item.snippet.title);
+    item.snippet.channelTitle = decodeEntities(item.snippet.channelTitle);
+  }
+  return items;
 }
 
 // videoIds（任意件数）に対して50件ずつvideos.listを叩き、id→description のマップを返す

@@ -1,5 +1,6 @@
 // 情報オーバーレイ・ローディング・エラー・全画面 等のUI制御。
 import { state } from './state.js';
+import { decodeEntities } from './entities.js';
 import {
   $info, $infoTitle, $infoChannel, $clock, $liveBadge, $cameraTime,
   $loading, $error, $errorMsg, $btnInfo, $btnFullscreen, $globe, $controls,
@@ -85,8 +86,9 @@ if (window.ResizeObserver) {
 updateControlsPlacement();
 
 export function showInfo(data) {
-  setMarquee($infoChannel, data.channel || '');
-  setMarquee($infoTitle, data.title || '');
+  // videos.json には &amp; などが残っていることがあるので、元の文字に戻してから出す
+  setMarquee($infoChannel, decodeEntities(data.channel || ''));
+  setMarquee($infoTitle, decodeEntities(data.title || ''));
   $infoTitle.href = `https://www.youtube.com/watch?v=${data.videoId}`;
   $info.classList.add('show');
 }
