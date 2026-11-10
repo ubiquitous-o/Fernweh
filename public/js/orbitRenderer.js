@@ -112,6 +112,8 @@ const EARTH_FRAGMENT = `
 
   const vec3 ATMO = vec3(0.30, 0.56, 1.0);   // 大気の散乱光（青）
   const float CLOUD_GAMMA = 0.5;             // 雲の濃淡の持ち上げ（小さいほど薄い雲まで見える）
+  const vec3 CITY_CORE = vec3(1.0, 0.92, 0.74); // 夜の街明かり: 明るい中心の色
+  const vec3 CITY_GLOW = vec3(1.0, 0.62, 0.30); // 夜の街明かり: 周辺とにじみの色
   const float RELIEF = 5.5;                  // 山の陰影の強さ
   const vec2 HEIGHT_STEP = vec2(1.5 / 2048.0, 1.5 / 1024.0); // 標高の傾きを測る間隔（画像の約1.5画素）
   const vec3 SUNSET = vec3(0.85, 0.48, 0.30); // 昼夜の境目の散乱光（夕焼け色）
@@ -212,9 +214,17 @@ const EARTH_FRAGMENT = `
       lit += sunColor * glint * water * sun;
 
       // --- 夜の地表 ---
-      // 画像は「暗い青の地表 + 街明かり」。明かり（赤み・黄みが青より強い部分）を取り出して暖色で光らせる
-      float lights = max(night.r - night.b, 0.0);
-      vec3 dark = night * 0.5 + vec3(1.0, 0.78, 0.48) * lights * 3.4;
+      // 画像は「暗い青の地表 + 街明かり」。地表と海は赤がほぼ 0 で、明かりだけ赤が高い（明かり自体は
+      // 灰色に近い）。そこで赤の値を明かりの強さとして取り出し、色はこちらで暖色に付ける。
+      //   芯: 画像そのままの鋭い明かり。明るい都市の中心ほど白っぽく、周辺は橙
+      //   にじみ: 同じ画像をぼかして重ねる（粗いミップマップを引く）。都市のまわりに光がにじみ、
+      //           大都市圏は面で光って見える
+      float lights = clamp((night.r - 0.07) * 3.4, 0.0, 1.0);
+      float glowNear = clamp((texture2D(u_night, uv, 2.0).r - 0.05) * 3.4, 0.0, 1.0);
+      float glowWide = clamp((texture2D(u_night, uv, 4.0).r - 0.04) * 3.4, 0.0, 1.0);
+      vec3 cityCore = mix(CITY_GLOW, CITY_CORE, lights) * lights * 1.7;
+      vec3 cityGlow = CITY_GLOW * (glowNear * 0.6 + glowWide * 0.5);
+      vec3 dark = night * 0.4 + cityCore + cityGlow;
       // --- 雲 ---
       // 雲は地表の上を少しずつ東へ流れる
       vec2 cloudUv = vec2(uv.x + u_cloudShift, uv.y);
