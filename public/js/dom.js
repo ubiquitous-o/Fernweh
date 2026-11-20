@@ -22,13 +22,15 @@ export const $loading = document.getElementById('loading');
 export const $error = document.getElementById('error');
 export const $errorMsg = document.getElementById('error-msg');
 
+// 右下の地球儀: 全体（地球儀と札）/ 地球儀を描く枠
 export const $globe = document.getElementById('globe-container');
+export const $globeStage = document.getElementById('globe-stage');
 export const globeRef = { canvas: document.getElementById('globe-canvas') };
 export const $globeLabel = document.getElementById('globe-label');
 export const $globeTag = document.getElementById('globe-tag');
 export const $globeUnknown = document.getElementById('globe-unknown');
-export const $globeLeaderLine = document.getElementById('globe-leader-line');
-export const $globeLeaderDot = document.getElementById('globe-leader-dot');
+// 映像の場所の印（光る点）
+export const $globePinDot = document.getElementById('globe-pin-dot');
 
 export const $cameraTime = document.getElementById('camera-time');
 export const $cameraTimeClock = document.getElementById('camera-time-clock');
