@@ -327,29 +327,41 @@ html, body {
 }
 
 /* --- Globe --- */
+/* 右下の隅: 札（地名と現地時刻）がいちばん下にあり、そのすぐ上に地球儀が出る。
+   2つは左右の中心をそろえて縦に並び、幅の広いほうの右端が画面端の余白の線にそろう
+   （札の幅は地名の長さで変わるので、地球儀の位置もそれに合わせて動く） */
 .globe-container {
   position: absolute;
-  /* 地球はこの枠の8割の大きさで描かれ（js/globe.js の RADIUS）、まわりに1割ずつ空きがある。
-     見た目の余白がほかの隅とそろうよう、その空きのぶんだけ外へ寄せる */
-  bottom: calc(var(--edge) - var(--globe-size) * 0.1 + var(--shift-y));
-  right: calc(var(--edge) - var(--globe-size) * 0.1 + var(--shift-x));
+  bottom: calc(var(--edge) + var(--shift-y));
+  right: calc(var(--edge) + var(--shift-x));
   z-index: 12;
-  width: var(--globe-size);
-  height: var(--globe-size);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   opacity: 0;
   transition: opacity 1.2s ease;
   pointer-events: none;
 }
 .globe-container.show { opacity: 0.95; }
-/* 札: 地名と現地時刻をまとめた小さな表示。地球の上、画面端の余白の線に右をそろえて置く
-   （位置は js/globe.js が決める）。中身が何も無いときは出さない。
+/* 地球儀を描く枠。球はこの枠の8割の大きさで描かれ（js/globe.js の RADIUS）、まわりに1割ずつ空きがある。
+   並べるときはその空きを無いものとして扱い（負の余白）、球そのものの端を札や画面端の線にそろえる */
+.globe-stage {
+  position: relative;
+  flex: none;
+  width: var(--globe-size);
+  height: var(--globe-size);
+  margin: calc(var(--globe-size) * -0.1);
+}
+/* 札: 地名と現地時刻をまとめた小さな表示。地球儀とのあいだは 8px 空ける。中身が何も無いときは出さない。
    パネルの見た目（地・角の丸み・余白。枠線なし）は右上の時計（.clock-overlay）に合わせてある */
 .globe-tag {
-  position: absolute;
+  position: relative;
   z-index: 1;
+  flex: none;
   width: max-content;
+  margin-top: 8px;
   padding: var(--clock-padding-y) var(--clock-padding-x);
-  text-align: right;
+  text-align: center;
   background: var(--overlay-bg);
   border-radius: 8px;
   backdrop-filter: blur(6px);
@@ -397,9 +409,10 @@ html, body {
 }
 .globe-unknown.show { display: block; }
 /* 場所の分からない映像のときは、札（現地時刻も含めて）を出さない */
-.globe-unknown.show ~ .globe-tag { display: none; }
-/* 札と映像の場所（光の柱の根元）をつなぐ引き出し線（端点は js/globe.js が毎フレーム動かす） */
+.globe-container:has(.globe-unknown.show) .globe-tag { display: none; }
+/* 映像の場所の印（光る点）を描く面。地球儀の枠にぴったり重ねる（位置と濃さは js/globe.js が毎フレーム動かす） */
 .globe-leader {
+  --neon: #3df5ff;
   position: absolute;
   left: 0;
   top: 0;
@@ -408,27 +421,43 @@ html, body {
   overflow: visible;
   pointer-events: none;
 }
-.globe-leader line {
-  stroke: rgba(255, 255, 255, 0.75);
-  stroke-width: 1;
+/* 光る点: 白い芯のまわりに、ネオン色のにじみ。にじみはゆっくり明滅する */
+.globe-pin-glow-core { stop-color: var(--neon); stop-opacity: 0.95; }
+.globe-pin-glow-edge { stop-color: var(--neon); stop-opacity: 0; }
+.globe-pin-core { fill: #fff; }
+.globe-pin-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: globe-pin-halo 1.4s ease-in-out infinite;
 }
-.globe-leader circle {
-  fill: #fff;
+@keyframes globe-pin-halo {
+  0%, 100% { opacity: 0.65; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
 }
-/* キャンバスは枠より一回り大きい（js/globe.js の CANVAS_SCALE）。地球の外へ伸びる光の柱が切れないように */
-.globe-container canvas {
+/* 地球の地: 球と同じ大きさの、暗いガラスの円（地と ぼかしは札や時計のパネルと同じ）。
+   点だけだと、明るい映像や細かい映像の上で埋もれて見えにくいので、後ろの映像をここだけ暗くぼかす。
+   裏側の陸地の点は、この円の上に淡く見える */
+.globe-stage::before {
+  content: '';
   position: absolute;
-  left: -15%;
-  top: -15%;
-  width: 130%;
-  height: 130%;
+  inset: 10%;
+  border-radius: 50%;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(6px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+/* 地球儀のキャンバス（点の集まり）。上の円より手前に描く */
+.globe-container canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 /* 現地時刻（札の中、地名の下）。時差を横に添える。タイムゾーンが分からない映像では出さない */
 .camera-time {
   display: none;
   align-items: baseline;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 8px;
 }
 .camera-time.show { display: flex; }
